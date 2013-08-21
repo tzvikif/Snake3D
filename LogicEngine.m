@@ -157,7 +157,7 @@ GLfloat cube_normals[] = {
     //load cube mesh
     Mesh *cubeMesh = [[Mesh alloc] init];
     [cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    [renderingEngineTemp createDrawable:cubeMesh];
+    Drawable *cubeDrawable =  [renderingEngineTemp createDrawable:cubeMesh];
 
 }
 -(void)Render {
