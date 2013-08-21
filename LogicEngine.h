@@ -19,6 +19,8 @@
 
 @interface LogicEngine : NSObject
 @property(nonatomic,retain) Node *simpleCube;
-@property(retain,nonatomic) RenderingEngine *renderingEng;
+@property(retain,nonatomic) RenderingEngine *renderingEngine;
 -(void)initialize;
+-(void)updateAnimation:(float)elapsedSeconds;
+-(void)Render;
 @end

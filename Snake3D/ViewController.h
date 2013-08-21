@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+//#import "GLProgram.h"
+@class LogicEngine;
+@interface ViewController : UIViewController {
+    float m_timestamp;
 
-@interface ViewController : UIViewController
-
+}
+@property (retain,nonatomic) LogicEngine *logicEngine;
+- (void)Render: (CADisplayLink*) displayLink;
+-(void)startRenderLoop;
 @end

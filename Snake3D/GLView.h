@@ -28,6 +28,6 @@
 - (void)setupRenderBuffer;
 - (void)setupFrameBuffer;
 - (void)presentRenderbuffer;
-- (void)startRenderLoop;
-- (void) Render: (CADisplayLink*) displayLink;
+//- (void)startRenderLoop;
+//- (void) Render: (CADisplayLink*) displayLink;
 @end

@@ -36,11 +36,17 @@ typedef struct _vertex3
 
 
 @interface Mesh : NSObject
-@property(assign,nonatomic) Vertex4 *vertices;
-@property(assign,nonatomic) GLuint *indices;
-@property(assign,nonatomic) GLuint indicesSize,verticesSize;
+@property(assign,nonatomic) GLfloat *vertices;
+@property(assign,nonatomic) GLushort *indices;
+@property(assign,nonatomic) GLuint inoe,vnoe;
 @property(nonatomic,assign) vertexStructure vertexStruct;
+-(void)loadVertices:(GLfloat*)v
+            normals:(GLfloat*)n
+              color:(GLfloat*)c
+            Texture:(GLfloat*)t
+            indices:(GLushort*)i
+        indicesNumberOfElemets:(GLuint)inoe
+       verticesNumberOfElemets:(GLuint)vnoe;
 -(size_t)sizeofVertices;
 -(size_t)sizeofIndices;
--(void)loadVertices:(GLfloat*)v normals:(GLfloat*)n color:(GLfloat*)c Texture:(GLfloat*)t andIndices:(GLuint*)i;
 @end

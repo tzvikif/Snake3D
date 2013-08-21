@@ -13,10 +13,10 @@
 
 @implementation Mesh
 -(size_t)sizeofVertices {
-    Vertex4 *v =  self.vertices;
+    Vertex4 *v = NULL;
     switch(_vertexStruct) {
             case PNCT:
-            return (sizeof(v->position) + sizeof(v->normal) + sizeof(v->color) + sizeof(v->texture))*_verticesSize;
+            return (sizeof(v->position) + sizeof(v->normal) + sizeof(v->color) + sizeof(v->texture))*_vnoe/3;
             break;
             case PNC:
             return sizeof(v->position) + sizeof(v->normal) + sizeof(v->color);
@@ -27,14 +27,21 @@
     }
 }
 -(size_t)sizeofIndices {
-    return sizeof(GLuint)*_indicesSize;
+    return sizeof(GLushort)*_inoe;
 }
--(void)loadVertices:(GLfloat*)v normals:(GLfloat*)n color:(GLfloat*)c Texture:(GLfloat*)t andIndices:(GLuint*)i {
-    Vertex4 *verticesTemp = malloc( sizeof(Vertex4) * ( sizeof(v)/sizeof(GLfloat)/3 ));
-    [self setVertices:verticesTemp];
-    GLuint *indicesTemp = malloc(sizeof(i));
+-(void)loadVertices:(GLfloat*)v
+            normals:(GLfloat*)n
+              color:(GLfloat*)c
+            Texture:(GLfloat*)t
+            indices:(GLushort*)i
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe
+ {
+    Vertex4 *verticesTemp = malloc( sizeof(Vertex4) * ( vnoe/3 ));
+    [self setVertices:(GLfloat*)verticesTemp];
+    GLushort *indicesTemp = malloc(sizeof(GLuint)*inoe);
     [self setIndices:indicesTemp];
-    for (int i=0; i<sizeof(v)/sizeof(GLfloat); i+=3) {
+    for (int i=0; i<vnoe/3; i+=3) {
         CC3Vector vertex;
         CC3Vector normal;
         CC3Vector4 color;
@@ -57,7 +64,13 @@
         texture[0] = t[i+0];
         texture[1] = t[i+1];
         
-        vstruct.texture = texture;
+        vstruct.position = vertex;
+        vstruct.normal = normal;
+        vstruct.color = color;
+        vstruct.texture[0] = texture[0];
+        vstruct.texture[1] = texture[1];
+        verticesTemp[i/3] = vstruct;
     }
 }
+
 @end

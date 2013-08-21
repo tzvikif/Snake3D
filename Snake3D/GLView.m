@@ -23,7 +23,7 @@
         [self setupDepthBuffer];
         [self setupRenderBuffer];
         [self setupFrameBuffer];
-        [self startRenderLoop];
+        //[self startRenderLoop];
 
     }
     return self;
@@ -95,32 +95,10 @@
                               GL_RENDERBUFFER, _colorRenderBuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);    
 }
--(void)startRenderLoop {
-    CADisplayLink* displayLink;
-    [self Render:nil];
-    m_timestamp = CACurrentMediaTime();
-    displayLink = [CADisplayLink displayLinkWithTarget:self
-                                              selector:@selector(Render:)];
-    
-    [displayLink addToRunLoop:[NSRunLoop currentRunLoop]
-                      forMode:NSDefaultRunLoopMode];
-
+-(void)presentRenderbuffer {
+    [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
-- (void) Render: (CADisplayLink*) displayLink {
-    if (displayLink != nil) {
-        float elapsedSeconds = displayLink.timestamp - m_timestamp;
-        m_timestamp = displayLink.timestamp;
-        m_applicationEngine->UpdateAnimation(elapsedSeconds);
-    }
-    
-    m_applicationEngine->Render();
-    [m_context presentRenderbuffer:GL_RENDERBUFFER];
-}
-
 -(void)dealloc {
     [super dealloc];
-}
-- (void)presentRenderbuffer {
-    [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 @end
