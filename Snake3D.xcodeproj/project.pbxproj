@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		20F74B5C17C2604800407740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5B17C2604800407740 /* UIKit.framework */; };
+		20F74B5E17C2604800407740 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5D17C2604800407740 /* Foundation.framework */; };
+		20F74B6017C2604800407740 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5F17C2604800407740 /* CoreGraphics.framework */; };
+		20F74B6617C2604800407740 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B6417C2604800407740 /* InfoPlist.strings */; };
+		20F74B6817C2604800407740 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B6717C2604800407740 /* main.m */; };
+		20F74B6C17C2604800407740 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B6B17C2604800407740 /* AppDelegate.m */; };
+		20F74B6E17C2604800407740 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B6D17C2604800407740 /* Default.png */; };
+		20F74B7017C2604800407740 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B6F17C2604800407740 /* Default@2x.png */; };
+		20F74B7217C2604800407740 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B7117C2604800407740 /* Default-568h@2x.png */; };
+		20F74B7517C2604800407740 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B7417C2604800407740 /* ViewController.m */; };
+		20F74B7817C2604800407740 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B7617C2604800407740 /* ViewController.xib */; };
+		20F74B8017C264CD00407740 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B7F17C264CD00407740 /* GLView.mm */; };
+		20F74B8317C2650200407740 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8217C2650200407740 /* GLProgram.m */; };
+		20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8617C26ADE00407740 /* LogicEngine.m */; };
+		20F74B8A17C26B0D00407740 /* RenderingEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8917C26B0D00407740 /* RenderingEngine.m */; };
+		20FF7DB417C4977800A58B95 /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB317C4977800A58B95 /* Mesh.m */; };
+		20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */; };
+		20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB917C49A1F00A58B95 /* CC3GLMatrix.mm */; };
+		20FF7DC217C49A1F00A58B95 /* CC3Kazmath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DBB17C49A1F00A58B95 /* CC3Kazmath.mm */; };
+		20FF7DC317C49A1F00A58B95 /* CC3Math.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DBE17C49A1F00A58B95 /* CC3Math.mm */; };
+		20FF7DC717C49F9100A58B95 /* Drawable.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DC617C49F9100A58B95 /* Drawable.m */; };
+		20FF7DCD17C4E57100A58B95 /* Material.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DCC17C4E57100A58B95 /* Material.m */; };
+		20FF7DD017C4EE0E00A58B95 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DCF17C4EE0D00A58B95 /* Node.m */; };
+		20FF7DD317C4F2B400A58B95 /* SimpleCube.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DD217C4F2B400A58B95 /* SimpleCube.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		20F74B5817C2604800407740 /* Snake3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20F74B5B17C2604800407740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		20F74B5D17C2604800407740 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		20F74B5F17C2604800407740 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		20F74B6317C2604800407740 /* Snake3D-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Snake3D-Info.plist"; sourceTree = "<group>"; };
+		20F74B6517C2604800407740 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		20F74B6717C2604800407740 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		20F74B6917C2604800407740 /* Snake3D-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Snake3D-Prefix.pch"; sourceTree = "<group>"; };
+		20F74B6A17C2604800407740 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		20F74B6B17C2604800407740 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		20F74B6D17C2604800407740 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		20F74B6F17C2604800407740 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		20F74B7117C2604800407740 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		20F74B7317C2604800407740 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		20F74B7417C2604800407740 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		20F74B7717C2604800407740 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		20F74B7E17C264CD00407740 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		20F74B7F17C264CD00407740 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
+		20F74B8117C2650200407740 /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
+		20F74B8217C2650200407740 /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
+		20F74B8517C26ADE00407740 /* LogicEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicEngine.h; sourceTree = "<group>"; };
+		20F74B8617C26ADE00407740 /* LogicEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicEngine.m; sourceTree = "<group>"; };
+		20F74B8817C26B0D00407740 /* RenderingEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingEngine.h; sourceTree = "<group>"; };
+		20F74B8917C26B0D00407740 /* RenderingEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderingEngine.m; sourceTree = "<group>"; };
+		20FF7DB217C4977800A58B95 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = Snake3D/Mesh.h; sourceTree = "<group>"; };
+		20FF7DB317C4977800A58B95 /* Mesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mesh.m; path = Snake3D/Mesh.m; sourceTree = "<group>"; };
+		20FF7DB617C49A1F00A58B95 /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
+		20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CC3Foundation.mm; sourceTree = "<group>"; };
+		20FF7DB817C49A1F00A58B95 /* CC3GLMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3GLMatrix.h; sourceTree = "<group>"; };
+		20FF7DB917C49A1F00A58B95 /* CC3GLMatrix.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CC3GLMatrix.mm; sourceTree = "<group>"; };
+		20FF7DBA17C49A1F00A58B95 /* CC3Kazmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Kazmath.h; sourceTree = "<group>"; };
+		20FF7DBB17C49A1F00A58B95 /* CC3Kazmath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CC3Kazmath.mm; sourceTree = "<group>"; };
+		20FF7DBC17C49A1F00A58B95 /* CC3Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Logging.h; sourceTree = "<group>"; };
+		20FF7DBD17C49A1F00A58B95 /* CC3Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Math.h; sourceTree = "<group>"; };
+		20FF7DBE17C49A1F00A58B95 /* CC3Math.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CC3Math.mm; sourceTree = "<group>"; };
+		20FF7DBF17C49A1F00A58B95 /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
+		20FF7DC417C49BF200A58B95 /* Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
+		20FF7DC517C49F9100A58B95 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = Snake3D/Drawable.h; sourceTree = "<group>"; };
+		20FF7DC617C49F9100A58B95 /* Drawable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Drawable.m; path = Snake3D/Drawable.m; sourceTree = "<group>"; };
+		20FF7DCB17C4E57100A58B95 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Material.h; path = Snake3D/Material.h; sourceTree = "<group>"; };
+		20FF7DCC17C4E57100A58B95 /* Material.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Material.m; path = Snake3D/Material.m; sourceTree = "<group>"; };
+		20FF7DCE17C4EE0D00A58B95 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = Snake3D/Node.h; sourceTree = "<group>"; };
+		20FF7DCF17C4EE0D00A58B95 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Node.m; path = Snake3D/Node.m; sourceTree = "<group>"; };
+		20FF7DD117C4F2B400A58B95 /* SimpleCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleCube.h; path = Snake3D/SimpleCube.h; sourceTree = "<group>"; };
+		20FF7DD217C4F2B400A58B95 /* SimpleCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleCube.m; path = Snake3D/SimpleCube.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		20F74B5517C2604800407740 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20F74B5C17C2604800407740 /* UIKit.framework in Frameworks */,
+				20F74B5E17C2604800407740 /* Foundation.framework in Frameworks */,
+				20F74B6017C2604800407740 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		20F74B4F17C2604800407740 = {
+			isa = PBXGroup;
+			children = (
+				20FF7DB517C49A1F00A58B95 /* Cocos3DMathLib */,
+				20FF7DB117C4975300A58B95 /* Objects */,
+				20F74B8417C26ABD00407740 /* Engine */,
+				20F74B6117C2604800407740 /* Snake3D */,
+				20F74B5A17C2604800407740 /* Frameworks */,
+				20F74B5917C2604800407740 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		20F74B5917C2604800407740 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20F74B5817C2604800407740 /* Snake3D.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20F74B5A17C2604800407740 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20F74B5B17C2604800407740 /* UIKit.framework */,
+				20F74B5D17C2604800407740 /* Foundation.framework */,
+				20F74B5F17C2604800407740 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		20F74B6117C2604800407740 /* Snake3D */ = {
+			isa = PBXGroup;
+			children = (
+				20F74B6A17C2604800407740 /* AppDelegate.h */,
+				20F74B6B17C2604800407740 /* AppDelegate.m */,
+				20F74B7317C2604800407740 /* ViewController.h */,
+				20F74B7417C2604800407740 /* ViewController.m */,
+				20F74B7617C2604800407740 /* ViewController.xib */,
+				20F74B7E17C264CD00407740 /* GLView.h */,
+				20F74B7F17C264CD00407740 /* GLView.mm */,
+				20F74B8117C2650200407740 /* GLProgram.h */,
+				20F74B8217C2650200407740 /* GLProgram.m */,
+				20F74B6217C2604800407740 /* Supporting Files */,
+			);
+			path = Snake3D;
+			sourceTree = "<group>";
+		};
+		20F74B6217C2604800407740 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				20F74B6317C2604800407740 /* Snake3D-Info.plist */,
+				20F74B6417C2604800407740 /* InfoPlist.strings */,
+				20F74B6717C2604800407740 /* main.m */,
+				20F74B6917C2604800407740 /* Snake3D-Prefix.pch */,
+				20F74B6D17C2604800407740 /* Default.png */,
+				20F74B6F17C2604800407740 /* Default@2x.png */,
+				20F74B7117C2604800407740 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		20F74B8417C26ABD00407740 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				20F74B8517C26ADE00407740 /* LogicEngine.h */,
+				20F74B8617C26ADE00407740 /* LogicEngine.m */,
+				20F74B8817C26B0D00407740 /* RenderingEngine.h */,
+				20F74B8917C26B0D00407740 /* RenderingEngine.m */,
+			);
+			name = Engine;
+			sourceTree = "<group>";
+		};
+		20FF7DB117C4975300A58B95 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				20FF7DB217C4977800A58B95 /* Mesh.h */,
+				20FF7DB317C4977800A58B95 /* Mesh.m */,
+				20FF7DC517C49F9100A58B95 /* Drawable.h */,
+				20FF7DC617C49F9100A58B95 /* Drawable.m */,
+				20FF7DCB17C4E57100A58B95 /* Material.h */,
+				20FF7DCC17C4E57100A58B95 /* Material.m */,
+				20FF7DCE17C4EE0D00A58B95 /* Node.h */,
+				20FF7DCF17C4EE0D00A58B95 /* Node.m */,
+				20FF7DD117C4F2B400A58B95 /* SimpleCube.h */,
+				20FF7DD217C4F2B400A58B95 /* SimpleCube.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		20FF7DB517C49A1F00A58B95 /* Cocos3DMathLib */ = {
+			isa = PBXGroup;
+			children = (
+				20FF7DB617C49A1F00A58B95 /* CC3Foundation.h */,
+				20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */,
+				20FF7DB817C49A1F00A58B95 /* CC3GLMatrix.h */,
+				20FF7DB917C49A1F00A58B95 /* CC3GLMatrix.mm */,
+				20FF7DBA17C49A1F00A58B95 /* CC3Kazmath.h */,
+				20FF7DBB17C49A1F00A58B95 /* CC3Kazmath.mm */,
+				20FF7DBC17C49A1F00A58B95 /* CC3Logging.h */,
+				20FF7DBD17C49A1F00A58B95 /* CC3Math.h */,
+				20FF7DBE17C49A1F00A58B95 /* CC3Math.mm */,
+				20FF7DBF17C49A1F00A58B95 /* ccTypes.h */,
+				20FF7DC417C49BF200A58B95 /* Vectors.h */,
+			);
+			path = Cocos3DMathLib;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		20F74B5717C2604800407740 /* Snake3D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20F74B7B17C2604800407740 /* Build configuration list for PBXNativeTarget "Snake3D" */;
+			buildPhases = (
+				20F74B5417C2604800407740 /* Sources */,
+				20F74B5517C2604800407740 /* Frameworks */,
+				20F74B5617C2604800407740 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Snake3D;
+			productName = Snake3D;
+			productReference = 20F74B5817C2604800407740 /* Snake3D.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20F74B5017C2604800407740 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = 20F74B5317C2604800407740 /* Build configuration list for PBXProject "Snake3D" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 20F74B4F17C2604800407740;
+			productRefGroup = 20F74B5917C2604800407740 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				20F74B5717C2604800407740 /* Snake3D */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20F74B5617C2604800407740 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20F74B6617C2604800407740 /* InfoPlist.strings in Resources */,
+				20F74B6E17C2604800407740 /* Default.png in Resources */,
+				20F74B7017C2604800407740 /* Default@2x.png in Resources */,
+				20F74B7217C2604800407740 /* Default-568h@2x.png in Resources */,
+				20F74B7817C2604800407740 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20F74B5417C2604800407740 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20F74B6817C2604800407740 /* main.m in Sources */,
+				20F74B6C17C2604800407740 /* AppDelegate.m in Sources */,
+				20F74B7517C2604800407740 /* ViewController.m in Sources */,
+				20F74B8017C264CD00407740 /* GLView.mm in Sources */,
+				20F74B8317C2650200407740 /* GLProgram.m in Sources */,
+				20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */,
+				20F74B8A17C26B0D00407740 /* RenderingEngine.m in Sources */,
+				20FF7DB417C4977800A58B95 /* Mesh.m in Sources */,
+				20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */,
+				20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */,
+				20FF7DC217C49A1F00A58B95 /* CC3Kazmath.mm in Sources */,
+				20FF7DC317C49A1F00A58B95 /* CC3Math.mm in Sources */,
+				20FF7DC717C49F9100A58B95 /* Drawable.m in Sources */,
+				20FF7DCD17C4E57100A58B95 /* Material.m in Sources */,
+				20FF7DD017C4EE0E00A58B95 /* Node.m in Sources */,
+				20FF7DD317C4F2B400A58B95 /* SimpleCube.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		20F74B6417C2604800407740 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20F74B6517C2604800407740 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		20F74B7617C2604800407740 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20F74B7717C2604800407740 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		20F74B7917C2604800407740 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		20F74B7A17C2604800407740 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		20F74B7C17C2604800407740 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Snake3D/Snake3D-Prefix.pch";
+				INFOPLIST_FILE = "Snake3D/Snake3D-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		20F74B7D17C2604800407740 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Snake3D/Snake3D-Prefix.pch";
+				INFOPLIST_FILE = "Snake3D/Snake3D-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		20F74B5317C2604800407740 /* Build configuration list for PBXProject "Snake3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20F74B7917C2604800407740 /* Debug */,
+				20F74B7A17C2604800407740 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20F74B7B17C2604800407740 /* Build configuration list for PBXNativeTarget "Snake3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20F74B7C17C2604800407740 /* Debug */,
+				20F74B7D17C2604800407740 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 20F74B5017C2604800407740 /* Project object */;
+}
