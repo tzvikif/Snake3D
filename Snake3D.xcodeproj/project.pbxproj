@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */; };
 		20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */; };
+		20B3A0FB17C64910001957B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B3A0FA17C64910001957B5 /* CoreGraphics.framework */; };
 		20F74B5C17C2604800407740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5B17C2604800407740 /* UIKit.framework */; };
 		20F74B5E17C2604800407740 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5D17C2604800407740 /* Foundation.framework */; };
-		20F74B6017C2604800407740 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5F17C2604800407740 /* CoreGraphics.framework */; };
 		20F74B6617C2604800407740 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B6417C2604800407740 /* InfoPlist.strings */; };
 		20F74B6817C2604800407740 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B6717C2604800407740 /* main.m */; };
 		20F74B6C17C2604800407740 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B6B17C2604800407740 /* AppDelegate.m */; };
@@ -40,10 +40,10 @@
 /* Begin PBXFileReference section */
 		20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleFragment.fsh; sourceTree = "<group>"; };
 		20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleVertex.vsh; sourceTree = "<group>"; };
+		20B3A0FA17C64910001957B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		20F74B5817C2604800407740 /* Snake3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F74B5B17C2604800407740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		20F74B5D17C2604800407740 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		20F74B5F17C2604800407740 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		20F74B6317C2604800407740 /* Snake3D-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Snake3D-Info.plist"; sourceTree = "<group>"; };
 		20F74B6517C2604800407740 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		20F74B6717C2604800407740 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,11 +94,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20B3A0FB17C64910001957B5 /* CoreGraphics.framework in Frameworks */,
 				9172EE2F17C550BB008F48AB /* QuartzCore.framework in Frameworks */,
 				9172EE2D17C5505C008F48AB /* OpenGLES.framework in Frameworks */,
 				20F74B5C17C2604800407740 /* UIKit.framework in Frameworks */,
 				20F74B5E17C2604800407740 /* Foundation.framework in Frameworks */,
-				20F74B6017C2604800407740 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +117,7 @@
 		20F74B4F17C2604800407740 = {
 			isa = PBXGroup;
 			children = (
+				20B3A0FA17C64910001957B5 /* CoreGraphics.framework */,
 				20B3A0F317C5EBDF001957B5 /* Shaders */,
 				20FF7DB517C49A1F00A58B95 /* Cocos3DMathLib */,
 				20FF7DB117C4975300A58B95 /* Objects */,
@@ -142,7 +143,6 @@
 				9172EE2C17C5505C008F48AB /* OpenGLES.framework */,
 				20F74B5B17C2604800407740 /* UIKit.framework */,
 				20F74B5D17C2604800407740 /* Foundation.framework */,
-				20F74B5F17C2604800407740 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

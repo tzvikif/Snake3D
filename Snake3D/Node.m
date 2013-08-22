@@ -12,4 +12,7 @@
 -(void)Render {
     
 }
+-(void)initialize {
+    
+}
 @end

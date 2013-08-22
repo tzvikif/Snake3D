@@ -38,25 +38,25 @@
     return d;
 }
 -(void)initialize:(CGRect)viewport {
-    NSString *texcoord_name = @"texcoord";
-    NSString* position_name = @"Position";
-    NSString* normal_name = @"Normal";
+ 
     NSString* ambient_name = @"AmbientMaterial";
     NSString* diffuse_name = @"DiffuseMaterial";
     NSString* specular_name = @"SpecularMaterial";
     NSString* shininess_name = @"Shininess";
     NSString* lightPosition_name = @"LightPosition";
     NSString* normalMatrix_name = @"NormalMatrix";
+    NSString* view_name = @"View";
+    NSString* projection_name = @"Projection";
 
-    [_program1 addAttribute:position_name];
-    [_program1 addAttribute:normal_name];
-    [_program1 addAttribute:texcoord_name];
     [_program1 addUniform:ambient_name];
     [_program1 addUniform:diffuse_name];
     [_program1 addUniform:specular_name];
     [_program1 addUniform:lightPosition_name];
     [_program1 addUniform:normalMatrix_name];
     [_program1 addUniform:shininess_name];
+    [_program1 addUniform:view_name];
+    [_program1 addUniform:projection_name];
+    
     
     glUniform3f([_program1 uniformLocation:ambient_name] , 0.1f, 0.1f, 0.1f);
     glUniform3f([_program1 uniformLocation:specular_name],9.0, 9.0, 0.0);
@@ -74,10 +74,16 @@
     //glCullFace(GL_BACK);
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glViewport(0, 0, viewport.size.width, viewport.size.width.height);
+    glViewport(0, 0, viewport.size.width, viewport.size.height);
     
+    CC3GLMatrix *projection = [CC3GLMatrix identity];
+    [_view populateToLookAt:CC3VectorMake(0.0, 0.0, -4.0) withEyeAt:CC3VectorMake(1.0, 2.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
+    float ratio = viewport.size.width / viewport.size.height;
+    glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _view.glMatrix);
+    [projection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
+    glUniformMatrix4fv([_program1 uniformLocation:projection_name], 1, 0, projection.glMatrix);
 }
 -(void)Render:(id<Renderable>)object {
-    
+    [object Render];
 }
 @end

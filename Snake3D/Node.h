@@ -15,13 +15,16 @@
 #import "Mesh.h"
 #import "Drawable.h"
 #import "Material.h"
+@class GLProgram;
 
 @protocol Renderable <NSObject>
 -(void)Render;
 @end
 @interface Node : NSObject<Renderable>
-@property(retain,nonatomic) CC3GLMatrix *model;
+@property(retain,nonatomic) CC3GLMatrix *modelMatrix;
 @property(retain,nonatomic) Mesh *cubeMesh;
 @property(retain,nonatomic) Drawable *cubeDrawable;
 @property(retain,nonatomic) Material *material;
+@property(retain,nonatomic) GLProgram *program1;
+-(void)initialize;
 @end
