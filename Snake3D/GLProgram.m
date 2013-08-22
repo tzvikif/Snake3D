@@ -12,7 +12,8 @@ typedef void (*GLLogFunction) (GLuint program,
 #pragma mark Private Extension Method Declaration
 @interface GLProgram()
 {
-    NSMutableArray  *attributes;
+    NSMutableDictionary  *attributes;
+    NSMutableDictionary  *uniforms;
     GLuint          program,
     vertShader, 
     fragShader;
@@ -23,6 +24,8 @@ typedef void (*GLLogFunction) (GLuint program,
 - (NSString *)logForOpenGLObject:(GLuint)object 
                     infoCallback:(GLInfoFunction)infoFunc 
                          logFunc:(GLLogFunction)logFunc;
+//- (void)checkUniform:(GLuint)uniform name:(const char *)name;
+//- (void)checkAttribute:(GLuint)attribute name:(const char *)name;
 @end
 #pragma mark -
 
@@ -32,7 +35,8 @@ typedef void (*GLLogFunction) (GLuint program,
 {
     if (self = [super init])
     {
-        attributes = [[NSMutableArray alloc] init];
+        attributes = [[NSMutableDictionary alloc] init];
+        uniforms   = [[NSMutableDictionary alloc] init];
         NSString *vertShaderPathname, *fragShaderPathname;
         program = glCreateProgram();
         
@@ -85,21 +89,39 @@ typedef void (*GLLogFunction) (GLuint program,
 #pragma mark -
 - (void)addAttribute:(NSString *)attributeName
 {
-    if (![attributes containsObject:attributeName])
+    if (![attributes objectForKey:attributeName])
     {
-        [attributes addObject:attributeName];
-        glBindAttribLocation(program, 
-                             [attributes indexOfObject:attributeName], 
-                             [attributeName UTF8String]);
+        int attribLocation = glGetAttribLocation(program, [attributeName UTF8String]);
+        if (attribLocation == -1) {
+            NSLog(@"Could not bind attribute %@\n", attributeName);
+            exit(1);
+        }
+
+        [attributes setObject:[NSNumber numberWithInt:attribLocation] forKey:attributeName];
+        glEnableVertexAttribArray(attribLocation);
     }
 }
-- (GLuint)attributeIndex:(NSString *)attributeName
+- (void)addUniform:(NSString *)uniformName
 {
-    return [attributes indexOfObject:attributeName];
+    if (![uniforms objectForKey:uniformName])
+    {
+        int uniformLocation = glGetUniformLocation(program, [uniformName UTF8String]);
+        if (uniformLocation == -1) {
+            NSLog(@"Could not bind uniform %@\n", uniformName);
+            exit(1);
+        }
+        [uniforms setObject:[NSNumber numberWithInt:uniformLocation] forKey:uniformName];
+    }
 }
-- (GLuint)uniformIndex:(NSString *)uniformName
+- (GLuint)attributeLocation:(NSString *)attributeName
 {
-    return glGetUniformLocation(program, [uniformName UTF8String]);
+    NSNumber *location = [attributes objectForKey:attributeName];
+    return (GLuint)[location intValue];
+}
+- (GLuint)uniformLocation:(NSString *)uniformName
+{
+    NSNumber *location = [uniforms objectForKey:uniformName];
+    return (GLuint)[location intValue];
 }
 #pragma mark -
 - (BOOL)link
@@ -167,6 +189,7 @@ typedef void (*GLLogFunction) (GLuint program,
 - (void)dealloc
 {
     [attributes release];
+    [uniforms release];
     
     if (vertShader)
         glDeleteShader(vertShader);

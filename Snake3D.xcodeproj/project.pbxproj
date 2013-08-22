@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */; };
+		20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */; };
 		20F74B5C17C2604800407740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5B17C2604800407740 /* UIKit.framework */; };
 		20F74B5E17C2604800407740 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5D17C2604800407740 /* Foundation.framework */; };
 		20F74B6017C2604800407740 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5F17C2604800407740 /* CoreGraphics.framework */; };
@@ -21,7 +23,7 @@
 		20F74B8017C264CD00407740 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B7F17C264CD00407740 /* GLView.m */; };
 		20F74B8317C2650200407740 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8217C2650200407740 /* GLProgram.m */; };
 		20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8617C26ADE00407740 /* LogicEngine.m */; };
-		20F74B8A17C26B0D00407740 /* RenderingEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8917C26B0D00407740 /* RenderingEngine.m */; };
+		20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8917C26B0D00407740 /* RenderingEngine.mm */; };
 		20FF7DB417C4977800A58B95 /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB317C4977800A58B95 /* Mesh.m */; };
 		20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */; };
 		20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB917C49A1F00A58B95 /* CC3GLMatrix.mm */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleFragment.fsh; sourceTree = "<group>"; };
+		20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleVertex.vsh; sourceTree = "<group>"; };
 		20F74B5817C2604800407740 /* Snake3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F74B5B17C2604800407740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		20F74B5D17C2604800407740 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,7 +63,7 @@
 		20F74B8517C26ADE00407740 /* LogicEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicEngine.h; sourceTree = "<group>"; };
 		20F74B8617C26ADE00407740 /* LogicEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicEngine.m; sourceTree = "<group>"; };
 		20F74B8817C26B0D00407740 /* RenderingEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingEngine.h; sourceTree = "<group>"; };
-		20F74B8917C26B0D00407740 /* RenderingEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderingEngine.m; sourceTree = "<group>"; };
+		20F74B8917C26B0D00407740 /* RenderingEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderingEngine.mm; sourceTree = "<group>"; };
 		20FF7DB217C4977800A58B95 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = Snake3D/Mesh.h; sourceTree = "<group>"; };
 		20FF7DB317C4977800A58B95 /* Mesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mesh.m; path = Snake3D/Mesh.m; sourceTree = "<group>"; };
 		20FF7DB617C49A1F00A58B95 /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
@@ -101,11 +105,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20B3A0F317C5EBDF001957B5 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */,
+				20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
 		20F74B4F17C2604800407740 = {
 			isa = PBXGroup;
 			children = (
-				9172EE2E17C550BB008F48AB /* QuartzCore.framework */,
-				9172EE2C17C5505C008F48AB /* OpenGLES.framework */,
+				20B3A0F317C5EBDF001957B5 /* Shaders */,
 				20FF7DB517C49A1F00A58B95 /* Cocos3DMathLib */,
 				20FF7DB117C4975300A58B95 /* Objects */,
 				20F74B8417C26ABD00407740 /* Engine */,
@@ -126,6 +138,8 @@
 		20F74B5A17C2604800407740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9172EE2E17C550BB008F48AB /* QuartzCore.framework */,
+				9172EE2C17C5505C008F48AB /* OpenGLES.framework */,
 				20F74B5B17C2604800407740 /* UIKit.framework */,
 				20F74B5D17C2604800407740 /* Foundation.framework */,
 				20F74B5F17C2604800407740 /* CoreGraphics.framework */,
@@ -170,7 +184,7 @@
 				20F74B8517C26ADE00407740 /* LogicEngine.h */,
 				20F74B8617C26ADE00407740 /* LogicEngine.m */,
 				20F74B8817C26B0D00407740 /* RenderingEngine.h */,
-				20F74B8917C26B0D00407740 /* RenderingEngine.m */,
+				20F74B8917C26B0D00407740 /* RenderingEngine.mm */,
 			);
 			name = Engine;
 			sourceTree = "<group>";
@@ -265,6 +279,8 @@
 				20F74B7017C2604800407740 /* Default@2x.png in Resources */,
 				20F74B7217C2604800407740 /* Default-568h@2x.png in Resources */,
 				20F74B7817C2604800407740 /* ViewController.xib in Resources */,
+				20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */,
+				20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +297,7 @@
 				20F74B8017C264CD00407740 /* GLView.m in Sources */,
 				20F74B8317C2650200407740 /* GLProgram.m in Sources */,
 				20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */,
-				20F74B8A17C26B0D00407740 /* RenderingEngine.m in Sources */,
+				20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */,
 				20FF7DB417C4977800A58B95 /* Mesh.m in Sources */,
 				20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */,
 				20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */,

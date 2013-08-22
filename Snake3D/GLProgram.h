@@ -8,8 +8,11 @@
 - (id)initWithVertexShaderFilename:(NSString *)vShaderFilename 
             fragmentShaderFilename:(NSString *)fShaderFilename;
 - (void)addAttribute:(NSString *)attributeName;
-- (GLuint)attributeIndex:(NSString *)attributeName;
-- (GLuint)uniformIndex:(NSString *)uniformName;
+- (void)addUniform:(NSString *)uniformName;
+//- (GLuint)attributeIndex:(NSString *)attributeName;
+//- (GLuint)uniformIndex:(NSString *)uniformName;
+- (GLuint)attributeLocation:(NSString *)attributeName;
+- (GLuint)uniformLocation:(NSString *)uniformName;
 - (BOOL)link;
 - (void)use;
 - (NSString *)vertexShaderLog;

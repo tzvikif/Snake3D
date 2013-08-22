@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Node.h"
 
-@interface SimpleCube : NSObject
+@interface SimpleCube : Node
 
 @end

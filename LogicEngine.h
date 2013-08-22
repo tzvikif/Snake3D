@@ -16,11 +16,17 @@
 #import "Drawable.h"
 #import "Node.h"
 #import "RenderingEngine.h"
+@class GLProgram;
 
 @interface LogicEngine : NSObject
 @property(nonatomic,retain) Node *simpleCube;
+@property(nonatomic,retain) Mesh *cubeMesh;
+@property(nonatomic,retain) Drawable *cubeDrawable;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
--(void)initialize;
+@property(retain,nonatomic) GLProgram *program1;
+
+-(void)initialize:(CGRect)viewport;
+-(void)loadProgram:(GLProgram*)program;
 -(void)updateAnimation:(float)elapsedSeconds;
 -(void)Render;
 @end

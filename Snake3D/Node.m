@@ -9,5 +9,7 @@
 #import "Node.h"
 
 @implementation Node
-
+-(void)Render {
+    
+}
 @end

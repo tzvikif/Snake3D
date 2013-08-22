@@ -13,10 +13,15 @@
 #import "CC3Math.h"
 #import "CC3GLMatrix.h"
 #import "Mesh.h"
+#import "Drawable.h"
 #import "Material.h"
 
-@interface Node : NSObject
+@protocol Renderable <NSObject>
+-(void)Render;
+@end
+@interface Node : NSObject<Renderable>
 @property(retain,nonatomic) CC3GLMatrix *model;
-@property(retain,nonatomic) Mesh *mesh;
+@property(retain,nonatomic) Mesh *cubeMesh;
+@property(retain,nonatomic) Drawable *cubeDrawable;
 @property(retain,nonatomic) Material *material;
 @end

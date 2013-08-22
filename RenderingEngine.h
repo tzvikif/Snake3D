@@ -7,16 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Drawable.h"
-#import "Mesh.h"
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
-#import "CC3Foundation.h"
-#import "CC3Math.h"
-#import "CC3GLMatrix.h"
+#import "Node.h"
+//#import "Drawable.h"
+//#import "Mesh.h"
+
+@class GLProgram;
+@class Mesh;
+@class Drawable;
+@class CC3GLMatrix;
+
 
 @interface RenderingEngine : NSObject
 @property(nonatomic,retain) CC3GLMatrix *view;
--(void)initialize;
+@property(nonatomic,retain) GLProgram *program1;
+-(void)initialize:(CGRect)viewport;
 -(Drawable*)createDrawable:(Mesh*)mesh;
+-(void)Render:(id<Renderable>)object;
 @end

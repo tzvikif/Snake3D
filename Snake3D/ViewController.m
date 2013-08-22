@@ -19,8 +19,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    _program1 = [[GLProgram alloc] initWithVertexShaderFilename:@"SimpleVertex" fragmentShaderFilename:@"SimpleShader"];
     _logicEngine = [[LogicEngine alloc] init];
-    [_logicEngine initialize];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    [_logicEngine initialize:screenBounds];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +52,7 @@
 }
 -(void)dealloc {
     [_logicEngine release];
+    [_program1 release];
     [super dealloc];
 }
 @end
