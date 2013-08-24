@@ -1,20 +1,21 @@
 attribute vec4 Position;
-attribute vec3 Normal;
-attribute vec2 texcoord;
+//attribute vec3 Normal;
+//attribute vec2 texcoord;
 uniform mat4 Projection;
 uniform mat4 Model;
 uniform mat4 View;
-uniform mat4 NormalMatrix;
-uniform vec4 LightPosition;
-uniform vec3 AmbientMaterial;
-uniform vec3 SpecularMaterial;
-uniform vec3 DiffuseMaterial;
-uniform float Shininess;
-varying vec4 DestinationColor;
-varying vec2 f_texcoord;
+//uniform mat4 NormalMatrix;
+//uniform vec4 LightPosition;
+//uniform vec3 AmbientMaterial;
+//uniform vec3 SpecularMaterial;
+//uniform vec3 DiffuseMaterial;
+//uniform float Shininess;
+//varying vec4 DestinationColor;
+//varying vec2 f_texcoord;
 
 void main(void)
 {
+    /*
     mat4 nm = NormalMatrix;
     vec4 N4 = View * Model * vec4(normalize(Normal),0);
     N4 = normalize(N4);
@@ -50,5 +51,6 @@ void main(void)
 //    }
     DestinationColor = vec4(color,1.0);
     f_texcoord = texcoord;
-    gl_Position = Projection * View * Model* Position;
+     */
+    gl_Position = Position;
 }

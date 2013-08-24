@@ -13,34 +13,33 @@
 
 @implementation Mesh
 -(size_t)sizeofVertices {
-    Vertex4 *v = NULL;
     switch(_vertexStruct) {
-            case PNCT:
-            return (sizeof(v->position) + sizeof(v->normal) + sizeof(v->color) + sizeof(v->texture))*_vnoe/3;
+        case PNCT:
+            return  _vnoe * sizeof(Vertex4);
             break;
-            case PNC:
-            return sizeof(v->position) + sizeof(v->normal) + sizeof(v->color);
+        case PNC:
+            return sizeof(Vertex3);
             break;
+        case PC:
+            return sizeof(Vertex2);
             default:
-            NSLog(@"in Mesh: bad vertex struct:%d",_vertexStruct);
+                NSLog(@"in Mesh: bad vertex struct  :%d",_vertexStruct);
             break;
     }
 }
 -(size_t)sizeofIndices {
-    return sizeof(GLushort)*_inoe;
+    return _inoe * sizeof(GLushort);
 }
 -(void)loadVertices:(GLfloat*)v
             normals:(GLfloat*)n
               color:(GLfloat*)c
             Texture:(GLfloat*)t
-            indices:(GLushort*)i
+            indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe
  {
     Vertex4 *verticesTemp = malloc( sizeof(Vertex4) * ( vnoe/3 ));
-    [self setVertices:(GLfloat*)verticesTemp];
-    GLushort *indicesTemp = malloc(sizeof(GLuint)*inoe);
-    [self setIndices:indicesTemp];
+     _indices = malloc(inoe*sizeof(GLuint));
     for (int i=0; i<vnoe/3; i+=3) {
         CC3Vector vertex;
         CC3Vector normal;
@@ -71,6 +70,10 @@ verticesNumberOfElemets:(GLuint)vnoe
         vstruct.texture[1] = texture[1];
         verticesTemp[i/3] = vstruct;
     }
+     _vertices = (GLfloat*)verticesTemp;
+     memcpy(_indices, elements, inoe*sizeof(GLuint));
+     _vnoe = vnoe;
+     _inoe = inoe;
 }
 
 @end

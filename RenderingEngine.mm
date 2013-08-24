@@ -27,6 +27,8 @@
     //CC3Vector *vertices = _objLoader->_arrVertices;
     glGenBuffers(1, &vboVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER,vboVertexBuffer );
+    size_t  size = [mesh sizeofVertices];
+    size = [mesh sizeofIndices];
     glBufferData(GL_ARRAY_BUFFER, [mesh sizeofVertices], mesh.vertices, GL_STATIC_DRAW);
     [d setVboVertexBuffer:vboVertexBuffer];
     

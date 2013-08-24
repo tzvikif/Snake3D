@@ -17,6 +17,7 @@ typedef enum _vertexStructure
 {
     PNCT,
     PNC,
+    PC,
 }vertexStructure;
 
 typedef struct _vertex4
@@ -33,18 +34,24 @@ typedef struct _vertex3
     CC3Vector normal;
     CC3Vector4 color;
 }Vertex3;
+typedef struct _vertex2
+{
+    CC3Vector position;
+    CC3Vector4 color;
+}Vertex2;
 
 
 @interface Mesh : NSObject
+@property(assign,nonatomic) GLuint inoe,vnoe;
 @property(assign,nonatomic) GLfloat *vertices;
 @property(assign,nonatomic) GLushort *indices;
-@property(assign,nonatomic) GLuint inoe,vnoe;
-@property(nonatomic,assign) vertexStructure vertexStruct;
+@property(assign,nonatomic) vertexStructure vertexStruct;
+
 -(void)loadVertices:(GLfloat*)v
             normals:(GLfloat*)n
               color:(GLfloat*)c
             Texture:(GLfloat*)t
-            indices:(GLushort*)i
+            indices:(GLushort*)elements
         indicesNumberOfElemets:(GLuint)inoe
        verticesNumberOfElemets:(GLuint)vnoe;
 -(size_t)sizeofVertices;

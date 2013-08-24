@@ -28,7 +28,20 @@
     }
     return self;
 }
-
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setupLayer];
+        [self setupContext];
+        [self setupDepthBuffer];
+        [self setupRenderBuffer];
+        [self setupFrameBuffer];
+        //[self startRenderLoop];
+    }
+    return self;
+    
+}
 - (void)setupLayer { // set leyer to opaque
     _eaglLayer = (CAEAGLLayer*) self.layer;
     _eaglLayer.opaque = YES; // by default is opaque set to NO, so we change because of better

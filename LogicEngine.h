@@ -16,12 +16,13 @@
 #import "Drawable.h"
 #import "Node.h"
 #import "RenderingEngine.h"
+#import "SimpleCube.h"
 @class GLProgram;
 
 @interface LogicEngine : NSObject
-@property(nonatomic,retain) Node *simpleCube;
+@property(nonatomic,retain) SimpleCube *simpleCube;
 @property(nonatomic,retain) Mesh *cubeMesh;
-@property(nonatomic,retain) Drawable *cubeDrawable;
+//@property(nonatomic,retain) Drawable *cubeDrawable;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
 @property(retain,nonatomic) GLProgram *program1;
 

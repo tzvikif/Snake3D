@@ -44,7 +44,7 @@ typedef void (*GLLogFunction) (GLuint program,
                               pathForResource:vShaderFilename 
                               ofType:@"vsh"];
         if (![self compileShader:&vertShader 
-                            type:GL_VERTEX_SHADER 
+                            type:GL_VERTEX_SHADER
                             file:vertShaderPathname])
             NSLog(@"Failed to compile vertex shader");
         
@@ -69,22 +69,49 @@ typedef void (*GLLogFunction) (GLuint program,
     GLint status;
     const GLchar *source;
     
-    source = 
-    (GLchar *)[[NSString stringWithContentsOfFile:file 
-                                         encoding:NSUTF8StringEncoding 
-                                            error:nil] UTF8String];
-    if (!source)
-    {
-        NSLog(@"Failed to load vertex shader");
-        return NO;
+    NSError* error;
+    NSString* shaderString = [NSString stringWithContentsOfFile:file
+                                                       encoding:NSUTF8StringEncoding error:&error];
+    if (!shaderString) {
+        NSLog(@"Error loading shader: %@", error.localizedDescription);
+        exit(1);
     }
+
+    GLuint shaderHandle = glCreateShader(type);
     
-    *shader = glCreateShader(type);
-    glShaderSource(*shader, 1, &source, NULL);
-    glCompileShader(*shader);
+    // 3
+    const char * shaderStringUTF8 = [shaderString UTF8String];
+    int shaderStringLength = [shaderString length];
+    glShaderSource(shaderHandle, 1, &shaderStringUTF8, &shaderStringLength);
     
-    glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
-    return status == GL_TRUE;
+    // 4
+    glCompileShader(shaderHandle);
+    
+    // 5
+    GLint compileSuccess;
+    glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &compileSuccess);
+    if (compileSuccess == GL_FALSE) {
+        GLchar messages[256];
+        glGetShaderInfoLog(shaderHandle, sizeof(messages), 0, &messages[0]);
+        NSString *messageString = [NSString stringWithUTF8String:messages];
+        NSLog(@"%@", messageString);
+        exit(1);
+    }
+    *shader = shaderHandle;
+    return YES;
+    
+//    if (!source)
+//    {
+//        NSLog(@"Failed to load vertex shader");
+//        return NO;
+//    }
+    
+//    *shader = glCreateShader(type);
+//    glShaderSource(*shader, 1, &source, NULL);
+//    glCompileShader(*shader);
+//    
+//    glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
+//    return status == GL_TRUE;
 }
 #pragma mark -
 - (void)addAttribute:(NSString *)attributeName

@@ -20,10 +20,12 @@
 @protocol Renderable <NSObject>
 -(void)Render;
 @end
-@interface Node : NSObject<Renderable>
+@interface Node : NSObject<Renderable> {
+    vertexStructure _vs;
+}
 @property(retain,nonatomic) CC3GLMatrix *modelMatrix;
-@property(retain,nonatomic) Mesh *cubeMesh;
-@property(retain,nonatomic) Drawable *cubeDrawable;
+//@property(retain,nonatomic) Mesh *mesh;
+@property(retain,nonatomic) Drawable *drawable;
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program1;
 -(void)initialize;
