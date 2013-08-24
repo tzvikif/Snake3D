@@ -50,24 +50,24 @@
     NSString* view_name = @"View";
     NSString* projection_name = @"Projection";
 
-    [_program1 addUniform:ambient_name];
-    [_program1 addUniform:diffuse_name];
-    [_program1 addUniform:specular_name];
-    [_program1 addUniform:lightPosition_name];
-    [_program1 addUniform:normalMatrix_name];
-    [_program1 addUniform:shininess_name];
+//    [_program1 addUniform:ambient_name];
+//    [_program1 addUniform:diffuse_name];
+//    [_program1 addUniform:specular_name];
+//    [_program1 addUniform:lightPosition_name];
+//    [_program1 addUniform:normalMatrix_name];
+//    [_program1 addUniform:shininess_name];
     [_program1 addUniform:view_name];
     [_program1 addUniform:projection_name];
     
     
-    glUniform3f([_program1 uniformLocation:ambient_name] , 0.1f, 0.1f, 0.1f);
-    glUniform3f([_program1 uniformLocation:specular_name],9.0, 9.0, 0.0);
-    glUniform1f([_program1 uniformLocation:shininess_name],60);
+//    glUniform3f([_program1 uniformLocation:ambient_name] , 0.1f, 0.1f, 0.1f);
+//    glUniform3f([_program1 uniformLocation:specular_name],9.0, 9.0, 0.0);
+//    glUniform1f([_program1 uniformLocation:shininess_name],60);
     // Set the light position.
-    CC3Vector4 lightPosition  = CC3Vector4Make(0.0,1.0,-2.0,0.0);
-    glUniform4f([_program1 attributeLocation:lightPosition_name], lightPosition.x, lightPosition.y, lightPosition.z,lightPosition.w);
-    CC3Vector color = CC3VectorMake(200.0/255.0, 150.0/255.0, 250.0/255.0);
-    glUniform3f([_program1 uniformLocation:diffuse_name], color.x, color.y, color.z);
+//    CC3Vector4 lightPosition  = CC3Vector4Make(0.0,1.0,-2.0,0.0);
+//    glUniform4f([_program1 attributeLocation:lightPosition_name], lightPosition.x, lightPosition.y, lightPosition.z,lightPosition.w);
+//    CC3Vector color = CC3VectorMake(200.0/255.0, 150.0/255.0, 250.0/255.0);
+//    glUniform3f([_program1 uniformLocation:diffuse_name], color.x, color.y, color.z);
     glEnable(GL_DEPTH_TEST);
     
     glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
@@ -84,6 +84,7 @@
     glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _view.glMatrix);
     [projection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
     glUniformMatrix4fv([_program1 uniformLocation:projection_name], 1, 0, projection.glMatrix);
+    
 }
 -(void)Render:(id<Renderable>)object {
     [object Render];

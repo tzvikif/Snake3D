@@ -21,6 +21,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     _program1 = [[GLProgram alloc] initWithVertexShaderFilename:@"SimpleVertex" fragmentShaderFilename:@"SimpleFragment"];
     _logicEngine = [[LogicEngine alloc] init];
+    [_logicEngine loadProgram:_program1];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     [_logicEngine initialize:screenBounds];
     [self startRenderLoop];

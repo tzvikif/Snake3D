@@ -11,19 +11,6 @@
          timestampString = "399068029.190751"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "17"
-         endingLineNumber = "17"
-         landmarkName = "-initialize"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Snake3D/SimpleCube.m"
-         timestampString = "399068029.190751"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "34"
          endingLineNumber = "34"
          landmarkName = "-Render"
@@ -34,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Snake3D/Mesh.m"
-         timestampString = "399064768.531417"
+         timestampString = "399073465.862124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "48"
-         endingLineNumber = "48"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
          landmarkName = "-loadVertices:normals:color:Texture:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LogicEngine.m"
-         timestampString = "399065919.019123"
+         timestampString = "399074724.2772"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "173"
-         endingLineNumber = "173"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
          landmarkName = "-Render"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Snake3D/SimpleCube.m"
-         timestampString = "399068029.190751"
+         timestampString = "399073423.229672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "-Render"
          landmarkType = "5">
       </FileBreakpoint>
@@ -98,13 +85,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Snake3D/Mesh.m"
-         timestampString = "399068418.859517"
+         filePath = "Snake3D/GLProgram.m"
+         timestampString = "399074882.093939"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "15"
-         endingLineNumber = "15"
-         landmarkName = "-sizeofVertices"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
+         landmarkName = "-addUniform:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

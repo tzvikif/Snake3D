@@ -154,10 +154,12 @@ GLfloat cube_normals[] = {
 
 -(void)initialize:(CGRect)viewport {
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
+    [renderingEngineTemp setProgram1:_program1];
     [renderingEngineTemp initialize:viewport];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
     SimpleCube *simpleCubeTemp = [[SimpleCube alloc] init]; //Node
+    [simpleCubeTemp initialize];
     //load cube mesh
     Mesh *cubeMesh = [[Mesh alloc] init];
     [cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];

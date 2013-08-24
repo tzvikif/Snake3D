@@ -18,6 +18,7 @@ typedef enum _vertexStructure
     PNCT,
     PNC,
     PC,
+    P,
 }vertexStructure;
 
 typedef struct _vertex4
