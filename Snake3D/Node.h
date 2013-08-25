@@ -29,5 +29,6 @@
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program1;
 -(void)setDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs;
--(void)initialize;
+-(id)initializeWithProgram:(GLProgram *)program andDrawable:(Drawable*)drawable andVertexStruct:(vertexStructure)vs;
+-(void)preRender;
 @end

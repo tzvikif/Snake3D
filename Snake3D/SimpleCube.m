@@ -15,8 +15,7 @@ NSString* position_name = @"Position";
 NSString* normal_name = @"Normal";
 NSString* color_name = @"Color";
 
--(void)initialize {
-    
+-(void)preRender {
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector;
     translateVector.x = 0;
@@ -24,7 +23,6 @@ NSString* color_name = @"Color";
     translateVector.z = -4;
     [self.modelMatrix populateFromTranslation:translateVector];
     [self.modelMatrix scaleUniformlyBy:1.0];
-    
     
     [self.program1 addAttribute:position_name];
     //[self.program1 addAttribute:normal_name];

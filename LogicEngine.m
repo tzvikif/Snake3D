@@ -177,9 +177,7 @@ GLfloat cube_normals[] = {
     [renderingEngineTemp initialize:viewport andProgram:program];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
-    SimpleCube *simpleCubeTemp = [[SimpleCube alloc] init]; //Node
-    [simpleCubeTemp setProgram1:program];
-    [simpleCubeTemp initialize];
+    //[simpleCubeTemp initialize];
     //load cube mesh
     Mesh *cubeMesh = [[Mesh alloc] init];
 //    [cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
@@ -187,7 +185,8 @@ GLfloat cube_normals[] = {
     [self setCubeMesh:cubeMesh];
     [cubeMesh release];
     Drawable *cubeDrawable =  [renderingEngineTemp createDrawable:cubeMesh];
-    [simpleCubeTemp setDrawable:cubeDrawable andVertexStruct:cubeMesh.vertexStruct];
+    SimpleCube *simpleCubeTemp = [[SimpleCube alloc] initializeWithProgram:program andDrawable:cubeDrawable andVertexStruct:cubeMesh.vertexStruct]; //Node
+    [simpleCubeTemp preRender];
     [self setSimpleCube:simpleCubeTemp];
     [simpleCubeTemp release];
     [cubeDrawable release];

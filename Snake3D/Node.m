@@ -12,11 +12,12 @@
 -(void)Render {
     
 }
--(void)initialize {
-    
-}
--(void)setDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs {
-    [self setDrawable:drawable];
-    _vs = vs;
+-(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs{
+    if ([super init]) {
+        [self setDrawable:drawable];
+        _vs = vs;
+        [self setProgram1:program];
+    }
+    return self;
 }
 @end
