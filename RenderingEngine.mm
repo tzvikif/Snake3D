@@ -56,8 +56,8 @@
 //    [_program1 addUniform:lightPosition_name];
 //    [_program1 addUniform:normalMatrix_name];
 //    [_program1 addUniform:shininess_name];
-    [_program1 addUniform:view_name];
-    [_program1 addUniform:projection_name];
+//    [_program1 addUniform:view_name];
+//    [_program1 addUniform:projection_name];
     
     
 //    glUniform3f([_program1 uniformLocation:ambient_name] , 0.1f, 0.1f, 0.1f);

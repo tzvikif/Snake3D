@@ -59,15 +59,14 @@ typedef void (*GLLogFunction) (GLuint program,
         glAttachShader(program, vertShader);
         glAttachShader(program, fragShader);
     }
-    
     return self;
 }
 - (BOOL)compileShader:(GLuint *)shader 
                  type:(GLenum)type 
                  file:(NSString *)file
 {
-    GLint status;
-    const GLchar *source;
+//    GLint status;
+//    const GLchar *source;
     
     NSError* error;
     NSString* shaderString = [NSString stringWithContentsOfFile:file

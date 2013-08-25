@@ -33,6 +33,7 @@ NSString* normal_name = @"Normal";
 }
 -(void)Render {
     int size;
+
 //    glActiveTexture(GL_TEXTURE0);
 //    glBindTexture(GL_TEXTURE_2D,self.material.textureId );
 //    glUniform1i(self.material.textureId, /*GL_TEXTURE*/0);
@@ -52,7 +53,6 @@ NSString* normal_name = @"Normal";
 //                          stride,                  // no extra data between each position
 //                          (GLvoid*)(2*sizeof(CC3Vector) + sizeof(CC3Vector4))                   // offset of first element
 //                          );
-    
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, 0);

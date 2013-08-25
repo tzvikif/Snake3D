@@ -25,7 +25,7 @@
             return _vnoe * sizeof(Vertex2);
             default:
         case P:
-            return 3 *_vnoe * sizeof(GLfloat);
+            return _vnoe * sizeof(GLfloat);
                 NSLog(@"in Mesh: bad vertex struct  :%d",_vertexStruct);
             break;
     }

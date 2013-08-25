@@ -9,7 +9,7 @@
 #import "LogicEngine.h"
 #import "SimpleCube.h"
 
-GLfloat cube_vertices[] = {
+GLfloat cube_verticesX[] = {
     // front
     -1.0, -1.0,  1.0,
     1.0, -1.0,  1.0,
@@ -40,6 +40,13 @@ GLfloat cube_vertices[] = {
     1.0, -1.0, -1.0,
     1.0,  1.0, -1.0,
     1.0,  1.0,  1.0,
+};
+GLfloat cube_vertices[] = {
+    // front
+    -0.5, -0.5,  0.5,
+    0.5, -0.5,  0.5,
+    0.5,  0.5,  0.5,
+    -0.5,  0.5,  0.5,
 };
 GLfloat cube_colors[] = {
     // front colors
@@ -73,7 +80,7 @@ GLfloat cube_colors[] = {
     0.0, 0.0, 1.0,
     1.0, 1.0, 1.0,
 };
-GLushort cube_elements[] = {
+GLushort cube_elementsX[] = {
     // front
     0,  1,  2,
     2,  3,  0,
@@ -93,6 +100,12 @@ GLushort cube_elements[] = {
     20, 21, 22,
     22, 23, 20,
 };
+GLushort cube_elements[] = {
+    // front
+    0,  1,  2,
+    2,  3,  0,
+ };
+
 GLfloat cube_texcoords[2*4*6] = {
     // front
     0.0, 0.0,
@@ -159,6 +172,7 @@ GLfloat cube_normals[] = {
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
     SimpleCube *simpleCubeTemp = [[SimpleCube alloc] init]; //Node
+    [simpleCubeTemp setProgram1:_program1];
     [simpleCubeTemp initialize];
     //load cube mesh
     Mesh *cubeMesh = [[Mesh alloc] init];
