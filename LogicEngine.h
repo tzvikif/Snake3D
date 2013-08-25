@@ -26,7 +26,7 @@
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
 @property(retain,nonatomic) GLProgram *program1;
 
--(void)initialize:(CGRect)viewport;
+-(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program;
 -(void)loadProgram:(GLProgram*)program;
 -(void)updateAnimation:(float)elapsedSeconds;
 -(void)Render;

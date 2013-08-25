@@ -18,28 +18,29 @@ typedef enum _vertexStructure
     PNCT,
     PNC,
     PC,
-    P,
+    PT
 }vertexStructure;
 
-typedef struct _vertex4
+typedef struct _vertexPNCT
 {
     CC3Vector position;
     CC3Vector normal;
-    CC3Vector4 color;
+    CC3Vector color;
     GLfloat texture[2];
-}Vertex4;
+}VertexPNCT;
 
-typedef struct _vertex3
+typedef struct _vertexPNC 
 {
     CC3Vector position;
     CC3Vector normal;
-    CC3Vector4 color;
-}Vertex3;
-typedef struct _vertex2
+    CC3Vector color;
+}VertexPNC;
+typedef struct _vertexPC
 {
     CC3Vector position;
-    CC3Vector4 color;
-}Vertex2;
+    CC3Vector color;
+}VertexPC;
+
 
 
 @interface Mesh : NSObject
@@ -55,6 +56,21 @@ typedef struct _vertex2
             indices:(GLushort*)elements
         indicesNumberOfElemets:(GLuint)inoe
        verticesNumberOfElemets:(GLuint)vnoe;
+-(void)loadVertices:(GLfloat*)v
+            indices:(GLushort*)elements
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe;
+-(void)loadVertices:(GLfloat*)v
+            normals:(GLfloat*)n
+              color:(GLfloat*)c
+            indices:(GLushort*)elements
+            indicesNumberOfElemets:(GLuint)inoe
+            verticesNumberOfElemets:(GLuint)vnoe;
+-(void)loadVertices:(GLfloat*)v
+              color:(GLfloat*)c
+            indices:(GLushort*)elements
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe;
 -(size_t)sizeofVertices;
 -(size_t)sizeofIndices;
 @end

@@ -13,20 +13,19 @@
 
 @implementation Mesh
 -(size_t)sizeofVertices {
-    _vertexStruct = P;
     switch(_vertexStruct) {
         case PNCT:
-            return  _vnoe * sizeof(Vertex4);
+            return  _vnoe * sizeof(VertexPNCT);
             break;
         case PNC:
-            return _vnoe * sizeof(Vertex3);
+            return _vnoe * sizeof(VertexPNC);
             break;
         case PC:
-            return _vnoe * sizeof(Vertex2);
-            default:
-        case P:
-            return _vnoe * sizeof(GLfloat);
-                NSLog(@"in Mesh: bad vertex struct  :%d",_vertexStruct);
+            return _vnoe * sizeof(VertexPC);
+            break;
+        default:
+            NSLog(@"in Mesh: bad vertex struct  :%d",_vertexStruct);
+            return 0;
             break;
     }
 }
@@ -41,17 +40,15 @@
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe
  {
-     
-     //Vertex4 *verticesTemp = malloc( sizeof(Vertex4) * ( vnoe/3 ));
+     VertexPNCT *verticesTemp = malloc( sizeof(VertexPNCT) * ( vnoe/3 ));
      
      _indices = malloc(inoe*sizeof(GLuint));
-     /*
-    for (int i=0; i<vnoe/3; i+=3) {
+    for (int i=0; i<vnoe; i+=3) {
         CC3Vector vertex;
         CC3Vector normal;
-        CC3Vector4 color;
+        CC3Vector color;
         GLfloat texture[2];
-        Vertex4 vstruct;
+        VertexPNCT vstruct;
         
         vertex.x = v[i+0];
         vertex.y = v[i+1];
@@ -64,7 +61,7 @@ verticesNumberOfElemets:(GLuint)vnoe
         color.x = c[i+0];
         color.y = c[i+1];
         color.z = c[i+2];
-        color.w = 1.0;
+        //color.w = 1.0;
         
         texture[0] = t[i+0];
         texture[1] = t[i+1];
@@ -76,12 +73,84 @@ verticesNumberOfElemets:(GLuint)vnoe
         vstruct.texture[1] = texture[1];
         verticesTemp[i/3] = vstruct;
     }
-     //_vertices = (GLfloat*)verticesTemp;
-      */
-     _vertices = v;
      memcpy(_indices, elements, inoe*sizeof(GLuint));
      _vnoe = vnoe;
      _inoe = inoe;
+     _vertexStruct = PNCT;
 }
+-(void)loadVertices:(GLfloat*)v
+            indices:(GLushort*)elements
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe {
+    
+}
+-(void)loadVertices:(GLfloat*)v
+            normals:(GLfloat*)n
+              color:(GLfloat*)c
+            indices:(GLushort*)elements
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe {
+    VertexPNC *verticesTemp = malloc( sizeof(VertexPNC) * ( vnoe/3 ));
+    
+    _indices = malloc(inoe*sizeof(GLuint));
+    for (int i=0; i<vnoe; i+=3) {
+        CC3Vector vertex;
+        CC3Vector normal;
+        CC3Vector color;
+        VertexPNC vstruct;
+        
+        vertex.x = v[i+0];
+        vertex.y = v[i+1];
+        vertex.z = v[i+2];
+        
+        normal.x = n[i+0];
+        normal.y = n[i+1];
+        normal.z = n[i+2];
+        
+        color.x = c[i+0];
+        color.y = c[i+1];
+        color.z = c[i+2];
+        
+        vstruct.position = vertex;
+        vstruct.normal = normal;
+        vstruct.color = color;
+        verticesTemp[i/3] = vstruct;
+    }
+    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    _vnoe = vnoe;
+    _inoe = inoe;
+    _vertexStruct = PNC;
 
+}
+-(void)loadVertices:(GLfloat*)v
+              color:(GLfloat*)c
+            indices:(GLushort*)elements
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe {
+    VertexPC *verticesTemp = malloc( sizeof(VertexPC) * ( vnoe/3 ));
+    _indices = malloc(inoe*sizeof(GLuint));
+    
+    _vertices = (GLfloat*)verticesTemp;
+    for (int i=0; i<vnoe; i+=3) {
+        CC3Vector vertex;
+        CC3Vector color;
+        VertexPC vstruct;
+        
+        vertex.x = v[i+0];
+        vertex.y = v[i+1];
+        vertex.z = v[i+2];
+        
+        color.x = c[i+0];
+        color.y = c[i+1];
+        color.z = c[i+2];
+        
+        vstruct.position = vertex;
+        vstruct.color = color;
+        verticesTemp[i/3] = vstruct;
+    }
+    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    _vnoe = vnoe;
+    _inoe = inoe;
+    _vertexStruct = PC;
+}
 @end

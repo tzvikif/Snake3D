@@ -20,7 +20,7 @@
 @interface RenderingEngine : NSObject
 @property(nonatomic,retain) CC3GLMatrix *view;
 @property(nonatomic,retain) GLProgram *program1;
--(void)initialize:(CGRect)viewport;
+-(void)initialize:(CGRect)viewport andProgram:(GLProgram*)program;
 -(Drawable*)createDrawable:(Mesh*)mesh;
 -(void)Render:(id<Renderable>)object;
 @end

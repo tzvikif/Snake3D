@@ -15,4 +15,8 @@
 -(void)initialize {
     
 }
+-(void)setDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs {
+    [self setDrawable:drawable];
+    _vs = vs;
+}
 @end

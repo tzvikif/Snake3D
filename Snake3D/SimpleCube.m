@@ -13,9 +13,10 @@
 NSString *texcoord_name = @"texcoord";
 NSString* position_name = @"Position";
 NSString* normal_name = @"Normal";
+NSString* color_name = @"Color";
 
 -(void)initialize {
-    /*
+    
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector;
     translateVector.x = 0;
@@ -26,25 +27,38 @@ NSString* normal_name = @"Normal";
     
     
     [self.program1 addAttribute:position_name];
-    [self.program1 addAttribute:normal_name];
-    [self.program1 addAttribute:texcoord_name];
-     */
+    //[self.program1 addAttribute:normal_name];
+    //[self.program1 addAttribute:texcoord_name];
+    [self.program1 addAttribute:color_name];
+     
     [self.program1 use];
 }
 -(void)Render {
     int size;
-
+    GLsizei stride = -1;
 //    glActiveTexture(GL_TEXTURE0);
 //    glBindTexture(GL_TEXTURE_2D,self.material.textureId );
 //    glUniform1i(self.material.textureId, /*GL_TEXTURE*/0);
 
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    GLsizei stride =  _vs == PNCT?sizeof(Vertex4):sizeof(Vertex3);
-    stride = 0;
+    switch (_vs) {
+        case PC:
+            stride = sizeof(VertexPC);
+            break;
+        case PNCT:
+            stride = sizeof(VertexPNCT);
+            break;
+        case PNC:
+            stride = sizeof(VertexPNC);
+            break;
+        default:
+            NSLog(@"stride error");
+            break;
+    }
     glVertexAttribPointer([self.program1 attributeLocation:position_name], 3, GL_FLOAT, GL_FALSE, stride,(GLvoid*)0);
 //    glVertexAttribPointer([self.program1 attributeLocation:normal_name], 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(sizeof(CC3Vector)));
-    //glVertexAttribPointer([self.program1 attributeLocation:color_name], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(CC3Vector)));
+    glVertexAttribPointer([self.program1 attributeLocation:color_name], 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(sizeof(CC3Vector)));
 //    glVertexAttribPointer(
 //                          [self.program1 attributeLocation:texcoord_name], // attribute
 //                          2,                  // number of elements per vertex, here (x,y)

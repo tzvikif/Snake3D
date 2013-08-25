@@ -39,9 +39,10 @@
         self.program1 = nil;
     }
     _logicEngine = [[LogicEngine alloc] init];
-    [_logicEngine loadProgram:_program1];
+    
+    //[_logicEngine loadProgram:_program1];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    [_logicEngine initialize:screenBounds];
+    [_logicEngine initialize:screenBounds andProgram:self.program1];
     [self startRenderLoop];
 }
 

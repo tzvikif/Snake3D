@@ -48,7 +48,7 @@ GLfloat cube_vertices[] = {
     0.5,  0.5,  0.5,
     -0.5,  0.5,  0.5,
 };
-GLfloat cube_colors[] = {
+GLfloat cube_colorsX[] = {
     // front colors
     1.0, 0.0, 0.0,
     0.0, 1.0, 0.0,
@@ -105,6 +105,13 @@ GLushort cube_elements[] = {
     0,  1,  2,
     2,  3,  0,
  };
+GLfloat cube_colors[] = {
+    // front colors
+    1.0, 0.0, 0.3,
+    0.2, 1.0, 0.0,
+    0.0, 1.0, 1.0,
+    0.3, 1.0, 0.7,
+};
 
 GLfloat cube_texcoords[2*4*6] = {
     // front
@@ -165,22 +172,22 @@ GLfloat cube_normals[] = {
 
 @implementation LogicEngine
 
--(void)initialize:(CGRect)viewport {
+-(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
-    [renderingEngineTemp setProgram1:_program1];
-    [renderingEngineTemp initialize:viewport];
+    [renderingEngineTemp initialize:viewport andProgram:program];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
     SimpleCube *simpleCubeTemp = [[SimpleCube alloc] init]; //Node
-    [simpleCubeTemp setProgram1:_program1];
+    [simpleCubeTemp setProgram1:program];
     [simpleCubeTemp initialize];
     //load cube mesh
     Mesh *cubeMesh = [[Mesh alloc] init];
-    [cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
+//    [cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
+    [cubeMesh loadVertices:cube_vertices color:cube_colors indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
     [self setCubeMesh:cubeMesh];
     [cubeMesh release];
     Drawable *cubeDrawable =  [renderingEngineTemp createDrawable:cubeMesh];
-    [simpleCubeTemp setDrawable:cubeDrawable];
+    [simpleCubeTemp setDrawable:cubeDrawable andVertexStruct:cubeMesh.vertexStruct];
     [self setSimpleCube:simpleCubeTemp];
     [simpleCubeTemp release];
     [cubeDrawable release];

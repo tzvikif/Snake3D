@@ -39,8 +39,9 @@
     [d setIboIndexBuffer:ibo];
     return d;
 }
--(void)initialize:(CGRect)viewport {
+-(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
  
+    [self setProgram1:program];
     NSString* ambient_name = @"AmbientMaterial";
     NSString* diffuse_name = @"DiffuseMaterial";
     NSString* specular_name = @"SpecularMaterial";
