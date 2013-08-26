@@ -43,10 +43,10 @@ GLfloat cube_verticesX[] = {
 };
 GLfloat cube_vertices[] = {
     // front
-    -0.5, -0.5,  0.5,
-    0.5, -0.5,  0.5,
-    0.5,  0.5,  0.5,
-    -0.5,  0.5,  0.5,
+    -1.0, -1.0,  0.0,
+    1.0, -1.0,  0.0,
+    1.0,  1.0,  0.0,
+    -1.0,  1.0,  0.0,
 };
 GLfloat cube_colorsX[] = {
     // front colors
@@ -181,11 +181,14 @@ GLfloat cube_normals[] = {
     //load cube mesh
     Mesh *cubeMesh = [[Mesh alloc] init];
 //    [cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    [cubeMesh loadVertices:cube_vertices color:cube_colors indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
+    //[cubeMesh loadVertices:cube_vertices color:cube_colors indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
+    [cubeMesh loadVertices:cube_vertices texture:cube_texcoords  indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
     [self setCubeMesh:cubeMesh];
     [cubeMesh release];
-    Drawable *cubeDrawable =  [renderingEngineTemp createDrawable:cubeMesh];
-    SimpleCube *simpleCubeTemp = [[SimpleCube alloc] initializeWithProgram:program andDrawable:cubeDrawable andVertexStruct:cubeMesh.vertexStruct]; //Node
+    Drawable *cubeDrawable =  [RenderingEngine createDrawable:cubeMesh];
+    Material *cubeMaterial = [[Material alloc] init];
+    [cubeMaterial setupTexture:@"tile_floor.png"];
+    SimpleCube *simpleCubeTemp = [[SimpleCube alloc] initializeWithProgram:program andDrawable:cubeDrawable andVertexStruct:cubeMesh.vertexStruct andMaterial:cubeMaterial]; //Node
     [simpleCubeTemp preRender];
     [self setSimpleCube:simpleCubeTemp];
     [simpleCubeTemp release];

@@ -4,29 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Snake3D/SimpleCube.m"
-         timestampString = "399140488.29537"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "36"
-         endingLineNumber = "36"
-         landmarkName = "-Render"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RenderingEngine.mm"
-         timestampString = "399122500.751619"
+         timestampString = "399225778.492569"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "24"
-         endingLineNumber = "24"
-         landmarkName = "-createDrawable:"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
+         landmarkName = "-initialize:andProgram:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

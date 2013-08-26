@@ -18,9 +18,10 @@
 
 
 @interface RenderingEngine : NSObject
-@property(nonatomic,retain) CC3GLMatrix *view;
+@property(nonatomic,retain) CC3GLMatrix *matView;
+@property(nonatomic,retain) CC3GLMatrix *matProjection;
 @property(nonatomic,retain) GLProgram *program1;
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram*)program;
--(Drawable*)createDrawable:(Mesh*)mesh;
++(Drawable*)createDrawable:(Mesh*)mesh;
 -(void)Render:(id<Renderable>)object;
 @end

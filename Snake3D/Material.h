@@ -10,5 +10,5 @@
 
 @interface Material : NSObject
 @property(nonatomic,assign) GLuint textureId;
-- (GLuint)setupTexture:(NSString *)fileName;
+- (void)setupTexture:(NSString *)fileName;
 @end

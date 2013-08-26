@@ -12,11 +12,15 @@
 -(void)Render {
     
 }
--(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs{
+-(void)preRender {
+    
+}
+-(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat{
     if ([super init]) {
         [self setDrawable:drawable];
         _vs = vs;
         [self setProgram1:program];
+        [self setMaterial:mat];
     }
     return self;
 }

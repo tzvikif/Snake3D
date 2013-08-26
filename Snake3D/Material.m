@@ -11,7 +11,7 @@
 #include <OpenGLES/ES2/glext.h>
 
 @implementation Material
-- (GLuint)setupTexture:(NSString *)fileName {
+- (void)setupTexture:(NSString *)fileName {
     // 1
     CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
     if (!spriteImage) {
@@ -43,7 +43,8 @@
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
     
     free(spriteData);
-    return texName;
+    //return texName;
+    _textureId = texName;
 }
 
 @end

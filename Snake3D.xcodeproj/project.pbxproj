@@ -10,6 +10,7 @@
 		20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */; };
 		20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */; };
 		20B3A0FB17C64910001957B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B3A0FA17C64910001957B5 /* CoreGraphics.framework */; };
+		20E9E55B17CB82E300C7D3C7 /* tile_floor.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E9E55A17CB82E300C7D3C7 /* tile_floor.png */; };
 		20F74B5C17C2604800407740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5B17C2604800407740 /* UIKit.framework */; };
 		20F74B5E17C2604800407740 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F74B5D17C2604800407740 /* Foundation.framework */; };
 		20F74B6617C2604800407740 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B6417C2604800407740 /* InfoPlist.strings */; };
@@ -41,6 +42,7 @@
 		20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleFragment.fsh; sourceTree = "<group>"; };
 		20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleVertex.vsh; sourceTree = "<group>"; };
 		20B3A0FA17C64910001957B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		20E9E55A17CB82E300C7D3C7 /* tile_floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile_floor.png; sourceTree = "<group>"; };
 		20F74B5817C2604800407740 /* Snake3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F74B5B17C2604800407740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		20F74B5D17C2604800407740 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -114,9 +116,18 @@
 			name = Shaders;
 			sourceTree = "<group>";
 		};
+		20E9E55917CB82CE00C7D3C7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				20E9E55A17CB82E300C7D3C7 /* tile_floor.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		20F74B4F17C2604800407740 = {
 			isa = PBXGroup;
 			children = (
+				20E9E55917CB82CE00C7D3C7 /* Images */,
 				20B3A0FA17C64910001957B5 /* CoreGraphics.framework */,
 				20B3A0F317C5EBDF001957B5 /* Shaders */,
 				20FF7DB517C49A1F00A58B95 /* Cocos3DMathLib */,
@@ -281,6 +292,7 @@
 				20F74B7817C2604800407740 /* ViewController.xib in Resources */,
 				20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */,
 				20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */,
+				20E9E55B17CB82E300C7D3C7 /* tile_floor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

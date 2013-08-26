@@ -21,7 +21,7 @@
 
 @implementation RenderingEngine
 
--(Drawable*)createDrawable:(Mesh*)mesh {
++(Drawable*)createDrawable:(Mesh*)mesh {
     Drawable *d = [[Drawable alloc] init];
     GLuint vboVertexBuffer;
     //CC3Vector *vertices = _objLoader->_arrVertices;
@@ -42,6 +42,7 @@
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
  
     [self setProgram1:program];
+    [self.program1 use];    //must me before glUniform*
     NSString* ambient_name = @"AmbientMaterial";
     NSString* diffuse_name = @"DiffuseMaterial";
     NSString* specular_name = @"SpecularMaterial";
@@ -57,8 +58,8 @@
 //    [_program1 addUniform:lightPosition_name];
 //    [_program1 addUniform:normalMatrix_name];
 //    [_program1 addUniform:shininess_name];
-//    [_program1 addUniform:view_name];
-//    [_program1 addUniform:projection_name];
+    //[_program1 addUniform:view_name];
+    [_program1 addUniform:projection_name];
     
     
 //    glUniform3f([_program1 uniformLocation:ambient_name] , 0.1f, 0.1f, 0.1f);
@@ -80,11 +81,14 @@
     glViewport(0, 0, viewport.size.width, viewport.size.height);
     
     CC3GLMatrix *projection = [CC3GLMatrix identity];
-    [_view populateToLookAt:CC3VectorMake(0.0, 0.0, -4.0) withEyeAt:CC3VectorMake(1.0, 2.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
+    _matProjection = [CC3GLMatrix identity];
+    _matView = [CC3GLMatrix identity];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -1.0) withEyeAt:CC3VectorMake(0.0, 0.0, 0.0) withUp:CC3VectorMake(1.0, 0.0, 0.0)];
     float ratio = viewport.size.width / viewport.size.height;
-    glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _view.glMatrix);
-    [projection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
-    glUniformMatrix4fv([_program1 uniformLocation:projection_name], 1, 0, projection.glMatrix);
+    //glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _matView.glMatrix);
+    //[projection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
+    GLuint projectionId = [_program1 uniformLocation:projection_name];
+    glUniformMatrix4fv(projectionId, 1, 0, projection.glMatrix);
     
 }
 -(void)Render:(id<Renderable>)object {

@@ -142,11 +142,25 @@ typedef void (*GLLogFunction) (GLuint program,
 - (GLuint)attributeLocation:(NSString *)attributeName
 {
     NSNumber *location = [attributes objectForKey:attributeName];
+    if (location == nil) {
+        NSException* myException = [NSException
+                                    exceptionWithName:@"AttributeException"
+                                    reason:@"no such attribute location"
+                                    userInfo:nil];
+        @throw myException;
+    }
     return (GLuint)[location intValue];
 }
 - (GLuint)uniformLocation:(NSString *)uniformName
 {
     NSNumber *location = [uniforms objectForKey:uniformName];
+    if (location == nil) {
+        NSException* myException = [NSException
+                                    exceptionWithName:@"UniformException"
+                                    reason:@"no such uniform location"
+                                    userInfo:nil];
+        @throw myException;
+    }
     return (GLuint)[location intValue];
 }
 #pragma mark -

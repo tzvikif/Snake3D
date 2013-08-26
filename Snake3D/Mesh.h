@@ -40,6 +40,11 @@ typedef struct _vertexPC
     CC3Vector position;
     CC3Vector color;
 }VertexPC;
+typedef struct _vertexPT
+{
+    CC3Vector position;
+    GLfloat texture[2];
+}VertexPT;
 
 
 
@@ -52,7 +57,7 @@ typedef struct _vertexPC
 -(void)loadVertices:(GLfloat*)v
             normals:(GLfloat*)n
               color:(GLfloat*)c
-            Texture:(GLfloat*)t
+            texture:(GLfloat*)t
             indices:(GLushort*)elements
         indicesNumberOfElemets:(GLuint)inoe
        verticesNumberOfElemets:(GLuint)vnoe;
@@ -68,6 +73,11 @@ verticesNumberOfElemets:(GLuint)vnoe;
             verticesNumberOfElemets:(GLuint)vnoe;
 -(void)loadVertices:(GLfloat*)v
               color:(GLfloat*)c
+            indices:(GLushort*)elements
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe;
+-(void)loadVertices:(GLfloat*)v
+            texture:(GLfloat*)c
             indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
