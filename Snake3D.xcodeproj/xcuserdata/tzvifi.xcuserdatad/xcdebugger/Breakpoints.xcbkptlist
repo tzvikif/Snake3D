@@ -4,17 +4,15 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RenderingEngine.mm"
-         timestampString = "399225778.492569"
+         timestampString = "399281641.152364"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
-         landmarkName = "-initialize:andProgram:"
-         landmarkType = "5">
+         startingLineNumber = "105"
+         endingLineNumber = "105">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

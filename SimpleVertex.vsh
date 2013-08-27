@@ -12,5 +12,5 @@ void main(void)
     //DestinationColor = Color;
     f_texcoord = texcoord;
     f_model = Model;
-    gl_Position = Projection * Model * Position;
+    gl_Position = Projection * View * Model * Position;
 }

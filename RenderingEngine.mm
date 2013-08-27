@@ -58,7 +58,7 @@
 //    [_program1 addUniform:lightPosition_name];
 //    [_program1 addUniform:normalMatrix_name];
 //    [_program1 addUniform:shininess_name];
-    //[_program1 addUniform:view_name];
+    [_program1 addUniform:view_name];
     [_program1 addUniform:projection_name];
     
     
@@ -80,15 +80,16 @@
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glViewport(0, 0, viewport.size.width, viewport.size.height);
     
-    CC3GLMatrix *projection = [CC3GLMatrix identity];
+    //CC3GLMatrix *projection = [CC3GLMatrix identity];
     _matProjection = [CC3GLMatrix identity];
     _matView = [CC3GLMatrix identity];
-    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -1.0) withEyeAt:CC3VectorMake(0.0, 0.0, 0.0) withUp:CC3VectorMake(1.0, 0.0, 0.0)];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -4.0) withEyeAt:CC3VectorMake(0.0, 0.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
     float ratio = viewport.size.width / viewport.size.height;
-    //glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _matView.glMatrix);
+    glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _matView.glMatrix);
     //[projection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
+    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
     GLuint projectionId = [_program1 uniformLocation:projection_name];
-    glUniformMatrix4fv(projectionId, 1, 0, projection.glMatrix);
+    glUniformMatrix4fv(projectionId, 1, 0, _matProjection.glMatrix);
     
 }
 -(void)Render:(id<Renderable>)object {

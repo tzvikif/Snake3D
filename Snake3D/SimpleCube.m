@@ -21,10 +21,10 @@ NSString* model_name = @"Model";
 -(void)preRender {
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector;
-    translateVector.x = 0.1;
+    translateVector.x = 0;
     translateVector.y = 0;
-    translateVector.z = 0;
-    //[self.modelMatrix populateFromTranslation:translateVector];
+    translateVector.z = -4;
+    [self.modelMatrix populateFromTranslation:translateVector];
     [self.modelMatrix scaleUniformlyBy:1.0];
     
     [self.program1 addAttribute:position_name];
