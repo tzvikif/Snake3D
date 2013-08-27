@@ -25,6 +25,7 @@
 		20F74B8317C2650200407740 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8217C2650200407740 /* GLProgram.m */; };
 		20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8617C26ADE00407740 /* LogicEngine.m */; };
 		20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8917C26B0D00407740 /* RenderingEngine.mm */; };
+		20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */; };
 		20FF7DB417C4977800A58B95 /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB317C4977800A58B95 /* Mesh.m */; };
 		20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */; };
 		20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB917C49A1F00A58B95 /* CC3GLMatrix.mm */; };
@@ -66,6 +67,7 @@
 		20F74B8617C26ADE00407740 /* LogicEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogicEngine.m; sourceTree = "<group>"; };
 		20F74B8817C26B0D00407740 /* RenderingEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingEngine.h; sourceTree = "<group>"; };
 		20F74B8917C26B0D00407740 /* RenderingEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderingEngine.mm; sourceTree = "<group>"; };
+		20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = uvtemplate.bmp; sourceTree = "<group>"; };
 		20FF7DB217C4977800A58B95 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = Snake3D/Mesh.h; sourceTree = "<group>"; };
 		20FF7DB317C4977800A58B95 /* Mesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mesh.m; path = Snake3D/Mesh.m; sourceTree = "<group>"; };
 		20FF7DB617C49A1F00A58B95 /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				20E9E55A17CB82E300C7D3C7 /* tile_floor.png */,
+				20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */,
 				20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */,
 				20E9E55B17CB82E300C7D3C7 /* tile_floor.png in Resources */,
+				20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

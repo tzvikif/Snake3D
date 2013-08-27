@@ -76,7 +76,7 @@ NSString* model_name = @"Model";
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
                           stride,                  // no extra data between each position
-                          (GLvoid*)(sizeof(CC3Vector))                   // offset of first element
+                          (GLvoid*)(3*sizeof(CC3Vector))                   // offset of first element
                           );
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);

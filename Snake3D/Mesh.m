@@ -36,52 +36,6 @@
     return _inoe * sizeof(GLushort);
 }
 -(void)loadVertices:(GLfloat*)v
-            normals:(GLfloat*)n
-              color:(GLfloat*)c
-            texture:(GLfloat*)t
-            indices:(GLushort*)elements
-indicesNumberOfElemets:(GLuint)inoe
-verticesNumberOfElemets:(GLuint)vnoe
- {
-     VertexPNCT *verticesTemp = malloc( sizeof(VertexPNCT) * ( vnoe/3 ));
-     
-     _indices = malloc(inoe*sizeof(GLuint));
-    for (int i=0; i<vnoe; i+=3) {
-        CC3Vector vertex;
-        CC3Vector normal;
-        CC3Vector color;
-        GLfloat texture[2];
-        VertexPNCT vstruct;
-        
-        vertex.x = v[i+0];
-        vertex.y = v[i+1];
-        vertex.z = v[i+2];
-        
-        normal.x = n[i+0];
-        normal.y = n[i+1];
-        normal.z = n[i+2];
-        
-        color.x = c[i+0];
-        color.y = c[i+1];
-        color.z = c[i+2];
-        //color.w = 1.0;
-        
-        texture[0] = t[i+0];
-        texture[1] = t[i+1];
-        
-        vstruct.position = vertex;
-        vstruct.normal = normal;
-        vstruct.color = color;
-        vstruct.texture[0] = texture[0];
-        vstruct.texture[1] = texture[1];
-        verticesTemp[i/3] = vstruct;
-    }
-     memcpy(_indices, elements, inoe*sizeof(GLuint));
-     _vnoe = vnoe;
-     _inoe = inoe;
-     _vertexStruct = PNCT;
-}
--(void)loadVertices:(GLfloat*)v
             indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
@@ -189,5 +143,53 @@ verticesNumberOfElemets:(GLuint)vnoe {
     _inoe = inoe;
     _vertexStruct = PT;
 }
+-(void)loadVertices:(GLfloat*)v
+            normals:(GLfloat*)n
+              color:(GLfloat*)c
+            texture:(GLfloat*)t
+            indices:(GLushort*)elements
+indicesNumberOfElemets:(GLuint)inoe
+verticesNumberOfElemets:(GLuint)vnoe {
+    VertexPNCT *verticesTemp = malloc( sizeof(VertexPNCT) * ( vnoe/3 ));
+    _indices = malloc(inoe*sizeof(GLuint));
+    
+    _vertices = (GLfloat*)verticesTemp;
+    int textureIndex = 0;
+    for (int i=0; i<vnoe; i+=3) {
+        CC3Vector vertex;
+        CC3Vector normal;
+        CC3Vector color;
+        GLfloat texture[2];
+        VertexPNCT vstruct;
+        
+        vertex.x = v[i+0];
+        vertex.y = v[i+1];
+        vertex.z = v[i+2];
+        
+        normal.x = n[i+0];
+        normal.y = n[i+1];
+        normal.z = n[i+2];
+        
+        color.x = c[i+0];
+        color.y = c[i+1];
+        color.z = c[i+2];
+
+        texture[0] = t[textureIndex+0];
+        texture[1] = t[textureIndex+1];
+        
+        vstruct.position = vertex;
+        vstruct.normal = normal;
+        vstruct.color = color;
+        vstruct.texture[0] = texture[0];
+        vstruct.texture[1] = texture[1];
+        verticesTemp[i/3] = vstruct;
+        textureIndex += 2;
+    }
+    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    _vnoe = vnoe;
+    _inoe = inoe;
+    _vertexStruct = PNCT;
+}
+
 
 @end
