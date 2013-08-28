@@ -83,7 +83,7 @@
     //CC3GLMatrix *projection = [CC3GLMatrix identity];
     _matProjection = [CC3GLMatrix identity];
     _matView = [CC3GLMatrix identity];
-    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -4.0) withEyeAt:CC3VectorMake(0.0, 0.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -4.0) withEyeAt:CC3VectorMake(1.0, 2.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
     float ratio = viewport.size.width / viewport.size.height;
     glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _matView.glMatrix);
     //[projection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];

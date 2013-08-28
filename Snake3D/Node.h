@@ -24,11 +24,9 @@
     vertexStructure _vs;
 }
 @property(retain,nonatomic) CC3GLMatrix *modelMatrix;
-//@property(retain,nonatomic) Mesh *mesh;
 @property(retain,nonatomic) Drawable *drawable;
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program1;
-//-(void)setDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs;
 -(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat;
 -(void)preRender;
 @end

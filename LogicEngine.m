@@ -181,7 +181,7 @@ GLfloat cube_normals[] = {
     //load cube mesh
     Mesh *cubeMesh = [[Mesh alloc] init];
     //[cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    [cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
+    [cubeMesh loadVertices:cube_verticesX normals:cube_normals color:cube_colors texture:cube_texcoords indices:cube_elementsX indicesNumberOfElemets:sizeof(cube_elementsX)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_verticesX)/sizeof(GLfloat)];
     //[cubeMesh loadVertices:cube_vertices color:cube_colors indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
     //[cubeMesh loadVertices:cube_vertices texture:cube_texcoords  indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
     [self setCubeMesh:cubeMesh];

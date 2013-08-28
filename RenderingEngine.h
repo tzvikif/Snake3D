@@ -24,4 +24,5 @@
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram*)program;
 +(Drawable*)createDrawable:(Mesh*)mesh;
 -(void)Render:(id<Renderable>)object;
+-(void)drawFloor;
 @end
