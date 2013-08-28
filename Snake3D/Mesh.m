@@ -47,10 +47,10 @@ verticesNumberOfElemets:(GLuint)vnoe {
             indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
-    VertexPNC *verticesTemp = malloc( sizeof(VertexPNC) * ( vnoe/3 ));
+    VertexPNC *verticesTemp = malloc( sizeof(VertexPNC) * ( vnoe ));
     
     _indices = malloc(inoe*sizeof(GLuint));
-    for (int i=0; i<vnoe; i+=3) {
+    for (int i=0; i<vnoe*3; i+=3) {
         CC3Vector vertex;
         CC3Vector normal;
         CC3Vector color;
@@ -84,11 +84,11 @@ verticesNumberOfElemets:(GLuint)vnoe {
             indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
-    VertexPC *verticesTemp = malloc( sizeof(VertexPC) * ( vnoe/3 ));
+    VertexPC *verticesTemp = malloc( sizeof(VertexPC) * ( vnoe ));
     _indices = malloc(inoe*sizeof(GLuint));
     
     _vertices = (GLfloat*)verticesTemp;
-    for (int i=0; i<vnoe; i+=3) {
+    for (int i=0; i<vnoe*3; i+=3) {
         CC3Vector vertex;
         CC3Vector color;
         VertexPC vstruct;
@@ -115,12 +115,12 @@ verticesNumberOfElemets:(GLuint)vnoe {
             indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
-    VertexPT *verticesTemp = malloc( sizeof(VertexPT) * ( vnoe/3 ));
+    VertexPT *verticesTemp = malloc( sizeof(VertexPT) * ( vnoe ));
     _indices = malloc(inoe*sizeof(GLuint));
     
     _vertices = (GLfloat*)verticesTemp;
     int textureIndex = 0;
-    for (int i=0; i<vnoe; i+=3) {
+    for (int i=0; i<vnoe*3; i+=3) {
         CC3Vector vertex;
         GLfloat texture[2];
         VertexPT vstruct;
@@ -150,12 +150,12 @@ verticesNumberOfElemets:(GLuint)vnoe {
             indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
-    VertexPNCT *verticesTemp = malloc( sizeof(VertexPNCT) * ( vnoe/3 ));
+    VertexPNCT *verticesTemp = malloc( sizeof(VertexPNCT) * ( vnoe ));
     _indices = malloc(inoe*sizeof(GLuint));
     
     _vertices = (GLfloat*)verticesTemp;
     int textureIndex = 0;
-    for (int i=0; i<vnoe; i+=3) {
+    for (int i=0; i<vnoe*3; i+=3) {
         CC3Vector vertex;
         CC3Vector normal;
         CC3Vector color;

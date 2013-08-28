@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "54"
          endingLineNumber = "54"
-         landmarkName = "-loadVertices:normals:color:Texture:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
+         landmarkName = "-loadVertices:normals:color:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
