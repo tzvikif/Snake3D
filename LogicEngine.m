@@ -179,20 +179,20 @@ GLfloat cube_normals[] = {
     [renderingEngineTemp initialize:viewport andProgram:program];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
-    Mesh *plotMesh = [[Mesh alloc] init];
+    Mesh *plotMeshTemp = [[Mesh alloc] init];
     CC3Vector *graph = [self createGraph];
-    [plotMesh loadVertices:(GLfloat*)graph indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:N];
+    [plotMeshTemp loadVertices:(GLfloat*)graph indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:N];
     free(graph);
-    [self setPlotterMesh:plotMesh];
-    [plotMesh release];
-    Drawable *plotDrawable =  [RenderingEngine createDrawable:plotMesh];
-    Material *plotMaterial = [[Material alloc] init];
+    [self setPlotterMesh:plotMeshTemp];
+    [plotMeshTemp release];
+    Drawable *plotDrawable =  [RenderingEngine createDrawable:_plotterMesh];
+    Material *plotMaterialTemp = [[Material alloc] init];
     //[cubeMaterial setupTexture:@"uvtemplate.bmp"];
-    Plotter *plotterTemp = [[Plotter alloc] initializeWithProgram:program andDrawable:plotDrawable andVertexStruct:plotMesh.vertexStruct andMaterial:plotMaterial]; //Node
-    [plotterTemp preRender];
-    [self setPlotterObj:plotterTemp];
-    [plotterTemp release];
-    [plotDrawable release];
+    Plotter *plotterObjTemp = [[Plotter alloc] initializeWithProgram:program andDrawable:plotDrawable andVertexStruct:_plotterMesh.vertexStruct andMaterial:plotMaterialTemp]; //Node
+    [plotMaterialTemp release];
+    [plotterObjTemp preRender];
+    [self setPlotterObj:plotterObjTemp];
+    [plotterObjTemp release];
 }
 -(void)Render {
     
@@ -204,12 +204,12 @@ GLfloat cube_normals[] = {
 -(CC3Vector*)createGraph {
     CC3Vector *graph = malloc(sizeof(CC3Vector) * N);
     
-    for(int i = N/2; i < N; i++) {
+    for(int i = 0; i < N; i++) {
         float x = (i - N/2.0) / 1000.0;
         graph[i].x = x;
         graph[i].y = sin(x * 10.0) / (1.0 + x * x);
         graph[i].z = -0.5;
-        NSLog(@"x=%f f(x)=%f",graph[i].x,graph[i].y);
+        //NSLog(@"x=%f f(x)=%f",graph[i].x,graph[i].y);
     }
     return  graph;
 }

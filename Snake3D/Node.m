@@ -54,4 +54,11 @@
     }
     return stride;
 }
+-(void) dealloc {
+    [_drawable release];
+    [_material release];
+    [_modelMatrix release];
+    [_program1 release];
+    [super dealloc];
+}
 @end
