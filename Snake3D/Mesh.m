@@ -26,6 +26,9 @@
         case PT:
             return _vnoe * sizeof(VertexPT);
             break;
+        case P:
+            return _vnoe * sizeof(CC3Vector);
+            break;
         default:
             NSLog(@"in Mesh: bad vertex struct  :%d",_vertexStruct);
             return 0;
@@ -39,7 +42,24 @@
             indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
+    CC3Vector *verticesTemp = malloc( sizeof(CC3Vector) * ( vnoe/3 ));
+    _indices = malloc(inoe*sizeof(GLuint));
     
+    _vertices = (GLfloat*)verticesTemp;
+    for (int i=0; i<vnoe; i+=3) {
+        CC3Vector vertex;
+        
+        vertex.x = v[i+0];
+        vertex.y = v[i+1];
+        vertex.z = v[i+2];
+              
+        verticesTemp[i/3] = vertex;
+    }
+    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    _vnoe = vnoe;
+    _inoe = inoe;
+    _vertexStruct = P;
+
 }
 -(void)loadVertices:(GLfloat*)v
             normals:(GLfloat*)n

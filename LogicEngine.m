@@ -7,7 +7,9 @@
 //
 
 #import "LogicEngine.h"
-#import "SimpleCube.h"
+#import "Plotter.h"
+#include "Consts.h"
+
 
 GLfloat cube_verticesX[] = {
     // front
@@ -177,39 +179,47 @@ GLfloat cube_normals[] = {
     [renderingEngineTemp initialize:viewport andProgram:program];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
-    //[simpleCubeTemp initialize];
-    //load cube mesh
-    Mesh *cubeMesh = [[Mesh alloc] init];
-    //[cubeMesh loadVertices:cube_vertices normals:cube_normals color:cube_colors Texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    [cubeMesh loadVertices:cube_verticesX normals:cube_normals color:cube_colors texture:cube_texcoords indices:cube_elementsX indicesNumberOfElemets:sizeof(cube_elementsX)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_verticesX)/sizeof(GLfloat)];
-    //[cubeMesh loadVertices:cube_vertices color:cube_colors indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    //[cubeMesh loadVertices:cube_vertices texture:cube_texcoords  indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    [self setCubeMesh:cubeMesh];
-    [cubeMesh release];
-    Drawable *cubeDrawable =  [RenderingEngine createDrawable:cubeMesh];
-    Material *cubeMaterial = [[Material alloc] init];
-    [cubeMaterial setupTexture:@"uvtemplate.bmp"];
-    SimpleCube *simpleCubeTemp = [[SimpleCube alloc] initializeWithProgram:program andDrawable:cubeDrawable andVertexStruct:cubeMesh.vertexStruct andMaterial:cubeMaterial]; //Node
-    [simpleCubeTemp preRender];
-    [self setSimpleCube:simpleCubeTemp];
-    [simpleCubeTemp release];
-    [cubeDrawable release];
-    
+    Mesh *plotMesh = [[Mesh alloc] init];
+    CC3Vector *graph = [self createGraph];
+    [plotMesh loadVertices:(GLfloat*)graph indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:N];
+    free(graph);
+    [self setPlotterMesh:plotMesh];
+    [plotMesh release];
+    Drawable *plotDrawable =  [RenderingEngine createDrawable:plotMesh];
+    Material *plotMaterial = [[Material alloc] init];
+    //[cubeMaterial setupTexture:@"uvtemplate.bmp"];
+    Plotter *plotterTemp = [[Plotter alloc] initializeWithProgram:program andDrawable:plotDrawable andVertexStruct:plotMesh.vertexStruct andMaterial:plotMaterial]; //Node
+    [plotterTemp preRender];
+    [self setPlotterObj:plotterTemp];
+    [plotterTemp release];
+    [plotDrawable release];
 }
 -(void)Render {
     
-    [_renderingEngine Render:_simpleCube];
+    [_renderingEngine Render:_plotterObj];
 }
 -(void)updateAnimation:(float)elapsedSeconds {
     
+}
+-(CC3Vector*)createGraph {
+    CC3Vector *graph = malloc(sizeof(CC3Vector) * N);
+    
+    for(int i = N/2; i < N; i++) {
+        float x = (i - N/2.0) / 1000.0;
+        graph[i].x = x;
+        graph[i].y = sin(x * 10.0) / (1.0 + x * x);
+        graph[i].z = -0.5;
+        NSLog(@"x=%f f(x)=%f",graph[i].x,graph[i].y);
+    }
+    return  graph;
 }
 -(void)loadProgram:(GLProgram*)program {
     [self setProgram1:program];
 }
 -(void)dealloc {
     [_program1 release];
-    [_simpleCube release];
-    [_cubeMesh release];
+    [_plotterObj release];
+    [_plotterMesh release];
     [_renderingEngine release];
     [super dealloc];
 }

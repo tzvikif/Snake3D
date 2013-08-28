@@ -16,12 +16,13 @@
 #import "Drawable.h"
 #import "Node.h"
 #import "RenderingEngine.h"
-#import "SimpleCube.h"
+#import "Plotter.h"
+
 @class GLProgram;
 
 @interface LogicEngine : NSObject
-@property(nonatomic,retain) SimpleCube *simpleCube;
-@property(nonatomic,retain) Mesh *cubeMesh;
+@property(nonatomic,retain) Plotter *plotterObj;
+@property(nonatomic,retain) Mesh *plotterMesh;
 //@property(nonatomic,retain) Drawable *cubeDrawable;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
 @property(retain,nonatomic) GLProgram *program1;
@@ -30,4 +31,7 @@
 -(void)loadProgram:(GLProgram*)program;
 -(void)updateAnimation:(float)elapsedSeconds;
 -(void)Render;
+-(CC3Vector*)createGraph;
+-(void)updateOffset_x:(GLfloat)delta;
+-(void)updateScale:(GLfloat)delta;
 @end

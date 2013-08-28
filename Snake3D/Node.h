@@ -28,5 +28,6 @@
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program1;
 -(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat;
+-(GLsizei)getStride;
 -(void)preRender;
 @end

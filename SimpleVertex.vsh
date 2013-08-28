@@ -1,16 +1,11 @@
-attribute vec4 Position;
-//attribute vec4 Color;
-attribute vec2 texcoord;
-varying vec2 f_texcoord;
-uniform mat4 View;
-uniform mat4 Projection;
-uniform mat4 Model;
-varying mat4 f_model;
-varying vec4 DestinationColor;
-void main(void)
-{
-    //DestinationColor = Color;
-    f_texcoord = texcoord;
-    f_model = Model;
-    gl_Position = Projection * View * Model * Position;
+attribute vec2 coord2d;
+varying vec4 f_color;
+uniform float offset_x;
+uniform float scale_x;
+//uniform mat4 Projection;
+
+void main(void) {
+    gl_Position = vec4((coord2d.x + offset_x) * scale_x, coord2d.y, 0.5, 1);
+    //f_color = vec4(coord2d.xy / 2.0 + 0.5, 1, 1);
+    f_color = vec4(1,0,0, 1);
 }

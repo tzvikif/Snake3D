@@ -10,13 +10,9 @@
 #import "GLProgram.h"
 
 @implementation SimpleCube
-NSString *texcoord_name = @"texcoord";
-NSString *texture_name = @"texture";
-NSString* position_name = @"Position";
-NSString* normal_name = @"Normal";
-NSString* color_name = @"Color";
-NSString* model_name = @"Model";
-
+NSString *coord2d_name = @"coord2d";
+NSString *offset_x_name = @"offset_x";
+NSString *scale_x_name = @"scale_x";
 
 -(void)preRender {
     self.modelMatrix = [CC3GLMatrix identity];
@@ -27,14 +23,10 @@ NSString* model_name = @"Model";
     [self.modelMatrix populateFromTranslation:translateVector];
     [self.modelMatrix scaleUniformlyBy:1.0];
     
-    [self.program1 addAttribute:position_name];
-    //[self.program1 addAttribute:normal_name];
-    [self.program1 addAttribute:texcoord_name];
-    [self.program1 addUniform:model_name];
-    //[self.program1 addAttribute:color_name];
+    [self.program1 addAttribute:coord2d_name];
     
-    GLuint modelId= [self.program1 uniformLocation:model_name];
-    glUniformMatrix4fv(modelId, 1, 0, self.modelMatrix.glMatrix);
+    [self.program1 uniformLocation:offset_x_name];
+    glUniformMatrix4fv([self.program1 uniformLocation:offset_x_name], 1, 0, self.modelMatrix.glMatrix);
     
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
@@ -43,30 +35,7 @@ NSString* model_name = @"Model";
 }
 -(void)Render {
     int size;
-    GLsizei stride = -1;
-//    glActiveTexture(GL_TEXTURE0);
-//    glBindTexture(GL_TEXTURE_2D,self.material.textureId );
-//    glUniform1i(self.material.textureId, /*GL_TEXTURE*/0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
-    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    switch (_vs) {
-        case PC:
-            stride = sizeof(VertexPC);
-            break;
-        case PNCT:
-            stride = sizeof(VertexPNCT);
-            break;
-        case PNC:
-            stride = sizeof(VertexPNC);
-            break;
-        case PT:
-            stride = sizeof(VertexPT);
-            break;
-        default:
-            NSLog(@"stride error");
-            break;
-    }
+    GLsizei stride = [self getStride];
     glVertexAttribPointer([self.program1 attributeLocation:position_name], 3, GL_FLOAT, GL_FALSE, stride,(GLvoid*)0);
 //    glVertexAttribPointer([self.program1 attributeLocation:normal_name], 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(sizeof(CC3Vector)));
     //glVertexAttribPointer([self.program1 attributeLocation:color_name], 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)(sizeof(CC3Vector)));

@@ -17,7 +17,7 @@
 #import "CC3GLMatrix.h"
 #import "Mesh.h"
 #import "Drawable.h"
-
+#import "Consts.h"
 
 @implementation RenderingEngine
 
@@ -32,11 +32,13 @@
     glBufferData(GL_ARRAY_BUFFER, [mesh sizeofVertices], mesh.vertices, GL_STATIC_DRAW);
     [d setVboVertexBuffer:vboVertexBuffer];
     
-    GLuint ibo;
-    glGenBuffers(1, &ibo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, [mesh sizeofIndices], mesh.indices, GL_STATIC_DRAW);
-    [d setIboIndexBuffer:ibo];
+    if ([mesh sizeofIndices] != 0) {
+        GLuint ibo;
+        glGenBuffers(1, &ibo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, [mesh sizeofIndices], mesh.indices, GL_STATIC_DRAW);
+        [d setIboIndexBuffer:ibo];
+    }
     return d;
 }
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
@@ -58,8 +60,8 @@
 //    [_program1 addUniform:lightPosition_name];
 //    [_program1 addUniform:normalMatrix_name];
 //    [_program1 addUniform:shininess_name];
-    [_program1 addUniform:view_name];
-    [_program1 addUniform:projection_name];
+//    [_program1 addUniform:view_name];
+//    [_program1 addUniform:projection_name];
     
     
 //    glUniform3f([_program1 uniformLocation:ambient_name] , 0.1f, 0.1f, 0.1f);
@@ -72,7 +74,7 @@
 //    glUniform3f([_program1 uniformLocation:diffuse_name], color.x, color.y, color.z);
     glEnable(GL_DEPTH_TEST);
     
-    glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
+    glClearColor(0.2, 0.2, 0.2, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //glEnable(GL_CULL_FACE);
     //glCullFace(GL_BACK);
@@ -85,11 +87,11 @@
     _matView = [CC3GLMatrix identity];
     [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -4.0) withEyeAt:CC3VectorMake(1.0, 2.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
     float ratio = viewport.size.width / viewport.size.height;
-    glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _matView.glMatrix);
+    //glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _matView.glMatrix);
     //[projection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
-    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
-    GLuint projectionId = [_program1 uniformLocation:projection_name];
-    glUniformMatrix4fv(projectionId, 1, 0, _matProjection.glMatrix);
+    [_matProjection populateOrthoFromFrustumLeft:-1.0 andRight:1.0 andBottom:-1.2 andTop:1.2 andNear:0.1 andFar:2.0];
+    //GLuint projectionId = [_program1 uniformLocation:projection_name];
+    //glUniformMatrix4fv(projectionId, 1, 0, _matProjection.glMatrix);
     
 }
 -(void)Render:(id<Renderable>)object {
