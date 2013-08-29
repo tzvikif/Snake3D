@@ -40,8 +40,10 @@ NSString *scale_x_name = @"scale_x";
     
 }
 -(void)Render {
+    GLsizei size;
     GLsizei stride = [self getStride];
-    //glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
+    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glVertexAttribPointer(
                           [self.program1 attributeLocation:coord2d_name], // attribute
                           2,                  // number of elements per vertex, here (x,y)
@@ -50,11 +52,10 @@ NSString *scale_x_name = @"scale_x";
                           stride,                  // no extra data between each position
                           (GLvoid*)0                  // offset of first element
                           );
-//    glDrawArrays(GL_POINTS, 0, N/2);
-    GLsizei size;
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
-    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glDrawElements(GL_POINTS, size/sizeof(GLushort), GL_UNSIGNED_SHORT, 0);
+    glDrawArrays(GL_POINTS, 0, size/stride);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
+//    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+//    glDrawElements(GL_POINTS, size/sizeof(GLushort), GL_UNSIGNED_SHORT, 0);
 }
 
 @end

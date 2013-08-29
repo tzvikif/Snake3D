@@ -43,8 +43,12 @@
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
     CC3Vector *verticesTemp = malloc( sizeof(CC3Vector) * ( vnoe ));
-    _indices = malloc(vnoe*sizeof(GLuint));
-
+    _indices = NULL;
+    if (inoe > 0) {
+        _indices = malloc(vnoe*sizeof(GLuint));
+        memcpy(_indices, elements, inoe*sizeof(GLuint));
+    }
+    int index = 0;
     _vertices = (GLfloat*)verticesTemp;
     for (int i=0; i<vnoe*3; i+=3) {
         CC3Vector vertex;
@@ -54,13 +58,13 @@ verticesNumberOfElemets:(GLuint)vnoe {
         vertex.z = v[i+2];
               
         verticesTemp[i/3] = vertex;
-        _indices[i] = i;
-        _indices[i+1] = i+1;
-        _indices[i+2] = i+2;
+        if (inoe > 0) {
+            _indices[i/3] = index;
+        }
+        index++;
     }
-    //memcpy(_indices, elements, inoe*sizeof(GLuint));
     _vnoe = vnoe;
-    _inoe = vnoe;
+    _inoe = inoe;
     _vertexStruct = P;
 
 }
