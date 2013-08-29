@@ -9,8 +9,9 @@
 #import "Node.h"
 
 @interface Plotter : Node {
-    GLfloat _offset_x;
-    GLfloat _scale_x;
+
 }
+@property(assign,nonatomic) GLfloat offset_x;
+@property(assign,nonatomic) GLfloat scale_x;
 
 @end

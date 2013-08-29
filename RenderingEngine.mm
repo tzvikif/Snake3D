@@ -74,8 +74,6 @@
 //    glUniform3f([_program1 uniformLocation:diffuse_name], color.x, color.y, color.z);
     glEnable(GL_DEPTH_TEST);
     
-    glClearColor(0.2, 0.2, 0.2, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //glEnable(GL_CULL_FACE);
     //glCullFace(GL_BACK);
     //glEnable(GL_BLEND);

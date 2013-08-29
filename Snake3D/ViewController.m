@@ -10,7 +10,7 @@
 #import "LogicEngine.h"
 #import "GLView.h"
 @interface ViewController ()
-
+-(void)addSwipeRecognizer;
 @end
 
 @implementation ViewController
@@ -43,6 +43,7 @@
     //[_logicEngine loadProgram:_program1];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     [_logicEngine initialize:screenBounds andProgram:self.program1];
+    [self addSwipeRecognizer];
     [self startRenderLoop];
 }
 
@@ -70,6 +71,21 @@
     }
     [_logicEngine Render];
     [(GLView*)self.view presentRenderbuffer];
+}
+- (void)handleSwipeLeftFrom:(UIGestureRecognizer*)recognizer {
+    [_logicEngine updateOffset_x:-0.3];
+}
+- (void)handleSwipeRightFrom:(UIGestureRecognizer*)recognizer {
+    [_logicEngine updateOffset_x:0.3];
+}
+-(void)addSwipeRecognizer {
+    UISwipeGestureRecognizer* swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeftFrom:)];
+    swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeftGestureRecognizer];
+    
+    UISwipeGestureRecognizer* swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRightFrom:)];
+    swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeRightGestureRecognizer];
 }
 -(void)dealloc {
     [_logicEngine release];

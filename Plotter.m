@@ -31,8 +31,6 @@ NSString *scale_x_name = @"scale_x";
     [self.program1 addUniform:scale_x_name];
     _offset_x = 0;
     _scale_x = 1.0;
-    glUniform1f([self.program1 uniformLocation:offset_x_name], _offset_x);
-    glUniform1f([self.program1 uniformLocation:scale_x_name], _scale_x);
     
 //    glActiveTexture(GL_TEXTURE0);
 //    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
@@ -40,6 +38,10 @@ NSString *scale_x_name = @"scale_x";
     
 }
 -(void)Render {
+    glClearColor(0.2, 0.2, 0.2, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glUniform1f([self.program1 uniformLocation:offset_x_name], _offset_x);
+    glUniform1f([self.program1 uniformLocation:scale_x_name], _scale_x);
     GLsizei size;
     GLsizei stride = [self getStride];
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
@@ -52,7 +54,7 @@ NSString *scale_x_name = @"scale_x";
                           stride,                  // no extra data between each position
                           (GLvoid*)0                  // offset of first element
                           );
-    glDrawArrays(GL_POINTS, 0, size/stride);
+    glDrawArrays(GL_LINE_STRIP, 0, size/stride);
 //    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
 //    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
 //    glDrawElements(GL_POINTS, size/sizeof(GLushort), GL_UNSIGNED_SHORT, 0);

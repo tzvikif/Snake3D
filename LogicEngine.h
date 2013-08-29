@@ -31,7 +31,6 @@
 -(void)loadProgram:(GLProgram*)program;
 -(void)updateAnimation:(float)elapsedSeconds;
 -(void)Render;
--(CC3Vector*)createGraph;
 -(void)updateOffset_x:(GLfloat)delta;
 -(void)updateScale:(GLfloat)delta;
 @end

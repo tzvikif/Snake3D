@@ -10,6 +10,9 @@
 #import "Plotter.h"
 #include "Consts.h"
 
+@interface LogicEngine ()
+-(CC3Vector*)createGraph;
+@end
 
 GLfloat cube_verticesX[] = {
     // front
@@ -187,6 +190,7 @@ GLfloat cube_normals[] = {
     [plotMeshTemp release];
     Drawable *plotDrawable =  [RenderingEngine createDrawable:_plotterMesh];
     Material *plotMaterialTemp = [[Material alloc] init];
+    [plotMaterialTemp setupTexture:@"tile_floor.png"];
     //[cubeMaterial setupTexture:@"uvtemplate.bmp"];
     Plotter *plotterObjTemp = [[Plotter alloc] initializeWithProgram:program andDrawable:plotDrawable andVertexStruct:_plotterMesh.vertexStruct andMaterial:plotMaterialTemp]; //Node
     [plotMaterialTemp release];
@@ -201,11 +205,14 @@ GLfloat cube_normals[] = {
 -(void)updateAnimation:(float)elapsedSeconds {
     
 }
+-(void)updateOffset_x:(GLfloat)delta {
+    [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];
+}
 -(CC3Vector*)createGraph {
     CC3Vector *graph = malloc(sizeof(CC3Vector) * N);
     
     for(int i = 0; i < N; i++) {
-        float x = (i - N/2.0) / 1000.0;
+        float x = (i - N/2.0) / 100.0;
         graph[i].x = x;
         graph[i].y = sin(x * 10.0) / (1.0 + x * x);
         graph[i].z = -0.5;
