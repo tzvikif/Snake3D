@@ -27,18 +27,50 @@
     //CC3Vector *vertices = _objLoader->_arrVertices;
     glGenBuffers(1, &vboVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER,vboVertexBuffer );
-    size_t  size = [mesh sizeofVertices];
-    size = [mesh sizeofIndices];
-    glBufferData(GL_ARRAY_BUFFER, [mesh sizeofVertices], mesh.vertices, GL_STATIC_DRAW);
-    [d setVboVertexBuffer:vboVertexBuffer];
     
-    if ([mesh sizeofIndices] != 0) {
-        GLuint ibo;
-        glGenBuffers(1, &ibo);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, [mesh sizeofIndices], mesh.indices, GL_STATIC_DRAW);
-        [d setIboIndexBuffer:ibo];
+    
+//    for(int i = 0; i < 101; i++) {
+//        line[i] = (i - 50) / 50.0;
+//    }
+    
+    
+//    size_t  size = [mesh sizeofVertices];
+//    size = [mesh sizeofIndices];
+//    glBufferData(GL_ARRAY_BUFFER, [mesh sizeofVertices], mesh.vertices, GL_STATIC_DRAW);
+    
+    GLbyte graph[2048];
+    GLfloat line[2048];
+    
+    for(int i = 0; i < 2048; i++) {
+        float x = (i - 1024.0) / 100.0;
+        float y = sin(x * 10.0) / (1.0 + x * x);
+        graph[i] = roundf(y * 128 + 128);
     }
+    glBufferData(GL_ARRAY_BUFFER, sizeof(line), line, GL_STATIC_DRAW);
+    [d setVboVertexBuffer:vboVertexBuffer];
+    GLuint texture_id;
+    glActiveTexture(GL_TEXTURE0);
+    glGenTextures(1, &texture_id);
+    glBindTexture(GL_TEXTURE_2D, texture_id);
+    glTexImage2D(
+                 GL_TEXTURE_2D,      // target
+                 0,                  // level, 0 = base, no minimap,
+                 GL_RGBA,       // internalformat
+                 2048,               // width
+                 1,                  // height
+                 0,                  // border, always 0 in OpenGL ES
+                 GL_RGBA,       // format
+                 GL_UNSIGNED_BYTE,   // type
+                 graph
+                 );
+    [d setTextureId:texture_id];
+//    if ([mesh sizeofIndices] != 0) {
+//        GLuint ibo;
+//        glGenBuffers(1, &ibo);
+//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+//        glBufferData(GL_ELEMENT_ARRAY_BUFFER, [mesh sizeofIndices], mesh.indices, GL_STATIC_DRAW);
+//        [d setIboIndexBuffer:ibo];
+//    }
     return d;
 }
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
@@ -90,6 +122,7 @@
     [_matProjection populateOrthoFromFrustumLeft:-1.0 andRight:1.0 andBottom:-1.2 andTop:1.2 andNear:0.1 andFar:2.0];
     //GLuint projectionId = [_program1 uniformLocation:projection_name];
     //glUniformMatrix4fv(projectionId, 1, 0, _matProjection.glMatrix);
+    
     
 }
 -(void)Render:(id<Renderable>)object {

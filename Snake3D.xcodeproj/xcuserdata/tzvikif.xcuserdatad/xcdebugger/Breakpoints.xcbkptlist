@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "62"
          endingLineNumber = "62"
-         landmarkName = "-loadVertices:normals:color:texture:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
+         landmarkName = "-loadVertices:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -52,7 +52,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "41"
          endingLineNumber = "41"
-         landmarkName = "-loadVertices:normals:color:texture:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
+         landmarkName = "-loadVertices:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Plotter.m"
-         timestampString = "399415229.547053"
+         timestampString = "399711566.088672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
          landmarkName = "-Render"
          landmarkType = "5">
       </FileBreakpoint>

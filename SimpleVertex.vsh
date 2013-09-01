@@ -1,10 +1,13 @@
-attribute vec2 coord2d;
+attribute float coord1d;
 varying vec4 f_color;
 uniform float offset_x;
 uniform float scale_x;
-//uniform mat4 Projection;
+uniform sampler2D mytexture;
 
 void main(void) {
-    gl_Position = vec4((coord2d.x + offset_x) * scale_x, coord2d.y, 0.5, 1);
-    f_color = vec4(coord2d.xy / 2.0 + 0.5, 1, 1);
+    float x = (coord1d / scale_x) - offset_x;
+    float y = (texture2D(mytexture, vec2(x / 10.24 / 2.0 + 0.5, 0)).r - 0.5) * 2.0;
+    float y = 1.0;
+    gl_Position = vec4(coord1d, y, 0.0, 1.0);
+    f_color = vec4(x / 2.0 + 0.5, y / 2.0 + 0.5, 1.0, 1.0);
 }

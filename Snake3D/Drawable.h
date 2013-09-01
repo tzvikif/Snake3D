@@ -15,6 +15,9 @@
 
 @property(nonatomic,assign) GLuint vboVertexBuffer;
 @property(nonatomic,assign) GLuint iboIndexBuffer;
+@property(nonatomic,assign) GLuint textureId;
+
 @property(nonatomic,assign) int IndexCount;
 
 @end
+
