@@ -208,6 +208,9 @@ GLfloat cube_normals[] = {
 -(void)updateOffset_x:(GLfloat)delta {
     [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];
 }
+-(void)updateScale:(GLfloat)delta {
+    [_plotterObj setScale_x:delta];
+}
 -(CC3Vector*)createGraph {
     CC3Vector *graph = malloc(sizeof(CC3Vector) * N);
     
