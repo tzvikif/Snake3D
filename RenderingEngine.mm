@@ -45,40 +45,25 @@
  
     [self setProgram1:program];
     [self.program1 use];    //must me before glUniform*
-    NSString* ambient_name = @"AmbientMaterial";
-    NSString* diffuse_name = @"DiffuseMaterial";
-    NSString* specular_name = @"SpecularMaterial";
-    NSString* shininess_name = @"Shininess";
-    NSString* lightPosition_name = @"LightPosition";
-    NSString* normalMatrix_name = @"NormalMatrix";
-    NSString* view_name = @"View";
-    NSString* projection_name = @"Projection";
+    const int margin = 20;
+    const int ticksize = 10;
 
-//    [_program1 addUniform:ambient_name];
-//    [_program1 addUniform:diffuse_name];
-//    [_program1 addUniform:specular_name];
-//    [_program1 addUniform:lightPosition_name];
-//    [_program1 addUniform:normalMatrix_name];
-//    [_program1 addUniform:shininess_name];
-//    [_program1 addUniform:view_name];
-//    [_program1 addUniform:projection_name];
-    
-    
-//    glUniform3f([_program1 uniformLocation:ambient_name] , 0.1f, 0.1f, 0.1f);
-//    glUniform3f([_program1 uniformLocation:specular_name],9.0, 9.0, 0.0);
-//    glUniform1f([_program1 uniformLocation:shininess_name],60);
-    // Set the light position.
-//    CC3Vector4 lightPosition  = CC3Vector4Make(0.0,1.0,-2.0,0.0);
-//    glUniform4f([_program1 attributeLocation:lightPosition_name], lightPosition.x, lightPosition.y, lightPosition.z,lightPosition.w);
-//    CC3Vector color = CC3VectorMake(200.0/255.0, 150.0/255.0, 250.0/255.0);
-//    glUniform3f([_program1 uniformLocation:diffuse_name], color.x, color.y, color.z);
     glEnable(GL_DEPTH_TEST);
     
     //glEnable(GL_CULL_FACE);
     //glCullFace(GL_BACK);
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glViewport(0, 0, viewport.size.width, viewport.size.height);
+    //glViewport(0, 0, viewport.size.width, viewport.size.height);
+    GLsizei height = viewport.size.height;
+    GLsizei width = viewport.size.width;
+//    glViewport(
+//               margin + ticksize,
+//               margin + ticksize,
+//               viewport.size.width - margin * 2 - ticksize,
+//               viewport.size.height - margin * 2 - ticksize
+//               );
+    glViewport(30, 30, 270, 430);
     
     //CC3GLMatrix *projection = [CC3GLMatrix identity];
     _matProjection = [CC3GLMatrix identity];

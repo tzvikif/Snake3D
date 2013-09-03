@@ -11,6 +11,8 @@
 #import "GLView.h"
 @interface ViewController ()
 -(void)addSwipeRecognizer;
+-(void)addPinchRecognizer;
+-(void)pinched:(UIPinchGestureRecognizer*)gestureRecognizer;
 @end
 
 @implementation ViewController
@@ -18,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 	// Do any additional setup after loading the view, typically from a nib.
     GLProgram *theProgram = [[GLProgram alloc] initWithVertexShaderFilename:@"SimpleVertex" fragmentShaderFilename:@"SimpleFragment"];
     self.program1 = theProgram;
@@ -44,6 +47,7 @@
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     [_logicEngine initialize:screenBounds andProgram:self.program1];
     [self addSwipeRecognizer];
+    [self addPinchRecognizer];
     [self startRenderLoop];
 }
 
@@ -86,6 +90,37 @@
     UISwipeGestureRecognizer* swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRightFrom:)];
     swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRightGestureRecognizer];
+    [swipeLeftGestureRecognizer release];
+    [swipeRightGestureRecognizer release];
+}
+-(void)addPinchRecognizer {
+    UIPinchGestureRecognizer *gestureRecognizer=[[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinched:)] autorelease];
+    gestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:gestureRecognizer];
+    
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+-(void)pinched:(UIPinchGestureRecognizer*)gestureRecognizer{
+    //if(gestureRecognizer.state==UIGestureRecognizerStateEnded){
+        //pinch ended
+        float scale = gestureRecognizer.scale;
+//        if (scale > 1.0) {
+//            scale = 1.5;
+//        }
+//        else {
+//            scale = 0.66;
+//        }
+    if(scale > 1.5)
+    {
+        scale = 1.5;
+    }
+    if (scale < 0.66) {
+        scale = 0.66;
+    }
+        [_logicEngine updateScale:scale];
+    //}
 }
 -(void)dealloc {
     [_logicEngine release];

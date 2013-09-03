@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GLProgram.h"
 @class LogicEngine;
-@interface ViewController : UIViewController {
+@interface ViewController : UIViewController <UIGestureRecognizerDelegate> {
     float m_timestamp;
 
 }

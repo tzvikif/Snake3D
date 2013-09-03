@@ -13,35 +13,42 @@
 
 @implementation Plotter
 NSString *coord2d_name = @"coord2d";
-NSString *offset_x_name = @"offset_x";
-NSString *scale_x_name = @"scale_x";
+NSString* model_name = @"transform";
+NSString* color_name = @"color";
 
 -(void)preRender {
-    self.modelMatrix = [CC3GLMatrix identity];
-    CC3Vector translateVector;
-    translateVector.x = 0;
-    translateVector.y = 0;
-    translateVector.z = -4;
-    [self.modelMatrix populateFromTranslation:translateVector];
-    [self.modelMatrix scaleUniformlyBy:1.0];
-    
-    [self.program1 addAttribute:coord2d_name];
-    
-    [self.program1 addUniform:offset_x_name];
-    [self.program1 addUniform:scale_x_name];
     _offset_x = 0;
     _scale_x = 1.0;
+
+    [self.program1 addUniform:model_name];
+    self.modelMatrix = [CC3GLMatrix identity];
+    CC3Vector translateVector;
+    translateVector.x = _offset_x;
+    translateVector.y = 0;
+    translateVector.z = -0.5;
+    [self.modelMatrix populateFromTranslation:translateVector];
+    [self.modelMatrix scaleUniformlyBy:_scale_x];
+    [self.program1 addAttribute:coord2d_name];
     
+    [self.program1 addUniform:color_name];
+    //CC3Vector4 color = CC3Vector4Make(1.0, 0.0, 0.0, 1.0);
+    glUniform4f([self.program1 uniformLocation:color_name], 1.0, 0.0, 0.0, 1.0);
 //    glActiveTexture(GL_TEXTURE0);
 //    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
 //    glUniform1i(self.material.textureId, /*GL_TEXTURE*/0);
     
 }
 -(void)Render {
-    glClearColor(0.2, 0.2, 0.2, 1.0);
+    glClearColor(0.9, 0.9, 0.9, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glUniform1f([self.program1 uniformLocation:offset_x_name], _offset_x);
-    glUniform1f([self.program1 uniformLocation:scale_x_name], _scale_x);
+    self.modelMatrix = [CC3GLMatrix identity];
+    CC3Vector translateVector;
+    translateVector.x = _offset_x;
+    translateVector.y = 0;
+    translateVector.z = -0.5;
+    [self.modelMatrix populateFromTranslation:translateVector];
+    [self.modelMatrix scaleUniformlyBy:_scale_x];
+    glUniformMatrix4fv([self.program1 uniformLocation:model_name], 1, 0, self.modelMatrix.glMatrix);
     GLsizei size;
     GLsizei stride = [self getStride];
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
