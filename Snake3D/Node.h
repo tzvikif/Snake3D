@@ -25,6 +25,7 @@
 }
 @property(retain,nonatomic) CC3GLMatrix *modelMatrix;
 @property(retain,nonatomic) Drawable *drawable;
+@property(assign,nonatomic) CGRect viewport;
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program1;
 -(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat;

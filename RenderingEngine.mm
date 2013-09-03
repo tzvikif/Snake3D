@@ -44,6 +44,7 @@
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
  
     [self setProgram1:program];
+    [self setViewport:viewport];
     [self.program1 use];    //must me before glUniform*
     const int margin = 20;
     const int ticksize = 10;
@@ -63,7 +64,7 @@
 //               viewport.size.width - margin * 2 - ticksize,
 //               viewport.size.height - margin * 2 - ticksize
 //               );
-    glViewport(30, 30, 270, 430);
+    glViewport(margin+ticksize, margin+ticksize, width-2*margin-ticksize, height-2*margin-ticksize);
     
     //CC3GLMatrix *projection = [CC3GLMatrix identity];
     _matProjection = [CC3GLMatrix identity];
@@ -79,5 +80,19 @@
 }
 -(void)Render:(id<Renderable>)object {
     [object Render];
+}
+-(CC3GLMatrix*)viewport_transformX:(GLfloat) x andY:(GLfloat)y andWidth:(GLfloat)width andHeight:(GLfloat)height {
+    float offset_x = (2.0 * x + (width - _viewport.size.width)) / _viewport.size.width;
+    float offset_y = (2.0 * y + (height - _viewport.size.height)) / _viewport.size.height;
+    
+    // Calculate how to rescale the x and y coordinates:
+    float scale_x = width / _viewport.size.width;
+    float scale_y = height / _viewport.size.height;
+    CC3Vector offset = CC3VectorMake(offset_x, offset_y, 0);
+    CC3Vector scale = CC3VectorMake(scale_x, scale_y, 1);
+    CC3GLMatrix *translate = [CC3GLMatrix identity];
+    [translate translateBy:offset];
+    [translate scaleBy:scale];
+    return translate;
 }
 @end
