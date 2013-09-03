@@ -26,7 +26,7 @@
 		20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8617C26ADE00407740 /* LogicEngine.m */; };
 		20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8917C26B0D00407740 /* RenderingEngine.mm */; };
 		20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */; };
-		20F8D94A17CE2CF100CFF9A6 /* Plotter.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F8D94917CE2CF100CFF9A6 /* Plotter.m */; };
+		20F8D94A17CE2CF100CFF9A6 /* Plotter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F8D94917CE2CF100CFF9A6 /* Plotter.mm */; };
 		20F8D95117CE4E4F00CFF9A6 /* Consts.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F8D95017CE4E4F00CFF9A6 /* Consts.m */; };
 		20FF7DB417C4977800A58B95 /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB317C4977800A58B95 /* Mesh.m */; };
 		20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */; };
@@ -70,7 +70,7 @@
 		20F74B8917C26B0D00407740 /* RenderingEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderingEngine.mm; sourceTree = "<group>"; };
 		20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = uvtemplate.bmp; sourceTree = "<group>"; };
 		20F8D94817CE2CF100CFF9A6 /* Plotter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plotter.h; sourceTree = "<group>"; };
-		20F8D94917CE2CF100CFF9A6 /* Plotter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plotter.m; sourceTree = "<group>"; };
+		20F8D94917CE2CF100CFF9A6 /* Plotter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Plotter.mm; sourceTree = "<group>"; };
 		20F8D94F17CE4E4F00CFF9A6 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		20F8D95017CE4E4F00CFF9A6 /* Consts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Consts.m; sourceTree = "<group>"; };
 		20FF7DB217C4977800A58B95 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = Snake3D/Mesh.h; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 				20FF7DCE17C4EE0D00A58B95 /* Node.h */,
 				20FF7DCF17C4EE0D00A58B95 /* Node.m */,
 				20F8D94817CE2CF100CFF9A6 /* Plotter.h */,
-				20F8D94917CE2CF100CFF9A6 /* Plotter.m */,
+				20F8D94917CE2CF100CFF9A6 /* Plotter.mm */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -327,7 +327,7 @@
 				20FF7DC717C49F9100A58B95 /* Drawable.m in Sources */,
 				20FF7DCD17C4E57100A58B95 /* Material.m in Sources */,
 				20FF7DD017C4EE0E00A58B95 /* Node.m in Sources */,
-				20F8D94A17CE2CF100CFF9A6 /* Plotter.m in Sources */,
+				20F8D94A17CE2CF100CFF9A6 /* Plotter.mm in Sources */,
 				20F8D95117CE4E4F00CFF9A6 /* Consts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

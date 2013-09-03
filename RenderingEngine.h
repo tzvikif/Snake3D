@@ -26,5 +26,4 @@
 +(Drawable*)createDrawable:(Mesh*)mesh;
 -(void)Render:(id<Renderable>)object;
 -(void)drawFloor;
--(CC3GLMatrix*) viewport_transformX:(GLfloat) x andY:(GLfloat)y andWidth:(GLfloat)width andHeight:(GLfloat)height;
 @end

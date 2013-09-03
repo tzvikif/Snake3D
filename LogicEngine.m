@@ -192,7 +192,7 @@ GLfloat cube_normals[] = {
     Material *plotMaterialTemp = [[Material alloc] init];
     [plotMaterialTemp setupTexture:@"tile_floor.png"];
     //[cubeMaterial setupTexture:@"uvtemplate.bmp"];
-    Plotter *plotterObjTemp = [[Plotter alloc] initializeWithProgram:program andDrawable:plotDrawable andVertexStruct:_plotterMesh.vertexStruct andMaterial:plotMaterialTemp]; //Node
+    Plotter *plotterObjTemp = [[Plotter alloc] initializeWithProgram:program andDrawable:plotDrawable andVertexStruct:_plotterMesh.vertexStruct andMaterial:plotMaterialTemp andViewport:viewport]; //Node
     [plotMaterialTemp release];
     [plotterObjTemp preRender];
     [self setPlotterObj:plotterObjTemp];
