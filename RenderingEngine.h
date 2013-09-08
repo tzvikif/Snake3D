@@ -21,6 +21,7 @@
 @property(nonatomic,retain) CC3GLMatrix *matView;
 @property(nonatomic,retain) CC3GLMatrix *matProjection;
 @property(nonatomic,retain) GLProgram *program1;
+@property(assign,nonatomic) CGRect viewport;
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram*)program;
 +(Drawable*)createDrawable:(Mesh*)mesh;
 -(void)Render:(id<Renderable>)object;

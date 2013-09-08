@@ -44,17 +44,11 @@
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
  
     [self setProgram1:program];
+    [self setViewport:viewport];
     [self.program1 use];    //must me before glUniform*
- 
 
     glEnable(GL_DEPTH_TEST);
-    
-    //glEnable(GL_CULL_FACE);
-    //glCullFace(GL_BACK);
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glViewport(0, 0, viewport.size.width, viewport.size.height);
-    //CC3GLMatrix *projection = [CC3GLMatrix identity];
+
     _matProjection = [CC3GLMatrix identity];
     _matView = [CC3GLMatrix identity];
     [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -4.0) withEyeAt:CC3VectorMake(1.0, 2.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
@@ -69,4 +63,5 @@
 -(void)Render:(id<Renderable>)object {
     [object Render];
 }
+
 @end
