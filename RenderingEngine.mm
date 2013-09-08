@@ -45,8 +45,7 @@
  
     [self setProgram1:program];
     [self.program1 use];    //must me before glUniform*
-    const int margin = 20;
-    const int ticksize = 10;
+ 
 
     glEnable(GL_DEPTH_TEST);
     
@@ -55,16 +54,6 @@
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glViewport(0, 0, viewport.size.width, viewport.size.height);
-    GLsizei height = viewport.size.height;
-    GLsizei width = viewport.size.width;
-//    glViewport(
-//               margin + ticksize,
-//               margin + ticksize,
-//               viewport.size.width - margin * 2 - ticksize,
-//               viewport.size.height - margin * 2 - ticksize
-//               );
-    glViewport(30, 30, 270, 430);
-    
     //CC3GLMatrix *projection = [CC3GLMatrix identity];
     _matProjection = [CC3GLMatrix identity];
     _matView = [CC3GLMatrix identity];

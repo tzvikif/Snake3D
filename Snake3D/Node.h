@@ -27,7 +27,8 @@
 @property(retain,nonatomic) Drawable *drawable;
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program1;
--(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat;
+@property(assign,nonatomic) CGRect viewport;
+-(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat andViewport:(CGRect)vp;
 -(GLsizei)getStride;
 -(void)preRender;
 @end
