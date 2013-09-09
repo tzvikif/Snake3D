@@ -44,9 +44,9 @@ const int ticksize = 10;
     glClearColor(0.9, 0.9, 0.9, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUniform4f([self.program1 uniformLocation:color_name], 1.0, 0.0, 0.0, 1.0);
-    GLsizei height = self.viewport.size.height;
-    GLsizei width = self.viewport.size.width;
-    glViewport(margin+ticksize, margin+ticksize, width-2*margin-ticksize, height-2*margin-ticksize);
+    GLsizei window_height = self.viewport.size.height;
+    GLsizei window_width = self.viewport.size.width;
+    glViewport(margin+ticksize, margin+ticksize, window_width-2*margin-ticksize, window_height-2*margin-ticksize);
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector;
     translateVector.x = _offset_x;
@@ -68,7 +68,7 @@ const int ticksize = 10;
                           (GLvoid*)0                  // offset of first element
                           );
     glDrawArrays(GL_LINE_STRIP, 0, size/stride);
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, window_width, window_height);
     
     GLuint box_vbo;
     glGenBuffers(1, &box_vbo);
@@ -83,9 +83,31 @@ const int ticksize = 10;
     glVertexAttribPointer([self.program1 attributeLocation:coord2d_name], 2, GL_FLOAT, GL_FALSE, 0, 0);
     
     
-    CC3GLMatrix *tranform = [self viewport_transformX:margin+ticksize andY:margin+ticksize andWidth:width-2*margin-ticksize andHeight: height-2*margin-ticksize];
+    CC3GLMatrix *tranform = [self viewport_transformX:margin+ticksize andY:margin+ticksize andWidth:window_width-2*margin-ticksize andHeight: window_height-2*margin-ticksize];
     glUniformMatrix4fv([self.program1 uniformLocation:model_name], 1, 0, tranform.glMatrix);
     glDrawArrays(GL_LINE_LOOP, 0, 4);
+    
+    
+    float pixel_x = 2.0 / (window_width - margin * 2 - ticksize);
+    float pixel_y = 2.0 / (window_height - margin * 2 - ticksize);
+    GLuint ticks_vbo;
+    glGenBuffers(1, &ticks_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, ticks_vbo);
+    
+    ccVertex2F ticks[42];
+    
+    for(int i = 0; i <= 20; i++) {
+        float y = -1 + i * 0.1;
+        ticks[i * 2].x = -1;
+        ticks[i * 2].y = y;
+        ticks[i * 2 + 1].x = -1 - ticksize * pixel_x;
+        ticks[i * 2 + 1].y = y;
+    }
+    
+    glBufferData(GL_ARRAY_BUFFER, sizeof ticks, ticks, GL_STREAM_DRAW);
+    
+    glVertexAttribPointer([self.program1 attributeLocation:coord2d_name], 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glDrawArrays(GL_LINES, 0, 42);
 }
 -(CC3GLMatrix*)viewport_transformX:(GLfloat) x andY:(GLfloat)y andWidth:(GLfloat)width andHeight:(GLfloat)height {
     float offset_x = (2.0 * x + (width - self.viewport.size.width)) / self.viewport.size.width;
