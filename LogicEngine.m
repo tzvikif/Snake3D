@@ -215,7 +215,7 @@ GLfloat cube_normals[] = {
     CC3Vector *graph = malloc(sizeof(CC3Vector) * N);
     
     for(int i = 0; i < N; i++) {
-        float x = (i - N/2.0) / 100.0;
+        float x = (i - N/2.0) / 1000;
         graph[i].x = x;
         graph[i].y = sin(x * 10.0) / (1.0 + x * x);
         graph[i].z = -0.5;

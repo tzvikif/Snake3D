@@ -87,7 +87,7 @@ const int ticksize = 10;
     glUniformMatrix4fv([self.program1 uniformLocation:model_name], 1, 0, tranform.glMatrix);
     glDrawArrays(GL_LINE_LOOP, 0, 4);
     
-    
+    //y ticks
     float pixel_x = 2.0 / (window_width - margin * 2 - ticksize);
     float pixel_y = 2.0 / (window_height - margin * 2 - ticksize);
     GLuint ticks_vbo;
@@ -97,17 +97,45 @@ const int ticksize = 10;
     ccVertex2F ticks[42];
     
     for(int i = 0; i <= 20; i++) {
+        float tickscale = (i % 10) ? 0.5 : 1; 
         float y = -1 + i * 0.1;
         ticks[i * 2].x = -1;
         ticks[i * 2].y = y;
-        ticks[i * 2 + 1].x = -1 - ticksize * pixel_x;
+        ticks[i * 2 + 1].x = -1 - ticksize * tickscale * pixel_x;
         ticks[i * 2 + 1].y = y;
     }
     
-    glBufferData(GL_ARRAY_BUFFER, sizeof ticks, ticks, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(ticks), ticks, GL_STREAM_DRAW);
     
     glVertexAttribPointer([self.program1 attributeLocation:coord2d_name], 2, GL_FLOAT, GL_FALSE, 0, 0);
     glDrawArrays(GL_LINES, 0, 42);
+    //x ticks
+    float tickspacing = 0.1 * powf(10, -floor(log10(_scale_x)));
+    float left = -1.0 / _scale_x - _offset_x;
+    float right = 1.0 / _scale_x - _offset_x;
+    int left_i = ceil(left / tickspacing);
+    int right_i = floor(right / tickspacing);
+    float rem = left_i * tickspacing - left;
+    float firsttick = -1.0 + rem * _scale_x;
+    
+    int nticks = right_i - left_i + 1;
+    if(nticks > 21)
+        nticks = 21;
+    
+    for(int i = 0; i < nticks; i++) {
+        float x = firsttick + i * tickspacing * _scale_x;
+        float tickscale = ((i + left_i) % 10) ? 0.5 : 1;
+        ticks[i * 2].x = x;
+        ticks[i * 2].y = -1;
+        ticks[i * 2 + 1].x = x;
+        ticks[i * 2 + 1].y = -1 - ticksize * tickscale * pixel_y;
+    }
+    
+    glBufferData(GL_ARRAY_BUFFER, sizeof(ticks), ticks, GL_STREAM_DRAW);
+    
+    glVertexAttribPointer([self.program1 attributeLocation:coord2d_name], 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glDrawArrays(GL_LINES, 0, nticks * 2);
+    
 }
 -(CC3GLMatrix*)viewport_transformX:(GLfloat) x andY:(GLfloat)y andWidth:(GLfloat)width andHeight:(GLfloat)height {
     float offset_x = (2.0 * x + (width - self.viewport.size.width)) / self.viewport.size.width;
