@@ -184,7 +184,7 @@ GLfloat cube_normals[] = {
     [renderingEngineTemp release];
     Mesh *plotMeshTemp = [[Mesh alloc] init];
     CC3Vector *graph = [self createGraph];
-    [plotMeshTemp loadVertices:(GLfloat*)graph indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:N];
+    [plotMeshTemp loadVertices:(GLfloat*)graph indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:N * N * 3];
     free(graph);
     [self setPlotterMesh:plotMeshTemp];
     [plotMeshTemp release];
@@ -209,19 +209,22 @@ GLfloat cube_normals[] = {
     [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];
 }
 -(void)updateScale:(GLfloat)delta {
-    [_plotterObj setScale_x:delta];
+    [_plotterObj setScale_xy:delta];
 }
 -(CC3Vector*)createGraph {
-    CC3Vector *graph = malloc(sizeof(CC3Vector) * N);
+    CC3Vector *graph = malloc(sizeof(CC3Vector) * N * N);
     
     for(int i = 0; i < N; i++) {
-        float x = (i - N/2.0) / 1000;
-        graph[i].x = x;
-        graph[i].y = sin(x * 10.0) / (1.0 + x * x);
-        graph[i].z = -0.5;
-        //NSLog(@"x=%f f(x)=%f",graph[i].x,graph[i].y);
-    }
-    return  graph;
+        for(int j = 0; j < N; j++) {
+            float x = (i - N / 2) / (N / 2.0);
+            float y = (j - N / 2) / (N / 2.0);
+            float t = hypotf(x, y) * 4.0;
+            float z = (1 - t * t) * expf(t * t / -2.0);
+            (graph + i * N + j)->x = x;
+            (graph + i * N + j)->y = y;
+            (graph + i * N + j)->z = z;
+        }
+    }    return  graph;
 }
 -(void)loadProgram:(GLProgram*)program {
     [self setProgram1:program];

@@ -13,7 +13,8 @@
 }
 
 @property(assign,nonatomic) GLfloat offset_x;
-@property(assign,nonatomic) GLfloat scale_x;
+@property(assign,nonatomic) GLfloat offset_y;
+@property(assign,nonatomic) GLfloat scale_xy;
 -(CC3GLMatrix*) viewport_transformX:(GLfloat)x y:(GLfloat)y width:(GLfloat)width height:(GLfloat)height;
 
 @end

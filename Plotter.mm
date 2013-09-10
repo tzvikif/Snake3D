@@ -20,18 +20,19 @@ const int ticksize = 10;
 
 -(void)preRender {
     _offset_x = 0;
-    _scale_x = 1.0;
+    _offset_y = 0;
+    _scale_xy = 1.0;
 
     [self.program1 addUniform:model_name];
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector;
     translateVector.x = _offset_x;
-    translateVector.y = 0;
+    translateVector.y = _offset_y;
     translateVector.z = -0.5;
     [self.modelMatrix populateFromTranslation:translateVector];
-    [self.modelMatrix scaleUniformlyBy:_scale_x];
+    [self.modelMatrix scaleUniformlyBy:_scale_xy];
     [self.program1 addAttribute:coord2d_name];
-    
+    [self.program1 adduni]
     [self.program1 addUniform:color_name];
     //CC3Vector4 color = CC3Vector4Make(1.0, 0.0, 0.0, 1.0);
     
@@ -47,13 +48,6 @@ const int ticksize = 10;
     GLsizei window_height = self.viewport.size.height;
     GLsizei window_width = self.viewport.size.width;
     glViewport(margin+ticksize, margin+ticksize, window_width-2*margin-ticksize, window_height-2*margin-ticksize);
-    self.modelMatrix = [CC3GLMatrix identity];
-    CC3Vector translateVector;
-    translateVector.x = _offset_x;
-    translateVector.y = 0;
-    translateVector.z = -0.5;
-    [self.modelMatrix populateFromTranslation:translateVector];
-    [self.modelMatrix scaleUniformlyBy:_scale_x];
     glUniformMatrix4fv([self.program1 uniformLocation:model_name], 1, 0, self.modelMatrix.glMatrix);
     GLsizei size;
     GLsizei stride = [self getStride];
