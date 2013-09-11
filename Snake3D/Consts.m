@@ -8,4 +8,4 @@
 
 #import "Consts.h"
 
-int const N = 256;
+int const N = 128;

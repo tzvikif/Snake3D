@@ -1,8 +1,8 @@
-attribute vec2 coord2d;
+attribute vec3 coord3d;
 uniform mat4 transform;
-varying vec4 graph_coord;
+varying vec3 zcolor;
 
 void main(void) {
-    gl_Position = transform * vec4(coord2d.xy, 0, 1);
-    graph_coord = vec4(1,1,1,1);
+    gl_Position = transform * vec4(coord3d.xy, 0, 1);
+    zcolor = vec3(coord3d.xy,coord3d.z);
 }

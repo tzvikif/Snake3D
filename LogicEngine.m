@@ -222,7 +222,7 @@ GLfloat cube_normals[] = {
             float z = (1 - t * t) * expf(t * t / -2.0);
             (graph + i * N + j)->x = x;
             (graph + i * N + j)->y = y;
-            (graph + i * N + j)->z = z;
+            (graph + i * N + j)->z = z * 100;
         }
     }    return  graph;
 }

@@ -49,12 +49,7 @@
 
     glEnable(GL_DEPTH_TEST);
 
-    _matProjection = [CC3GLMatrix identity];
-    _matView = [CC3GLMatrix identity];
-    [_matView populateToLookAt:CC3VectorMake(0.0, -2.0, 2.0) withEyeAt:CC3VectorMake(0.0, 0.0, 0.0) withUp:CC3VectorMake(0.0, 0.0, 1.0)];
-    float ratio = viewport.size.width / viewport.size.height;   
-    //glUniformMatrix4fv([_program1 uniformLocation:view_name], 1, 0, _matView.glMatrix);
-    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
+  
     //[_matProjection populateOrthoFromFrustumLeft:-1.0 andRight:1.0 andBottom:-1.2 andTop:1.2 andNear:0.1 andFar:2.0];
     //GLuint projectionId = [_program1 uniformLocation:projection_name];
     //glUniformMatrix4fv(projectionId, 1, 0, _matProjection.glMatrix);

@@ -145,7 +145,7 @@ typedef void (*GLLogFunction) (GLuint program,
     if (location == nil) {
         NSException* myException = [NSException
                                     exceptionWithName:@"AttributeException"
-                                    reason:@"no such attribute location"
+                                    reason:[NSString stringWithFormat:@"%@: no such attribute location",attributeName]
                                     userInfo:nil];
         @throw myException;
     }
@@ -157,7 +157,7 @@ typedef void (*GLLogFunction) (GLuint program,
     if (location == nil) {
         NSException* myException = [NSException
                                     exceptionWithName:@"UniformException"
-                                    reason:@"no such uniform location"
+                                    reason:[NSString stringWithFormat:@"%@: no such uniform location",uniformName]
                                     userInfo:nil];
         @throw myException;
     }
