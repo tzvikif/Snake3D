@@ -33,6 +33,7 @@ const int ticksize = 10;
     
 }
 -(void)Render {
+    glEnable(GL_DEPTH_TEST);
     glClearColor(0.9, 0.9, 0.9, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //glUniform4f([self.program1 uniformLocation:color_name], 1.0, 0.0, 0.0, 1.0);
@@ -41,7 +42,7 @@ const int ticksize = 10;
     glViewport(0, 0, window_width, window_height);
     _matProjection = [CC3GLMatrix identity];
     _matView = [CC3GLMatrix identity];
-    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -0.5) withEyeAt:CC3VectorMake(0.1, 0.0, 0.0) withUp:CC3VectorMake(0.0, 0.0, 1.0)];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -1.2) withEyeAt:CC3VectorMake(0.1, -1.5, 0.0) withUp:CC3VectorMake(0.0, 0.0, 1.0)];
     float ratio = self.viewport.size.width / self.viewport.size.height;
     [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
    
@@ -49,7 +50,7 @@ const int ticksize = 10;
     CC3Vector translateVector;
     translateVector.x = _offset_x;
     translateVector.y = _offset_y;
-    translateVector.z = -1.0;
+    translateVector.z = -1.2;
 
     [self.modelMatrix translateBy:translateVector];
     [self.modelMatrix scaleBy:CC3VectorMake(_scale_xy, _scale_xy, 1.0)];
