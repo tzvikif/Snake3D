@@ -226,6 +226,7 @@ GLfloat cube_normals[] = {
         }
     }    return  graph;
 }
+
 -(void)loadProgram:(GLProgram*)program {
     [self setProgram1:program];
 }

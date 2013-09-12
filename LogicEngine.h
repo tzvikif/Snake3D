@@ -33,4 +33,5 @@
 -(void)Render;
 -(void)updateOffset_x:(GLfloat)delta;
 -(void)updateScale:(GLfloat)delta;
+-(GLushort*)createElemets;
 @end
