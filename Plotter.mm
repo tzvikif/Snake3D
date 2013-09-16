@@ -21,7 +21,7 @@ const int ticksize = 10;
 -(void)preRender {
     _offset_x = 0;
     _offset_y = 0;
-    _scale_xy = 1.0;
+    _scale_xy = 2.0;
     _rotationAngle = 0;
     [self.program1 addAttribute:coord3d_name];
     [self.program1 addUniform:model_name];
@@ -43,7 +43,7 @@ const int ticksize = 10;
     glViewport(0, 0, window_width, window_height);
     _matProjection = [CC3GLMatrix identity];
     _matView = [CC3GLMatrix identity];
-    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -1) withEyeAt:CC3VectorMake(0.001, 0.0, 0.0) withUp:CC3VectorMake(0.0, 0.0, 1.0)];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 0.2, -2) withEyeAt:CC3VectorMake(0.0, -2.0, 0.5) withUp:CC3VectorMake(0.0, 0.0, 1.0)];
     float ratio = self.viewport.size.width / self.viewport.size.height;
     [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
    
@@ -51,7 +51,7 @@ const int ticksize = 10;
     CC3Vector translateVector;
     translateVector.x = _offset_x;
     translateVector.y = _offset_y;
-    translateVector.z = -1.5;
+    translateVector.z = -1;
 
     [self.modelMatrix translateBy:translateVector];
     [self.modelMatrix scaleBy:CC3VectorMake(_scale_xy, _scale_xy, 1.0)];
@@ -63,7 +63,7 @@ const int ticksize = 10;
         _rotationAngle -=360;
     }
     //glViewport(margin+ticksize, margin+ticksize, window_width-2*margin-ticksize, window_height-2*margin-ticksize);
-    glUniformMatrix4fv([self.program1 uniformLocation:model_name], 1, 0, _matProjection.glMatrix);
+    glUniformMatrix4fv([self.program1 uniformLocation:model_name], 1,   0, _matProjection.glMatrix);
     GLsizei size;
     GLsizei stride = [self getStride];
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);

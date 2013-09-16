@@ -184,7 +184,7 @@ GLfloat cube_normals[] = {
     [renderingEngineTemp release];
     Mesh *plotMeshTemp = [[Mesh alloc] init];
     CC3Vector *graph = [self createGraph];
-    [plotMeshTemp loadVertices:(GLfloat*)graph indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:N * N * 3];
+    [plotMeshTemp loadVertices:(GLfloat*)graph indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:N * N];
     free(graph);
     [self setPlotterMesh:plotMeshTemp];
     [plotMeshTemp release];
@@ -224,6 +224,7 @@ GLfloat cube_normals[] = {
             (graph + i * N + j)->y = y;
             (graph + i * N + j)->z = z;
         }
+        
     }    return  graph;
 }
 
