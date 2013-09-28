@@ -51,7 +51,7 @@ const int ticksize = 10;
     CC3Vector translateVector;
     translateVector.x = _offset_x;
     translateVector.y = _offset_y;
-    translateVector.z = -1;
+    translateVector.z = -0.5;
 
     [self.modelMatrix translateBy:translateVector];
     [self.modelMatrix scaleBy:CC3VectorMake(_scale_xy, _scale_xy, 1.0)];

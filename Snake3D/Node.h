@@ -20,10 +20,12 @@
 @protocol Renderable <NSObject>
 -(void)Render;
 @end
-@interface Node : NSObject<Renderable> {
+@interface Node : NSObject {
     vertexStructure _vs;
 }
 @property(retain,nonatomic) CC3GLMatrix *modelMatrix;
+@property(retain,nonatomic) CC3GLMatrix *viewMatrix;
+@property(retain,nonatomic) CC3GLMatrix *projectionMatrix;
 @property(retain,nonatomic) Drawable *drawable;
 @property(assign,nonatomic) CGRect viewport;
 @property(retain,nonatomic) Material *material;
@@ -31,5 +33,6 @@
 
 -(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat andViewport:(CGRect)vp;
 -(GLsizei)getStride;
--(void)preRender;
+-(void)Render;
+-(void)initResources;
 @end

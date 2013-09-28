@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Node.h"
+#import "Floor.h"
 //#import "Drawable.h"
 //#import "Mesh.h"
 
@@ -24,6 +25,7 @@
 @property(assign,nonatomic) CGRect viewport;
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram*)program;
 +(Drawable*)createDrawable:(Mesh*)mesh;
--(void)Render:(id<Renderable>)object;
--(void)drawFloor;
+//-(void)Render:(id<Renderable>)object;
+-(void)Render:(Node*)object;
+-(void)initResources:(NSArray*)nodes;
 @end

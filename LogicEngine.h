@@ -16,13 +16,14 @@
 #import "Drawable.h"
 #import "Node.h"
 #import "RenderingEngine.h"
-#import "Plotter.h"
+//#import "Plotter.h"
+#import "Floor.h"
 
 @class GLProgram;
 
 @interface LogicEngine : NSObject
-@property(nonatomic,retain) Plotter *plotterObj;
-@property(nonatomic,retain) Mesh *plotterMesh;
+@property(nonatomic,retain) Floor *floorObj;
+@property(nonatomic,retain) Mesh *meshFloor;
 //@property(nonatomic,retain) Drawable *cubeDrawable;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
 @property(retain,nonatomic) GLProgram *program1;
@@ -35,3 +36,4 @@
 -(void)updateScale:(GLfloat)delta;
 -(GLushort*)createElemets;
 @end
+    

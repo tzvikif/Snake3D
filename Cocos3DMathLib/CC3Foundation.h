@@ -120,7 +120,6 @@ CC3Vector CC3VectorMinimize(CC3Vector v1, CC3Vector v2);
  * maximum value for that component between the two vectors.
  */
 CC3Vector CC3VectorMaximize(CC3Vector v1, CC3Vector v2);
-	
 /**
  * Returns the scalar length of the specified CC3Vector from the origin.
  * This is calculated as sqrt(x*x + y*y + z*z) and will always be positive.

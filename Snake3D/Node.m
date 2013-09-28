@@ -8,13 +8,23 @@
 
 #import "Node.h"
 #import "GLProgram.h"
+#import "LogicEngine.h"
+#include "Consts.h"
+
+@interface Node()
+-(void)initResources:(NSArray*)matrices;
+@end
 
 @implementation Node
--(void)Render {
-    
+-(void)initResources:(NSArray *)matrices {
+    [self setModelMatrix:[matrices objectAtIndex:0]];
+    [self setViewMatrix:[matrices objectAtIndex:1]];
+    [self setProjectionMatrix:[matrices objectAtIndex:2]];
 }
--(void)preRender {
-    
+
+-(void)Render {
+    NSException *ex = [[NSException alloc] initWithName:@"" reason:@"Render method in Node is virtual" userInfo:nil];
+    @throw [ex autorelease];
 }
 -(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat andViewport:(CGRect)vp{
     if ([super init]) {

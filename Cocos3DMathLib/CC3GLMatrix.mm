@@ -101,7 +101,19 @@
 -(GLfloat*) glMatrix {
 	return NULL;
 }
-
+-(void)print:(NSString*)name {
+    NSMutableString *mstr = [[NSMutableString alloc] init];
+    float f;
+    for (int i=0; i<4; i++) {
+        for (int j=0; j<4; j++) {
+            f = (GLfloat)self.glMatrix[i*4+j];
+            [mstr appendFormat:@"%f,",f];
+        }
+        [mstr appendFormat:@"\n"];
+    }
+    NSLog(@"%@:%@",name,mstr);
+    [mstr release];
+}
 
 #pragma mark Allocation and initialization
 

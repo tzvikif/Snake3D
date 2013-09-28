@@ -94,7 +94,7 @@
  * GL matrix, which must be a standard 4x4 OpenGL matrix in column-major order.
  */
 -(id) initFromGLMatrix: (GLfloat*) aGLMtx;
-
+-(void)print:(NSString*)name;
 /**
  * Allocates and returns an initialized autoreleased instance with all elements copied from
  * the specified GL matrix, which must be a standard 4x4 OpenGL matrix in column-major order.
