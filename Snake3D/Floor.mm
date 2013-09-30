@@ -37,7 +37,7 @@ NSString *mvp_name = @"mvp";
     //[self.projectionMatrix print:@"Projection"];
     //[self.viewMatrix print:@"View"];
     CC3GLMatrix *projectionMat = [[CC3GLMatrix alloc] initFromGLMatrix:self.projectionMatrix.glMatrix];
-    NSLog(@"projection %@",[projectionMat description]);
+    //NSLog(@"projection %@",[projectionMat description]);
     [projectionMat multiplyByMatrix:self.viewMatrix];
     [projectionMat multiplyByMatrix:self.modelMatrix];
     //[self setProjectionMatrix:[CC3GLMatrix identity]];

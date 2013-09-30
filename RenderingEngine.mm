@@ -23,27 +23,6 @@
 
 @implementation RenderingEngine
 
-+(Drawable*)createDrawable:(Mesh*)mesh {
-    Drawable *d = [[Drawable alloc] init];
-    GLuint vboVertexBuffer;
-    //CC3Vector *vertices = _objLoader->_arrVertices;
-    glGenBuffers(1, &vboVertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER,vboVertexBuffer );
-    size_t  size = [mesh sizeofVertices];
-    glBufferData(GL_ARRAY_BUFFER, size, mesh.vertices, GL_STATIC_DRAW);
-    [d setVboVertexBuffer:vboVertexBuffer];
-    
-    if ([mesh sizeofIndices] != 0) {
-        GLuint ibo;
-        glGenBuffers(1, &ibo);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        size = [mesh sizeofIndices];
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, mesh.indices, GL_STATIC_DRAW);
-        NSLog(@"indices:%d,%d,%d",*(mesh.indices+0),*(mesh.indices+1),*(mesh.indices+2));
-        [d setIboIndexBuffer:ibo];
-    }
-    return d;
-}
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
  
     [self setProgram1:program];

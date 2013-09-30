@@ -291,8 +291,8 @@ GLfloat cube_normals[] = {
 //    }
 //    NSLog(@"%@",str);
   //  [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:(N-1)*N*6 verticesNumberOfElemets:N*N];
-    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:(N-1)*(N-1)*6
-    verticesNumberOfElemets:(N)*(N)];
+    //[floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:(N-1)*(N-1)*6 verticesNumberOfElemets:(N)*(N)];
+    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:(N)*(N)];
     
     free(floorGrid);
     free(elements);
