@@ -26,10 +26,11 @@
     NSException *ex = [[NSException alloc] initWithName:@"" reason:@"Render method in Node is virtual" userInfo:nil];
     @throw [ex autorelease];
 }
--(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat andViewport:(CGRect)vp{
+-(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andMesh:(Mesh*)mesh andMaterial:(Material*)mat andViewport:(CGRect)vp{
     if ([super init]) {
+        [self setMesh:mesh];
         [self setDrawable:drawable];
-        _vs = vs;
+        _vs = mesh.vertexStruct;
         [self setProgram1:program];
         [self setMaterial:mat];
         [self setViewport:vp];

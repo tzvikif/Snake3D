@@ -41,16 +41,21 @@
     [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -4) withEyeAt:CC3VectorMake(0.0, 4.0, 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
     float ratio = self.viewport.size.width / self.viewport.size.height;
     [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:10 andAspectRatio:ratio];
-    Node *floor = (Node*)[nodes objectAtIndex:0];
-        [floor setProjectionMatrix:_matProjection];
-    [floor setViewMatrix:_matView];
-    [floor initResources];
-
+    for (Node *obj in nodes) {
+        [obj setProjectionMatrix:_matProjection];
+        [obj setViewMatrix:_matView];
+        [obj setViewport:self.viewport];
+        [obj initResources];
+    }
 }
--(void)Render:(Node*)object {
-    [object setViewMatrix:_matView];
-    [object setProjectionMatrix:_matProjection];
-    [object Render];
+-(void)Render:(NSArray*)renderables {
+    glClearColor(0.4, 0.9, 0.9, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    for (Node *obj in renderables) {
+//            [obj setViewMatrix:_matView];
+//            [obj setProjectionMatrix:_matProjection];
+    [obj Render];
+    }
 }
 
 @end

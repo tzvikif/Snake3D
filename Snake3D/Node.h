@@ -23,6 +23,7 @@
 @interface Node : NSObject {
     vertexStructure _vs;
 }
+@property(retain,nonatomic) Mesh *mesh;
 @property(retain,nonatomic) CC3GLMatrix *modelMatrix;
 @property(retain,nonatomic) CC3GLMatrix *viewMatrix;
 @property(retain,nonatomic) CC3GLMatrix *projectionMatrix;
@@ -31,7 +32,7 @@
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program1;
 
--(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andVertexStruct:(vertexStructure)vs andMaterial:(Material*)mat andViewport:(CGRect)vp;
+-(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andMesh:(Mesh*)mesh andMaterial:(Material*)mat andViewport:(CGRect)vp;
 -(GLsizei)getStride;
 -(void)Render;
 -(void)initResources;

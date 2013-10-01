@@ -13,7 +13,7 @@
 @implementation Drawable
 
 +(Drawable*)createDrawable:(Mesh*)mesh {
-    Drawable *d = [[Drawable alloc] init];
+    Drawable *d = [[[Drawable alloc] init] autorelease];
     GLuint vboVertexBuffer;
     //CC3Vector *vertices = _objLoader->_arrVertices;
     glGenBuffers(1, &vboVertexBuffer);

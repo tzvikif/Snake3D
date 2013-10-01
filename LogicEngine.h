@@ -22,8 +22,9 @@
 @class GLProgram;
 
 @interface LogicEngine : NSObject
-@property(nonatomic,retain) Floor *floorObj;
-@property(nonatomic,retain) Mesh *meshFloor;
+//@property(nonatomic,retain) Floor *floorObj;
+@property(nonatomic,retain) NSMutableArray *renderables;
+//@property(nonatomic,retain) Mesh *meshFloor;
 //@property(nonatomic,retain) Drawable *cubeDrawable;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
 @property(retain,nonatomic) GLProgram *program1;

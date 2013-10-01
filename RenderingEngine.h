@@ -24,6 +24,6 @@
 @property(nonatomic,retain) GLProgram *program1;
 @property(assign,nonatomic) CGRect viewport;
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram*)program;
--(void)Render:(Node*)object;
+-(void)Render:(NSArray*)renderables;
 -(void)initResources:(NSArray*)nodes;
 @end

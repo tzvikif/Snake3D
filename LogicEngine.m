@@ -10,6 +10,7 @@
 //#import "Plotter.h"
 #include "Consts.h"
 #import "Floor.h"
+#import "Snake.h"
 
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
@@ -180,26 +181,32 @@ GLfloat cube_normals[] = {
 
 -(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
+    NSMutableArray *maTemp = [[NSMutableArray alloc] init];
+    [self setRenderables:maTemp];
+    [maTemp release];
     [renderingEngineTemp initialize:viewport andProgram:program];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
     Mesh *floorMeshTemp = [[Mesh alloc] init];
     //sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
     [self createFloor:floorMeshTemp];
-    [self setMeshFloor:floorMeshTemp];
-    [floorMeshTemp release];
-    Drawable *DrwFloor =  [RenderingEngine createDrawable:_meshFloor];
+    
+    Drawable *DrwFloor =  [Drawable createDrawable:floorMeshTemp];
     Material *floorMaterialTemp = [[Material alloc] init];
     [floorMaterialTemp setupTexture:@"tile_floor.png"];
-    Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:program andDrawable:DrwFloor andVertexStruct:_meshFloor.vertexStruct andMaterial:floorMaterialTemp andViewport:viewport]; //Node
+    Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:program andDrawable:DrwFloor andMesh:floorMeshTemp
+                                                   andMaterial:floorMaterialTemp andViewport:viewport]; //Node
+    [floorMeshTemp release];
     [floorMaterialTemp release];
-    [self setFloorObj:floorObjTemp];
+    Snake *snakeObj = [[Snake alloc] init];
+    //[_renderables addObject:floorObjTemp];
+    [_renderables addObject:snakeObj];
+    [snakeObj release];
     [floorObjTemp release];
-    [_renderingEngine initResources:[NSArray arrayWithObjects:_floorObj, nil]];
+    [_renderingEngine initResources:_renderables];
 }
 -(void)Render {
-    
-    [_renderingEngine Render:_floorObj];
+    [_renderingEngine Render:_renderables];
 }
 -(void)updateAnimation:(float)elapsedSeconds {
     
@@ -302,8 +309,8 @@ GLfloat cube_normals[] = {
 }
 -(void)dealloc {
     [_program1 release];
-    [_floorObj release];
     [_renderingEngine release];
+    [_renderables release];
     [super dealloc];
 }
 @end

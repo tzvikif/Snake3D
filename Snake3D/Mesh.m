@@ -109,7 +109,10 @@ verticesNumberOfElemets:(GLuint)vnoe {
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
     VertexPC *verticesTemp = malloc( sizeof(VertexPC) * ( vnoe ));
-    _indices = malloc(inoe*sizeof(GLuint));
+    if (inoe != 0 && elements != NULL) {
+        _indices = malloc(inoe*sizeof(GLuint));
+    }
+    
     
     _vertices = (GLfloat*)verticesTemp;
     for (int i=0; i<vnoe*3; i+=3) {
@@ -129,7 +132,9 @@ verticesNumberOfElemets:(GLuint)vnoe {
         vstruct.color = color;
         verticesTemp[i/3] = vstruct;
     }
-    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    if (inoe != 0 && elements != NULL) {
+        memcpy(_indices, elements, inoe*sizeof(GLuint));
+    }
     _vnoe = vnoe;
     _inoe = inoe;
     _vertexStruct = PC;

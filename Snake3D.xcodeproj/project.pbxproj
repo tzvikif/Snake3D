@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		20427BC917F98F8800D02B84 /* Snake.m in Sources */ = {isa = PBXBuildFile; fileRef = 20427BC817F98F8700D02B84 /* Snake.m */; };
+		201FF79017FB0053004F188C /* BodyPart.mm in Sources */ = {isa = PBXBuildFile; fileRef = 201FF78E17FB0053004F188C /* BodyPart.mm */; };
+		20427BC917F98F8800D02B84 /* Snake.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20427BC817F98F8700D02B84 /* Snake.mm */; };
 		20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */; };
 		20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */; };
 		20B3A0FB17C64910001957B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B3A0FA17C64910001957B5 /* CoreGraphics.framework */; };
@@ -43,10 +44,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		201FF78E17FB0053004F188C /* BodyPart.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BodyPart.mm; path = Snake3D/BodyPart.mm; sourceTree = "<group>"; };
+		201FF78F17FB0053004F188C /* BodyPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BodyPart.h; path = Snake3D/BodyPart.h; sourceTree = "<group>"; };
 		20427BC717F98F8700D02B84 /* Snake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snake.h; path = Snake3D/Snake.h; sourceTree = "<group>"; };
-		20427BC817F98F8700D02B84 /* Snake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snake.m; path = Snake3D/Snake.m; sourceTree = "<group>"; };
-		20427BCD17F99F8B00D02B84 /* BodyPart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BodyPart.h; path = Snake3D/BodyPart.h; sourceTree = "<group>"; };
-		20427BCE17F99F8B00D02B84 /* BodyPart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BodyPart.m; path = Snake3D/BodyPart.m; sourceTree = "<group>"; };
+		20427BC817F98F8700D02B84 /* Snake.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Snake.mm; path = Snake3D/Snake.mm; sourceTree = "<group>"; };
 		20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleFragment.fsh; sourceTree = "<group>"; };
 		20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = SimpleVertex.vsh; sourceTree = "<group>"; };
 		20B3A0FA17C64910001957B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -219,11 +220,11 @@
 		20FF7DB117C4975300A58B95 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				201FF78E17FB0053004F188C /* BodyPart.mm */,
+				201FF78F17FB0053004F188C /* BodyPart.h */,
 				20FF7DB217C4977800A58B95 /* Mesh.h */,
 				20FF7DB317C4977800A58B95 /* Mesh.m */,
 				20FF7DC517C49F9100A58B95 /* Drawable.h */,
-				20427BCD17F99F8B00D02B84 /* BodyPart.h */,
-				20427BCE17F99F8B00D02B84 /* BodyPart.m */,
 				20FF7DC617C49F9100A58B95 /* Drawable.m */,
 				20FF7DCB17C4E57100A58B95 /* Material.h */,
 				20FF7DCC17C4E57100A58B95 /* Material.m */,
@@ -234,7 +235,7 @@
 				913D96C117EC6B87005AAF09 /* Floor.h */,
 				913D96C217EC6B87005AAF09 /* Floor.mm */,
 				20427BC717F98F8700D02B84 /* Snake.h */,
-				20427BC817F98F8700D02B84 /* Snake.m */,
+				20427BC817F98F8700D02B84 /* Snake.mm */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -344,7 +345,8 @@
 				20F8D94A17CE2CF100CFF9A6 /* Plotter.mm in Sources */,
 				20F8D95117CE4E4F00CFF9A6 /* Consts.m in Sources */,
 				913D96C317EC6B87005AAF09 /* Floor.mm in Sources */,
-				20427BC917F98F8800D02B84 /* Snake.m in Sources */,
+				20427BC917F98F8800D02B84 /* Snake.mm in Sources */,
+				201FF79017FB0053004F188C /* BodyPart.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
