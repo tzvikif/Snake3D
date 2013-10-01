@@ -45,6 +45,7 @@
         [obj setProjectionMatrix:_matProjection];
         [obj setViewMatrix:_matView];
         [obj setViewport:self.viewport];
+        [obj setProgram1:self.program1];
         [obj initResources];
     }
 }

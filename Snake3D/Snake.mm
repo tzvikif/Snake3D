@@ -11,7 +11,7 @@
 #import "BodyPart.h"
 #import "Floor.h"
 
-GLfloat SnakeCube_vertices[] = {
+GLfloat SnakeCube_verticesX[] = {
     // front
     -1.0, -1.0,  1.0,
     1.0, -1.0,  1.0,
@@ -42,6 +42,13 @@ GLfloat SnakeCube_vertices[] = {
     1.0, -1.0, -1.0,
     1.0,  1.0, -1.0,
     1.0,  1.0,  1.0,
+};
+GLfloat SnakeCube_vertices[] = {
+    // front
+    -1.0, -1.0,  -0.5,
+    1.0, -1.0,  -0.5,
+    0.0,  1.0,  -0.5,
+    -1.0,  1.0,  -0.5,
 };
 GLfloat SnakeCube_colors[] = {
     // front colors
