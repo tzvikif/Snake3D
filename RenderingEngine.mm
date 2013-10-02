@@ -19,6 +19,7 @@
 #import "Drawable.h"
 #import "Consts.h"
 #import "Floor.h"
+#import "Snake.h"
 
 
 @implementation RenderingEngine
@@ -38,15 +39,24 @@
 -(void)initResources:(NSArray*)nodes {
     [self setMatProjection:[CC3GLMatrix identity]];
     [self setMatView:[CC3GLMatrix identity]];
-    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -20) withEyeAt:CC3VectorMake(5.0,2 , 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -25) withEyeAt:CC3VectorMake(1.0,4.0 , 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
     float ratio = self.viewport.size.width / self.viewport.size.height;
-    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:100 andAspectRatio:ratio];
+    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:50 andAspectRatio:ratio];
     for (Node *obj in nodes) {
-        [obj setProjectionMatrix:_matProjection];
-        [obj setViewMatrix:_matView];
-        [obj setViewport:self.viewport];
-        [obj setProgram1:self.program1];
-        [obj initResources];
+        if ([obj isKindOfClass:[Floor class]]) {
+            [obj setProjectionMatrix:_matProjection];
+            [obj setViewMatrix:_matView];
+            [obj setViewport:self.viewport];
+            [obj setProgram1:self.program1];
+            [obj initResources];
+        }
+        if ([obj isKindOfClass:[Snake class]]) {
+            [obj setProjectionMatrix:_matProjection];
+            [obj setViewMatrix:_matView];
+            [obj setViewport:self.viewport];
+            [obj setProgram1:self.program1];
+            [obj initResources];
+        }
     }
 }
 -(void)Render:(NSArray*)renderables {

@@ -30,12 +30,12 @@ NSString *SnakeColor_name = @"color";
     self.modelMatrix = [CC3GLMatrix identity];
     //CC3Vector translateVector = self.position;
     CC3Vector translateVector;
-    translateVector.x = 0.;
-    translateVector.y = 0.0;
-    translateVector.z = -50.0;
+    translateVector.x = 0.0;
+    translateVector.y = 1.0;
+    translateVector.z = -20.0;
 
     [self.modelMatrix translateBy:translateVector];
-    [self.modelMatrix scaleBy:CC3VectorMake(self.scaleFactor, self.scaleFactor, self.scaleFactor)];
+    //[self.modelMatrix scaleBy:CC3VectorMake(self.scaleFactor, self.scaleFactor, self.scaleFactor)];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
 //    NSLog(@"projection %@",[projectionMat description]);

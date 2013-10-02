@@ -195,15 +195,16 @@ GLfloat cube_normals[] = {
     Material *floorMaterialTemp = [[Material alloc] init];
     [floorMaterialTemp setupTexture:@"tile_floor.png"];
     Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:program andDrawable:DrwFloor andMesh:floorMeshTemp
-                                                   andMaterial:floorMaterialTemp andViewport:viewport]; //Node
+                                                   andMaterial:floorMaterialTemp andViewport:viewport];
     [floorMeshTemp release];
     [floorMaterialTemp release];
-    Snake *snakeObj = [[Snake alloc] init];
+    Snake *snakeObjTemp = [[Snake alloc] init];
+    [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
-    [_renderables addObject:snakeObj];
     
-    [snakeObj release];
     [floorObjTemp release];
+    [snakeObjTemp release];
+    
     [_renderingEngine initResources:_renderables];
 }
 -(void)Render {
@@ -298,8 +299,8 @@ GLfloat cube_normals[] = {
 //        }
 //    }
 //    NSLog(@"%@",str);
-    //[floorMesh loadVertices:(GLfloat*)cube_vertices indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    //[floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:(N)*(N)];
+    //[floorMesh loadVertices:(GLfloat*)cube_vertices indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(cube_elements[0]) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(cube_vertices[0])];
+    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:N*N];
     
     free(floorGrid);
     free(elements);

@@ -21,7 +21,10 @@
     [self setViewMatrix:[matrices objectAtIndex:1]];
     [self setProjectionMatrix:[matrices objectAtIndex:2]];
 }
-
+-(void)initResources {
+    NSException *ex = [[NSException alloc] initWithName:@"" reason:@"initResources method in Node is virtual" userInfo:nil];
+    @throw [ex autorelease];
+}
 -(void)Render {
     NSException *ex = [[NSException alloc] initWithName:@"" reason:@"Render method in Node is virtual" userInfo:nil];
     @throw [ex autorelease];

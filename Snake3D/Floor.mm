@@ -33,7 +33,7 @@ NSString *mvp_name = @"mvp";
     translateVector.z = -1.0;
     
     [self.modelMatrix translateBy:translateVector];
-    [self.modelMatrix scaleBy:CC3VectorMake(10.0,10.0, 10.0)];
+    [self.modelMatrix scaleBy:CC3VectorMake(30.0,1.0, 30.0)];
     //[self.projectionMatrix print:@"Projection"];
     //[self.viewMatrix print:@"View"];
     CC3GLMatrix *projectionMat = [[CC3GLMatrix alloc] initFromGLMatrix:self.projectionMatrix.glMatrix];
@@ -54,7 +54,7 @@ NSString *mvp_name = @"mvp";
                           stride,                  // no extra data between each position
                           (GLvoid*)0                  // offset of first element
                           );
-//    glDrawArrays(GL_POINTS, 0, size/sizeof(CC3Vector));
+    //glDrawArrays(GL_POINTS, 0, size/sizeof(CC3Vector));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glDrawElements(GL_LINES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));

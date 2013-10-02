@@ -113,8 +113,8 @@ GLushort SnakeCube_elements[] = {
     [self setBodyParts:ma];
     [ma release];
     Mesh *meshCube = [[Mesh alloc] init];
-    [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:SnakeCube_elements indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(GLushort)
-   verticesNumberOfElemets:sizeof(SnakeCube_vertices)/sizeof(GLfloat)/3];
+    [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:SnakeCube_elements indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
+   verticesNumberOfElemets:sizeof(SnakeCube_vertices)/sizeof(SnakeCube_vertices[0])/3];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp = [[BodyPart alloc] initializeWithProgram:self.program1 andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
