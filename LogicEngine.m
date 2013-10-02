@@ -199,8 +199,9 @@ GLfloat cube_normals[] = {
     [floorMeshTemp release];
     [floorMaterialTemp release];
     Snake *snakeObj = [[Snake alloc] init];
-    //[_renderables addObject:floorObjTemp];
+    [_renderables addObject:floorObjTemp];
     [_renderables addObject:snakeObj];
+    
     [snakeObj release];
     [floorObjTemp release];
     [_renderingEngine initResources:_renderables];
@@ -297,9 +298,8 @@ GLfloat cube_normals[] = {
 //        }
 //    }
 //    NSLog(@"%@",str);
-  //  [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:(N-1)*N*6 verticesNumberOfElemets:N*N];
-    //[floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:(N-1)*(N-1)*6 verticesNumberOfElemets:(N)*(N)];
-    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:(N)*(N)];
+    //[floorMesh loadVertices:(GLfloat*)cube_vertices indices:NULL indicesNumberOfElemets:0 verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
+    //[floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:(N)*(N)];
     
     free(floorGrid);
     free(elements);

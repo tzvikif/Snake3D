@@ -12,6 +12,24 @@
 #import "CC3GLMatrix.h"
 
 @implementation Mesh
+-(id)init {
+    if ([super init]) {
+        _vnoe = 0;
+        _vertices = NULL;
+        _indices = NULL;
+        _inoe = 0;
+    }
+    return self;
+}
+-(void)dealloc {
+    if (_vertices) {
+        free(_vertices);
+    }
+    if (_indices) {
+        free(_indices);
+    }
+    [super dealloc];
+}
 -(size_t)sizeofVertices {
     switch(_vertexStruct) {
         case PNCT:
@@ -133,7 +151,7 @@ verticesNumberOfElemets:(GLuint)vnoe {
         verticesTemp[i/3] = vstruct;
     }
     if (inoe != 0 && elements != NULL) {
-        memcpy(_indices, elements, inoe*sizeof(GLuint));
+        memcpy(_indices, elements, inoe*sizeof(GLuint));    
     }
     _vnoe = vnoe;
     _inoe = inoe;

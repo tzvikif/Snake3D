@@ -11,7 +11,7 @@
 #import "BodyPart.h"
 #import "Floor.h"
 
-GLfloat SnakeCube_verticesX[] = {
+GLfloat SnakeCube_vertices[] = {
     // front
     -1.0, -1.0,  1.0,
     1.0, -1.0,  1.0,
@@ -43,11 +43,11 @@ GLfloat SnakeCube_verticesX[] = {
     1.0,  1.0, -1.0,
     1.0,  1.0,  1.0,
 };
-GLfloat SnakeCube_vertices[] = {
+GLfloat SnakeCube_verticesX[] = {
     // front
     -1.0, -1.0,  -0.5,
     1.0, -1.0,  -0.5,
-    0.0,  1.0,  -0.5,
+    1.0,  1.0,  -0.5,
     -1.0,  1.0,  -0.5,
 };
 GLfloat SnakeCube_colors[] = {
@@ -82,6 +82,26 @@ GLfloat SnakeCube_colors[] = {
     0.0, 0.0, 1.0,
     1.0, 1.0, 1.0,
 };
+GLushort SnakeCube_elements[] = {
+    // front
+    0,  1,  2,
+    2,  3,  0,
+    // top
+    4,  5,  6,
+    6,  7,  4,
+    // back
+    8,  9, 10,
+    10, 11,  8,
+    // bottom
+    12, 13, 14,
+    14, 15, 12,
+    // left
+    16, 17, 18,
+    18, 19, 16,
+    // right
+    20, 21, 22,
+    22, 23, 20,
+};
 
 
 
@@ -93,8 +113,8 @@ GLfloat SnakeCube_colors[] = {
     [self setBodyParts:ma];
     [ma release];
     Mesh *meshCube = [[Mesh alloc] init];
-    [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:NULL indicesNumberOfElemets:0
-   verticesNumberOfElemets:sizeof(SnakeCube_vertices)/sizeof(GLfloat)];
+    [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:SnakeCube_elements indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(GLushort)
+   verticesNumberOfElemets:sizeof(SnakeCube_vertices)/sizeof(GLfloat)/3];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp = [[BodyPart alloc] initializeWithProgram:self.program1 andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
