@@ -21,9 +21,9 @@
 @interface RenderingEngine : NSObject
 @property(nonatomic,retain) CC3GLMatrix *matView;
 @property(nonatomic,retain) CC3GLMatrix *matProjection;
-@property(nonatomic,retain) GLProgram *program1;
+@property(nonatomic,retain) NSMutableDictionary *programs;
 @property(assign,nonatomic) CGRect viewport;
--(void)initialize:(CGRect)viewport andProgram:(GLProgram*)program;
+-(void)initialize:(CGRect)viewport andProgram:(NSMutableDictionary*)programs;
 -(void)Render:(NSArray*)renderables;
--(void)initResources:(NSArray*)nodes;
+-(void)initResources:(NSArray*)renderables;
 @end

@@ -30,7 +30,7 @@
 @property(retain,nonatomic) Drawable *drawable;
 @property(assign,nonatomic) CGRect viewport;
 @property(retain,nonatomic) Material *material;
-@property(retain,nonatomic) GLProgram *program1;
+@property(retain,nonatomic) GLProgram *program;
 
 -(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andMesh:(Mesh*)mesh andMaterial:(Material*)mat andViewport:(CGRect)vp;
 -(GLsizei)getStride;

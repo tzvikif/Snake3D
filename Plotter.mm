@@ -23,10 +23,10 @@ const int ticksize = 10;
     _offset_y = 0;
     _scale_xy = 2.0;
     _rotationAngle = 0;
-    [self.program1 addAttribute:coord3d_name];
-    [self.program1 addUniform:model_name];
+    [self.program addAttribute:coord3d_name];
+    [self.program addUniform:model_name];
     //[self.program1 addUniform:color_name];
-    [self.program1 addUniform:model_name];
+    [self.program addUniform:model_name];
    
 //    glActiveTexture(GL_TEXTURE0);
 //    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
@@ -63,13 +63,13 @@ const int ticksize = 10;
         _rotationAngle -=360;
     }
     //glViewport(margin+ticksize, margin+ticksize, window_width-2*margin-ticksize, window_height-2*margin-ticksize);
-    glUniformMatrix4fv([self.program1 uniformLocation:model_name], 1,   0, _matProjection.glMatrix);
+    glUniformMatrix4fv([self.program uniformLocation:model_name], 1,   0, _matProjection.glMatrix);
     GLsizei size;
     GLsizei stride = [self getStride];
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glVertexAttribPointer(
-                          [self.program1 attributeLocation:coord3d_name], // attribute
+                          [self.program attributeLocation:coord3d_name], // attribute
                           3,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
@@ -80,7 +80,7 @@ const int ticksize = 10;
         glDrawArrays(GL_LINE_STRIP, N*i, N);
     }
     for (int i=0; i<N; i++) {
-        glVertexAttribPointer([self.program1 attributeLocation:coord3d_name], 3, GL_FLOAT, GL_FALSE, N * sizeof(CC3Vector), (void *)(i * sizeof(CC3Vector)));
+        glVertexAttribPointer([self.program attributeLocation:coord3d_name], 3, GL_FLOAT, GL_FALSE, N * sizeof(CC3Vector), (void *)(i * sizeof(CC3Vector)));
         glDrawArrays(GL_LINE_STRIP,0, N);
     }
 }

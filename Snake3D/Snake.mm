@@ -10,7 +10,7 @@
 #import "Drawable.h"
 #import "BodyPart.h"
 #import "Floor.h"
-
+#import "Consts.h"
 GLfloat SnakeCube_vertices[] = {
     // front
     -1.0, -1.0,  1.0,
@@ -117,8 +117,8 @@ GLushort SnakeCube_elements[] = {
    verticesNumberOfElemets:sizeof(SnakeCube_vertices)/sizeof(SnakeCube_vertices[0])/3];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
-    BodyPart *bp = [[BodyPart alloc] initializeWithProgram:self.program1 andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
-    [bp setScaleFactor:2.0];
+    BodyPart *bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
+    [bp setScaleFactor:(N/2.0)*(1.0/N)*(2/2-1/N)];
     [bp setPosition:CC3VectorMake(10.5, 1.0, 10.5)];
     [bp setVelocity:CC3VectorMake(0, 0, 0.5)];
     [bp setViewMatrix:self.viewMatrix];

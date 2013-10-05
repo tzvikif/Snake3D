@@ -21,31 +21,11 @@
 {
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-	// Do any additional setup after loading the view, typically from a nib.
-    GLProgram *theProgram = [[GLProgram alloc] initWithVertexShaderFilename:@"SimpleVertex" fragmentShaderFilename:@"SimpleFragment"];
-    self.program1 = theProgram;
-    [theProgram release];
-    if (![self.program1 link])
-    {
-        NSLog(@"Link failed");
-        
-        NSString *progLog = [self.program1 programLog];
-        NSLog(@"Program Log: %@", progLog);
-        
-        NSString *fragLog = [self.program1 fragmentShaderLog];
-        NSLog(@"Frag Log: %@", fragLog);
-        
-        NSString *vertLog = [self.program1 vertexShaderLog];
-        NSLog(@"Vert Log: %@", vertLog);
-        
-        //[(GLView *)self.view stopAnimation];
-        self.program1 = nil;
-    }
-    _logicEngine = [[LogicEngine alloc] init];
-    
-    //[_logicEngine loadProgram:_program1];
+    LogicEngine *leTemp = [[LogicEngine alloc] init];
+    [self setLogicEngine:leTemp];
+    [leTemp release];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    [_logicEngine initialize:screenBounds andProgram:self.program1];
+    [_logicEngine initialize:screenBounds];
     [self addSwipeRecognizer];
     [self addPinchRecognizer];
     [self startRenderLoop];

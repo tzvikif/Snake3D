@@ -24,37 +24,33 @@
 
 @implementation RenderingEngine
 
--(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
+-(void)initialize:(CGRect)viewport andProgram:(NSMutableDictionary*)programs{
  
-    [self setProgram1:program];
+    [self setPrograms:programs];
     [self setViewport:viewport];
-    [self.program1 use];    //must me before glUniform*    
-
   
     //[_matProjection populateOrthoFromFrustumLeft:-1.0 andRight:1.0 andBottom:-1.2 andTop:1.2 andNear:0.1 andFar:2.0];
     //GLuint projectionId = [_program1 uniformLocation:projection_name];
     //glUniformMatrix4fv(projectionId, 1, 0, _matProjection.glMatrix);
     
 }
--(void)initResources:(NSArray*)nodes {
+-(void)initResources:(NSArray*)renderables {
     [self setMatProjection:[CC3GLMatrix identity]];
     [self setMatView:[CC3GLMatrix identity]];
-    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, -25) withEyeAt:CC3VectorMake(1.0,4.0 , 0.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 0.0, 0) withEyeAt:CC3VectorMake(0.0,6.0 , -10.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
     float ratio = self.viewport.size.width / self.viewport.size.height;
-    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:50 andAspectRatio:ratio];
-    for (Node *obj in nodes) {
+    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:100 andAspectRatio:ratio];
+    for (Node *obj in renderables) {
         if ([obj isKindOfClass:[Floor class]]) {
             [obj setProjectionMatrix:_matProjection];
             [obj setViewMatrix:_matView];
             [obj setViewport:self.viewport];
-            [obj setProgram1:self.program1];
             [obj initResources];
         }
         if ([obj isKindOfClass:[Snake class]]) {
             [obj setProjectionMatrix:_matProjection];
             [obj setViewMatrix:_matView];
             [obj setViewport:self.viewport];
-            [obj setProgram1:self.program1];
             [obj initResources];
         }
     }

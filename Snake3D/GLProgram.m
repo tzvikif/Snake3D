@@ -72,7 +72,7 @@ typedef void (*GLLogFunction) (GLuint program,
     NSString* shaderString = [NSString stringWithContentsOfFile:file
                                                        encoding:NSUTF8StringEncoding error:&error];
     if (!shaderString) {
-        NSLog(@"Error loading shader: %@", error.localizedDescription);
+        NSLog(@"Error loading shader %@: %@",shaderString, error.localizedDescription);
         exit(1);
     }
 

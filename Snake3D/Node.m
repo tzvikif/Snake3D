@@ -34,7 +34,7 @@
         [self setMesh:mesh];
         [self setDrawable:drawable];
         _vs = mesh.vertexStruct;
-        [self setProgram1:program];
+        [self setProgram:program];
         [self setMaterial:mat];
         [self setViewport:vp];
     }
@@ -73,7 +73,7 @@
     [_drawable release];
     [_material release];
     [_modelMatrix release];
-    [_program1 release];
+    [_program release];
     [super dealloc];
 }
 @end

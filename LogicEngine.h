@@ -18,6 +18,7 @@
 #import "RenderingEngine.h"
 //#import "Plotter.h"
 #import "Floor.h"
+#import "Consts.h"
 
 @class GLProgram;
 
@@ -27,14 +28,15 @@
 //@property(nonatomic,retain) Mesh *meshFloor;
 //@property(nonatomic,retain) Drawable *cubeDrawable;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
-@property(retain,nonatomic) GLProgram *program1;
+//@property(retain,nonatomic) GLProgram *program1;
+@property(retain,nonatomic) NSMutableDictionary *programs;
 
--(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program;
--(void)loadProgram:(GLProgram*)program;
+-(void)initialize:(CGRect)viewport;
+//-(void)loadProgram:(GLProgram*)program;
 -(void)updateAnimation:(float)elapsedSeconds;
 -(void)Render;
 -(void)updateOffset_x:(GLfloat)delta;
 -(void)updateScale:(GLfloat)delta;
--(GLushort*)createElemets;
+-(BOOL)createProgramWithVertexShaderName:(NSString*)vsName andFragmentShaderName:(NSString*)fsName withId:(PROG_ID)progid;
 @end
     

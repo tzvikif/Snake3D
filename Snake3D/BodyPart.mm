@@ -8,18 +8,20 @@
 
 #import "BodyPart.h"
 #import "GLProgram.h"
+#import "Consts.h"
 
 @implementation BodyPart
 extern NSString *mvp_name;
 NSString *bp_name = @"gridFloor";
 NSString *SnakeColor_name = @"color";
 -(void)initResources {
-    [self.program1 addAttribute:bp_name];
-    [self.program1 addUniform:mvp_name];
-    [self.program1 addAttribute:SnakeColor_name];
+    [self.program addAttribute:bp_name];
+    [self.program addUniform:mvp_name];
+    [self.program addAttribute:SnakeColor_name];
 
 }
 -(void)Render {
+    [self.program use];
     glEnable(GL_DEPTH_TEST);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -30,12 +32,12 @@ NSString *SnakeColor_name = @"color";
     self.modelMatrix = [CC3GLMatrix identity];
     //CC3Vector translateVector = self.position;
     CC3Vector translateVector;
-    translateVector.x = 0.0;
+    translateVector.x = 0.5;
     translateVector.y = 1.0;
-    translateVector.z = -20.0;
+    translateVector.z = 0.0;
 
     [self.modelMatrix translateBy:translateVector];
-    //[self.modelMatrix scaleBy:CC3VectorMake(self.scaleFactor, self.scaleFactor, self.scaleFactor)];
+    [self.modelMatrix scaleBy:CC3VectorMake(self.scaleFactor, self.scaleFactor, self.scaleFactor)];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
 //    NSLog(@"projection %@",[projectionMat description]);
@@ -43,13 +45,13 @@ NSString *SnakeColor_name = @"color";
     [projectionMat multiplyByMatrix:self.viewMatrix];
     [projectionMat multiplyByMatrix:self.modelMatrix];
     //[self setProjectionMatrix:[CC3GLMatrix identity]];
-    glUniformMatrix4fv([self.program1 uniformLocation:mvp_name], 1,   0, projectionMat.glMatrix);
+    glUniformMatrix4fv([self.program uniformLocation:mvp_name], 1,   0, projectionMat.glMatrix);
     GLsizei size;
     GLsizei stride = [self getStride];
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glVertexAttribPointer(
-                          [self.program1 attributeLocation:bp_name], // attribute
+                          [self.program attributeLocation:bp_name], // attribute
                           3,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
@@ -57,7 +59,7 @@ NSString *SnakeColor_name = @"color";
                           (GLvoid*)0                  // offset of first element
                           );
     glVertexAttribPointer(
-                          [self.program1 attributeLocation:SnakeColor_name], // attribute
+                          [self.program attributeLocation:SnakeColor_name], // attribute
                           3,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is

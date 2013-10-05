@@ -11,6 +11,7 @@
 #include "Consts.h"
 #import "Floor.h"
 #import "Snake.h"
+#import "GLProgram.h"
 
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
@@ -179,12 +180,21 @@ GLfloat cube_normals[] = {
 
 @implementation LogicEngine
 
--(void)initialize:(CGRect)viewport andProgram:(GLProgram *)program{
+-(void)initialize:(CGRect)viewport {
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
     NSMutableArray *maTemp = [[NSMutableArray alloc] init];
     [self setRenderables:maTemp];
     [maTemp release];
-    [renderingEngineTemp initialize:viewport andProgram:program];
+    NSMutableDictionary *progs = [[NSMutableDictionary alloc] init];
+    [self setPrograms:progs];
+    [progs release];
+    [self createProgramWithVertexShaderName:@"SimpleVertex"
+                      andFragmentShaderName:@"SimpleFragment"
+                                     withId:PROG_FLOOR];
+    [self createProgramWithVertexShaderName:@"SbpVertex"
+                      andFragmentShaderName:@"SbpFragment"
+                                     withId:PROG_SNAKE];
+    [renderingEngineTemp initialize:viewport andProgram:_programs];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
     Mesh *floorMeshTemp = [[Mesh alloc] init];
@@ -194,11 +204,11 @@ GLfloat cube_normals[] = {
     Drawable *DrwFloor =  [Drawable createDrawable:floorMeshTemp];
     Material *floorMaterialTemp = [[Material alloc] init];
     [floorMaterialTemp setupTexture:@"tile_floor.png"];
-    Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:program andDrawable:DrwFloor andMesh:floorMeshTemp
-                                                   andMaterial:floorMaterialTemp andViewport:viewport];
+    Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_FLOOR]] andDrawable:DrwFloor andMesh:floorMeshTemp andMaterial:floorMaterialTemp andViewport:viewport];
     [floorMeshTemp release];
     [floorMaterialTemp release];
     Snake *snakeObjTemp = [[Snake alloc] init];
+    [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
     
@@ -219,22 +229,22 @@ GLfloat cube_normals[] = {
 -(void)updateScale:(GLfloat)delta {
 //    [_plotterObj setScale_xy:delta];
 }
--(CC3Vector*)createGraph {
-    CC3Vector *graph = malloc(sizeof(CC3Vector) * N * N);
-    
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < N; j++) {
-            float x = (i - N / 2) / (N / 2.0);
-            float y = (j - N / 2) / (N / 2.0);
-            float t = hypotf(x, y) * 4.0;
-            float z = (1 - t * t) * expf(t * t / -2.0);
-            (graph + i * N + j)->x = x;
-            (graph + i * N + j)->y = y;
-            (graph + i * N + j)->z = z;
-        }
-        
-    }    return  graph;
-}
+//-(CC3Vector*)createGraph {
+//    CC3Vector *graph = malloc(sizeof(CC3Vector) * N * N);
+//    
+//    for(int i = 0; i < N; i++) {
+//        for(int j = 0; j < N; j++) {
+//            float x = (i - N / 2) / (N / 2.0);
+//            float y = (j - N / 2) / (N / 2.0);
+//            float t = hypotf(x, y) * 4.0;
+//            float z = (1 - t * t) * expf(t * t / -2.0);
+//            (graph + i * N + j)->x = x;
+//            (graph + i * N + j)->y = y;
+//            (graph + i * N + j)->z = z;
+//        }
+//        
+//    }    return  graph;
+//}
 -(void)createFloor:(Mesh*)floorMesh {
     CC3Vector *floorGrid = malloc(sizeof(CC3Vector) * N * N);
     float x,y,z;
@@ -305,11 +315,37 @@ GLfloat cube_normals[] = {
     free(floorGrid);
     free(elements);
 }
--(void)loadProgram:(GLProgram*)program {
-    [self setProgram1:program];
+//-(void)loadProgram:(GLProgram*)program {
+//    [self setProgram1:program];
+//}
+-(BOOL)createProgramWithVertexShaderName:(NSString*)vsName andFragmentShaderName:(NSString*)fsName withId:(PROG_ID)progid {
+    GLProgram *theProgram = [[GLProgram alloc] initWithVertexShaderFilename:vsName fragmentShaderFilename:fsName];
+    if (![theProgram link])
+    {
+        NSLog(@"Link failed");
+        
+        NSString *progLog = [theProgram programLog];
+        NSLog(@"Program Log: %@", progLog);
+        
+        NSString *fragLog = [theProgram fragmentShaderLog];
+        NSLog(@"Frag Log: %@", fragLog);
+        
+        NSString *vertLog = [theProgram vertexShaderLog];
+        NSLog(@"Vert Log: %@", vertLog);
+        
+        //[(GLView *)self.view stopAnimation];
+        theProgram = nil;
+    }
+    else
+    {
+        [_programs setObject:theProgram forKey:[NSNumber numberWithInt:progid]];
+        [theProgram release];
+    }
+    return (theProgram == nil)?NO:YES;
+
 }
 -(void)dealloc {
-    [_program1 release];
+    [_programs release];
     [_renderingEngine release];
     [_renderables release];
     [super dealloc];

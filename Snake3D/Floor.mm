@@ -8,17 +8,19 @@
 
 #import "Floor.h"
 #import "GLProgram.h"
+#import "Consts.h"
 
 @implementation Floor
 NSString *gridFloor_name = @"gridFloor";
 NSString *mvp_name = @"mvp";
 
 -(void)initResources {
-    [self.program1 addAttribute:gridFloor_name];
-    [self.program1 addUniform:mvp_name];
+    [self.program addAttribute:gridFloor_name];
+    [self.program addUniform:mvp_name];
 }
 
 -(void)Render {
+    [self.program use];
     glEnable(GL_DEPTH_TEST);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -28,12 +30,12 @@ NSString *mvp_name = @"mvp";
     
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector;
-    translateVector.x = 0.;
+    translateVector.x = 0.0;
     translateVector.y = 0.0;
-    translateVector.z = -1.0;
+    translateVector.z = -0.0;
     
     [self.modelMatrix translateBy:translateVector];
-    [self.modelMatrix scaleBy:CC3VectorMake(30.0,1.0, 30.0)];
+    [self.modelMatrix scaleBy:CC3VectorMake(N/2 ,1.0,N/2)];
     //[self.projectionMatrix print:@"Projection"];
     //[self.viewMatrix print:@"View"];
     CC3GLMatrix *projectionMat = [[CC3GLMatrix alloc] initFromGLMatrix:self.projectionMatrix.glMatrix];
@@ -41,13 +43,13 @@ NSString *mvp_name = @"mvp";
     [projectionMat multiplyByMatrix:self.viewMatrix];
     [projectionMat multiplyByMatrix:self.modelMatrix];
     //[self setProjectionMatrix:[CC3GLMatrix identity]];
-    glUniformMatrix4fv([self.program1 uniformLocation:mvp_name], 1,   0, projectionMat.glMatrix);
+    glUniformMatrix4fv([self.program uniformLocation:mvp_name], 1,   0, projectionMat.glMatrix);
     GLsizei size;   
     GLsizei stride = [self getStride];
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glVertexAttribPointer(
-                          [self.program1 attributeLocation:gridFloor_name], // attribute
+                          [self.program attributeLocation:gridFloor_name], // attribute
                           3,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is

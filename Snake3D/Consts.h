@@ -9,3 +9,8 @@
 #import <Foundation/Foundation.h>
 
 extern int const N;
+
+typedef enum _PROGRAMS {
+    PROG_FLOOR,
+    PROG_SNAKE
+}PROG_ID;
