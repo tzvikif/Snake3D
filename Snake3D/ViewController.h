@@ -11,7 +11,7 @@
 #import "GLProgram.h"
 @class LogicEngine;
 @interface ViewController : UIViewController <UIGestureRecognizerDelegate> {
-    float m_timestamp;
+    NSTimeInterval m_timestamp;
 
 }
 @property (retain,nonatomic) LogicEngine *logicEngine;

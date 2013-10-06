@@ -49,7 +49,7 @@
 }
 - (void) Render: (CADisplayLink*) displayLink {
     if (displayLink != nil) {
-        float elapsedSeconds = displayLink.timestamp - m_timestamp;
+        NSTimeInterval elapsedSeconds = displayLink.timestamp - m_timestamp;
         m_timestamp = displayLink.timestamp;
         [_logicEngine updateAnimation:elapsedSeconds];
     }

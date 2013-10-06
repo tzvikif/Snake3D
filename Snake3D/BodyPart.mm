@@ -30,11 +30,11 @@ NSString *SnakeColor_name = @"color";
     glViewport(0, 0, window_width, window_height);
     
     self.modelMatrix = [CC3GLMatrix identity];
-    //CC3Vector translateVector = self.position;
-    CC3Vector translateVector;
-    translateVector.x = 0.5;
-    translateVector.y = 1.0;
-    translateVector.z = 0.0;
+    CC3Vector translateVector = self.position;
+//    CC3Vector translateVector;
+//    translateVector.x = 0.5;
+//    translateVector.y = 0.5;
+//    translateVector.z = 0.5;
 
     [self.modelMatrix translateBy:translateVector];
     [self.modelMatrix scaleBy:CC3VectorMake(self.scaleFactor, self.scaleFactor, self.scaleFactor)];

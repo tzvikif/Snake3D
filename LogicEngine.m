@@ -220,7 +220,7 @@ GLfloat cube_normals[] = {
 -(void)Render {
     [_renderingEngine Render:_renderables];
 }
--(void)updateAnimation:(float)elapsedSeconds {
+-(void)updateAnimation:(NSTimeInterval)elapsedSeconds {
     
 }
 -(void)updateOffset_x:(GLfloat)delta {
@@ -251,12 +251,12 @@ GLfloat cube_normals[] = {
     for(int i = 0; i < N; i++) {
         for(int j = 0; j < N; j++) {
             x = (i - N / 2) / (N / 2.0);
-            y = (j - N / 2) / (N / 2.0);
-            z = 0;
+            z = (j - N / 2) / (N / 2.0);
+            y = 0;
             (floorGrid + i * N + j)->x = x;
-            (floorGrid + i * N + j)->y = z;
-            (floorGrid + i * N + j)->z = y;
-            //NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
+            (floorGrid + i * N + j)->y = y;
+            (floorGrid + i * N + j)->z = z;
+            NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
         }
     }
     

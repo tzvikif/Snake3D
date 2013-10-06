@@ -30,10 +30,11 @@
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
 //@property(retain,nonatomic) GLProgram *program1;
 @property(retain,nonatomic) NSMutableDictionary *programs;
+@property(assign,nonatomic) NSTimeInterval timeBetweenSteps;
 
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;
--(void)updateAnimation:(float)elapsedSeconds;
+-(void)updateAnimation:(NSTimeInterval)elapsedSeconds;
 -(void)Render;
 -(void)updateOffset_x:(GLfloat)delta;
 -(void)updateScale:(GLfloat)delta;
