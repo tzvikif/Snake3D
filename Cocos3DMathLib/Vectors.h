@@ -28,5 +28,6 @@ typedef struct {
 
 CC3Vector CC3VectorNormalize(CC3Vector v);
 CC3Vector CC3VectorCross(CC3Vector v1, CC3Vector v2);
+CC3Vector CC3VectorAdd(CC3Vector v, CC3Vector translation);
 #endif
     

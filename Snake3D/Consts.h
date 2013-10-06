@@ -14,3 +14,11 @@ typedef enum _PROGRAMS {
     PROG_FLOOR,
     PROG_SNAKE
 }PROG_ID;
+
+typedef enum _DIRECTION {
+    DIR_UP,
+    DIR_DOWN,
+    DIR_LEFT,
+    DIR_RIGHT
+}DIRECTION;
+

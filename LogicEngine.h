@@ -31,6 +31,7 @@
 //@property(retain,nonatomic) GLProgram *program1;
 @property(retain,nonatomic) NSMutableDictionary *programs;
 @property(assign,nonatomic) NSTimeInterval timeBetweenSteps;
+@property(assign,nonatomic) DIRECTION dir;
 
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;

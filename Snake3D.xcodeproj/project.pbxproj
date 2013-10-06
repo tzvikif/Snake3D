@@ -25,7 +25,7 @@
 		20F74B7817C2604800407740 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F74B7617C2604800407740 /* ViewController.xib */; };
 		20F74B8017C264CD00407740 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B7F17C264CD00407740 /* GLView.m */; };
 		20F74B8317C2650200407740 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8217C2650200407740 /* GLProgram.m */; };
-		20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8617C26ADE00407740 /* LogicEngine.m */; };
+		20F74B8717C26ADE00407740 /* LogicEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8617C26ADE00407740 /* LogicEngine.mm */; };
 		20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F74B8917C26B0D00407740 /* RenderingEngine.mm */; };
 		20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */; };
 		20F8D94A17CE2CF100CFF9A6 /* Plotter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F8D94917CE2CF100CFF9A6 /* Plotter.mm */; };
@@ -76,7 +76,7 @@
 		20F74B8117C2650200407740 /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		20F74B8217C2650200407740 /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
 		20F74B8517C26ADE00407740 /* LogicEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogicEngine.h; sourceTree = "<group>"; };
-		20F74B8617C26ADE00407740 /* LogicEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LogicEngine.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		20F74B8617C26ADE00407740 /* LogicEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = LogicEngine.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20F74B8817C26B0D00407740 /* RenderingEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingEngine.h; sourceTree = "<group>"; };
 		20F74B8917C26B0D00407740 /* RenderingEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderingEngine.mm; sourceTree = "<group>"; };
 		20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = uvtemplate.bmp; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				20F74B8517C26ADE00407740 /* LogicEngine.h */,
-				20F74B8617C26ADE00407740 /* LogicEngine.m */,
+				20F74B8617C26ADE00407740 /* LogicEngine.mm */,
 				20F74B8817C26B0D00407740 /* RenderingEngine.h */,
 				20F74B8917C26B0D00407740 /* RenderingEngine.mm */,
 			);
@@ -343,7 +343,7 @@
 				20F74B8017C264CD00407740 /* GLView.m in Sources */,
 				20F74B8317C2650200407740 /* GLProgram.m in Sources */,
 				91289D6A1800A5920096F1E8 /* SbpFragment.fsh in Sources */,
-				20F74B8717C26ADE00407740 /* LogicEngine.m in Sources */,
+				20F74B8717C26ADE00407740 /* LogicEngine.mm in Sources */,
 				20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */,
 				20FF7DB417C4977800A58B95 /* Mesh.m in Sources */,
 				20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */,

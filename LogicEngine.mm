@@ -12,6 +12,8 @@
 #import "Floor.h"
 #import "Snake.h"
 #import "GLProgram.h"
+#import "Vectors.h"
+#import <math.h>
 
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
@@ -181,6 +183,7 @@ GLfloat cube_normals[] = {
 @implementation LogicEngine
 
 -(void)initialize:(CGRect)viewport {
+    _dir = DIR_UP;
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
     NSMutableArray *maTemp = [[NSMutableArray alloc] init];
     [self setRenderables:maTemp];
@@ -221,7 +224,30 @@ GLfloat cube_normals[] = {
     [_renderingEngine Render:_renderables];
 }
 -(void)updateAnimation:(NSTimeInterval)elapsedSeconds {
-    
+    Snake *snk = [_renderables objectAtIndex:0];
+    CC3Vector pos = snk.position;
+    CC3Vector v;
+    if ((int)pos.x*2 < pos.x*2 + 0.0001 && (int)pos.z*2 == pos.z*2) {
+        switch (_dir) {
+            case DIR_UP:
+                v = CC3VectorMake(0, 0, -0.1);
+                break;
+            case DIR_DOWN:
+                v = CC3VectorMake(0, 0, 0.1);
+                break;
+            case DIR_LEFT:
+                v = CC3VectorMake(-0.1, 0, 0);
+                break;
+            case DIR_RIGHT:
+                v = CC3VectorMake(0.1, 0, 0);
+                break;
+            default:
+                break;
+        }
+        [snk setVelocity:v];
+    }
+    pos = CC3VectorAdd(pos, v);
+    [snk setPosition:pos];
 }
 -(void)updateOffset_x:(GLfloat)delta {
 //    [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];
@@ -246,7 +272,7 @@ GLfloat cube_normals[] = {
 //    }    return  graph;
 //}
 -(void)createFloor:(Mesh*)floorMesh {
-    CC3Vector *floorGrid = malloc(sizeof(CC3Vector) * N * N);
+    CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * N * N);
     float x,y,z;
     for(int i = 0; i < N; i++) {
         for(int j = 0; j < N; j++) {
@@ -275,7 +301,7 @@ GLfloat cube_normals[] = {
 //        }
 //    }
     //draw grid
-    GLushort *elements = malloc(sizeof(GLushort)*(N)*(N-1)*2*2);
+    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*(N)*(N-1)*2*2);
     GLushort index = 0;
     for (int c=0; c<N; c++) {
         for (int r=0; r<N-1; r++) {

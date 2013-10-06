@@ -10,4 +10,3 @@
 
 int const N = 32;
 
-
