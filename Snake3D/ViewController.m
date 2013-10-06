@@ -71,7 +71,7 @@
     swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRightGestureRecognizer];
     [swipeLeftGestureRecognizer release];
-    [swipeRightGestureRecognizer release];
+    [swipeRightGestureRecognizer release];  
 }
 -(void)addPinchRecognizer {
     UIPinchGestureRecognizer *gestureRecognizer=[[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinched:)] autorelease];

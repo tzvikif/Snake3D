@@ -142,6 +142,7 @@ GLushort SnakeCube_elements[] = {
 
 -(void)initResources {
     _bpCount = 1;
+    _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
     [self setBodyParts:ma];
     [ma release];
@@ -153,8 +154,9 @@ GLushort SnakeCube_elements[] = {
     BodyPart *bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
     //[bp setScaleFactor:(N/2.0)/2.0];
     [bp setScaleFactor:(1.0/2.0)];
+    [self setVelocity:CC3VectorMake(0, 0, 2)];
     [bp setPosition:CC3VectorMake(2.5, 0.5, 2.5)];
-    [bp setVelocity:CC3VectorMake(0, 0, 0.5)];
+    [bp setVelocity:_velocity];    //m,squares per second
     [bp setViewMatrix:self.viewMatrix];
     [bp setProjectionMatrix:self.projectionMatrix];
     [bp initResources];
@@ -170,5 +172,6 @@ GLushort SnakeCube_elements[] = {
     for (BodyPart *bp in _bodyParts) {
         [bp Render];
     }
+    _velocityChanged = NO;
 }
 @end
