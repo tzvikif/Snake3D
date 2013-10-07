@@ -22,3 +22,10 @@ typedef enum _DIRECTION {
     DIR_RIGHT
 }DIRECTION;
 
+typedef enum _WALL {
+    WALL_LEFT,
+    WALL_RIGHIT,
+    WALL_DOWN,
+    WALL_UP
+}WALL;
+

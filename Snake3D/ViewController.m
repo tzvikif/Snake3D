@@ -27,7 +27,7 @@
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     [_logicEngine initialize:screenBounds];
     [self addSwipeRecognizer];
-    [self addPinchRecognizer];
+    //[self addPinchRecognizer];
     [self startRenderLoop];
 }
 
@@ -52,21 +52,26 @@
         NSTimeInterval elapsedSeconds = displayLink.timestamp - m_timestamp;
         m_timestamp = displayLink.timestamp;
         [_logicEngine updateAnimation:elapsedSeconds];
+        [_logicEngine Render];
+        [(GLView*)self.view presentRenderbuffer];
     }
-    [_logicEngine Render];
-    [(GLView*)self.view presentRenderbuffer];
+    
 }
 - (void)handleSwipeLeftFrom:(UIGestureRecognizer*)recognizer {
     [_logicEngine setDir:DIR_LEFT];
+    NSLog(@"left");
 }
 - (void)handleSwipeRightFrom:(UIGestureRecognizer*)recognizer {
     [_logicEngine setDir:DIR_RIGHT];
+    NSLog(@"right");
 }
 - (void)handleSwipeUpFrom:(UIGestureRecognizer*)recognizer {
     [_logicEngine setDir:DIR_UP];
+    NSLog(@"up");
 }
 - (void)handleSwipeDownFrom:(UIGestureRecognizer*)recognizer {
     [_logicEngine setDir:DIR_DOWN];
+    NSLog(@"down");
 }
 
 -(void)addSwipeRecognizer {
@@ -79,17 +84,20 @@
     swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRightGestureRecognizer];
     //up
+    /*
     UISwipeGestureRecognizer* swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUpFrom:)];
     swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:swipeUpGestureRecognizer];
+    */
     //down
     UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDownFrom:)];
     swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     [self.view addGestureRecognizer:swipeDownGestureRecognizer];
+     
     [swipeLeftGestureRecognizer release];
     [swipeRightGestureRecognizer release];
     [swipeDownGestureRecognizer release];
-    [swipeUpGestureRecognizer release];
+    //[swipeUpGestureRecognizer release];
 }
 -(void)addPinchRecognizer {
     UIPinchGestureRecognizer *gestureRecognizer=[[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinched:)] autorelease];

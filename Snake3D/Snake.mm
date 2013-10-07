@@ -154,7 +154,6 @@ GLushort SnakeCube_elements[] = {
     BodyPart *bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
     //[bp setScaleFactor:(N/2.0)/2.0];
     [bp setScaleFactor:(1.0/2.0)];
-    [self setVelocity:CC3VectorMake(0, 0, -0.1)];
     [self setPosition:CC3VectorMake(2.5, 0.5, 5.5)];
     [bp setPosition:_position];
     [bp setVelocity:_velocity];    //m,squares per second
@@ -170,7 +169,7 @@ GLushort SnakeCube_elements[] = {
     [super dealloc];
 }
 -(void)Render {
-    _position = CC3VectorAdd(_position, _velocity);
+    //_position = CC3VectorAdd(_position, _velocity);
     for (BodyPart *bp in _bodyParts) {
         [bp setPosition:_position];
         [bp Render];

@@ -18,7 +18,7 @@
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
 @end
-
+float speed = 0.05;
 GLfloat cube_verticesX[] = {
     // front
     -1.0, -1.0,  1.0,
@@ -211,6 +211,8 @@ GLfloat cube_normals[] = {
     [floorMeshTemp release];
     [floorMaterialTemp release];
     Snake *snakeObjTemp = [[Snake alloc] init];
+    [snakeObjTemp setPosition:CC3VectorMake(2.5, 0.5, 5.5)];
+    [snakeObjTemp setVelocity:CC3VectorMake(0, 0, -speed)];
     [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
@@ -226,20 +228,38 @@ GLfloat cube_normals[] = {
 -(void)updateAnimation:(NSTimeInterval)elapsedSeconds {
     Snake *snk = [_renderables objectAtIndex:0];
     CC3Vector pos = snk.position;
-    CC3Vector v;
-    if ((int)pos.x*2 < pos.x*2 + 0.0001 && (int)pos.z*2 == pos.z*2) {
+    CC3Vector v = snk.velocity;
+    float px = pos.x;
+    px = px<0?-px:px;
+    float pz = pos.z;
+    float tpz;
+    pz = pz<0?-pz:pz;
+    pz += 0.001;
+    px*=100;
+    tpz = pz * 100;
+    //NSLog(@"pz:%f",tpz);
+    px = (int)(px);
+    pz = truncf(pz);
+    px /= 100.0;
+    tpz /= 100.0;
+    //NSLog(@"pz:%f",tpz);
+    //NSLog(@"-----");
+    //NSLog(@"px:%f pz:%f",px,pz);
+    //if (((int)pos.x*2 < pos.x*2 + 0.0001 || (int)pos.x*2 > pos.x*2 + 0.0001) && ((int)pos.z*2 < pos.z*2 + 0.0001 || (int)pos.z*2 > pos.z*2 + 0.0001)) {
+    if ((int)px == px - 0.5 && (int)pz == pz - 0.5) {
+        NSLog(@"can turn: px:%f pz:%f",px,pz);
         switch (_dir) {
             case DIR_UP:
-                v = CC3VectorMake(0, 0, -0.1);
+                v = CC3VectorMake(0, 0, -speed);
                 break;
             case DIR_DOWN:
-                v = CC3VectorMake(0, 0, 0.1);
+                v = CC3VectorMake(0, 0, speed);
                 break;
             case DIR_LEFT:
-                v = CC3VectorMake(-0.1, 0, 0);
+                v = CC3VectorMake(-speed, 0, 0);
                 break;
             case DIR_RIGHT:
-                v = CC3VectorMake(0.1, 0, 0);
+                v = CC3VectorMake(speed, 0, 0);
                 break;
             default:
                 break;
@@ -282,7 +302,7 @@ GLfloat cube_normals[] = {
             (floorGrid + i * N + j)->x = x;
             (floorGrid + i * N + j)->y = y;
             (floorGrid + i * N + j)->z = z;
-            NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
+            //NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
         }
     }
     
