@@ -232,22 +232,21 @@ GLfloat cube_normals[] = {
     float px = pos.x;
     px = px<0?-px:px;
     float pz = pos.z;
-    float tpz;
     pz = pz<0?-pz:pz;
-    pz += 0.001;
     px*=100;
-    tpz = pz * 100;
-    //NSLog(@"pz:%f",tpz);
-    px = (int)(px);
+    pz*=100;
+    px = roundf(px);
+    pz = roundf(pz);
+    px = truncf(px);
     pz = truncf(pz);
     px /= 100.0;
-    tpz /= 100.0;
+    pz /= 100.0;
     //NSLog(@"pz:%f",tpz);
     //NSLog(@"-----");
     //NSLog(@"px:%f pz:%f",px,pz);
     //if (((int)pos.x*2 < pos.x*2 + 0.0001 || (int)pos.x*2 > pos.x*2 + 0.0001) && ((int)pos.z*2 < pos.z*2 + 0.0001 || (int)pos.z*2 > pos.z*2 + 0.0001)) {
     if ((int)px == px - 0.5 && (int)pz == pz - 0.5) {
-        NSLog(@"can turn: px:%f pz:%f",px,pz);
+        //NSLog(@"can turn: px:%f pz:%f",px,pz);
         switch (_dir) {
             case DIR_UP:
                 v = CC3VectorMake(0, 0, -speed);

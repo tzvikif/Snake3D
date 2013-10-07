@@ -12,6 +12,7 @@
 @interface ViewController ()
 -(void)addSwipeRecognizer;
 -(void)addPinchRecognizer;
+-(void)handleSwipeGesture:(UISwipeGestureRecognizer*)sender;
 -(void)pinched:(UIPinchGestureRecognizer*)gestureRecognizer;
 @end
 
@@ -57,47 +58,46 @@
     }
     
 }
-- (void)handleSwipeLeftFrom:(UIGestureRecognizer*)recognizer {
-    [_logicEngine setDir:DIR_LEFT];
-    NSLog(@"left");
+-(void)handleSwipeGesture:(UISwipeGestureRecognizer*)sender {
+    if (sender.direction == UISwipeGestureRecognizerDirectionUp) {
+        [_logicEngine setDir:DIR_UP];
+        NSLog(@"up");
+    }
+    if (sender.direction == UISwipeGestureRecognizerDirectionDown) {
+        [_logicEngine setDir:DIR_DOWN];
+        NSLog(@"down");
+    }
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        [_logicEngine setDir:DIR_LEFT];
+        NSLog(@"left");
+    }
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        [_logicEngine setDir:DIR_RIGHT];
+        NSLog(@"right");
+    }
 }
-- (void)handleSwipeRightFrom:(UIGestureRecognizer*)recognizer {
-    [_logicEngine setDir:DIR_RIGHT];
-    NSLog(@"right");
-}
-- (void)handleSwipeUpFrom:(UIGestureRecognizer*)recognizer {
-    [_logicEngine setDir:DIR_UP];
-    NSLog(@"up");
-}
-- (void)handleSwipeDownFrom:(UIGestureRecognizer*)recognizer {
-    [_logicEngine setDir:DIR_DOWN];
-    NSLog(@"down");
-}
-
 -(void)addSwipeRecognizer {
     //left
-    UISwipeGestureRecognizer* swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeftFrom:)];
+    UISwipeGestureRecognizer* swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
     swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeftGestureRecognizer];
     //right
-    UISwipeGestureRecognizer* swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRightFrom:)];
+    UISwipeGestureRecognizer* swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
     swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRightGestureRecognizer];
     //up
-    /*
-    UISwipeGestureRecognizer* swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUpFrom:)];
-    swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    UISwipeGestureRecognizer* swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
+    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:swipeUpGestureRecognizer];
-    */
     //down
-    UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDownFrom:)];
-    swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    UISwipeGestureRecognizer* swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
+    swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     [self.view addGestureRecognizer:swipeDownGestureRecognizer];
      
     [swipeLeftGestureRecognizer release];
     [swipeRightGestureRecognizer release];
     [swipeDownGestureRecognizer release];
-    //[swipeUpGestureRecognizer release];
+    [swipeUpGestureRecognizer release];
 }
 -(void)addPinchRecognizer {
     UIPinchGestureRecognizer *gestureRecognizer=[[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinched:)] autorelease];
