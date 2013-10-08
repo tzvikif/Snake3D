@@ -13,6 +13,7 @@
 @property(nonatomic,assign) CC3Vector position;
 @property(nonatomic,assign) CC3Vector velocity;
 @property(nonatomic,assign) float scaleFactor;
+@property(nonatomic,assign) int myId;
 
 
 @end

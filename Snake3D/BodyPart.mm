@@ -22,6 +22,9 @@ NSString *SnakeColor_name = @"color";
 }
 -(void)Render {
     [self.program use];
+//    if (_myId != 0 && _myId != 5) {
+//        return;
+//    }
     glEnable(GL_DEPTH_TEST);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
