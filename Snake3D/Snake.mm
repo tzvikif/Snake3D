@@ -156,16 +156,16 @@ GLushort SnakeCube_elements[] = {
     [self setPosition:CC3VectorMake(2.5, 0.5, 1.5)];
     //[bp setScaleFactor:(N/2.0)/2.0];
     for (int i=0; i<_bpCount; i++) {
+        [bp initResources];
         bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
         [bp setScaleFactor:(1.0/2.0)];
         pos = _position;
         pos.z = _position.z + i;
         [bp setPosition:pos];
-        [bp setVelocity:_velocity];    //m*60,squares per second
+        [bp setSpeed:_speed];
         [bp setViewMatrix:self.viewMatrix];
         [bp setProjectionMatrix:self.projectionMatrix];
         [bp setMyId:i];
-        [bp initResources];
         [_bodyParts addObject:bp];
     }
     [meshCube release];
@@ -176,20 +176,36 @@ GLushort SnakeCube_elements[] = {
     [super dealloc];
 }
 -(void)Render {
-    BodyPart *head = [_bodyParts objectAtIndex:0];
-    int i;
-    BodyPart *bp,*bpNext;
-    CC3Vector nextPos;
-    for (i=[_bodyParts count]-1; i>0; i--) {
-        bp = [_bodyParts objectAtIndex:i];
-        bpNext = [_bodyParts objectAtIndex:i-1];
-        nextPos = bpNext.position;
-        [bp setPosition:nextPos];
-    }
-    [head setPosition:_position];
+//    BodyPart *head = [_bodyParts objectAtIndex:0];
+//    int i;
+//    BodyPart *bp,*bpNext;
+//    CC3Vector nextPos;
+//    for (i=[_bodyParts count]-1; i>0; i--) {
+//        bp = [_bodyParts objectAtIndex:i];
+//        bpNext = [_bodyParts objectAtIndex:i-1];
+//        nextPos = bpNext.position;
+//        [bp setPosition:nextPos];
+//    }
+//    [head setPosition:_position];
     for (BodyPart *bp in _bodyParts) {
         [bp Render];
     }
     _velocityChanged = NO;
+}
+-(void)setDir:(DIRECTION)dir {
+    if (dir != _dir) {
+        _dir = dir;
+        for (BodyPart *bp in _bodyParts) {
+            [bp addTurnDirection:dir inPosition:_position];
+        }
+    }
+}
+-(void)advance {
+    for (BodyPart *bp in _bodyParts) {
+        [bp advance];
+    }
+    //NSLog(@"----------");
+    BodyPart *bp = [_bodyParts objectAtIndex:0];
+    _position = bp.position;
 }
 @end

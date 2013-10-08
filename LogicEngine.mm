@@ -212,7 +212,7 @@ GLfloat cube_normals[] = {
     [floorMaterialTemp release];
     Snake *snakeObjTemp = [[Snake alloc] init];
     [snakeObjTemp setPosition:CC3VectorMake(2.5, 0.5, 5.5)];
-    [snakeObjTemp setVelocity:CC3VectorMake(0, 0, -speed)];
+    [snakeObjTemp setSpeed:speed];
     [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
@@ -228,7 +228,6 @@ GLfloat cube_normals[] = {
 -(void)updateAnimation:(NSTimeInterval)elapsedSeconds {
     Snake *snk = [_renderables objectAtIndex:0];
     CC3Vector pos = snk.position;
-    CC3Vector v = snk.velocity;
     float px = pos.x;
     px = px<0?-px:px;
     float pz = pos.z;
@@ -249,24 +248,22 @@ GLfloat cube_normals[] = {
         //NSLog(@"can turn: px:%f pz:%f",px,pz);
         switch (_dir) {
             case DIR_UP:
-                v = CC3VectorMake(0, 0, -speed);
+                [snk setDir:DIR_UP];
                 break;
             case DIR_DOWN:
-                v = CC3VectorMake(0, 0, speed);
+                [snk setDir:DIR_DOWN];
                 break;
             case DIR_LEFT:
-                v = CC3VectorMake(-speed, 0, 0);
+                [snk setDir:DIR_LEFT];
                 break;
             case DIR_RIGHT:
-                v = CC3VectorMake(speed, 0, 0);
+                [snk setDir:DIR_RIGHT];
                 break;
             default:
                 break;
         }
-        [snk setVelocity:v];
     }
-    pos = CC3VectorAdd(pos, v);
-    [snk setPosition:pos];
+    [snk advance];
 }
 -(void)updateOffset_x:(GLfloat)delta {
 //    [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];

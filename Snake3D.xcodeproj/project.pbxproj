@@ -43,6 +43,7 @@
 		91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 91289D681800A5920096F1E8 /* SbpFragment.fsh */; };
 		91289D6D1800A5D10096F1E8 /* SbpVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 91289D691800A5920096F1E8 /* SbpVertex.vsh */; };
 		913D96C317EC6B87005AAF09 /* Floor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 913D96C217EC6B87005AAF09 /* Floor.mm */; };
+		91680FB51804ADF300B68789 /* TurnPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 91680FB41804ADF300B68789 /* TurnPosition.m */; };
 		9172EE2D17C5505C008F48AB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2C17C5505C008F48AB /* OpenGLES.framework */; };
 		9172EE2F17C550BB008F48AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2E17C550BB008F48AB /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -107,6 +108,8 @@
 		91289D691800A5920096F1E8 /* SbpVertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SbpVertex.vsh; sourceTree = "<group>"; };
 		913D96C117EC6B87005AAF09 /* Floor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Floor.h; path = Snake3D/Floor.h; sourceTree = "<group>"; };
 		913D96C217EC6B87005AAF09 /* Floor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Floor.mm; path = Snake3D/Floor.mm; sourceTree = "<group>"; };
+		91680FB31804ADF300B68789 /* TurnPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TurnPosition.h; path = Snake3D/TurnPosition.h; sourceTree = "<group>"; };
+		91680FB41804ADF300B68789 /* TurnPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TurnPosition.m; path = Snake3D/TurnPosition.m; sourceTree = "<group>"; };
 		9172EE2C17C5505C008F48AB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		9172EE2E17C550BB008F48AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -244,6 +247,8 @@
 				913D96C217EC6B87005AAF09 /* Floor.mm */,
 				20427BC717F98F8700D02B84 /* Snake.h */,
 				20427BC817F98F8700D02B84 /* Snake.mm */,
+				91680FB31804ADF300B68789 /* TurnPosition.h */,
+				91680FB41804ADF300B68789 /* TurnPosition.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				20F74B7517C2604800407740 /* ViewController.m in Sources */,
 				20F74B8017C264CD00407740 /* GLView.m in Sources */,
 				20F74B8317C2650200407740 /* GLProgram.m in Sources */,
+				91680FB51804ADF300B68789 /* TurnPosition.m in Sources */,
 				91289D6A1800A5920096F1E8 /* SbpFragment.fsh in Sources */,
 				20F74B8717C26ADE00407740 /* LogicEngine.mm in Sources */,
 				20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */,

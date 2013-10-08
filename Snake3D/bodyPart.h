@@ -7,6 +7,7 @@
 //
 
 #import "Node.h"
+#import "Consts.h"
 
 @interface BodyPart : Node
 
@@ -14,6 +15,8 @@
 @property(nonatomic,assign) CC3Vector velocity;
 @property(nonatomic,assign) float scaleFactor;
 @property(nonatomic,assign) int myId;
-
-
+@property(nonatomic,assign) float speed;
+@property(nonatomic,retain) NSMutableArray *turnsAndPositions;
+-(void)addTurnDirection:(DIRECTION)dir inPosition:(CC3Vector)pos;
+-(void)advance;
 @end

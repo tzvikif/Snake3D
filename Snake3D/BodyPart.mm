@@ -9,6 +9,7 @@
 #import "BodyPart.h"
 #import "GLProgram.h"
 #import "Consts.h"
+#import "TurnPosition.h"
 
 @implementation BodyPart
 extern NSString *mvp_name;
@@ -18,6 +19,10 @@ NSString *SnakeColor_name = @"color";
     [self.program addAttribute:bp_name];
     [self.program addUniform:mvp_name];
     [self.program addAttribute:SnakeColor_name];
+    _velocity = CC3VectorMake(0, 0, -_speed);
+    NSMutableArray *arrTemp = [[NSMutableArray alloc] init];
+    [self setTurnsAndPositions:arrTemp];
+    [arrTemp release];
 
 }
 -(void)Render {
@@ -75,5 +80,64 @@ NSString *SnakeColor_name = @"color";
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
+}
+-(void)advance {
+    if ([_turnsAndPositions count] > 0) {
+        TurnPosition *turnPos = [_turnsAndPositions objectAtIndex:0];
+        CC3Vector nextTurnPos = turnPos.nextTurnPos;
+        DIRECTION nextTurnDir = turnPos.nextTurnDir;
+        _position.x *= 100;
+        _position.z *= 100;
+        nextTurnPos.x *= 100;
+        nextTurnPos.z *= 100;
+        _position.x = roundf(_position.x);
+        _position.z = roundf(_position.z);
+        nextTurnPos.x = roundf(nextTurnPos.x);
+        nextTurnPos.z = roundf(nextTurnPos.z);
+        _position.x /= 100;
+        _position.z /= 100;
+        nextTurnPos.x /= 100;
+        nextTurnPos.z /= 100;
+        if (_position.x == nextTurnPos.x &&
+            _position.z == nextTurnPos.z) {
+            switch (nextTurnDir) {
+                case DIR_RIGHT:
+                    _velocity = CC3VectorMake(_speed, 0, 0);
+                    break;
+                case DIR_LEFT:
+                    _velocity = CC3VectorMake(-_speed, 0, 0);
+                    break;
+                case DIR_UP:
+                    _velocity = CC3VectorMake(0, 0, -_speed);
+                    break;
+                case DIR_DOWN:
+                    _velocity = CC3VectorMake(0, 0, _speed);
+                    break;
+                default:
+                    NSException* myException = [NSException
+                                                exceptionWithName:@"direction error"
+                                                reason:[NSString stringWithFormat:@"%d: no such direction",nextTurnDir]
+                                                userInfo:nil];
+                    @throw myException;
+                    break;
+            }
+            [_turnsAndPositions removeObjectAtIndex:0];
+        }
+
+    }
+    _position = CC3VectorAdd(_position,_velocity);
+    //NSLog(@"id:%d pos.z:%f",_myId,_position.z);
+}
+-(void)addTurnDirection:(DIRECTION)dir inPosition:(CC3Vector)pos {
+    TurnPosition *tp = [[TurnPosition alloc] init];
+    tp.nextTurnPos = pos;
+    tp.nextTurnDir = dir;
+    [_turnsAndPositions addObject:tp];
+    [tp release];
+    
+}
+-(void)dealloc {
+    [_turnsAndPositions release];
+    [super dealloc];
 }
 @end
