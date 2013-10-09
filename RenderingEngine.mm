@@ -37,7 +37,7 @@
 -(void)initResources:(NSArray*)renderables {
     [self setMatProjection:[CC3GLMatrix identity]];
     [self setMatView:[CC3GLMatrix identity]];
-    [_matView populateToLookAt:CC3VectorMake(0.0, 1.0, 0.0) withEyeAt:CC3VectorMake(0.0,6.0 , 8.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
+    [_matView populateToLookAt:CC3VectorMake(0.0, 1.0, 0.0) withEyeAt:CC3VectorMake(0.0,8.0 , 8.0) withUp:CC3VectorMake(0.0, 1.0, 0.0)];
     float ratio = self.viewport.size.width / self.viewport.size.height;
     [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:50 andAspectRatio:ratio];
     for (Node *obj in renderables) {

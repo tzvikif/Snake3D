@@ -141,7 +141,7 @@ GLushort SnakeCube_elements[] = {
 @implementation Snake
 
 -(void)initResources {
-    _bpCount = 5;
+    _bpCount = 15;
     _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
     [self setBodyParts:ma];
@@ -156,16 +156,18 @@ GLushort SnakeCube_elements[] = {
     [self setPosition:CC3VectorMake(2.5, 0.5, 1.5)];
     //[bp setScaleFactor:(N/2.0)/2.0];
     for (int i=0; i<_bpCount; i++) {
-        [bp initResources];
         bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
-        [bp setScaleFactor:(1.0/2.0)];
+        [bp setMyId:i];
+        [bp setSpeed:_speed];
+        [bp initResources];
+        float bsf = 1.0/2.0; //base scale factor
+        [bp setScaleFactor:CC3VectorMake(bsf-i*0.02, bsf, bsf)];
         pos = _position;
         pos.z = _position.z + i;
         [bp setPosition:pos];
-        [bp setSpeed:_speed];
         [bp setViewMatrix:self.viewMatrix];
         [bp setProjectionMatrix:self.projectionMatrix];
-        [bp setMyId:i];
+        
         [_bodyParts addObject:bp];
     }
     [meshCube release];

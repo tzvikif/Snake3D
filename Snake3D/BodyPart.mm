@@ -23,6 +23,7 @@ NSString *SnakeColor_name = @"color";
     NSMutableArray *arrTemp = [[NSMutableArray alloc] init];
     [self setTurnsAndPositions:arrTemp];
     [arrTemp release];
+    [self setRotatetionMat:[CC3GLMatrix identity]];
 
 }
 -(void)Render {
@@ -45,7 +46,8 @@ NSString *SnakeColor_name = @"color";
 //    translateVector.z = 0.5;
 
     [self.modelMatrix translateBy:translateVector];
-    [self.modelMatrix scaleBy:CC3VectorMake(self.scaleFactor, self.scaleFactor, self.scaleFactor)];
+    [self.modelMatrix multiplyByMatrix:self.rotatetionMat];
+    [self.modelMatrix scaleBy:self.scaleFactor];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
 //    NSLog(@"projection %@",[projectionMat description]);
@@ -103,15 +105,23 @@ NSString *SnakeColor_name = @"color";
             switch (nextTurnDir) {
                 case DIR_RIGHT:
                     _velocity = CC3VectorMake(_speed, 0, 0);
+                    [self setRotatetionMat:[CC3GLMatrix identity]];
+                    [_rotatetionMat rotateByY:270];
                     break;
                 case DIR_LEFT:
                     _velocity = CC3VectorMake(-_speed, 0, 0);
+                    [self setRotatetionMat:[CC3GLMatrix identity]];
+                    [_rotatetionMat rotateByY:90];
                     break;
                 case DIR_UP:
                     _velocity = CC3VectorMake(0, 0, -_speed);
+                    [self setRotatetionMat:[CC3GLMatrix identity]];
+                    [_rotatetionMat rotateByY:0];
                     break;
                 case DIR_DOWN:
                     _velocity = CC3VectorMake(0, 0, _speed);
+                    [self setRotatetionMat:[CC3GLMatrix identity]];
+                    [_rotatetionMat rotateByY:180];
                     break;
                 default:
                     NSException* myException = [NSException

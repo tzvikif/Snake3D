@@ -13,7 +13,8 @@
 
 @property(nonatomic,assign) CC3Vector position;
 @property(nonatomic,assign) CC3Vector velocity;
-@property(nonatomic,assign) float scaleFactor;
+@property(nonatomic,assign) CC3Vector scaleFactor;
+@property(nonatomic,retain) CC3GLMatrix *rotatetionMat;
 @property(nonatomic,assign) int myId;
 @property(nonatomic,assign) float speed;
 @property(nonatomic,retain) NSMutableArray *turnsAndPositions;
