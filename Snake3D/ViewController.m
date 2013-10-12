@@ -52,8 +52,8 @@
     if (displayLink != nil) {
         NSTimeInterval elapsedSeconds = displayLink.timestamp - m_timestamp;
         m_timestamp = displayLink.timestamp;
-        [_logicEngine updateAnimation:elapsedSeconds];
         [_logicEngine Render];
+        [_logicEngine updateAnimation:elapsedSeconds];
         [(GLView*)self.view presentRenderbuffer];
     }
     

@@ -15,11 +15,15 @@
 extern NSString *mvp_name;
 NSString *bp_name = @"gridFloor";
 NSString *SnakeColor_name = @"color";
+
 -(void)initResources {
     [self.program addAttribute:bp_name];
     [self.program addUniform:mvp_name];
     [self.program addAttribute:SnakeColor_name];
     _velocity = CC3VectorMake(0, 0, -_speed);
+    _dir = DIR_UP;
+    _currentRotatoinAngle = 0;
+    _inRotation = NO;
     NSMutableArray *arrTemp = [[NSMutableArray alloc] init];
     [self setTurnsAndPositions:arrTemp];
     [arrTemp release];
@@ -84,57 +88,114 @@ NSString *SnakeColor_name = @"color";
     glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
 }
 -(void)advance {
-    if ([_turnsAndPositions count] > 0) {
+    NSLog(@"curent posiont x=%f z=%f",_position.x,_position.z);
+    static int maxStepsBeforeTurn = ceil(1.0/_speed); //cube size/speed
+    if ([_turnsAndPositions count] > 0 && !_inRotation) {
         TurnPosition *turnPos = [_turnsAndPositions objectAtIndex:0];
+        _nextTurnDir = turnPos.nextTurnDir;
         CC3Vector nextTurnPos = turnPos.nextTurnPos;
-        DIRECTION nextTurnDir = turnPos.nextTurnDir;
-        _position.x *= 100;
-        _position.z *= 100;
-        nextTurnPos.x *= 100;
-        nextTurnPos.z *= 100;
-        _position.x = roundf(_position.x);
-        _position.z = roundf(_position.z);
-        nextTurnPos.x = roundf(nextTurnPos.x);
-        nextTurnPos.z = roundf(nextTurnPos.z);
-        _position.x /= 100;
-        _position.z /= 100;
-        nextTurnPos.x /= 100;
-        nextTurnPos.z /= 100;
-        if (_position.x == nextTurnPos.x &&
-            _position.z == nextTurnPos.z) {
-            switch (nextTurnDir) {
+        CC3Vector deltaPos = CC3VectorAdd(nextTurnPos, CC3VectorNegate(_position));
+        deltaPos = CC3VectorScale(deltaPos, CC3VectorMake(100.0, 100.0, 100.0));
+        deltaPos.x = roundf(deltaPos.x);
+        deltaPos.y = roundf(deltaPos.y);
+        deltaPos.z = roundf(deltaPos.z);
+        deltaPos = CC3VectorScale(deltaPos, CC3VectorMake(1/100.0, 1/100.0, 1/100.0));
+        float numOfStepsRotation;
+        if (_dir == DIR_UP || _dir == DIR_DOWN) {
+            numOfStepsRotation = deltaPos.z / _velocity.z>0?deltaPos.z / _velocity.z:deltaPos.z / _velocity.z*-1;
+        }
+        else
+        {
+            numOfStepsRotation = deltaPos.x / _velocity.z>0?deltaPos.x / _velocity.z:deltaPos.x / _velocity.x*-1;
+        }
+        NSLog(@"numOfStepsRotation=%f",numOfStepsRotation);
+        if (numOfStepsRotation <= maxStepsBeforeTurn) {
+            _inRotation = YES;
+            switch (turnPos.nextTurnDir) {
                 case DIR_RIGHT:
-                    _velocity = CC3VectorMake(_speed, 0, 0);
-                    [self setRotatetionMat:[CC3GLMatrix identity]];
-                    [_rotatetionMat rotateByY:270];
+                    _destAngle = 270.0;
                     break;
                 case DIR_LEFT:
-                    _velocity = CC3VectorMake(-_speed, 0, 0);
-                    [self setRotatetionMat:[CC3GLMatrix identity]];
-                    [_rotatetionMat rotateByY:90];
+                    _destAngle = 90.0;
                     break;
                 case DIR_UP:
-                    _velocity = CC3VectorMake(0, 0, -_speed);
-                    [self setRotatetionMat:[CC3GLMatrix identity]];
-                    [_rotatetionMat rotateByY:0];
+                    _destAngle = 0.0;
                     break;
                 case DIR_DOWN:
-                    _velocity = CC3VectorMake(0, 0, _speed);
-                    [self setRotatetionMat:[CC3GLMatrix identity]];
-                    [_rotatetionMat rotateByY:180];
+                    _destAngle = 180.0;
                     break;
                 default:
                     NSException* myException = [NSException
                                                 exceptionWithName:@"direction error"
-                                                reason:[NSString stringWithFormat:@"%d: no such direction",nextTurnDir]
+                                                reason:[NSString stringWithFormat:@"%d: no such direction",turnPos.nextTurnDir]
                                                 userInfo:nil];
                     @throw myException;
                     break;
             }
-            [_turnsAndPositions removeObjectAtIndex:0];
+            _rotationAngleStep = (_destAngle - _currentRotatoinAngle)/numOfStepsRotation;
+            _rotationAngleStep*=100;
+            _rotationAngleStep = roundf(_rotationAngleStep);
+            _rotationAngleStep/=100;
         }
-
     }
+    if (_inRotation) {
+        _currentRotatoinAngle += _rotationAngleStep;
+        _currentRotatoinAngle*=100;
+        _currentRotatoinAngle = roundf(_currentRotatoinAngle);
+        _currentRotatoinAngle/=100;
+        NSLog(@"_currentRotatoinAngle=%f _destAngle=%f",_currentRotatoinAngle,_destAngle);
+        if (_currentRotatoinAngle >= _destAngle) {
+            _currentRotatoinAngle = _destAngle;
+            _inRotation = NO;
+            [_turnsAndPositions removeObjectAtIndex:0];
+            switch (_nextTurnDir) {
+                case DIR_RIGHT:
+                    _velocity = CC3VectorMake(0, 0, _speed);
+                    break;
+                case DIR_LEFT:
+                    _velocity = CC3VectorMake(-_speed, 0, 0);
+                    break;
+                case DIR_UP:
+                    _velocity = CC3VectorMake(0, 0, -_speed);
+                    break;
+                case DIR_DOWN:
+                    _velocity = CC3VectorMake(0, 0, _speed);
+                    break;
+                default:
+                    NSException* myException = [NSException
+                                                exceptionWithName:@"direction error"
+                                                reason:[NSString stringWithFormat:@"%d: no such direction",_nextTurnDir]
+                                                userInfo:nil];
+                    @throw myException;
+                    break;
+            }
+            
+            
+        }
+        [self setRotatetionMat:[CC3GLMatrix identity]];
+        [_rotatetionMat rotateByY:_currentRotatoinAngle];
+    }
+        //CC3Vector tempPos = CC3VectorAdd(_position, CC3VectorScale(_velocity, CC3VectorMake(stepsBeforeTurn, stepsBeforeTurn, stepsBeforeTurn)));
+        //DIRECTION nextTurnDir = turnPos.nextTurnDir;
+        //to avoid floating point problems
+//        tempPos.x *= 100;
+//        tempPos.z *= 100;
+//        nextTurnPos.x *= 100;
+//        nextTurnPos.z *= 100;
+//        tempPos.x = roundf(tempPos.x);
+//        tempPos.z = roundf(tempPos.z);
+//        nextTurnPos.x = roundf(nextTurnPos.x);
+//        nextTurnPos.z = roundf(nextTurnPos.z);
+//        tempPos.x /= 100;
+//        tempPos.z /= 100;
+//        nextTurnPos.x /= 100;
+//        nextTurnPos.z /= 100;
+        
+        //the position stepsBeforeTurn ahead.
+        
+//        if (tempPos.x == nextTurnPos.x &&
+//            tempPos.z == nextTurnPos.z) {
+ 
     _position = CC3VectorAdd(_position,_velocity);
     //NSLog(@"id:%d pos.z:%f",_myId,_position.z);
 }

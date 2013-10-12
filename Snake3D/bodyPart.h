@@ -13,6 +13,14 @@
 
 @property(nonatomic,assign) CC3Vector position;
 @property(nonatomic,assign) CC3Vector velocity;
+@property(nonatomic,assign) DIRECTION dir;
+//@property(nonatomic,assign) NSTimeInterval rotationTime;
+//@property(nonatomic,assign) NSTimeInterval rotationTimeElapsed;
+@property(nonatomic,assign) BOOL inRotation;
+@property(nonatomic,assign) float rotationAngleStep;
+@property(nonatomic,assign) float currentRotatoinAngle;
+@property(nonatomic,assign) float destAngle;
+@property(nonatomic,assign) DIRECTION nextTurnDir;
 @property(nonatomic,assign) CC3Vector scaleFactor;
 @property(nonatomic,retain) CC3GLMatrix *rotatetionMat;
 @property(nonatomic,assign) int myId;

@@ -183,7 +183,6 @@ GLfloat cube_normals[] = {
 @implementation LogicEngine
 
 -(void)initialize:(CGRect)viewport {
-    _dir = DIR_UP;
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
     NSMutableArray *maTemp = [[NSMutableArray alloc] init];
     [self setRenderables:maTemp];
@@ -227,42 +226,6 @@ GLfloat cube_normals[] = {
 }
 -(void)updateAnimation:(NSTimeInterval)elapsedSeconds {
     Snake *snk = [_renderables objectAtIndex:0];
-    CC3Vector pos = snk.position;
-    float px = pos.x;
-    px = px<0?-px:px;
-    float pz = pos.z;
-    pz = pz<0?-pz:pz;
-    px*=100;
-    pz*=100;
-    px = roundf(px);
-    pz = roundf(pz);
-    px = truncf(px);
-    pz = truncf(pz);
-    px /= 100.0;
-    pz /= 100.0;
-    //NSLog(@"pz:%f",tpz);
-    //NSLog(@"-----");
-    //NSLog(@"px:%f pz:%f",px,pz);
-    //if (((int)pos.x*2 < pos.x*2 + 0.0001 || (int)pos.x*2 > pos.x*2 + 0.0001) && ((int)pos.z*2 < pos.z*2 + 0.0001 || (int)pos.z*2 > pos.z*2 + 0.0001)) {
-    if ((int)px == px - 0.5 && (int)pz == pz - 0.5) {
-        //NSLog(@"can turn: px:%f pz:%f",px,pz);
-        switch (_dir) {
-            case DIR_UP:
-                [snk setDir:DIR_UP];
-                break;
-            case DIR_DOWN:
-                [snk setDir:DIR_DOWN];
-                break;
-            case DIR_LEFT:
-                [snk setDir:DIR_LEFT];
-                break;
-            case DIR_RIGHT:
-                [snk setDir:DIR_RIGHT];
-                break;
-            default:
-                break;
-        }
-    }
     [snk advance];
 }
 -(void)updateOffset_x:(GLfloat)delta {
@@ -385,6 +348,54 @@ GLfloat cube_normals[] = {
     }
     return (theProgram == nil)?NO:YES;
 
+}
+-(void)setDir:(DIRECTION)dir {
+    Snake *snk = [_renderables objectAtIndex:0];
+    CC3Vector pos = snk.position;
+    
+    DIRECTION currentDir = snk.dir;
+    
+    float px = pos.x;
+    float pz = pos.z;
+    NSLog(@"in logicEngine. px=%f pz=%f",px,pz);
+//    px = px<0?-px:px;
+//    
+//    pz = pz<0?-pz:pz;
+//    px*=100;
+//    pz*=100;
+//    px = roundf(px);
+//    pz = roundf(pz);
+//    px = truncf(px);
+//    pz = truncf(pz);
+//    px /= 100.0;
+//    pz /= 100.0;
+    
+    if (currentDir == DIR_UP || currentDir == DIR_DOWN) {
+        pz = ceilf(pz) - 0.5;
+    }
+    else
+    {
+        px = ceilf(px) - 0.5;
+    }
+    CC3Vector nextTurnPos = CC3VectorMake(px, 0.5, pz);
+    switch (dir) {
+        case DIR_UP:
+            [snk setDir:DIR_UP andPosition:nextTurnPos];
+            break;
+        case DIR_DOWN:
+            [snk setDir:DIR_DOWN andPosition:nextTurnPos];
+            break;
+        case DIR_LEFT:
+            [snk setDir:DIR_LEFT andPosition:nextTurnPos];
+            break;
+        case DIR_RIGHT:
+            [snk setDir:DIR_RIGHT andPosition:nextTurnPos];
+            break;
+        default:
+            break;
+    }
+
+    
 }
 -(void)dealloc {
     [_programs release];

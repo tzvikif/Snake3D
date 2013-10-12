@@ -15,6 +15,7 @@
 @property(nonatomic,assign) BOOL velocityChanged;
 @property(nonatomic,assign) float speed;
 @property(nonatomic,assign) DIRECTION dir;
--(void)setDir:(DIRECTION)dir;
+@property(nonatomic,assign) CC3Vector turnPos;
+-(void)setDir:(DIRECTION)dir andPosition:(CC3Vector)pos;
 -(void)advance;
 @end
