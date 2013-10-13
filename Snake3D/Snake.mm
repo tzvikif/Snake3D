@@ -136,12 +136,16 @@ GLushort SnakeCube_elements[] = {
     22, 23, 20,
 };
 
-
+float lerp(float a,float b,float blend) {
+    return  (blend*a + (1-blend)*b);
+    
+}
 
 @implementation Snake
 
 -(void)initResources {
     _bpCount = 15;
+    _totalTimeElapsed = 0;
     _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
     [self setBodyParts:ma];
@@ -153,15 +157,18 @@ GLushort SnakeCube_elements[] = {
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;
     CC3Vector pos;
+    _initScales = (CC3Vector*)malloc(sizeof(CC3Vector) * [_bodyParts count]);
     [self setPosition:CC3VectorMake(2.5, 0.5, 1.5)];
     //[bp setScaleFactor:(N/2.0)/2.0];
+    float bsf = 1.0/2.0; //base scale factor
     for (int i=0; i<_bpCount; i++) {
         bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
         [bp setMyId:i];
         [bp setSpeed:_speed];
         [bp initResources];
-        float bsf = 1.0/2.0; //base scale factor
-        [bp setScaleFactor:CC3VectorMake(bsf-i*0.02, bsf, bsf)];
+        CC3Vector currentScale = CC3VectorMake(bsf-i*0.02, bsf, bsf);
+        _initScales[i] = CC3VectorM
+        [bp setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
         pos = _position;
         pos.z = _position.z + i;
         [bp setPosition:pos];
@@ -174,7 +181,8 @@ GLushort SnakeCube_elements[] = {
     [materialTemp release];
 }
 -(void)dealloc {
-    [_bodyParts release];   
+    [_bodyParts release];
+    free(_initScales);
     [super dealloc];
 }
 -(void)Render {
@@ -201,5 +209,39 @@ GLushort SnakeCube_elements[] = {
     _position = bp.position;
     _dir = bp.dir;
     //NSLog(@"px=%f pz=%f",_position.x,_position.y);
+}
+-(BOOL)isCollideWithPosition:(CC3Vector)pos {
+    BOOL collisitionStatus = NO;
+    for (int i=3; i<[_bodyParts count]; i++) {
+        BodyPart *bp = [_bodyParts objectAtIndex:i];
+        CC3Vector objPos = bp.position;
+        if ((objPos.x - pos.x < 1.0 && objPos.x - pos.x > -1.0) && (objPos.z - pos.z < 1.0 && objPos.z - pos.z > -1.0)) {
+            collisitionStatus = YES;
+            break;
+        }
+    }
+    return collisitionStatus;
+}
+-(void)oops:(NSTimeInterval)timeElappsed{
+    static float total = 2.0;
+    if (_totalTimeElapsed > total) {
+        _totalTimeElapsed = 0;
+        return;
+    }
+    
+    _totalTimeElapsed += timeElappsed;
+ 
+    float scaleX,scaleY,scaleZ;
+    BodyPart *bp;
+    for (int i=0; i<_bpCount; i++) {
+        bp = [_bodyParts objectAtIndex:i];
+        CC3Vector scaleFactor = _initScales[i];
+        scaleX = lerp(0.0, scaleFactor.x, timeElappsed/total);
+        scaleY = lerp(0, scaleFactor.y, timeElappsed/total);
+        scaleZ = lerp(0, scaleFactor.z, timeElappsed/total);
+    
+        scaleFactor = CC3VectorScale(scaleFactor, CC3VectorMake(scaleX, scaleY, scaleZ));
+        [bp setScaleFactor:scaleFactor];
+    }
 }
 @end

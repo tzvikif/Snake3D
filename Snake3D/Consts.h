@@ -29,3 +29,4 @@ typedef enum _WALL {
     WALL_UP
 }WALL;
 
+float lerp(float a,float b,float blend);

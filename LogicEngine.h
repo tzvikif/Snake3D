@@ -35,7 +35,7 @@
 
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;
--(void)updateAnimation:(NSTimeInterval)elapsedSeconds;
+-(void)updateAnimation:(NSTimeInterval)timeElapsed;
 -(void)Render;
 -(void)updateOffset_x:(GLfloat)delta;
 -(void)updateScale:(GLfloat)delta;

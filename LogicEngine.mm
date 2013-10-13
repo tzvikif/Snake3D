@@ -224,9 +224,15 @@ GLfloat cube_normals[] = {
 -(void)Render {
     [_renderingEngine Render:_renderables];
 }
--(void)updateAnimation:(NSTimeInterval)elapsedSeconds {
+-(void)updateAnimation:(NSTimeInterval)timeElapsed {
     Snake *snk = [_renderables objectAtIndex:0];
-    [snk advance];
+    BOOL isCollide = [snk isCollideWithPosition:snk.position];
+    if (!isCollide) {
+        [snk advance];
+    }
+    else {
+        [snk oops:timeElapsed];
+    }
 }
 -(void)updateOffset_x:(GLfloat)delta {
 //    [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];
