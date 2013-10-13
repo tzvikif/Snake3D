@@ -351,6 +351,7 @@ GLfloat cube_normals[] = {
 }
 -(void)setDir:(DIRECTION)dir {
     Snake *snk = [_renderables objectAtIndex:0];
+    float speed = snk.speed;
     CC3Vector pos = snk.position;
     
     DIRECTION currentDir = snk.dir;
@@ -369,14 +370,24 @@ GLfloat cube_normals[] = {
 //    pz = truncf(pz);
 //    px /= 100.0;
 //    pz /= 100.0;
-    
-    if (currentDir == DIR_UP || currentDir == DIR_DOWN) {
-        pz = ceilf(pz) - 0.5;
+    float tpz,tpx;
+    if (currentDir == DIR_UP) {
+        tpz = roundf(pz);
+        pz = tpz - 0.5;
     }
-    else
-    {
-        px = ceilf(px) - 0.5;
+    if (currentDir == DIR_DOWN) {
+        tpz = roundf(pz);
+        pz = tpz + 0.5;
     }
+    if (currentDir == DIR_LEFT) {
+        tpx = roundf(px);
+        px = tpx - 0.5;
+    }
+    if (currentDir == DIR_RIGHT) {
+        tpx = roundf(px);
+        px = tpx + 0.5;
+    }
+    NSLog(@"next turn pos: x=%f z=%f",px,pz);
     CC3Vector nextTurnPos = CC3VectorMake(px, 0.5, pz);
     switch (dir) {
         case DIR_UP:

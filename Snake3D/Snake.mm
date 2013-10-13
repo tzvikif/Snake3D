@@ -141,7 +141,7 @@ GLushort SnakeCube_elements[] = {
 @implementation Snake
 
 -(void)initResources {
-    _bpCount = 1;
+    _bpCount = 15;
     _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
     [self setBodyParts:ma];
@@ -178,17 +178,6 @@ GLushort SnakeCube_elements[] = {
     [super dealloc];
 }
 -(void)Render {
-//    BodyPart *head = [_bodyParts objectAtIndex:0];
-//    int i;
-//    BodyPart *bp,*bpNext;
-//    CC3Vector nextPos;
-//    for (i=[_bodyParts count]-1; i>0; i--) {
-//        bp = [_bodyParts objectAtIndex:i];
-//        bpNext = [_bodyParts objectAtIndex:i-1];
-//        nextPos = bpNext.position;
-//        [bp setPosition:nextPos];
-//    }
-//    [head setPosition:_position];
     for (BodyPart *bp in _bodyParts) {
         [bp Render];
     }
@@ -210,6 +199,7 @@ GLushort SnakeCube_elements[] = {
     //NSLog(@"----------");
     BodyPart *bp = [_bodyParts objectAtIndex:0];
     _position = bp.position;
+    _dir = bp.dir;
     //NSLog(@"px=%f pz=%f",_position.x,_position.y);
 }
 @end

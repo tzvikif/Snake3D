@@ -44,11 +44,6 @@ NSString *SnakeColor_name = @"color";
     
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector = self.position;
-//    CC3Vector translateVector;
-//    translateVector.x = 0.5;
-//    translateVector.y = 0.5;
-//    translateVector.z = 0.5;
-
     [self.modelMatrix translateBy:translateVector];
     [self.modelMatrix multiplyByMatrix:self.rotatetionMat];
     [self.modelMatrix scaleBy:self.scaleFactor];
@@ -88,27 +83,21 @@ NSString *SnakeColor_name = @"color";
     glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
 }
 -(void)advance {
-    NSLog(@"curent posiont x=%f z=%f",_position.x,_position.z);
     static int maxStepsBeforeTurn = ceil(1.0/_speed); //cube size/speed
     if ([_turnsAndPositions count] > 0 && !_inRotation) {
         TurnPosition *turnPos = [_turnsAndPositions objectAtIndex:0];
         _nextTurnDir = turnPos.nextTurnDir;
-        CC3Vector nextTurnPos = turnPos.nextTurnPos;
-        CC3Vector deltaPos = CC3VectorAdd(nextTurnPos, CC3VectorNegate(_position));
-        deltaPos = CC3VectorScale(deltaPos, CC3VectorMake(100.0, 100.0, 100.0));
-        deltaPos.x = roundf(deltaPos.x);
-        deltaPos.y = roundf(deltaPos.y);
-        deltaPos.z = roundf(deltaPos.z);
-        deltaPos = CC3VectorScale(deltaPos, CC3VectorMake(1/100.0, 1/100.0, 1/100.0));
+        _nextTurnPos = turnPos.nextTurnPos;
+        CC3Vector deltaPos = CC3VectorAdd(_nextTurnPos, CC3VectorNegate(_position));
         float numOfStepsRotation;
         if (_dir == DIR_UP || _dir == DIR_DOWN) {
             numOfStepsRotation = deltaPos.z / _velocity.z>0?deltaPos.z / _velocity.z:deltaPos.z / _velocity.z*-1;
         }
         else
         {
-            numOfStepsRotation = deltaPos.x / _velocity.z>0?deltaPos.x / _velocity.z:deltaPos.x / _velocity.x*-1;
+            numOfStepsRotation = deltaPos.x / _velocity.x>0?deltaPos.x / _velocity.x:deltaPos.x / _velocity.x*-1;
         }
-        NSLog(@"numOfStepsRotation=%f",numOfStepsRotation);
+        //NSLog(@"numOfStepsRotation=%f",numOfStepsRotation);
         if (numOfStepsRotation <= maxStepsBeforeTurn) {
             _inRotation = YES;
             switch (turnPos.nextTurnDir) {
@@ -132,34 +121,55 @@ NSString *SnakeColor_name = @"color";
                     @throw myException;
                     break;
             }
-            _rotationAngleStep = (_destAngle - _currentRotatoinAngle)/numOfStepsRotation;
-            _rotationAngleStep*=100;
-            _rotationAngleStep = roundf(_rotationAngleStep);
-            _rotationAngleStep/=100;
+            float deltaAngle = _destAngle - _currentRotatoinAngle;
+            if (deltaAngle < -90) {
+                deltaAngle += 360;
+            }
+            else if (deltaAngle > 90) {
+                deltaAngle -= 360;
+            }
+            _rotationAngleStep = (deltaAngle)/numOfStepsRotation;
+            _rotationAngleStep = floorf(_rotationAngleStep);
+//            _rotationAngleStep*=100;
+//            _rotationAngleStep = roundf(_rotationAngleStep);
+//            _rotationAngleStep/=100;
         }
     }
     if (_inRotation) {
         _currentRotatoinAngle += _rotationAngleStep;
-        _currentRotatoinAngle*=100;
-        _currentRotatoinAngle = roundf(_currentRotatoinAngle);
-        _currentRotatoinAngle/=100;
-        NSLog(@"_currentRotatoinAngle=%f _destAngle=%f",_currentRotatoinAngle,_destAngle);
-        if (_currentRotatoinAngle >= _destAngle) {
+        //NSLog(@"_destAngle=%f _currentRotatoinAngle=%f _rotationAngleStep=%f",_destAngle,_currentRotatoinAngle,_rotationAngleStep);
+        GLfloat px,pz;
+        px = _position.x;
+        pz = _position.z;
+        px*=100;
+        pz*=100;
+        px = roundf(px);
+        pz = roundf(pz);
+        px/=100;
+        pz/=100;
+        _position.x = px;
+        _position.z = pz;
+        //NSLog(@"current position x=%f z=%f. next turn position x=%f z=%f",_position.x,_position.z,_nextTurnPos.x,_nextTurnPos.z);
+        if (_position.x == _nextTurnPos.x && _position.z == _nextTurnPos.z) {
             _currentRotatoinAngle = _destAngle;
             _inRotation = NO;
             [_turnsAndPositions removeObjectAtIndex:0];
             switch (_nextTurnDir) {
                 case DIR_RIGHT:
-                    _velocity = CC3VectorMake(0, 0, _speed);
+                    _velocity = CC3VectorMake(_speed, 0, 0);
+                    _dir = DIR_RIGHT;
                     break;
                 case DIR_LEFT:
                     _velocity = CC3VectorMake(-_speed, 0, 0);
+                    _dir = DIR_LEFT;
                     break;
                 case DIR_UP:
                     _velocity = CC3VectorMake(0, 0, -_speed);
+                    _dir = DIR_UP;
                     break;
                 case DIR_DOWN:
                     _velocity = CC3VectorMake(0, 0, _speed);
+                    _dir = DIR_DOWN;
                     break;
                 default:
                     NSException* myException = [NSException
@@ -169,33 +179,10 @@ NSString *SnakeColor_name = @"color";
                     @throw myException;
                     break;
             }
-            
-            
         }
         [self setRotatetionMat:[CC3GLMatrix identity]];
         [_rotatetionMat rotateByY:_currentRotatoinAngle];
     }
-        //CC3Vector tempPos = CC3VectorAdd(_position, CC3VectorScale(_velocity, CC3VectorMake(stepsBeforeTurn, stepsBeforeTurn, stepsBeforeTurn)));
-        //DIRECTION nextTurnDir = turnPos.nextTurnDir;
-        //to avoid floating point problems
-//        tempPos.x *= 100;
-//        tempPos.z *= 100;
-//        nextTurnPos.x *= 100;
-//        nextTurnPos.z *= 100;
-//        tempPos.x = roundf(tempPos.x);
-//        tempPos.z = roundf(tempPos.z);
-//        nextTurnPos.x = roundf(nextTurnPos.x);
-//        nextTurnPos.z = roundf(nextTurnPos.z);
-//        tempPos.x /= 100;
-//        tempPos.z /= 100;
-//        nextTurnPos.x /= 100;
-//        nextTurnPos.z /= 100;
-        
-        //the position stepsBeforeTurn ahead.
-        
-//        if (tempPos.x == nextTurnPos.x &&
-//            tempPos.z == nextTurnPos.z) {
- 
     _position = CC3VectorAdd(_position,_velocity);
     //NSLog(@"id:%d pos.z:%f",_myId,_position.z);
 }

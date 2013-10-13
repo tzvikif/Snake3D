@@ -21,6 +21,7 @@
 @property(nonatomic,assign) float currentRotatoinAngle;
 @property(nonatomic,assign) float destAngle;
 @property(nonatomic,assign) DIRECTION nextTurnDir;
+@property(nonatomic,assign) CC3Vector nextTurnPos;
 @property(nonatomic,assign) CC3Vector scaleFactor;
 @property(nonatomic,retain) CC3GLMatrix *rotatetionMat;
 @property(nonatomic,assign) int myId;
