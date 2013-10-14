@@ -28,6 +28,7 @@ NSString *SnakeColor_name = @"color";
     [self setTurnsAndPositions:arrTemp];
     [arrTemp release];
     [self setRotatetionMat:[CC3GLMatrix identity]];
+    _isDrawEnabled = YES;
 
 }
 -(void)Render {
@@ -80,7 +81,9 @@ NSString *SnakeColor_name = @"color";
     //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
+    if (_isDrawEnabled) {
+        glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
+    }
 }
 -(void)advance {
     static int maxStepsBeforeTurn = ceil(1.0/_speed); //cube size/speed

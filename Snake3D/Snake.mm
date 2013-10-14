@@ -157,7 +157,7 @@ float lerp(float a,float b,float blend) {
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;
     CC3Vector pos;
-    _initScales = (CC3Vector*)malloc(sizeof(CC3Vector) * [_bodyParts count]);
+    _initScales = (CC3Vector*)malloc(sizeof(CC3Vector) * _bpCount);
     [self setPosition:CC3VectorMake(2.5, 0.5, 1.5)];
     //[bp setScaleFactor:(N/2.0)/2.0];
     float bsf = 1.0/2.0; //base scale factor
@@ -167,7 +167,7 @@ float lerp(float a,float b,float blend) {
         [bp setSpeed:_speed];
         [bp initResources];
         CC3Vector currentScale = CC3VectorMake(bsf-i*0.02, bsf, bsf);
-        _initScales[i] = CC3VectorM
+        _initScales[i] = currentScale;
         [bp setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
         pos = _position;
         pos.z = _position.z + i;
@@ -220,27 +220,42 @@ float lerp(float a,float b,float blend) {
             break;
         }
     }
+    if(collisitionStatus == NO) {
+        BodyPart *bp = [_bodyParts objectAtIndex:0];
+        CC3Vector objPos = bp.position;
+        if (objPos.x > N/2.0 - 0.5 || objPos.x < -N/2.0 + 0.5 ||
+            objPos.z > N/.0 - 0.5 || objPos.z < -N/2.0 + 0.5) {
+            collisitionStatus = YES;
+        }
+    }
     return collisitionStatus;
 }
 -(void)oops:(NSTimeInterval)timeElappsed{
-    static float total = 2.0;
-    if (_totalTimeElapsed > total) {
-        _totalTimeElapsed = 0;
+    static float total = 0.3;
+    if (_totalTimeElapsed >= total) {
+        //_totalTimeElapsed = 0;
+        for (BodyPart *bp in _bodyParts) {
+            [bp setIsDrawEnabled:NO];
+        }
         return;
     }
     
     _totalTimeElapsed += timeElappsed;
+    if (_totalTimeElapsed > total) {
+        _totalTimeElapsed = total;
+    }
  
     float scaleX,scaleY,scaleZ;
     BodyPart *bp;
     for (int i=0; i<_bpCount; i++) {
         bp = [_bodyParts objectAtIndex:i];
         CC3Vector scaleFactor = _initScales[i];
-        scaleX = lerp(0.0, scaleFactor.x, timeElappsed/total);
-        scaleY = lerp(0, scaleFactor.y, timeElappsed/total);
-        scaleZ = lerp(0, scaleFactor.z, timeElappsed/total);
+        scaleX = lerp(0.0, scaleFactor.x, _totalTimeElapsed/total);
+        scaleY = lerp(0, scaleFactor.y, _totalTimeElapsed/total);
+        //scaleZ = lerp(0, scaleFactor.z, timeElappsed/total);
     
-        scaleFactor = CC3VectorScale(scaleFactor, CC3VectorMake(scaleX, scaleY, scaleZ));
+        scaleFactor = CC3VectorMake(scaleFactor.x, scaleY, scaleFactor.z);
+        //NSLog(@"scaleX=%f scaleY=%f scaleZ=%f totalTime=%f",scaleX,scaleY,scaleFactor.z,_totalTimeElapsed);
         [bp setScaleFactor:scaleFactor];
     }
 }

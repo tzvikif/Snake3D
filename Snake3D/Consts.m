@@ -15,3 +15,5 @@ float DOWN_DIR_ANGLE = 180;
 float LEFT_DIR_ANGLE = 90;
 float RIGHT_DIR_ANGLE = 270;
 
+float const totalOrientationTime = 1.0;
+

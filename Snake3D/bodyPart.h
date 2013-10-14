@@ -27,6 +27,7 @@
 @property(nonatomic,assign) int myId;
 @property(nonatomic,assign) float speed;
 @property(nonatomic,retain) NSMutableArray *turnsAndPositions;
+@property(nonatomic,assign) BOOL isDrawEnabled;
 -(void)addTurnDirection:(DIRECTION)dir inPosition:(CC3Vector)pos;
 -(void)advance;
 @end

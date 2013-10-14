@@ -56,5 +56,14 @@
     [obj Render];
     }
 }
+-(void)applyView:(CC3Vector*)arr to:(NSArray*)renderables {
+    CC3Vector lookAt = arr[0];
+    CC3Vector eyeAt = arr[1];
+    CC3Vector up = arr[2];
+    [_matView populateToLookAt:lookAt withEyeAt:eyeAt withUp:up];
+    for (Node *obj in renderables) {
+        [obj setViewMatrix:_matView];
+    }
+}
 
 @end

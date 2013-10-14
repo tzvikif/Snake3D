@@ -17,8 +17,26 @@
 
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
+-(ORIENTATION)getOrientation:(CC3Vector)pos;
+-(void)updateSceneOrientation:(NSTimeInterval)timeElapsed;
 @end
 float speed = 0.05;
+//UL
+CC3Vector ul_lookAt = CC3VectorMake(-8.0, 1.0, -8.0);
+CC3Vector ul_eyeAt = CC3VectorMake(-8.0, 8.0, 8.0);
+CC3Vector ul_up = CC3VectorMake(0.0, 1.0, 0.0);
+//UR
+CC3Vector ur_lookAt = CC3VectorMake(8.0, 1.0, -8.0);
+CC3Vector ur_eyeAt = CC3VectorMake(8.0, 8.0, 8.0);
+CC3Vector ur_up = CC3VectorMake(0.0, 1.0, 0.0);
+//BL
+CC3Vector bl_lookAt = CC3VectorMake(-8.0, 1.0, 0.0);
+CC3Vector bl_eyeAt = CC3VectorMake(-8.0, 8.0, 22.0);
+CC3Vector bl_up = CC3VectorMake(0.0, 1.0, 0.0);
+//BR
+CC3Vector br_lookAt = CC3VectorMake(8.0, 1.0, 0.0);
+CC3Vector br_eyeAt = CC3VectorMake(8.0, 8.0, 22.0);
+CC3Vector br_up = CC3VectorMake(0.0, 1.0, 0.0);
 GLfloat cube_verticesX[] = {
     // front
     -1.0, -1.0,  1.0,
@@ -184,6 +202,8 @@ GLfloat cube_normals[] = {
 
 -(void)initialize:(CGRect)viewport {
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
+    _orient = ORTN_UR;
+    _newOrient = ORTN_NONE;
     NSMutableArray *maTemp = [[NSMutableArray alloc] init];
     [self setRenderables:maTemp];
     [maTemp release];
@@ -224,6 +244,8 @@ GLfloat cube_normals[] = {
 -(void)Render {
     [_renderingEngine Render:_renderables];
 }
+//updateAnimation: is called after Render()
+//paramters: timeElapsed - time elapsed after last frame.
 -(void)updateAnimation:(NSTimeInterval)timeElapsed {
     Snake *snk = [_renderables objectAtIndex:0];
     BOOL isCollide = [snk isCollideWithPosition:snk.position];
@@ -232,6 +254,18 @@ GLfloat cube_normals[] = {
     }
     else {
         [snk oops:timeElapsed];
+    }
+    if (_newOrient != ORTN_NONE) {
+        _orient = _newOrient;
+        [self updateSceneOrientation:timeElapsed];
+    }
+    else
+    {
+        ORIENTATION snakeOrientation = [self getOrientation:snk.position];
+        if (_orient != snakeOrientation) {
+            _newOrient = snakeOrientation;
+            NSLog(@"new orientation:%d",_newOrient);
+        }
     }
 }
 -(void)updateOffset_x:(GLfloat)delta {
@@ -270,8 +304,6 @@ GLfloat cube_normals[] = {
             //NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
         }
     }
-    
-    
 //    GLushort *elements = malloc(sizeof(GLushort)* (N-1)*(N-1)*6);
 //    GLushort index = 0;
 //    for (int i=0; i< N-1; i++) {
@@ -357,7 +389,6 @@ GLfloat cube_normals[] = {
 }
 -(void)setDir:(DIRECTION)dir {
     Snake *snk = [_renderables objectAtIndex:0];
-    float speed = snk.speed;
     CC3Vector pos = snk.position;
     
     DIRECTION currentDir = snk.dir;
@@ -411,7 +442,91 @@ GLfloat cube_normals[] = {
         default:
             break;
     }
-
+}
+-(ORIENTATION)getOrientation:(CC3Vector)pos; {
+    ORIENTATION tempOrien;
+    if (pos.x > 0 && pos.z < 0) {
+        tempOrien = ORTN_UR;
+    }
+    if (pos.x < 0 && pos.z < 0) {
+        tempOrien = ORTN_UL;
+    }
+    if (pos.x > 0 && pos.z > 0) {
+        tempOrien = ORTN_BR;
+    }
+    if (pos.x < 0 && pos.z > 0) {
+        tempOrien = ORTN_BL;
+    }
+    return tempOrien;
+}
+-(void)updateSceneOrientation:(NSTimeInterval)timeElapsed {
+    _orientationTimeElapsed += timeElapsed;
+    NSLog(@"_orientationTimeElapsed:%f",_orientationTimeElapsed);
+    if (_orientationTimeElapsed > totalOrientationTime) {
+        _orientationTimeElapsed = 0;
+        _newOrient = ORTN_NONE;
+    }
+    CC3Vector slookAt,seyeAt,sup;   //source
+    CC3Vector dlookAt,deyeAt,dup;   //destination
+    CC3Vector clookAt,ceyeAt,cup;   //current
+    switch (_orient) {
+        case ORTN_UL:
+            slookAt = ul_lookAt;
+            seyeAt = ul_eyeAt;
+            sup = ul_up;
+            break;
+        case ORTN_UR:
+            slookAt = ur_lookAt;
+            seyeAt = ur_eyeAt;
+            sup = ur_up;
+            break;
+        case ORTN_BL:
+            slookAt = bl_lookAt;
+            seyeAt = bl_eyeAt;
+            sup = bl_up;
+            break;
+        case ORTN_BR:
+            slookAt = br_lookAt;
+            seyeAt = br_eyeAt;
+            sup = br_up;
+            break;
+            
+        default:
+            break;
+    }
+    switch (_newOrient) {
+        case ORTN_UL:
+            dlookAt = ul_lookAt;
+            deyeAt = ul_eyeAt;
+            dup = ul_up;
+            break;
+        case ORTN_UR:
+            dlookAt = ur_lookAt;
+            deyeAt = ur_eyeAt;
+            dup = ur_up;
+            break;
+        case ORTN_BL:
+            dlookAt = bl_lookAt;
+            deyeAt = bl_eyeAt;
+            dup = bl_up;
+            break;
+        case ORTN_BR:
+            dlookAt = br_lookAt;
+            deyeAt = br_eyeAt;
+            dup = br_up;
+            break;
+        default:
+            break;
+    }
+    clookAt = CC3VectorLerp(slookAt, dlookAt, _orientationTimeElapsed/totalOrientationTime);
+    ceyeAt = CC3VectorLerp(seyeAt, deyeAt, _orientationTimeElapsed/totalOrientationTime);
+    cup = CC3VectorLerp(sup, dup, _orientationTimeElapsed/totalOrientationTime);
+    CC3Vector arr[3];
+    arr[0] = clookAt;
+    arr[1] = ceyeAt;
+    arr[2] = cup;
+    NSLog(@"_orientationTimeElapsed=%f eyeAtX=%f eyeAtZ=%f",_orientationTimeElapsed,ceyeAt.x,ceyeAt.z);
+    [_renderingEngine applyView:arr to:_renderables];
     
 }
 -(void)dealloc {

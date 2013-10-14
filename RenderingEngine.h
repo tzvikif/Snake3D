@@ -26,4 +26,5 @@
 -(void)initialize:(CGRect)viewport andProgram:(NSMutableDictionary*)programs;
 -(void)Render:(NSArray*)renderables;
 -(void)initResources:(NSArray*)renderables;
+-(void)applyView:(CC3Vector*)arr to:(NSArray*)renderables;
 @end

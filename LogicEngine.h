@@ -23,15 +23,14 @@
 @class GLProgram;
 
 @interface LogicEngine : NSObject
-//@property(nonatomic,retain) Floor *floorObj;
 @property(nonatomic,retain) NSMutableArray *renderables;
-//@property(nonatomic,retain) Mesh *meshFloor;
-//@property(nonatomic,retain) Drawable *cubeDrawable;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
-//@property(retain,nonatomic) GLProgram *program1;
 @property(retain,nonatomic) NSMutableDictionary *programs;
 @property(assign,nonatomic) NSTimeInterval timeBetweenSteps;
-//@property(assign,nonatomic) DIRECTION dir;
+@property(nonatomic,assign) ORIENTATION orient;
+@property(nonatomic,assign) ORIENTATION newOrient;
+@property(nonatomic,assign) BOOL inOrientationAnimation;
+@property(nonatomic,assign) float orientationTimeElapsed;
 
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;
