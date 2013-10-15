@@ -187,7 +187,6 @@ NSString *SnakeColor_name = @"color";
         [_rotatetionMat rotateByY:_currentRotatoinAngle];
     }
     _position = CC3VectorAdd(_position,_velocity);
-    //NSLog(@"id:%d pos.z:%f",_myId,_position.z);
 }
 -(void)addTurnDirection:(DIRECTION)dir inPosition:(CC3Vector)pos {
     TurnPosition *tp = [[TurnPosition alloc] init];

@@ -140,11 +140,11 @@ float lerp(float a,float b,float blend) {
     return  (blend*a + (1-blend)*b);
     
 }
-
+float bsf = 1.0/2.0;
 @implementation Snake
 
 -(void)initResources {
-    _bpCount = 15;
+    _bpCount = 25;
     _totalTimeElapsed = 0;
     _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
@@ -160,7 +160,7 @@ float lerp(float a,float b,float blend) {
     _initScales = (CC3Vector*)malloc(sizeof(CC3Vector) * _bpCount);
     [self setPosition:CC3VectorMake(2.5, 0.5, 1.5)];
     //[bp setScaleFactor:(N/2.0)/2.0];
-    float bsf = 1.0/2.0; //base scale factor
+    //float bsf = 1.0/2.0; //base scale factor
     for (int i=0; i<_bpCount; i++) {
         bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
         [bp setMyId:i];
@@ -208,7 +208,6 @@ float lerp(float a,float b,float blend) {
     BodyPart *bp = [_bodyParts objectAtIndex:0];
     _position = bp.position;
     _dir = bp.dir;
-    //NSLog(@"px=%f pz=%f",_position.x,_position.y);
 }
 -(BOOL)isCollideWithPosition:(CC3Vector)pos {
     BOOL collisitionStatus = NO;
@@ -259,5 +258,37 @@ float lerp(float a,float b,float blend) {
         //NSLog(@"scaleX=%f scaleY=%f scaleZ=%f totalTime=%f",scaleX,scaleY,scaleFactor.z,_totalTimeElapsed);
         [bp setScaleFactor:scaleFactor];
     }
+}
+-(void)addBodyPart {
+    Mesh *meshCube = [[Mesh alloc] init];
+    [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:SnakeCube_elements indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
+   verticesNumberOfElemets:sizeof(SnakeCube_verticesY)/sizeof(SnakeCube_verticesY[0])/3];
+    Drawable *drwblTemp = [Drawable createDrawable:meshCube];
+    Material *materialTemp = [[Material alloc] init];
+    BodyPart *bp;
+    CC3Vector pos;
+    bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
+    //[bp setMyId:i];
+    [bp setSpeed:_speed];
+    [bp initResources];
+    CC3Vector currentScale = CC3VectorMake(bsf-([_bodyParts count]-1)*0.02, bsf, bsf);
+    CC3Vector *tempScale = (CC3Vector*)malloc(sizeof(CC3Vector) * ([_bodyParts count]+1));
+    memcpy(tempScale, _initScales, sizeof(CC3Vector)*[_bodyParts count]);
+    
+    tempScale[[_bodyParts count]] = currentScale;
+    free(_initScales);
+    _initScales = tempScale;
+    [bp setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
+    BodyPart *tail = [_bodyParts objectAtIndex:[_bodyParts count]-1];
+    CC3Vector tailPos = tail.position;
+    CC3Vector tailVelosity = tail.velocity;
+    CC3Vector newPartPos = CC3VectorAdd(tailPos, CC3VectorScale(CC3VectorNegate(tailVelosity),
+                                                                CC3VectorMake(1.0/tailVelosity.x, 1.0/tailVelosity.y, 1.0/tailVelosity.z)));
+    CC3GLMatrix *rotationMat = tail.rotatetionMat;
+    [bp setPosition:newPartPos];
+    [bp setViewMatrix:self.viewMatrix];
+    [bp setProjectionMatrix:self.projectionMatrix];
+    [bp setRotatetionMat:rotationMat];
+    [_bodyParts addObject:bp];
 }
 @end

@@ -21,5 +21,6 @@
 -(void)setDir:(DIRECTION)dir andPosition:(CC3Vector)pos;
 -(BOOL)isCollideWithPosition:(CC3Vector)pos;
 -(void)oops:(NSTimeInterval)timeElappsed;
+-(void)addBodyPart;
 -(void)advance;
 @end

@@ -19,8 +19,9 @@
 -(void)createFloor:(Mesh*)floorMesh;
 -(ORIENTATION)getOrientation:(CC3Vector)pos;
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed;
+-(CC3Vector)createFood;
 @end
-float speed = 0.05;
+float speed = 0.1;
 //UL
 CC3Vector ul_lookAt = CC3VectorMake(-8.0, 1.0, -8.0);
 CC3Vector ul_eyeAt = CC3VectorMake(-12.0, 10.0, 10.0);
@@ -263,7 +264,7 @@ GLfloat cube_normals[] = {
         ORIENTATION snakeOrientation = [self getOrientation:snk.position];
         if (_orient != snakeOrientation) {
             _newOrient = snakeOrientation;
-            NSLog(@"new orientation:%d",_newOrient);
+            //NSLog(@"new orientation:%d",_newOrient);
         }
     }
 }
@@ -443,24 +444,27 @@ GLfloat cube_normals[] = {
     }
 }
 -(ORIENTATION)getOrientation:(CC3Vector)pos; {
-    ORIENTATION tempOrien;
-    if (pos.x > 0 && pos.z < 0) {
+    ORIENTATION tempOrien = ORTN_NONE;
+    if (pos.x > 0 && pos.z <= 0) {
         tempOrien = ORTN_UR;
     }
-    if (pos.x < 0 && pos.z < 0) {
+    if (pos.x <= 0 && pos.z <= 0) {
         tempOrien = ORTN_UL;
     }
     if (pos.x > 0 && pos.z > 0) {
         tempOrien = ORTN_BR;
     }
-    if (pos.x < 0 && pos.z > 0) {
+    if (pos.x <= 0 && pos.z > 0) {
         tempOrien = ORTN_BL;
+    }
+    if (tempOrien == ORTN_NONE) {
+        NSLog(@"new orientation error. x=%f z=%f", pos.x,pos.z);
     }
     return tempOrien;
 }
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed {
     _orientationTimeElapsed += timeElapsed;
-    NSLog(@"_orientationTimeElapsed:%f",_orientationTimeElapsed);
+    NSLog(@"before updateSceneOrientation");
     if (_orientationTimeElapsed > totalOrientationTime) {
         _orientationTimeElapsed = 0;
         _orient = _newOrient;
@@ -499,6 +503,7 @@ GLfloat cube_normals[] = {
             break;
             break;
     }
+   
     switch (_newOrient) {
         case ORTN_UL:
             dlookAt = ul_lookAt;
@@ -531,6 +536,7 @@ GLfloat cube_normals[] = {
             @throw myException;
             break;
     }
+     NSLog(@"after updateSceneOrientation");
     clookAt = CC3VectorLerp(slookAt, dlookAt, _orientationTimeElapsed/totalOrientationTime);
     ceyeAt = CC3VectorLerp(seyeAt, deyeAt, _orientationTimeElapsed/totalOrientationTime);
     cup = CC3VectorLerp(sup, dup, _orientationTimeElapsed/totalOrientationTime);
@@ -539,8 +545,18 @@ GLfloat cube_normals[] = {
     arr[1] = ceyeAt;
     arr[2] = cup;
     //NSLog(@"_orientationTimeElapsed=%f eyeAtX=%f eyeAtZ=%f",_orientationTimeElapsed,ceyeAt.x,ceyeAt.z);
+    
     [_renderingEngine applyView:arr to:_renderables];
     
+}
+-(CC3Vector)createFood {
+    BOOL emptySpot = NO;
+    int x,z;
+    while (emptySpot) {
+        x = rand() % N;
+        z = rand() % N;
+        
+    }
 }
 -(void)dealloc {
     [_programs release];
