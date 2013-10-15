@@ -23,19 +23,19 @@
 float speed = 0.05;
 //UL
 CC3Vector ul_lookAt = CC3VectorMake(-8.0, 1.0, -8.0);
-CC3Vector ul_eyeAt = CC3VectorMake(-8.0, 8.0, 8.0);
+CC3Vector ul_eyeAt = CC3VectorMake(-12.0, 10.0, 10.0);
 CC3Vector ul_up = CC3VectorMake(0.0, 1.0, 0.0);
 //UR
-CC3Vector ur_lookAt = CC3VectorMake(8.0, 1.0, -8.0);
-CC3Vector ur_eyeAt = CC3VectorMake(8.0, 8.0, 8.0);
+CC3Vector ur_lookAt = CC3VectorMake(6.0, 1.0, -8.0);
+CC3Vector ur_eyeAt = CC3VectorMake(14.0, 10.0, 10.0);
 CC3Vector ur_up = CC3VectorMake(0.0, 1.0, 0.0);
 //BL
-CC3Vector bl_lookAt = CC3VectorMake(-8.0, 1.0, 0.0);
-CC3Vector bl_eyeAt = CC3VectorMake(-8.0, 8.0, 22.0);
+CC3Vector bl_lookAt = CC3VectorMake(-5.0, 1.0, 0.0);
+CC3Vector bl_eyeAt = CC3VectorMake(-13.0, 10.0, 24.0);
 CC3Vector bl_up = CC3VectorMake(0.0, 1.0, 0.0);
 //BR
-CC3Vector br_lookAt = CC3VectorMake(8.0, 1.0, 0.0);
-CC3Vector br_eyeAt = CC3VectorMake(8.0, 8.0, 22.0);
+CC3Vector br_lookAt = CC3VectorMake(5.0, 1.0, 0.0);
+CC3Vector br_eyeAt = CC3VectorMake(12.0, 10.0, 24.0);
 CC3Vector br_up = CC3VectorMake(0.0, 1.0, 0.0);
 GLfloat cube_verticesX[] = {
     // front
@@ -202,7 +202,7 @@ GLfloat cube_normals[] = {
 
 -(void)initialize:(CGRect)viewport {
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
-    _orient = ORTN_UR;
+    _orient = ORTN_BR;
     _newOrient = ORTN_NONE;
     NSMutableArray *maTemp = [[NSMutableArray alloc] init];
     [self setRenderables:maTemp];
@@ -256,7 +256,6 @@ GLfloat cube_normals[] = {
         [snk oops:timeElapsed];
     }
     if (_newOrient != ORTN_NONE) {
-        _orient = _newOrient;
         [self updateSceneOrientation:timeElapsed];
     }
     else
@@ -464,6 +463,7 @@ GLfloat cube_normals[] = {
     NSLog(@"_orientationTimeElapsed:%f",_orientationTimeElapsed);
     if (_orientationTimeElapsed > totalOrientationTime) {
         _orientationTimeElapsed = 0;
+        _orient = _newOrient;
         _newOrient = ORTN_NONE;
     }
     CC3Vector slookAt,seyeAt,sup;   //source
@@ -490,8 +490,13 @@ GLfloat cube_normals[] = {
             seyeAt = br_eyeAt;
             sup = br_up;
             break;
-            
         default:
+            NSException* myException = [NSException
+                                        exceptionWithName:@"orientation error"
+                                        reason:[NSString stringWithFormat:@"%d: invalid orientation",_orient]
+                                        userInfo:nil];
+            @throw myException;
+            break;
             break;
     }
     switch (_newOrient) {
@@ -515,7 +520,15 @@ GLfloat cube_normals[] = {
             deyeAt = br_eyeAt;
             dup = br_up;
             break;
+            case ORTN_NONE:
+            //nothing to do.
+            break;
         default:
+            NSException* myException = [NSException
+                                        exceptionWithName:@"orientation error"
+                                        reason:[NSString stringWithFormat:@"%d: invalid new orientation",_newOrient]
+                                        userInfo:nil];
+            @throw myException;
             break;
     }
     clookAt = CC3VectorLerp(slookAt, dlookAt, _orientationTimeElapsed/totalOrientationTime);
@@ -525,7 +538,7 @@ GLfloat cube_normals[] = {
     arr[0] = clookAt;
     arr[1] = ceyeAt;
     arr[2] = cup;
-    NSLog(@"_orientationTimeElapsed=%f eyeAtX=%f eyeAtZ=%f",_orientationTimeElapsed,ceyeAt.x,ceyeAt.z);
+    //NSLog(@"_orientationTimeElapsed=%f eyeAtX=%f eyeAtZ=%f",_orientationTimeElapsed,ceyeAt.x,ceyeAt.z);
     [_renderingEngine applyView:arr to:_renderables];
     
 }

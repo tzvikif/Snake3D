@@ -38,3 +38,4 @@ typedef enum _ORIENTATION {
 }ORIENTATION;
 
 float lerp(float a,float b,float blend);
+

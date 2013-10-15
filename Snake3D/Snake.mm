@@ -223,8 +223,9 @@ float lerp(float a,float b,float blend) {
     if(collisitionStatus == NO) {
         BodyPart *bp = [_bodyParts objectAtIndex:0];
         CC3Vector objPos = bp.position;
-        if (objPos.x > N/2.0 - 0.5 || objPos.x < -N/2.0 + 0.5 ||
-            objPos.z > N/.0 - 0.5 || objPos.z < -N/2.0 + 0.5) {
+        //in case N is even the right most point(the x axis) is N/2 - 1.
+        if (objPos.x > trunc((N-1)/2.0) - 0.5 || objPos.x < -N/2.0 + 0.5 || 
+            objPos.z > trunc((N-1)/2.0) - 0.5 || objPos.z < -N/2.0 + 0.5) {
             collisitionStatus = YES;
         }
     }
