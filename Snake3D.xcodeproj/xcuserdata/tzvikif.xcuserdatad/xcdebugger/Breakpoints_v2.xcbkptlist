@@ -40,13 +40,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403306789.142836"
+            timestampString = "403562806.357338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
-            landmarkName = "-createFloor:"
-            landmarkType = "5">
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "@implementation LogicEngine"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403306789.142836"
+            timestampString = "403562806.357338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "-createFloor:"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,12 +136,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403306789.142836"
+            timestampString = "403562806.357338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-updateAnimation:"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "-initialize:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -157,7 +157,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "213"
             endingLineNumber = "213"
-            landmarkName = "-advance"
+            landmarkName = "-isCollideWithPosition:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -200,12 +200,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403306789.142836"
+            timestampString = "403562806.357338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
-            landmarkName = "-setDir:"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "-createFloor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -221,7 +221,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "202"
             endingLineNumber = "202"
-            landmarkName = "-addTurnDirection:inPosition:"
+            landmarkName = "-dealloc"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -244,22 +244,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Snake3D/BodyPart.mm"
-            timestampString = "403311026.655263"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-advance"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -271,6 +255,32 @@
             endingLineNumber = "148"
             landmarkName = "-advance"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LogicEngine.mm"
+            timestampString = "403563248.552026"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "-updateAnimation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
