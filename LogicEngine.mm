@@ -551,12 +551,19 @@ GLfloat cube_normals[] = {
 }
 -(CC3Vector)createFood {
     BOOL emptySpot = NO;
+    CC3Vector pos;
     int x,z;
     while (emptySpot) {
         x = rand() % N;
         z = rand() % N;
-        
+        Snake *snk = [_renderables objectAtIndex:0];
+        pos = CC3VectorMake(x+0.5, 0.5, z+0.5);
+        BOOL isCollide = [snk isCollideWithPosition:pos];
+        if (isCollide == NO) {
+            emptySpot = YES;
+        }
     }
+    return pos;
 }
 -(void)dealloc {
     [_programs release];

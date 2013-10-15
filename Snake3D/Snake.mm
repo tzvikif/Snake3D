@@ -211,7 +211,7 @@ float bsf = 1.0/2.0;
 }
 -(BOOL)isCollideWithPosition:(CC3Vector)pos {
     BOOL collisitionStatus = NO;
-    for (int i=3; i<[_bodyParts count]; i++) {
+    for (int i=2; i<[_bodyParts count]; i++) {
         BodyPart *bp = [_bodyParts objectAtIndex:i];
         CC3Vector objPos = bp.position;
         if ((objPos.x - pos.x < 1.0 && objPos.x - pos.x > -1.0) && (objPos.z - pos.z < 1.0 && objPos.z - pos.z > -1.0)) {
