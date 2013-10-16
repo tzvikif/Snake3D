@@ -72,9 +72,9 @@ verticesNumberOfElemets:(GLuint)vnoe;
             indices:(GLushort*)elements
             indicesNumberOfElemets:(GLuint)inoe
             verticesNumberOfElemets:(GLuint)vnoe;
--(void)loadVertices:(GLfloat*)v
-              color:(GLfloat*)c
-            indices:(GLushort*)elements
+-(void)loadVertices:(const GLfloat*)v
+              color:(const GLfloat*)c
+            indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
 -(void)loadVertices:(GLfloat*)v

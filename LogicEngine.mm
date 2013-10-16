@@ -13,174 +13,15 @@
 #import "Snake.h"
 #import "GLProgram.h"
 #import "Vectors.h"
+#import "Food.h"
 #import <math.h>
 
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
 -(ORIENTATION)getOrientation:(CC3Vector)pos;
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed;
--(CC3Vector)createFood;
+-(Food*)createFood;
 @end
-//GLfloat cube_verticesX[] = {
-//    // front
-//    -1.0, -1.0,  1.0,
-//    1.0, -1.0,  1.0,
-//    1.0,  1.0,  1.0,
-//    -1.0,  1.0,  1.0,
-//    // top
-//    -1.0,  1.0,  1.0,
-//    1.0,  1.0,  1.0,
-//    1.0,  1.0, -1.0,
-//    -1.0,  1.0, -1.0,
-//    // back
-//    1.0, -1.0, -1.0,
-//    -1.0, -1.0, -1.0,
-//    -1.0,  1.0, -1.0,
-//    1.0,  1.0, -1.0,
-//    // bottom
-//    -1.0, -1.0, -1.0,
-//    1.0, -1.0, -1.0,
-//    1.0, -1.0,  1.0,
-//    -1.0, -1.0,  1.0,
-//    // left
-//    -1.0, -1.0, -1.0,
-//    -1.0, -1.0,  1.0,
-//    -1.0,  1.0,  1.0,
-//    -1.0,  1.0, -1.0,
-//    // right
-//    1.0, -1.0,  1.0,
-//    1.0, -1.0, -1.0,
-//    1.0,  1.0, -1.0,
-//    1.0,  1.0,  1.0,
-//};
-//GLfloat cube_vertices[] = {
-//    // front
-//    -1.0, -1.0,  -0.5,
-//    1.0, -1.0,  -0.5,
-//    0.0,  1.0,  -0.5,
-//    -1.0,  1.0,  -0.5,
-//};
-//GLfloat cube_colorsX[] = {
-//    // front colors
-//    1.0, 0.0, 0.0,
-//    0.0, 1.0, 0.0,
-//    0.0, 0.0, 1.0,
-//    1.0, 1.0, 1.0,
-//    // back colors
-//    1.0, 0.0, 0.0,
-//    0.0, 1.0, 0.0,
-//    0.0, 0.0, 1.0,
-//    1.0, 1.0, 1.0,
-//    //
-//    1.0, 0.0, 0.0,
-//    0.0, 1.0, 0.0,
-//    0.0, 0.0, 1.0,
-//    1.0, 1.0, 1.0,
-//    //
-//    1.0, 0.0, 0.0,
-//    0.0, 1.0, 0.0,
-//    0.0, 0.0, 1.0,
-//    1.0, 1.0, 1.0,
-//    //
-//    1.0, 0.0, 0.0,
-//    0.0, 1.0, 0.0,
-//    0.0, 0.0, 1.0,
-//    1.0, 1.0, 1.0,
-//    //
-//    1.0, 0.0, 0.0,
-//    0.0, 1.0, 0.0,
-//    0.0, 0.0, 1.0,
-//    1.0, 1.0, 1.0,
-//};
-//GLushort cube_elementsX[] = {
-//    // front
-//    0,  1,  2,
-//    2,  3,  0,
-//    // top
-//    4,  5,  6,
-//    6,  7,  4,
-//    // back
-//    8,  9, 10,
-//    10, 11,  8,
-//    // bottom
-//    12, 13, 14,
-//    14, 15, 12,
-//    // left
-//    16, 17, 18,
-//    18, 19, 16,
-//    // right
-//    20, 21, 22,
-//    22, 23, 20,
-//};
-//GLushort cube_elements[] = {
-//    // front
-//    0,  1,  2,
-//    2,  3,  0,
-// };
-//GLfloat cube_colors[] = {
-//    // front colors
-//    1.0, 0.0, 0.3,
-//    0.2, 1.0, 0.0,
-//    0.0, 1.0, 1.0,
-//    0.3, 1.0, 0.7,
-//};
-//
-//GLfloat cube_texcoords[2*4*6] = {
-//    // front
-//    0.0, 0.0,
-//    1.0, 0.0,
-//    1.0, 1.0,
-//    0.0, 1.0,
-//};
-//GLfloat cube_normals[] = {
-//    0.000000,0.000000,4.000000,
-//    
-//    0.000000,0.000000,4.000000,
-//    
-//    0.000000,0.000000,4.000000,
-//    
-//    0.000000,0.000000,4.000000,
-//    
-//    0.000000,4.000000,0.000000,
-//    
-//    -0.000000,4.000000,0.000000,
-//    
-//    0.000000,4.000000,0.000000,
-//    
-//    0.000000,4.000000,0.000000,
-//    
-//    0.000000,0.000000,-4.000000,
-//    
-//    0.000000,0.000000,-4.000000,
-//    
-//    0.000000,0.000000,-4.000000,
-//    
-//    0.000000,0.000000,-4.000000,
-//    
-//    -0.000000,-4.000000,0.000000,
-//    
-//    0.000000,-4.000000,0.000000,
-//    
-//    -0.000000,-4.000000,0.000000,
-//    
-//    -0.000000,-4.000000,0.000000,
-//    
-//    -4.000000,0.000000,-0.000000,
-//    
-//    -4.000000,0.000000,0.000000,
-//    
-//    -4.000000,0.000000,-0.000000,
-//    
-//    -4.000000,0.000000,-0.000000,
-//    
-//    4.000000,0.000000,-0.000000,
-//    
-//    4.000000,0.000000,0.000000,
-//    
-//    4.000000,0.000000,-0.000000,
-//    
-//    4.000000,0.000000,-0.000000
-//};
 
 @implementation LogicEngine
 
@@ -447,7 +288,6 @@
 }
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed {
     _orientationTimeElapsed += timeElapsed;
-    NSLog(@"before updateSceneOrientation");
     if (_orientationTimeElapsed > totalOrientationTime) {
         _orientationTimeElapsed = 0;
         _orient = _newOrient;
@@ -519,7 +359,6 @@
             @throw myException;
             break;
     }
-     NSLog(@"after updateSceneOrientation");
     clookAt = CC3VectorLerp(slookAt, dlookAt, _orientationTimeElapsed/totalOrientationTime);
     ceyeAt = CC3VectorLerp(seyeAt, deyeAt, _orientationTimeElapsed/totalOrientationTime);
     cup = CC3VectorLerp(sup, dup, _orientationTimeElapsed/totalOrientationTime);
@@ -532,7 +371,9 @@
     [_renderingEngine applyView:arr to:_renderables];
     
 }
--(CC3Vector)createFood {
+-(Food*)createFood {
+    Food *foodTemp = [[Food alloc] init];
+    [foodTemp initializeWithProgram:self.programs andDrawable:<#(Drawable *)#> andMesh:<#(Mesh *)#> andMaterial:<#(Material *)#> andViewport:<#(CGRect)#>]
     BOOL emptySpot = NO;
     CC3Vector pos;
     int x,z;

@@ -121,9 +121,9 @@ verticesNumberOfElemets:(GLuint)vnoe {
     _vertexStruct = PNC;
 
 }
--(void)loadVertices:(GLfloat*)v
-              color:(GLfloat*)c
-            indices:(GLushort*)elements
+-(void)loadVertices:(const GLfloat*)v
+              color:(const GLfloat*)c
+            indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
     VertexPC *verticesTemp = malloc( sizeof(VertexPC) * ( vnoe ));

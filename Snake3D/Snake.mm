@@ -151,8 +151,11 @@ float bsf = 1.0/2.0;
     [self setBodyParts:ma];
     [ma release];
     Mesh *meshCube = [[Mesh alloc] init];
-    [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:SnakeCube_elements indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
-   verticesNumberOfElemets:sizeof(SnakeCube_verticesY)/sizeof(SnakeCube_verticesY[0])/3];
+    [meshCube loadVertices:SnakeCube_vertices
+                     color:SnakeCube_colors
+                   indices:SnakeCube_elements
+                indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
+                verticesNumberOfElemets:sizeof(SnakeCube_verticesY)/sizeof(SnakeCube_verticesY[0])/3];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;
@@ -214,8 +217,14 @@ float bsf = 1.0/2.0;
     for (int i=2; i<[_bodyParts count]; i++) {
         BodyPart *bp = [_bodyParts objectAtIndex:i];
         CC3Vector objPos = bp.position;
+        TWODIGITS_FP(objPos.x);
+        TWODIGITS_FP(objPos.z);
+        TWODIGITS_FP(pos.x);
+        TWODIGITS_FP(pos.z);
         if ((objPos.x - pos.x < 1.0 && objPos.x - pos.x > -1.0) && (objPos.z - pos.z < 1.0 && objPos.z - pos.z > -1.0)) {
             collisitionStatus = YES;
+           
+            NSLog(@"objPos.x=%f objPos.z=%f pos.x=%f pos.z=%f",objPos.x,objPos.z,pos.x,pos.z);
             break;
         }
     }

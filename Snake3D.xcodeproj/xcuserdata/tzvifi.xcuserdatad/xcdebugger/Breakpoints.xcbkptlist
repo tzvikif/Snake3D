@@ -23,9 +23,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "82"
-         endingLineNumber = "82"
-         landmarkName = "-Render"
-         landmarkType = "5">
+         endingLineNumber = "82">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -37,7 +35,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "16"
          endingLineNumber = "16"
-         landmarkName = "-sizeofVertices"
+         landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -83,26 +81,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LogicEngine.mm"
-         timestampString = "402845125.413406"
+         filePath = "Snake3D/Snake.mm"
+         timestampString = "403600166.86332"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "239"
-         endingLineNumber = "239"
-         landmarkName = "-updateAnimation:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LogicEngine.mm"
-         timestampString = "402845752.337377"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "252"
-         endingLineNumber = "252"
-         landmarkName = "-updateAnimation:"
+         startingLineNumber = "226"
+         endingLineNumber = "226"
+         landmarkName = "-isCollideWithPosition:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

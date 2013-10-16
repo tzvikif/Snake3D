@@ -65,4 +65,6 @@ extern GLushort const cube_elements[];
 extern GLfloat const cube_colors[];
 extern GLfloat const cube_normals[];
 
+#define TWODIGITS_FP(x) x*=100;x=roundf(x);x/=100; //round a number by 2 digits. 5.499993 => 5.500000
+
 
