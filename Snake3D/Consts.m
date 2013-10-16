@@ -75,6 +75,7 @@ GLfloat const cube_vertices[] = {
     0.0,  1.0,  -0.5,
     -1.0,  1.0,  -0.5,
 };
+size_t const cube_verticesSize = sizeof(cube_vertices);
 GLfloat const cube_colorsX[] = {
     // front colors
     1.0, 0.0, 0.0,
@@ -132,6 +133,7 @@ GLushort const cube_elements[] = {
     0,  1,  2,
     2,  3,  0,
 };
+size_t const cube_elementsSize = sizeof(cube_elements);
 GLfloat const cube_colors[] = {
     // front colors
     1.0, 0.0, 0.3,
@@ -196,5 +198,40 @@ GLfloat const cube_normals[] = {
     
     4.000000,0.000000,-0.000000
 };
+
+GLfloat const SnakeCube_verticesY[] = {
+    // front
+    -0.125, -0.125,  0.125,
+    0.125, -0.125,  0.125,
+    0.125,  0.125,  0.125,
+    -0.125,  0.125,  0.125,
+    // top
+    -0.125,  0.125,  0.125,
+    0.125,  0.125,  0.125,
+    0.125,  0.125, -0.125,
+    -0.125,  0.125, -0.125,
+    // back
+    0.125, -0.125, -0.125,
+    -0.125, -0.125, -0.125,
+    -0.125,  0.125, -0.125,
+    0.125,  0.125, -0.125,
+    // bottom
+    -0.125, -0.125, -0.125,
+    0.125, -0.125, -0.125,
+    0.125, -0.125,  0.125,
+    -0.125, -0.125,  0.125,
+    // left
+    -0.125, -0.125, -0.125,
+    -0.125, -0.125,  0.125,
+    -0.125,  0.125,  0.125,
+    -0.125,  0.125, -0.125,
+    // right
+    0.125, -0.125,  0.125,
+    0.125, -0.125, -0.125,
+    0.125,  0.125, -0.125,
+    0.125,  0.125,  0.125,
+};
+size_t const SnakeCube_verticesYSize = sizeof(SnakeCube_verticesY);
+
 
 

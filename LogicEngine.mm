@@ -26,6 +26,7 @@
 @implementation LogicEngine
 
 -(void)initialize:(CGRect)viewport {
+    _viewport = viewport;
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
     _orient = ORTN_BR;
     _newOrient = ORTN_NONE;
@@ -90,6 +91,15 @@
             _newOrient = snakeOrientation;
             //NSLog(@"new orientation:%d",_newOrient);
         }
+    }
+    if (!_isFoodOnBoard) {
+        Food *f = [self createFood];
+        [f setProjectionMatrix:_renderingEngine.matProjection];
+        [f setViewMatrix:_renderingEngine.matView];
+        [f setViewport:_renderingEngine.viewport];
+        [f initResources];
+        [_renderables addObject:f];
+        _isFoodOnBoard = YES;
     }
 }
 -(void)updateOffset_x:(GLfloat)delta {
@@ -373,11 +383,24 @@
 }
 -(Food*)createFood {
     Food *foodTemp = [[Food alloc] init];
-    [foodTemp initializeWithProgram:self.programs andDrawable:<#(Drawable *)#> andMesh:<#(Mesh *)#> andMaterial:<#(Material *)#> andViewport:<#(CGRect)#>]
+    Mesh *foodMeshTemp = [[Mesh alloc] init];
+    [foodMeshTemp loadVertices:cube_vertices
+                         color:cube_colors
+                       indices:cube_elements
+        indicesNumberOfElemets:cube_elementsSize
+       verticesNumberOfElemets:cube_verticesSize];
+    Drawable *DrwFood =  [Drawable createDrawable:foodMeshTemp];
+    Material *foodMaterialTemp = [[Material alloc] init];
+    [foodMaterialTemp setupTexture:@"tile_floor.png"];
+    [foodTemp initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]
+                        andDrawable:DrwFood
+                            andMesh:foodMeshTemp andMaterial:foodMaterialTemp
+                        andViewport:_viewport];
+    
     BOOL emptySpot = NO;
     CC3Vector pos;
     int x,z;
-    while (emptySpot) {
+    while (!emptySpot) {
         x = rand() % N;
         z = rand() % N;
         Snake *snk = [_renderables objectAtIndex:0];
@@ -387,7 +410,8 @@
             emptySpot = YES;
         }
     }
-    return pos;
+    [foodTemp setPosition:pos];
+    return [foodTemp autorelease];
 }
 -(void)dealloc {
     [_programs release];

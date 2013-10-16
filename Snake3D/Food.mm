@@ -9,12 +9,13 @@
 #import "Food.h"
 #import "GLProgram.h"
 #import "Consts.h"
+//#import "Vectors.h"
 
 @implementation Food
 extern NSString *mvp_name;
 NSString *foodAttrib_name = @"gridFloor";
 NSString *foodColor_name = @"color";
-
+float food_bsf = 1.0/2.0;
 -(void)initResources {
     [self.program addAttribute:foodAttrib_name];
     [self.program addUniform:mvp_name];
@@ -36,7 +37,7 @@ NSString *foodColor_name = @"color";
     self.modelMatrix = [CC3GLMatrix identity];
     CC3Vector translateVector = self.position;
     [self.modelMatrix translateBy:translateVector];
-    //[self.modelMatrix scaleBy:self.scaleFactor];
+    [self.modelMatrix scaleBy:CC3VectorMake(food_bsf, food_bsf, food_bsf)];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
     //    NSLog(@"projection %@",[projectionMat description]);

@@ -31,6 +31,8 @@
 @property(nonatomic,assign) ORIENTATION newOrient;
 @property(nonatomic,assign) BOOL inOrientationAnimation;
 @property(nonatomic,assign) float orientationTimeElapsed;
+@property(nonatomic,assign) CGRect viewport;
+@property(nonatomic,assign) BOOL isFoodOnBoard;
 
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;

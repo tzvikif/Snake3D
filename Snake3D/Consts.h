@@ -59,11 +59,16 @@ extern CC3Vector const br_up;
 
 extern GLfloat const cube_verticesX[];
 extern GLfloat const cube_vertices[];
+extern size_t const cube_verticesSize;
 extern GLfloat const cube_colorsX[];
 extern GLushort const cube_elementsX[];
 extern GLushort const cube_elements[];
+extern size_t const cube_elementsSize;
 extern GLfloat const cube_colors[];
 extern GLfloat const cube_normals[];
+
+extern GLfloat const SnakeCube_verticesY[];
+extern size_t const SnakeCube_verticesYSize;
 
 #define TWODIGITS_FP(x) x*=100;x=roundf(x);x/=100; //round a number by 2 digits. 5.499993 => 5.500000
 

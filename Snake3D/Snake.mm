@@ -43,38 +43,38 @@ GLfloat SnakeCube_vertices[] = {
     1.0,  1.0, -1.0,
     1.0,  1.0,  1.0,
 };
-GLfloat SnakeCube_verticesY[] = {
-    // front
-    -0.125, -0.125,  0.125,
-    0.125, -0.125,  0.125,
-    0.125,  0.125,  0.125,
-    -0.125,  0.125,  0.125,
-    // top
-    -0.125,  0.125,  0.125,
-    0.125,  0.125,  0.125,
-    0.125,  0.125, -0.125,
-    -0.125,  0.125, -0.125,
-    // back
-    0.125, -0.125, -0.125,
-    -0.125, -0.125, -0.125,
-    -0.125,  0.125, -0.125,
-    0.125,  0.125, -0.125,
-    // bottom
-    -0.125, -0.125, -0.125,
-    0.125, -0.125, -0.125,
-    0.125, -0.125,  0.125,
-    -0.125, -0.125,  0.125,
-    // left
-    -0.125, -0.125, -0.125,
-    -0.125, -0.125,  0.125,
-    -0.125,  0.125,  0.125,
-    -0.125,  0.125, -0.125,
-    // right
-    0.125, -0.125,  0.125,
-    0.125, -0.125, -0.125,
-    0.125,  0.125, -0.125,
-    0.125,  0.125,  0.125,
-};
+//GLfloat SnakeCube_verticesY[] = {
+//    // front
+//    -0.125, -0.125,  0.125,
+//    0.125, -0.125,  0.125,
+//    0.125,  0.125,  0.125,
+//    -0.125,  0.125,  0.125,
+//    // top
+//    -0.125,  0.125,  0.125,
+//    0.125,  0.125,  0.125,
+//    0.125,  0.125, -0.125,
+//    -0.125,  0.125, -0.125,
+//    // back
+//    0.125, -0.125, -0.125,
+//    -0.125, -0.125, -0.125,
+//    -0.125,  0.125, -0.125,
+//    0.125,  0.125, -0.125,
+//    // bottom
+//    -0.125, -0.125, -0.125,
+//    0.125, -0.125, -0.125,
+//    0.125, -0.125,  0.125,
+//    -0.125, -0.125,  0.125,
+//    // left
+//    -0.125, -0.125, -0.125,
+//    -0.125, -0.125,  0.125,
+//    -0.125,  0.125,  0.125,
+//    -0.125,  0.125, -0.125,
+//    // right
+//    0.125, -0.125,  0.125,
+//    0.125, -0.125, -0.125,
+//    0.125,  0.125, -0.125,
+//    0.125,  0.125,  0.125,
+//};
 
 GLfloat SnakeCube_verticesX[] = {
     // front
@@ -155,7 +155,7 @@ float bsf = 1.0/2.0;
                      color:SnakeCube_colors
                    indices:SnakeCube_elements
                 indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
-                verticesNumberOfElemets:sizeof(SnakeCube_verticesY)/sizeof(SnakeCube_verticesY[0])/3];
+                verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;
@@ -271,11 +271,10 @@ float bsf = 1.0/2.0;
 -(void)addBodyPart {
     Mesh *meshCube = [[Mesh alloc] init];
     [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:SnakeCube_elements indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
-   verticesNumberOfElemets:sizeof(SnakeCube_verticesY)/sizeof(SnakeCube_verticesY[0])/3];
+   verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;
-    CC3Vector pos;
     bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
     //[bp setMyId:i];
     [bp setSpeed:_speed];
