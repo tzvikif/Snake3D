@@ -36,7 +36,7 @@ CC3Vector const br_lookAt = {5.0, 1.0, 0.0};
 CC3Vector const br_eyeAt = {12.0, 10.0, 24.0};
 CC3Vector const br_up = {0.0, 1.0, 0.0};
 
-GLfloat const cube_verticesX[] = {
+GLfloat const cube_vertices[] = {
     // front
     -1.0, -1.0,  1.0,
     1.0, -1.0,  1.0,
@@ -68,14 +68,15 @@ GLfloat const cube_verticesX[] = {
     1.0,  1.0, -1.0,
     1.0,  1.0,  1.0,
 };
-GLfloat const cube_vertices[] = {
+size_t const cube_verticesSize = sizeof(cube_vertices);
+GLfloat const cube_verticesX[] = {
     // front
     -1.0, -1.0,  -0.5,
     1.0, -1.0,  -0.5,
     0.0,  1.0,  -0.5,
     -1.0,  1.0,  -0.5,
 };
-size_t const cube_verticesSize = sizeof(cube_vertices);
+size_t const cube_verticesXSize = sizeof(cube_vertices);
 GLfloat const cube_colorsX[] = {
     // front colors
     1.0, 0.0, 0.0,
@@ -108,7 +109,7 @@ GLfloat const cube_colorsX[] = {
     0.0, 0.0, 1.0,
     1.0, 1.0, 1.0,
 };
-GLushort const cube_elementsX[] = {
+GLushort const cube_elements[] = {
     // front
     0,  1,  2,
     2,  3,  0,
@@ -128,18 +129,52 @@ GLushort const cube_elementsX[] = {
     20, 21, 22,
     22, 23, 20,
 };
-GLushort const cube_elements[] = {
+size_t const cube_elementsSize = sizeof(cube_elements);
+GLushort const SimpleCube_elements[] = {
     // front
     0,  1,  2,
     2,  3,  0,
 };
-size_t const cube_elementsSize = sizeof(cube_elements);
+size_t const SimpleCube_elementsSize = sizeof(SimpleCube_elements);
 GLfloat const cube_colors[] = {
     // front colors
     1.0, 0.0, 0.3,
     0.2, 1.0, 0.0,
     0.0, 1.0, 1.0,
     0.3, 1.0, 0.7,
+};
+GLfloat const cube_colorsFood[] = {
+    // front colors
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+    0.4, 0.4, 0.6,
+
 };
 
 GLfloat const cube_texcoords[2*4*6] = {

@@ -144,7 +144,7 @@ float bsf = 1.0/2.0;
 @implementation Snake
 
 -(void)initResources {
-    _bpCount = 25;
+    _bpCount = 5;
     _totalTimeElapsed = 0;
     _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
@@ -233,7 +233,7 @@ float bsf = 1.0/2.0;
         CC3Vector objPos = bp.position;
         //in case N is even the right most point(the x axis) is N/2 - 1.
         if (objPos.x > trunc((N-1)/2.0) - 0.5 || objPos.x < -N/2.0 + 0.5 || 
-            objPos.z > trunc((N-1)/2.0) - 0.5 || objPos.z < -N/2.0 + 0.5) {
+            objPos.z > -1*(trunc(N/2.0) - 0.5) || objPos.z < (N-1)/2.0 - 0.5) {
             collisitionStatus = YES;
         }
     }

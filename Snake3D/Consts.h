@@ -60,13 +60,15 @@ extern CC3Vector const br_up;
 extern GLfloat const cube_verticesX[];
 extern GLfloat const cube_vertices[];
 extern size_t const cube_verticesSize;
+extern size_t const cube_verticesXSize;
 extern GLfloat const cube_colorsX[];
 extern GLushort const cube_elementsX[];
 extern GLushort const cube_elements[];
 extern size_t const cube_elementsSize;
 extern GLfloat const cube_colors[];
+extern GLfloat const cube_colorsFood[];
 extern GLfloat const cube_normals[];
-
+extern size_t const SimpleCube_elementsSize;
 extern GLfloat const SnakeCube_verticesY[];
 extern size_t const SnakeCube_verticesYSize;
 

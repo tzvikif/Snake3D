@@ -21,9 +21,11 @@
 #import "Consts.h"
 
 @class GLProgram;
+@class Food;
 
 @interface LogicEngine : NSObject
 @property(nonatomic,retain) NSMutableArray *renderables;
+@property(nonatomic,retain) Food *currentFood;
 @property(retain,nonatomic) RenderingEngine *renderingEngine;
 @property(retain,nonatomic) NSMutableDictionary *programs;
 @property(assign,nonatomic) NSTimeInterval timeBetweenSteps;

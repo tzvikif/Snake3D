@@ -14,6 +14,7 @@
 #import "GLProgram.h"
 #import "Vectors.h"
 #import "Food.h"
+#include <stdlib.h>
 #import <math.h>
 
 @interface LogicEngine ()
@@ -21,6 +22,8 @@
 -(ORIENTATION)getOrientation:(CC3Vector)pos;
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed;
 -(Food*)createFood;
+-(void)Render:(NSArray*)renderables;
+-(BOOL)isFoodEaten:(CC3Vector)pos;
 @end
 
 @implementation LogicEngine
@@ -67,8 +70,15 @@
     
     [_renderingEngine initResources:_renderables];
 }
+-(void)Render:(NSArray*)renderables; {
+    [_renderingEngine Render:renderables];
+}
 -(void)Render {
-    [_renderingEngine Render:_renderables];
+    [_renderingEngine preRender];
+    [self Render:_renderables];
+    if (_currentFood) {
+        [self Render:[NSArray arrayWithObject:_currentFood]];
+    }
 }
 //updateAnimation: is called after Render()
 //paramters: timeElapsed - time elapsed after last frame.
@@ -98,8 +108,14 @@
         [f setViewMatrix:_renderingEngine.matView];
         [f setViewport:_renderingEngine.viewport];
         [f initResources];
-        [_renderables addObject:f];
+        [self setCurrentFood:f];
         _isFoodOnBoard = YES;
+    }
+    if ([self isFoodEaten:_currentFood.position]) {
+        _isFoodOnBoard = NO;
+        [_currentFood release];
+        _currentFood = nil;
+        [snk addBodyPart];
     }
 }
 -(void)updateOffset_x:(GLfloat)delta {
@@ -108,22 +124,6 @@
 -(void)updateScale:(GLfloat)delta {
 //    [_plotterObj setScale_xy:delta];
 }
-//-(CC3Vector*)createGraph {
-//    CC3Vector *graph = malloc(sizeof(CC3Vector) * N * N);
-//    
-//    for(int i = 0; i < N; i++) {
-//        for(int j = 0; j < N; j++) {
-//            float x = (i - N / 2) / (N / 2.0);
-//            float y = (j - N / 2) / (N / 2.0);
-//            float t = hypotf(x, y) * 4.0;
-//            float z = (1 - t * t) * expf(t * t / -2.0);
-//            (graph + i * N + j)->x = x;
-//            (graph + i * N + j)->y = y;
-//            (graph + i * N + j)->z = z;
-//        }
-//        
-//    }    return  graph;
-//}
 -(void)createFloor:(Mesh*)floorMesh {
     CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * N * N);
     float x,y,z;
@@ -169,24 +169,6 @@
         }
     }
 
-//    NSMutableString *str = [[NSMutableString alloc] init];
-//    for (int i=0; i<(N-1)*(N-1)*6; i++) {
-//        if (i%6 == 0) {
-//            [str appendString:@"\n"];
-//        }
-//        
-//        
-//        if (i%3 == 0) {
-//            [str appendFormat:@"%d",elements[i]];
-//            [str appendString:@" "];
-//            
-//        }
-//        else {
-//            [str appendFormat:@"%d,",elements[i]];
-//        }
-//    }
-//    NSLog(@"%@",str);
-    //[floorMesh loadVertices:(GLfloat*)cube_vertices indices:cube_elements indicesNumberOfElemets:sizeof(cube_elements)/sizeof(cube_elements[0]) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(cube_vertices[0])];
     [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:N*N];
     
     free(floorGrid);
@@ -230,17 +212,6 @@
     float px = pos.x;
     float pz = pos.z;
     NSLog(@"in logicEngine. px=%f pz=%f",px,pz);
-//    px = px<0?-px:px;
-//    
-//    pz = pz<0?-pz:pz;
-//    px*=100;
-//    pz*=100;
-//    px = roundf(px);
-//    pz = roundf(pz);
-//    px = truncf(px);
-//    pz = truncf(pz);
-//    px /= 100.0;
-//    pz /= 100.0;
     float tpz,tpx;
     if (currentDir == DIR_UP) {
         tpz = roundf(pz);
@@ -385,7 +356,7 @@
     Food *foodTemp = [[Food alloc] init];
     Mesh *foodMeshTemp = [[Mesh alloc] init];
     [foodMeshTemp loadVertices:cube_vertices
-                         color:cube_colors
+                         color:cube_colorsFood
                        indices:cube_elements
         indicesNumberOfElemets:cube_elementsSize
        verticesNumberOfElemets:cube_verticesSize];
@@ -401,8 +372,10 @@
     CC3Vector pos;
     int x,z;
     while (!emptySpot) {
-        x = rand() % N;
-        z = rand() % N;
+        x = arc4random() % N;
+        x -= N/2.0;
+        z = arc4random() % N;
+        z -= N/2.0;
         Snake *snk = [_renderables objectAtIndex:0];
         pos = CC3VectorMake(x+0.5, 0.5, z+0.5);
         BOOL isCollide = [snk isCollideWithPosition:pos];
@@ -412,6 +385,11 @@
     }
     [foodTemp setPosition:pos];
     return [foodTemp autorelease];
+}
+-(BOOL)isFoodEaten:(CC3Vector)pos {
+    Snake *snk = [_renderables objectAtIndex:0];
+    BOOL isEaten = [snk isCollideWithPosition:pos];
+    return isEaten;
 }
 -(void)dealloc {
     [_programs release];
