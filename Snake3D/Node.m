@@ -76,4 +76,18 @@
     [_program release];
     [super dealloc];
 }
+- (id)copyWithZone:(NSZone *)zone {
+    Node *copyObj = [[[self class] allocWithZone:zone] init];
+    copyObj.mesh = self.mesh;
+    copyObj.modelMatrix = self.modelMatrix;
+    copyObj.viewMatrix = self.viewMatrix;
+    copyObj.projectionMatrix = self.projectionMatrix;
+    copyObj.drawable = self.drawable;
+    copyObj.viewport = self.viewport;
+    copyObj.material = self.material;
+    copyObj.program = self.program;
+    copyObj.vs = self.vs;
+    return copyObj;
+    
+}
 @end

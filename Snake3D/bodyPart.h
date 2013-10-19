@@ -9,7 +9,7 @@
 #import "Node.h"
 #import "Consts.h"
 
-@interface BodyPart : Node
+@interface BodyPart : Node <NSCopying>
 
 @property(nonatomic,assign) CC3Vector position;
 @property(nonatomic,assign) CC3Vector velocity;
@@ -30,4 +30,5 @@
 @property(nonatomic,assign) BOOL isDrawEnabled;
 -(void)addTurnDirection:(DIRECTION)dir inPosition:(CC3Vector)pos;
 -(void)advance;
+-(id)copyWithZone:(NSZone *)zone;
 @end

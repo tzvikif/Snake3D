@@ -20,9 +20,7 @@
 @protocol Renderable <NSObject>
 -(void)Render;
 @end
-@interface Node : NSObject {
-    vertexStructure _vs;
-}
+@interface Node : NSObject <NSCopying>
 @property(retain,nonatomic) Mesh *mesh;
 @property(retain,nonatomic) CC3GLMatrix *modelMatrix;
 @property(retain,nonatomic) CC3GLMatrix *viewMatrix;
@@ -31,9 +29,11 @@
 @property(assign,nonatomic) CGRect viewport;
 @property(retain,nonatomic) Material *material;
 @property(retain,nonatomic) GLProgram *program;
+@property(assign,nonatomic) vertexStructure vs;
 
 -(id)initializeWithProgram:(GLProgram*)program andDrawable:(Drawable *)drawable andMesh:(Mesh*)mesh andMaterial:(Material*)mat andViewport:(CGRect)vp;
 -(GLsizei)getStride;
 -(void)Render;
 -(void)initResources;
+-(id)copyWithZone:(NSZone *)zone;
 @end

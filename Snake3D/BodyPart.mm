@@ -200,4 +200,19 @@ NSString *SnakeColor_name = @"color";
     [_turnsAndPositions release];
     [super dealloc];
 }
+- (id)copyWithZone:(NSZone *)zone {
+    BodyPart *bpCopy = [super copyWithZone:zone];
+    bpCopy.position = self.position;
+    bpCopy.velocity = self.velocity;
+    bpCopy.dir = self.dir;
+    bpCopy.nextTurnDir = self.nextTurnDir;
+    bpCopy.nextTurnPos = self.nextTurnPos;
+    bpCopy.scaleFactor = self.scaleFactor;
+    bpCopy.rotatetionMat = self.rotatetionMat;
+    bpCopy.myId = self.myId + 1;
+    bpCopy.speed = self.speed;
+    bpCopy.turnsAndPositions = [self.turnsAndPositions mutableCopy];
+    bpCopy.isDrawEnabled = self.isDrawEnabled;
+    return  bpCopy;
+}
 @end

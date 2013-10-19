@@ -84,7 +84,7 @@
 //paramters: timeElapsed - time elapsed after last frame.
 -(void)updateAnimation:(NSTimeInterval)timeElapsed {
     Snake *snk = [_renderables objectAtIndex:0];
-    BOOL isCollide = [snk isCollideWithPosition:snk.position];
+    BOOL isCollide = [snk isCollideWithPosition:snk.position] || [snk isCollideWithWall];
     if (!isCollide) {
         [snk advance];
     }
@@ -373,11 +373,11 @@
     int x,z;
     while (!emptySpot) {
         x = arc4random() % N;
-        x -= N/2.0;
+        x -= truncf( (N+1)/2.0 );
         z = arc4random() % N;
-        z -= N/2.0;
+        z -= truncf( (N+1)/2.0 );
         Snake *snk = [_renderables objectAtIndex:0];
-        pos = CC3VectorMake(x+0.5, 0.5, z+0.5);
+        pos = CC3VectorMake(x<0?x+0.5:x-0.5, 0.5,z<0?z+0.5:z-0.5);
         BOOL isCollide = [snk isCollideWithPosition:pos];
         if (isCollide == NO) {
             emptySpot = YES;

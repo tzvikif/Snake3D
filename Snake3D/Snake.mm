@@ -144,7 +144,7 @@ float bsf = 1.0/2.0;
 @implementation Snake
 
 -(void)initResources {
-    _bpCount = 5;
+    _bpCount = 3;
     _totalTimeElapsed = 0;
     _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
@@ -213,6 +213,7 @@ float bsf = 1.0/2.0;
     _dir = bp.dir;
 }
 -(BOOL)isCollideWithPosition:(CC3Vector)pos {
+    //snake
     BOOL collisitionStatus = NO;
     for (int i=2; i<[_bodyParts count]; i++) {
         BodyPart *bp = [_bodyParts objectAtIndex:i];
@@ -224,18 +225,20 @@ float bsf = 1.0/2.0;
         if ((objPos.x - pos.x < 1.0 && objPos.x - pos.x > -1.0) && (objPos.z - pos.z < 1.0 && objPos.z - pos.z > -1.0)) {
             collisitionStatus = YES;
            
-            NSLog(@"objPos.x=%f objPos.z=%f pos.x=%f pos.z=%f",objPos.x,objPos.z,pos.x,pos.z);
+            NSLog(@"collision. objPos.x=%f objPos.z=%f pos.x=%f pos.z=%f",objPos.x,objPos.z,pos.x,pos.z);
             break;
         }
     }
-    if(collisitionStatus == NO) {
-        BodyPart *bp = [_bodyParts objectAtIndex:0];
-        CC3Vector objPos = bp.position;
-        //in case N is even the right most point(the x axis) is N/2 - 1.
-        if (objPos.x > trunc((N-1)/2.0) - 0.5 || objPos.x < -N/2.0 + 0.5 || 
-            objPos.z > -1*(trunc(N/2.0) - 0.5) || objPos.z < (N-1)/2.0 - 0.5) {
-            collisitionStatus = YES;
-        }
+    return collisitionStatus;
+}
+-(BOOL)isCollideWithWall {
+    BOOL collisitionStatus = NO;
+    BodyPart *bp = [_bodyParts objectAtIndex:0];
+    CC3Vector objPos = bp.position;
+    //in case N is even the right most point(the x axis) is N/2 - 1.
+    if (objPos.x > trunc((N-1)/2.0) - 0.5 || objPos.x < -N/2.0 + 0.5 ||
+        objPos.z > trunc((N-1)/2.0 - 0.5) || objPos.z < -N/2.0 + 0.5) {
+        collisitionStatus = YES;
     }
     return collisitionStatus;
 }
@@ -269,9 +272,13 @@ float bsf = 1.0/2.0;
     }
 }
 -(void)addBodyPart {
+    /*
     Mesh *meshCube = [[Mesh alloc] init];
-    [meshCube loadVertices:SnakeCube_vertices color:SnakeCube_colors indices:SnakeCube_elements indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
-   verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
+    [meshCube loadVertices:SnakeCube_vertices
+                     color:SnakeCube_colors
+                   indices:SnakeCube_elements
+                indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
+                verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;
@@ -288,6 +295,7 @@ float bsf = 1.0/2.0;
     _initScales = tempScale;
     [bp setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
     BodyPart *tail = [_bodyParts objectAtIndex:[_bodyParts count]-1];
+    [tail copy];
     CC3Vector tailPos = tail.position;
     CC3Vector tailVelosity = tail.velocity;
     CC3Vector newPartPos = CC3VectorAdd(tailPos, CC3VectorScale(CC3VectorNegate(tailVelosity),
@@ -297,6 +305,25 @@ float bsf = 1.0/2.0;
     [bp setViewMatrix:self.viewMatrix];
     [bp setProjectionMatrix:self.projectionMatrix];
     [bp setRotatetionMat:rotationMat];
-    [_bodyParts addObject:bp];
+     */
+    BodyPart *tail = [_bodyParts objectAtIndex:[_bodyParts count]-1];
+    BodyPart *lastObj = [tail copy];
+    CC3Vector currentScale = CC3VectorMake(bsf-([_bodyParts count]-1)*0.02, bsf, bsf);
+    CC3Vector *tempScale = (CC3Vector*)malloc(sizeof(CC3Vector) * ([_bodyParts count]+1));
+    memcpy(tempScale, _initScales, sizeof(CC3Vector)*[_bodyParts count]);
+    
+    tempScale[[_bodyParts count]] = currentScale;
+    free(_initScales);
+    _initScales = tempScale;
+    [lastObj setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
+    CC3Vector negVelocity = CC3VectorNegate(lastObj.velocity);
+    CC3Vector one =  CC3VectorMake(!negVelocity.x?0:negVelocity.x<0?-1.0/negVelocity.x:1.0/negVelocity.x,
+                  !negVelocity.y?0:negVelocity.y<0?-1.0/negVelocity.y:1.0/negVelocity.y,
+                  !negVelocity.z?0:negVelocity.z<0?-1.0/negVelocity.z:1.0/negVelocity.z);
+    CC3Vector scale = CC3VectorScale(negVelocity, one);
+    CC3Vector newPartPos = CC3VectorAdd(lastObj.position,
+                                        CC3VectorScale(negVelocity,one));
+    [lastObj setPosition:newPartPos];
+    [_bodyParts addObject:lastObj];
 }
 @end

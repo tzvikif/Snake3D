@@ -20,6 +20,7 @@
 @property(nonatomic,assign) CC3Vector turnPos;
 -(void)setDir:(DIRECTION)dir andPosition:(CC3Vector)pos;
 -(BOOL)isCollideWithPosition:(CC3Vector)pos;
+-(BOOL)isCollideWithWall;
 -(void)oops:(NSTimeInterval)timeElappsed;
 -(void)addBodyPart;
 -(void)advance;
