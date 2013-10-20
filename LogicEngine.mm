@@ -111,6 +111,7 @@
         [self setCurrentFood:f];
         _isFoodOnBoard = YES;
     }
+
     if ([self isFoodEaten:_currentFood.position]) {
         _isFoodOnBoard = NO;
         [_currentFood release];
@@ -358,8 +359,8 @@
     [foodMeshTemp loadVertices:cube_vertices
                          color:cube_colorsFood
                        indices:cube_elements
-        indicesNumberOfElemets:cube_elementsSize
-       verticesNumberOfElemets:cube_verticesSize];
+        indicesNumberOfElemets:cube_elementsSize/sizeof(GLushort)
+       verticesNumberOfElemets:cube_verticesSize/sizeof(GLfloat)];
     Drawable *DrwFood =  [Drawable createDrawable:foodMeshTemp];
     Material *foodMaterialTemp = [[Material alloc] init];
     [foodMaterialTemp setupTexture:@"tile_floor.png"];

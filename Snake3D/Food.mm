@@ -28,7 +28,7 @@ float food_bsf = 1.0/2.0;
     //        return;
     //    }
     glEnable(GL_DEPTH_TEST);
-    //glClearColor(0.4, 0.9, 0.9, 1.0);
+    //glClearColor(0.4,gj 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLsizei window_height = self.viewport.size.height;
     GLsizei window_width = self.viewport.size.width;
