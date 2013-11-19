@@ -37,6 +37,12 @@ typedef enum _ORIENTATION {
     ORTN_BL,    //bottom left
     ORTN_BR     //bottom right
 }ORIENTATION;
+typedef enum _VIEW {
+    LOOK_AT,
+    UP,    //upper left
+    EYE_AT    //upper right
+}VIEW;
+
 
 float lerp(float a,float b,float blend);
 

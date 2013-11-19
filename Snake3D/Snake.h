@@ -24,4 +24,5 @@
 -(void)oops:(NSTimeInterval)timeElappsed;
 -(void)addBodyPart;
 -(void)advance;
+-(CC3Vector)getVelocity;
 @end

@@ -326,4 +326,8 @@ float bsf = 1.0/2.0;
     [lastObj setPosition:newPartPos];
     [_bodyParts addObject:lastObj];
 }
+-(CC3Vector)getVelocity {
+    BodyPart *head = _bodyParts[0];
+    return head.velocity;
+}
 @end

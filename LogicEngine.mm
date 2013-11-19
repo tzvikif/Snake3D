@@ -19,7 +19,8 @@
 
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
--(ORIENTATION)getOrientation:(CC3Vector)pos;
+//-(ORIENTATION)getOrientation:(CC3Vector)pos;
+-(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity;
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed;
 -(Food*)createFood;
 -(void)Render:(NSArray*)renderables;
@@ -91,17 +92,9 @@
     else {
         [snk oops:timeElapsed];
     }
-    if (_newOrient != ORTN_NONE) {
-        [self updateSceneOrientation:timeElapsed];
-    }
-    else
-    {
-        ORIENTATION snakeOrientation = [self getOrientation:snk.position];
-        if (_orient != snakeOrientation) {
-            _newOrient = snakeOrientation;
-            //NSLog(@"new orientation:%d",_newOrient);
-        }
-    }
+    CC3Vector *pnewOrientation = [self getOrientation:snk.position andVelocity:[snk getVelocity]];
+    [_renderingEngine applyView:pnewOrientation to:_renderables];
+    //[self updateSceneOrientation:timeElapsed];
     if (!_isFoodOnBoard) {
         Food *f = [self createFood];
         [f setProjectionMatrix:_renderingEngine.matProjection];
@@ -111,7 +104,7 @@
         [self setCurrentFood:f];
         _isFoodOnBoard = YES;
     }
-
+    
     if ([self isFoodEaten:_currentFood.position]) {
         _isFoodOnBoard = NO;
         [_currentFood release];
@@ -120,10 +113,10 @@
     }
 }
 -(void)updateOffset_x:(GLfloat)delta {
-//    [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];
+    //    [_plotterObj setOffset_x:_plotterObj.offset_x+=delta];
 }
 -(void)updateScale:(GLfloat)delta {
-//    [_plotterObj setScale_xy:delta];
+    //    [_plotterObj setScale_xy:delta];
 }
 -(void)createFloor:(Mesh*)floorMesh {
     CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * N * N);
@@ -139,19 +132,19 @@
             //NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
         }
     }
-//    GLushort *elements = malloc(sizeof(GLushort)* (N-1)*(N-1)*6);
-//    GLushort index = 0;
-//    for (int i=0; i< N-1; i++) {
-//        for (int j=0; j<N-1; j++) {
-//            elements[index+0] = (i+1)*N+j+0;
-//            elements[index+1] = i*N+j+1;
-//            elements[index+2] = i*N+j+0;
-//            elements[index+3] = (i+1)*N+j+0;
-//            elements[index+4] = (i+1)*N+j+1;
-//            elements[index+5] = i*N+j+1;
-//            index+=6;
-//        }
-//    }
+    //    GLushort *elements = malloc(sizeof(GLushort)* (N-1)*(N-1)*6);
+    //    GLushort index = 0;
+    //    for (int i=0; i< N-1; i++) {
+    //        for (int j=0; j<N-1; j++) {
+    //            elements[index+0] = (i+1)*N+j+0;
+    //            elements[index+1] = i*N+j+1;
+    //            elements[index+2] = i*N+j+0;
+    //            elements[index+3] = (i+1)*N+j+0;
+    //            elements[index+4] = (i+1)*N+j+1;
+    //            elements[index+5] = i*N+j+1;
+    //            index+=6;
+    //        }
+    //    }
     //draw grid
     GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*(N)*(N-1)*2*2);
     GLushort index = 0;
@@ -169,7 +162,7 @@
             index+=2;
         }
     }
-
+    
     [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:N*N];
     
     free(floorGrid);
@@ -202,7 +195,7 @@
         [theProgram release];
     }
     return (theProgram == nil)?NO:YES;
-
+    
 }
 -(void)setDir:(DIRECTION)dir {
     Snake *snk = [_renderables objectAtIndex:0];
@@ -249,25 +242,33 @@
             break;
     }
 }
--(ORIENTATION)getOrientation:(CC3Vector)pos; {
-    ORIENTATION tempOrien = ORTN_NONE;
-    if (pos.x > 0 && pos.z <= 0) {
-        tempOrien = ORTN_UR;
-    }
-    if (pos.x <= 0 && pos.z <= 0) {
-        tempOrien = ORTN_UL;
-    }
-    if (pos.x > 0 && pos.z > 0) {
-        tempOrien = ORTN_BR;
-    }
-    if (pos.x <= 0 && pos.z > 0) {
-        tempOrien = ORTN_BL;
-    }
-    if (tempOrien == ORTN_NONE) {
-        NSLog(@"new orientation error. x=%f z=%f", pos.x,pos.z);
-    }
-    return tempOrien;
+//-(ORIENTATION)getOrientation:(CC3Vector)pos; {
+//    ORIENTATION tempOrien = ORTN_NONE;
+//    if (pos.x > 0 && pos.z <= 0) {
+//        tempOrien = ORTN_UR;
+//    }
+//    if (pos.x <= 0 && pos.z <= 0) {
+//        tempOrien = ORTN_UL;
+//    }
+//    if (pos.x > 0 && pos.z > 0) {
+//        tempOrien = ORTN_BR;
+//    }
+//    if (pos.x <= 0 && pos.z > 0) {
+//        tempOrien = ORTN_BL;
+//    }
+//    if (tempOrien == ORTN_NONE) {
+//        NSLog(@"new orientation error. x=%f z=%f", pos.x,pos.z);
+//    }
+//    return tempOrien;
+//}
+-(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity {
+    static CC3Vector lookAt[3];
+    lookAt[LOOK_AT] = CC3VectorMake(pos.x, 0,pos.z-5.0);
+    lookAt[UP] = CC3VectorMake(0.0, 1.0, 0.0);
+    lookAt[EYE_AT] = CC3VectorMake(pos.x, 10,pos.z+10.0);
+    return lookAt;
 }
+
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed {
     _orientationTimeElapsed += timeElapsed;
     if (_orientationTimeElapsed > totalOrientationTime) {
@@ -308,7 +309,7 @@
             break;
             break;
     }
-   
+    
     switch (_newOrient) {
         case ORTN_UL:
             dlookAt = ul_lookAt;
@@ -330,7 +331,7 @@
             deyeAt = br_eyeAt;
             dup = br_up;
             break;
-            case ORTN_NONE:
+        case ORTN_NONE:
             //nothing to do.
             break;
         default:
