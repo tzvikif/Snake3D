@@ -262,10 +262,11 @@
 //    return tempOrien;
 //}
 -(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity {
+    CC3Vector vn = CC3VectorNormalize(velocity);
     static CC3Vector lookAt[3];
-    lookAt[LOOK_AT] = CC3VectorMake(pos.x, 0,pos.z-5.0);
+    lookAt[LOOK_AT] = CC3VectorMake(pos.x-5.0*vn.x, 0,pos.z+5.0*vn.z);
     lookAt[UP] = CC3VectorMake(0.0, 1.0, 0.0);
-    lookAt[EYE_AT] = CC3VectorMake(pos.x, 10,pos.z+10.0);
+    lookAt[EYE_AT] = CC3VectorMake(pos.x+10.0*vn.x, 10,pos.z-10.0*vn.z);
     return lookAt;
 }
 
