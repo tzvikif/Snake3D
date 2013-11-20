@@ -47,6 +47,8 @@
 		91680FB51804ADF300B68789 /* TurnPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 91680FB41804ADF300B68789 /* TurnPosition.m */; };
 		9172EE2D17C5505C008F48AB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2C17C5505C008F48AB /* OpenGLES.framework */; };
 		9172EE2F17C550BB008F48AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2E17C550BB008F48AB /* QuartzCore.framework */; };
+		E549AC131833E0CB0023394A /* LoadObj.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC121833E0CB0023394A /* LoadObj.m */; };
+		E549AC161833E0DF0023394A /* face.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC151833E0DF0023394A /* face.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +117,10 @@
 		91680FB41804ADF300B68789 /* TurnPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TurnPosition.m; path = Snake3D/TurnPosition.m; sourceTree = "<group>"; };
 		9172EE2C17C5505C008F48AB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		9172EE2E17C550BB008F48AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E549AC111833E0CB0023394A /* LoadObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadObj.h; sourceTree = "<group>"; };
+		E549AC121833E0CB0023394A /* LoadObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadObj.m; sourceTree = "<group>"; };
+		E549AC141833E0DF0023394A /* face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = face.h; sourceTree = "<group>"; };
+		E549AC151833E0DF0023394A /* face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = face.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +240,10 @@
 		20FF7DB117C4975300A58B95 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				E549AC141833E0DF0023394A /* face.h */,
+				E549AC151833E0DF0023394A /* face.m */,
+				E549AC111833E0CB0023394A /* LoadObj.h */,
+				E549AC121833E0CB0023394A /* LoadObj.m */,
 				201FF78E17FB0053004F188C /* BodyPart.mm */,
 				201FF78F17FB0053004F188C /* BodyPart.h */,
 				20FF7DB217C4977800A58B95 /* Mesh.h */,
@@ -371,6 +381,8 @@
 				20427BC917F98F8800D02B84 /* Snake.mm in Sources */,
 				201FF79017FB0053004F188C /* BodyPart.mm in Sources */,
 				206157B2180E75A500AACAC4 /* Food.mm in Sources */,
+				E549AC131833E0CB0023394A /* LoadObj.m in Sources */,
+				E549AC161833E0DF0023394A /* face.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +469,7 @@
 				GCC_PREFIX_HEADER = "Snake3D/Snake3D-Prefix.pch";
 				INFOPLIST_FILE = "Snake3D/Snake3D-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -468,6 +481,7 @@
 				GCC_PREFIX_HEADER = "Snake3D/Snake3D-Prefix.pch";
 				INFOPLIST_FILE = "Snake3D/Snake3D-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

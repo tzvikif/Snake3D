@@ -43,5 +43,6 @@
 -(void)updateOffset_x:(GLfloat)delta;
 -(void)updateScale:(GLfloat)delta;
 -(BOOL)createProgramWithVertexShaderName:(NSString*)vsName andFragmentShaderName:(NSString*)fsName withId:(PROG_ID)progid;
+-(void)updateSceneOrientation;
 @end
     

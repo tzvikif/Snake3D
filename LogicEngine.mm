@@ -354,6 +354,9 @@
     [_renderingEngine applyView:arr to:_renderables];
     
 }
+-(void)updateSceneOrientation {
+    
+}
 -(Food*)createFood {
     Food *foodTemp = [[Food alloc] init];
     Mesh *foodMeshTemp = [[Mesh alloc] init];
