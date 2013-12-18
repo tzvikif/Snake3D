@@ -194,7 +194,7 @@ float bsf = 1.0/2.0;
     }
     _velocityChanged = NO;
 }
--(void)setDir:(DIRECTION)dir andPosition:(CC3Vector)pos{
+-(void)setDir:(DIRECTION)dir andAtPosition:(CC3Vector)pos{
     if (dir != _dir) {
         _dir = dir;
         _turnPos = pos;
@@ -272,41 +272,7 @@ float bsf = 1.0/2.0;
     }
 }
 -(void)addBodyPart {
-    /*
-    Mesh *meshCube = [[Mesh alloc] init];
-    [meshCube loadVertices:SnakeCube_vertices
-                     color:SnakeCube_colors
-                   indices:SnakeCube_elements
-                indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
-                verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
-    Drawable *drwblTemp = [Drawable createDrawable:meshCube];
-    Material *materialTemp = [[Material alloc] init];
-    BodyPart *bp;
-    bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
-    //[bp setMyId:i];
-    [bp setSpeed:_speed];
-    [bp initResources];
-    CC3Vector currentScale = CC3VectorMake(bsf-([_bodyParts count]-1)*0.02, bsf, bsf);
-    CC3Vector *tempScale = (CC3Vector*)malloc(sizeof(CC3Vector) * ([_bodyParts count]+1));
-    memcpy(tempScale, _initScales, sizeof(CC3Vector)*[_bodyParts count]);
-    
-    tempScale[[_bodyParts count]] = currentScale;
-    free(_initScales);
-    _initScales = tempScale;
-    [bp setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
-    BodyPart *tail = [_bodyParts objectAtIndex:[_bodyParts count]-1];
-    [tail copy];
-    CC3Vector tailPos = tail.position;
-    CC3Vector tailVelosity = tail.velocity;
-    CC3Vector newPartPos = CC3VectorAdd(tailPos, CC3VectorScale(CC3VectorNegate(tailVelosity),
-                                                                CC3VectorMake(1.0/tailVelosity.x, 1.0/tailVelosity.y, 1.0/tailVelosity.z)));
-    CC3GLMatrix *rotationMat = tail.rotatetionMat;
-    [bp setPosition:newPartPos];
-    [bp setViewMatrix:self.viewMatrix];
-    [bp setProjectionMatrix:self.projectionMatrix];
-    [bp setRotatetionMat:rotationMat];
-     */
-    BodyPart *tail = [_bodyParts objectAtIndex:[_bodyParts count]-1];
+     BodyPart *tail = [_bodyParts objectAtIndex:[_bodyParts count]-1];
     BodyPart *lastObj = [tail copy];
     CC3Vector currentScale = CC3VectorMake(bsf-([_bodyParts count]-1)*0.02, bsf, bsf);
     CC3Vector *tempScale = (CC3Vector*)malloc(sizeof(CC3Vector) * ([_bodyParts count]+1));
@@ -325,6 +291,14 @@ float bsf = 1.0/2.0;
                                         CC3VectorScale(negVelocity,one));
     [lastObj setPosition:newPartPos];
     [_bodyParts addObject:lastObj];
+}
+-(BOOL)isRotating {
+    BodyPart *head = [_bodyParts objectAtIndex:0];
+    return head.inRotation;
+}
+-(float)getRotationAngle {
+    BodyPart *head = [_bodyParts objectAtIndex:0];
+    return head.currentRotatoinAngle;
 }
 -(CC3Vector)getVelocity {
     BodyPart *head = _bodyParts[0];

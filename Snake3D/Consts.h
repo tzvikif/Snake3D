@@ -17,9 +17,9 @@ typedef enum _PROGRAMS {
 }PROG_ID;
 
 typedef enum _DIRECTION {
-    DIR_UP,
-    DIR_DOWN,
+    DIR_UP = 0,
     DIR_LEFT,
+    DIR_DOWN,
     DIR_RIGHT
 }DIRECTION;
 

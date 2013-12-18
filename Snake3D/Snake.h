@@ -18,11 +18,13 @@
 @property(nonatomic,assign) float speed;
 @property(nonatomic,assign) DIRECTION dir;
 @property(nonatomic,assign) CC3Vector turnPos;
--(void)setDir:(DIRECTION)dir andPosition:(CC3Vector)pos;
+-(void)setDir:(DIRECTION)dir andAtPosition:(CC3Vector)pos;
 -(BOOL)isCollideWithPosition:(CC3Vector)pos;
 -(BOOL)isCollideWithWall;
 -(void)oops:(NSTimeInterval)timeElappsed;
 -(void)addBodyPart;
 -(void)advance;
 -(CC3Vector)getVelocity;
+-(BOOL)isRotating;
+-(float)getRotationAngle;
 @end

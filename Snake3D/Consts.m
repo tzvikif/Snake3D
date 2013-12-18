@@ -17,7 +17,7 @@ float LEFT_DIR_ANGLE = 90;
 float RIGHT_DIR_ANGLE = 270;
 
 float const totalOrientationTime = 1.0;
-float const SNKspeed = 0.1;
+float const SNKspeed = 0.05;
 
 //UL
 CC3Vector const ul_lookAt = {-8.0, 1.0, -8.0};

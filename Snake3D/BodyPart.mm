@@ -86,7 +86,7 @@ NSString *SnakeColor_name = @"color";
     }
 }
 -(void)advance {
-    static int maxStepsBeforeTurn = ceil(1.0/_speed); //cube size/speed
+    static int maxStepsBeforeTurn = ceil(1.0/_speed); //floor cube: size/speed
     if ([_turnsAndPositions count] > 0 && !_inRotation) {
         TurnPosition *turnPos = [_turnsAndPositions objectAtIndex:0];
         _nextTurnDir = turnPos.nextTurnDir;
@@ -185,6 +185,7 @@ NSString *SnakeColor_name = @"color";
         }
         [self setRotatetionMat:[CC3GLMatrix identity]];
         [_rotatetionMat rotateByY:_currentRotatoinAngle];
+        NSLog(@"current rotation angle:%f",_currentRotatoinAngle);
     }
     _position = CC3VectorAdd(_position,_velocity);
 }

@@ -35,6 +35,7 @@
 @property(nonatomic,assign) float orientationTimeElapsed;
 @property(nonatomic,assign) CGRect viewport;
 @property(nonatomic,assign) BOOL isFoodOnBoard;
+@property(nonatomic,assign) CC3Vector currentVelocity;
 
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;
@@ -43,6 +44,8 @@
 -(void)updateOffset_x:(GLfloat)delta;
 -(void)updateScale:(GLfloat)delta;
 -(BOOL)createProgramWithVertexShaderName:(NSString*)vsName andFragmentShaderName:(NSString*)fsName withId:(PROG_ID)progid;
+-(DIRECTION)getDirectionFromVelocity:(CC3Vector)v;
 -(void)updateSceneOrientation;
+-(void)setDir:(DIRECTION)dir;
 @end
     

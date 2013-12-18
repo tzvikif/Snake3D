@@ -1070,10 +1070,15 @@ static const GLfloat identityContents[] = { 1.0f, 0.0f, 0.0f, 0.0f,
 	m[13] = t.y;
 	m[14] = t.z;
 }
-//-(CC3Vector) multiplyByVector:(CC3Vector)vector {
-//    CC3Vector v;
-//    v.x =
-//}
+-(CC3Vector4) multiplyByVector:(CC3Vector4)vector {
+    CC3Vector4 v;
+    v.x = self.glMatrix[0] * vector.x + self.glMatrix[1] * vector.y + self.glMatrix[2] * vector.z + self.glMatrix[3] * vector.w;
+    v.y = self.glMatrix[4] * vector.x + self.glMatrix[5] * vector.y + self.glMatrix[6] * vector.z + self.glMatrix[7] * vector.w;
+    v.z = self.glMatrix[8] * vector.x + self.glMatrix[9] * vector.y + self.glMatrix[10] * vector.z + self.glMatrix[11] * vector.w;
+    v.w = self.glMatrix[12] * vector.x + self.glMatrix[13] * vector.y + self.glMatrix[14] * vector.z + self.glMatrix[15] * vector.w;
+    
+    return v;
+}
 //+(void) multiply:(GLfloat *)aGLMatrix byVector:(GLfloat *)avector {
 // fromFrustumLeft: (GLfloat) left
 //		andRight: (GLfloat) right
