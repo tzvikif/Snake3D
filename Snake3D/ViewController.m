@@ -60,20 +60,24 @@
 }
 -(void)handleSwipeGesture:(UISwipeGestureRecognizer*)sender {
     if (sender.direction == UISwipeGestureRecognizerDirectionUp) {
+        NSLog(@"up gesture");
         [_logicEngine setDir:DIR_UP];
-        NSLog(@"up");
+        
     }
     if (sender.direction == UISwipeGestureRecognizerDirectionDown) {
+        NSLog(@"down gesture");
         [_logicEngine setDir:DIR_DOWN];
-        NSLog(@"down");
+        
     }
     if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@"left gesture");
         [_logicEngine setDir:DIR_LEFT];
-        NSLog(@"left");
+        
     }
     if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+        NSLog(@"right gesture");
         [_logicEngine setDir:DIR_RIGHT];
-        NSLog(@"right");
+        
     }
 }
 -(void)addSwipeRecognizer {

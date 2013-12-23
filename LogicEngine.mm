@@ -202,8 +202,8 @@
 -(void)setDir:(DIRECTION)dir {
     Snake *snk = [_renderables objectAtIndex:0];
     CC3Vector pos = snk.position;
-    CC3Vector velocity = [snk getVelocity];
-    CC3Vector vn = CC3VectorNegate(CC3VectorNormalize(velocity));
+    //CC3Vector velocity = [snk getVelocity];
+    //CC3Vector vn = CC3VectorNegate(CC3VectorNormalize(velocity));
     DIRECTION currentDir = snk.dir;
     //next turn position
     float px = pos.x;
@@ -312,24 +312,38 @@
 -(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity {
     Snake *snk = [_renderables objectAtIndex:0];
    
-    CC3Vector vn = CC3VectorNegate(CC3VectorNormalize(velocity));
-    CC3Vector eyeAt = CC3VectorMake(pos.x+10.0*vn.x, 10,pos.z+10.0*vn.z);
+    CC3Vector vn = CC3VectorNormalize(velocity);
+    CC3Vector eyeAt = CC3VectorMake(pos.x-10.0*vn.x, 10,pos.z-10.0*vn.z);
     static CC3Vector cameraSpace[3];
-    if ([snk inRotation]) {
-        float angle = [snk getRotationAngle];
-        NSLog(@"rotation angle:%f",angle);
-    
+    if ([snk isRotating]) {
+        float angle = -1 * [snk getRotationAngle];
+        NSLog(@"angle:%f",-angle);
+        NSLog(@"postion(%f,%f,%f",pos.x,pos.y,pos.z);
+        NSLog(@"before translation eyeAt(%f,%f,%f",eyeAt.x,eyeAt.y,eyeAt.z);
         CC3GLMatrix *rotationMat = [CC3GLMatrix identity];
-        [rotationMat rotateByY:[snk getRotationAngle]];
-        CC3Vector eyeAtRelOrigin = CC3VectorAdd(eyeAt, CC3VectorNegate(pos));
-        CC3Vector4 eyeAt4 = [rotationMat multiplyByVector:CC3Vector4Make(eyeAtRelOrigin.x, eyeAtRelOrigin.y, eyeAtRelOrigin.z, 1.0)];
+        [rotationMat translateBy:pos];
+        [rotationMat rotateByY:angle];
+        [rotationMat translateBy:CC3VectorNegate(pos)];
+        [rotationMat print:@"rotation"];
+        CC3Vector4 eyeAt4 = [rotationMat multiplyByVector:CC3Vector4Make(eyeAt.x, eyeAt.y, eyeAt.z, 1.0)];
         eyeAt.x = eyeAt4.x;
-        eyeAt.y = eyeAt.y;
-        eyeAt.z = eyeAt.z;
-        eyeAt = CC3VectorAdd(eyeAt, pos);
+        eyeAt.y = eyeAt4.y;
+        eyeAt.z = eyeAt4.z;
+        NSLog(@"after translation eyeAt(%f,%f,%f",eyeAt.x,eyeAt.y,eyeAt.z);
+        
+//        {
+//            CC3GLMatrix *rotationMat = [CC3GLMatrix identity];
+//        
+//            [rotationMat translateBy:CC3VectorMake(0, 0, 10)];
+//            [rotationMat rotateByY:90];
+//            CC3Vector4 test = [rotationMat multiplyByVector:CC3Vector4Make(0, 0, 10, 1)];
+//            [rotationMat print:@"test"];
+//            NSLog(@"test  eyeAt(%f,%f,%f",test.x,test.y,test.z);
+//        }
+        
         
     }
-    cameraSpace[LOOK_AT] = CC3VectorMake(pos.x-5.0*vn.x, 0,pos.z-5.0*vn.z);
+    cameraSpace[LOOK_AT] = CC3VectorMake(pos.x+5.0*vn.x, 0,pos.z+5.0*vn.z);
     cameraSpace[UP] = CC3VectorMake(0.0, 1.0, 0.0);
     cameraSpace[EYE_AT] = eyeAt;
     return cameraSpace;

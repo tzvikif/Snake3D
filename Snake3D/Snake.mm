@@ -294,7 +294,7 @@ float bsf = 1.0/2.0;
 }
 -(BOOL)isRotating {
     BodyPart *head = [_bodyParts objectAtIndex:0];
-    return head.inRotation;
+    return head.isRotating;
 }
 -(float)getRotationAngle {
     BodyPart *head = [_bodyParts objectAtIndex:0];

@@ -16,7 +16,7 @@
 @property(nonatomic,assign) DIRECTION dir;
 //@property(nonatomic,assign) NSTimeInterval rotationTime;
 //@property(nonatomic,assign) NSTimeInterval rotationTimeElapsed;
-@property(nonatomic,assign) BOOL inRotation;
+@property(nonatomic,assign) BOOL isRotating;
 @property(nonatomic,assign) float rotationAngleStep;
 @property(nonatomic,assign) float currentRotatoinAngle;
 @property(nonatomic,assign) float destAngle;

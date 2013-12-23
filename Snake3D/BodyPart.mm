@@ -23,7 +23,7 @@ NSString *SnakeColor_name = @"color";
     _velocity = CC3VectorMake(0, 0, -_speed);
     _dir = DIR_UP;
     _currentRotatoinAngle = 0;
-    _inRotation = NO;
+    _isRotating = NO;
     NSMutableArray *arrTemp = [[NSMutableArray alloc] init];
     [self setTurnsAndPositions:arrTemp];
     [arrTemp release];
@@ -87,7 +87,7 @@ NSString *SnakeColor_name = @"color";
 }
 -(void)advance {
     static int maxStepsBeforeTurn = ceil(1.0/_speed); //floor cube: size/speed
-    if ([_turnsAndPositions count] > 0 && !_inRotation) {
+    if ([_turnsAndPositions count] > 0 && !_isRotating) {
         TurnPosition *turnPos = [_turnsAndPositions objectAtIndex:0];
         _nextTurnDir = turnPos.nextTurnDir;
         _nextTurnPos = turnPos.nextTurnPos;
@@ -102,7 +102,7 @@ NSString *SnakeColor_name = @"color";
         }
         //NSLog(@"numOfStepsRotation=%f",numOfStepsRotation);
         if (numOfStepsRotation <= maxStepsBeforeTurn) {
-            _inRotation = YES;
+            _isRotating = YES;
             switch (turnPos.nextTurnDir) {
                 case DIR_RIGHT:
                     _destAngle = 270.0;
@@ -138,7 +138,7 @@ NSString *SnakeColor_name = @"color";
 //            _rotationAngleStep/=100;
         }
     }
-    if (_inRotation) {
+    if (_isRotating) {
         _currentRotatoinAngle += _rotationAngleStep;
         //NSLog(@"_destAngle=%f _currentRotatoinAngle=%f _rotationAngleStep=%f",_destAngle,_currentRotatoinAngle,_rotationAngleStep);
         GLfloat px,pz;
@@ -155,7 +155,7 @@ NSString *SnakeColor_name = @"color";
         //NSLog(@"current position x=%f z=%f. next turn position x=%f z=%f",_position.x,_position.z,_nextTurnPos.x,_nextTurnPos.z);
         if (_position.x == _nextTurnPos.x && _position.z == _nextTurnPos.z) {
             _currentRotatoinAngle = _destAngle;
-            _inRotation = NO;
+            _isRotating = NO;
             [_turnsAndPositions removeObjectAtIndex:0];
             switch (_nextTurnDir) {
                 case DIR_RIGHT:
@@ -185,7 +185,7 @@ NSString *SnakeColor_name = @"color";
         }
         [self setRotatetionMat:[CC3GLMatrix identity]];
         [_rotatetionMat rotateByY:_currentRotatoinAngle];
-        NSLog(@"current rotation angle:%f",_currentRotatoinAngle);
+        //NSLog(@"current rotation angle:%f",_currentRotatoinAngle);
     }
     _position = CC3VectorAdd(_position,_velocity);
 }
