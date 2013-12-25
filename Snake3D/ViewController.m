@@ -77,7 +77,6 @@
     if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
         NSLog(@"right gesture");
         [_logicEngine setDir:DIR_RIGHT];
-        
     }
 }
 -(void)addSwipeRecognizer {
