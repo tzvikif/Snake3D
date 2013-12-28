@@ -10,6 +10,7 @@
 #import "CC3Foundation.h"
 #import "CC3Math.h"
 #import "CC3GLMatrix.h"
+#import "LoadObj.h"
 
 @implementation Mesh
 -(id)init {
@@ -121,6 +122,27 @@ verticesNumberOfElemets:(GLuint)vnoe {
     _vertexStruct = PNC;
 
 }
+//-(void)loadObjFromFile:(NSString *)name {
+//    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"obj"];
+//    LoadObj *bp = [[LoadObj alloc] initWithPath:path];
+//    [self loadVertices:(GLfloat*)bp->_arrVertices
+//               normals:NULL
+//                 color:NULL
+//               texture:bp->_arrTexture
+//               indices:bp->_arrElements
+//                indicesNumberOfElemets:bp->_numberOfFaces*3
+//                verticesNumberOfElemets:bp->_numberOfVertices];
+//}
+-(void)loadObjFromFile:(NSString *)name {
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"obj"];
+    LoadObj *bp = [[LoadObj alloc] initWithPath:path];
+    [self loadVertices:(const GLfloat*)bp->_arrVertices
+                 color:(const GLfloat*)bp->_arrVertices
+               indices:bp->_arrElements
+                indicesNumberOfElemets:bp->_numberOfFaces*3
+                verticesNumberOfElemets:bp->_numberOfVertices];
+}
+
 -(void)loadVertices:(const GLfloat*)v
               color:(const GLfloat*)c
             indices:(const GLushort*)elements

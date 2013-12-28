@@ -45,7 +45,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "275"
             endingLineNumber = "275"
-            landmarkName = "-updateSceneOrientation:"
+            landmarkName = "-getOrientation:andVelocity:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -109,7 +109,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "292"
             endingLineNumber = "292"
-            landmarkName = "-updateSceneOrientation:"
+            landmarkName = "-getOrientation:andVelocity:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake3D/Snake.mm"
-            timestampString = "402960495.874468"
+            timestampString = "409961196.615475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "-initResources"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake3D/Snake.mm"
-            timestampString = "403307757.608686"
+            timestampString = "409961196.615475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-advance"
             landmarkType = "5">
          </BreakpointContent>
@@ -216,12 +216,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake3D/Snake.mm"
-            timestampString = "403308089.98473"
+            timestampString = "409961196.615475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
-            landmarkName = "-setDir:andPosition:"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "-setDir:andAtPosition:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -248,13 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake3D/Snake.mm"
-            timestampString = "403912693.854906"
+            timestampString = "409961196.615475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
-            landmarkName = "-addBodyPart"
-            landmarkType = "5">
+            startingLineNumber = "328"
+            endingLineNumber = "328">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -275,12 +273,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake3D/Snake.mm"
-            timestampString = "403908531.56189"
+            timestampString = "409961196.615475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "-isCollideWithPosition:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Snake3D/Snake.mm"
+            timestampString = "409961166.668602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "-initResources"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -84,4 +84,5 @@ indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
 -(size_t)sizeofVertices;
 -(size_t)sizeofIndices;
+-(void)loadObjFromFile:(NSString*)name;
 @end

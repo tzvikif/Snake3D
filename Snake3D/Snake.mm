@@ -151,11 +151,12 @@ float bsf = 1.0/2.0;
     [self setBodyParts:ma];
     [ma release];
     Mesh *meshCube = [[Mesh alloc] init];
-    [meshCube loadVertices:SnakeCube_vertices
-                     color:SnakeCube_colors
-                   indices:SnakeCube_elements
-                indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
-                verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
+//    [meshCube loadVertices:SnakeCube_vertices
+//                     color:SnakeCube_colors
+//                   indices:SnakeCube_elements
+//                indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
+//                verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
+    [meshCube loadObjFromFile:@"monkey"];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;
