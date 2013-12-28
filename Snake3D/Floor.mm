@@ -59,7 +59,7 @@ NSString *mvp_name = @"mvp";
     //glDrawArrays(GL_POINTS, 0, size/sizeof(CC3Vector));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glDrawElements(GL_LINES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
+    glDrawElements(GL_LINE_LOOP, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
 }
 
 @end

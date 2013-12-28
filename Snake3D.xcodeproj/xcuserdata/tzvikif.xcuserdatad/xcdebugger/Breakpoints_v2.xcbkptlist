@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403562806.357338"
+            timestampString = "409965096.189576"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
             landmarkName = "-getOrientation:andVelocity:"
             landmarkType = "5">
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403562806.357338"
+            timestampString = "409965096.189576"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
             landmarkName = "-getOrientation:andVelocity:"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403562806.357338"
+            timestampString = "409965096.189576"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-setDir:"
             landmarkType = "5">
          </BreakpointContent>
@@ -200,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogicEngine.mm"
-            timestampString = "403562806.357338"
+            timestampString = "409965096.189576"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "-updateSceneOrientation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -285,7 +285,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake3D/Snake.mm"

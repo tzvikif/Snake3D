@@ -51,7 +51,8 @@
     [renderingEngineTemp release];
     Mesh *floorMeshTemp = [[Mesh alloc] init];
     //sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    [self createFloor:floorMeshTemp];
+    //[self createFloor:floorMeshTemp];
+    [self createSimpleFloor:floorMeshTemp];
     
     Drawable *DrwFloor =  [Drawable createDrawable:floorMeshTemp];
     Material *floorMaterialTemp = [[Material alloc] init];
@@ -166,6 +167,47 @@
     }
     
     [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:N*N];
+    
+    free(floorGrid);
+    free(elements);
+}
+-(void)createSimpleFloor:(Mesh*)floorMesh {
+    CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * 4);
+  
+//    int left = (0 - N / 2) / (N / 2.0);
+//    int right = ((N-1) - N / 2) / (N / 2.0);
+//    int far = (0 - N / 2) / (N / 2.0);
+//    int near = ((N-1) - N / 2) / (N / 2.0);
+    int left = -1;
+    int right = 1;
+    int far = -1;
+    int near = 1;
+   
+
+    floorGrid[0].x = left;
+    floorGrid[0].z = near;
+    floorGrid[0].y = 0;
+    
+    floorGrid[1].x = right;
+    floorGrid[1].z = near;
+    floorGrid[1].y = 0;
+    
+    floorGrid[2].x = right;
+    floorGrid[2].z = far;
+    floorGrid[2].y = 0;
+    
+    floorGrid[3].x = left;
+    floorGrid[3].z = far;
+    floorGrid[3].y = 0;
+    
+    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*4);
+    elements[0] = 0;
+    elements[1] = 1;
+    elements[2] = 2;
+    elements[3] = 3;
+    
+    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:4
+    verticesNumberOfElemets:4];
     
     free(floorGrid);
     free(elements);
