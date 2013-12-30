@@ -156,7 +156,7 @@ float bsf = 1.0/2.0;
 //                   indices:SnakeCube_elements
 //                indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
 //                verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
-    [meshCube loadObjFromFile:@"monkey"];
+    [meshCube loadObjFromFile:@"snakeBP"];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
     BodyPart *bp;

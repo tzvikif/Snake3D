@@ -56,9 +56,22 @@
                 
                 NSArray *arrOneFace = [oneFace componentsSeparatedByString:@"/"];
                 Face *faceKey = [[Face alloc] init];
-                NSString *strV = [arrOneFace objectAtIndex:0];
-                NSString *strVT = [arrOneFace objectAtIndex:1];
-                NSString *strN = [arrOneFace objectAtIndex:2];
+                NSString *strV;
+                NSString *strVT;
+                NSString *strN;
+                @try {
+                    
+                   strV = [arrOneFace objectAtIndex:0];
+                   strVT = [arrOneFace objectAtIndex:1];
+                   strN = [arrOneFace objectAtIndex:2];
+                }
+                @catch (NSException *exception) {
+                    int i = 0;
+                    i++;
+                }
+                @finally {
+                    ;
+                }
                 [faceKey setV:[strV integerValue]];
                 [faceKey setVt:[strVT integerValue]];
                 [faceKey setN:[strN integerValue]];

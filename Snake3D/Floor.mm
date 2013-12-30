@@ -12,6 +12,7 @@
 
 @implementation Floor
 NSString *gridFloor_name = @"gridFloor";
+NSString *texCoord_name = @"texCoord";
 NSString *mvp_name = @"mvp";
 
 -(void)initResources {
@@ -50,10 +51,10 @@ NSString *mvp_name = @"mvp";
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glVertexAttribPointer(
                           [self.program attributeLocation:gridFloor_name], // attribute
-                          3,                  // number of elements per vertex, here (x,y)
+                          3,                  // number of elements per vertex, here (x,y,z)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
-                          stride,                  // no extra data between each position
+                          stride,                  // data between each position
                           (GLvoid*)0                  // offset of first element
                           );
     //glDrawArrays(GL_POINTS, 0, size/sizeof(CC3Vector));

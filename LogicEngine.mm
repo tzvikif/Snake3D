@@ -174,16 +174,25 @@
 -(void)createSimpleFloor:(Mesh*)floorMesh {
     CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * 4);
   
-//    int left = (0 - N / 2) / (N / 2.0);
-//    int right = ((N-1) - N / 2) / (N / 2.0);
-//    int far = (0 - N / 2) / (N / 2.0);
-//    int near = ((N-1) - N / 2) / (N / 2.0);
-    int left = -1;
-    int right = 1;
-    int far = -1;
-    int near = 1;
+    GLfloat left = (0 - N / 2) / (N / 2.0);
+    GLfloat right = ((N-1) - N / 2) / (N / 2.0);
+    GLfloat far = (0 - N / 2) / (N / 2.0);
+    GLfloat near = ((N-1) - N / 2) / (N / 2.0);
+//    int left = -1;
+//    int right = 1;
+//    int far = -1;
+//    int near = 1;
    
-
+    GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 4*2);   //(x,y) * 4 vertices
+    texCoord[0] =   0.0;
+    texCoord[1] =   0.0;
+    texCoord[2] =   1.0;
+    texCoord[3] =   0.0;
+    texCoord[4] =   1.0;
+    texCoord[5] =   1.0;
+    texCoord[6] =   0.0;
+    texCoord[7] =   1.0;
+    
     floorGrid[0].x = left;
     floorGrid[0].z = near;
     floorGrid[0].y = 0;
@@ -208,6 +217,8 @@
     
     [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:4
     verticesNumberOfElemets:4];
+    
+    [floorMesh loadVertices:(GLfloat*)floorGrid normals:(GLfloat*)floorGrid color:(GLfloat*)floorGrid texture:texCoord indices:elements indicesNumberOfElemets:4 verticesNumberOfElemets:4];
     
     free(floorGrid);
     free(elements);
