@@ -1,5 +1,6 @@
-uniform sampler2D texture1;
-
+uniform sampler2D sampler1;
+varying mediump vec2 textureCoordOut;
 void main(void) {
-    gl_FragColor = vec4(0,0,0,1);
+    gl_FragColor = texture2D(sampler1, textureCoordOut);
+    /*gl_FragColor = texture2D(Sampler, TextureCoordOut) * DestinationColor;*/
 }

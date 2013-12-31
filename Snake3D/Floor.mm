@@ -12,7 +12,7 @@
 
 @implementation Floor
 NSString *gridFloor_name = @"gridFloor";
-NSString *texCoord_name = @"texCoord";
+NSString *texCoord_name = @"textureCoord";
 NSString *mvp_name = @"mvp";
 
 -(void)initResources {
@@ -23,6 +23,9 @@ NSString *mvp_name = @"mvp";
 -(void)Render {
     [self.program use];
     glEnable(GL_DEPTH_TEST);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    glUniform1i(self.material.textureId, /*GL_TEXTURE*/0);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLsizei window_height = self.viewport.size.height;
@@ -56,6 +59,14 @@ NSString *mvp_name = @"mvp";
                           GL_FALSE,           // take our values as-is
                           stride,                  // data between each position
                           (GLvoid*)0                  // offset of first element
+                          );
+    glVertexAttribPointer(
+                          [self.program attributeLocation:texCoord_name], // attribute
+                          2,                  // number of elements per vertex, here (U,V)
+                          GL_FLOAT,           // the type of each element
+                          GL_FALSE,           // take our values as-is
+                          stride,                  // data between each position
+                          (GLvoid*)(3*sizeof(CC3Vector))                  // offset of first element
                           );
     //glDrawArrays(GL_POINTS, 0, size/sizeof(CC3Vector));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
