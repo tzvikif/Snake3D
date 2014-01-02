@@ -56,7 +56,7 @@
     
     Drawable *DrwFloor =  [Drawable createDrawable:floorMeshTemp];
     Material *floorMaterialTemp = [[Material alloc] init];
-    [floorMaterialTemp setupTexture:@"tile_floor.png"];
+    [floorMaterialTemp setupTexture:@"floorGrass.png"];
     Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_FLOOR]] andDrawable:DrwFloor andMesh:floorMeshTemp andMaterial:floorMaterialTemp andViewport:viewport];
     [floorMeshTemp release];
     [floorMaterialTemp release];
@@ -209,16 +209,18 @@
     floorGrid[3].z = far;
     floorGrid[3].y = 0;
     
-    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*4);
+    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6);
     elements[0] = 0;
     elements[1] = 1;
     elements[2] = 2;
-    elements[3] = 3;
+    elements[3] = 0;
+    elements[4] = 2;
+    elements[5] = 3;
     
-    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:4
-    verticesNumberOfElemets:4];
+//    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:6
+//    verticesNumberOfElemets:4];
     
-    [floorMesh loadVertices:(GLfloat*)floorGrid normals:(GLfloat*)floorGrid color:(GLfloat*)floorGrid texture:texCoord indices:elements indicesNumberOfElemets:4 verticesNumberOfElemets:4];
+    [floorMesh loadVertices:(GLfloat*)floorGrid normals:(GLfloat*)floorGrid color:(GLfloat*)floorGrid texture:texCoord indices:elements indicesNumberOfElemets:6 verticesNumberOfElemets:4];
     
     free(floorGrid);
     free(elements);

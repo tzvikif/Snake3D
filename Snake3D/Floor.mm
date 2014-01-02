@@ -13,11 +13,14 @@
 @implementation Floor
 NSString *gridFloor_name = @"gridFloor";
 NSString *texCoord_name = @"textureCoord";
+NSString *sampler_name = @"sampler";
 NSString *mvp_name = @"mvp";
 
 -(void)initResources {
     [self.program addAttribute:gridFloor_name];
+    [self.program addAttribute:texCoord_name];
     [self.program addUniform:mvp_name];
+    [self.program addUniform:sampler_name];
 }
 
 -(void)Render {
@@ -25,7 +28,7 @@ NSString *mvp_name = @"mvp";
     glEnable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
-    glUniform1i(self.material.textureId, /*GL_TEXTURE*/0);
+    glUniform1i([self.program uniformLocation:sampler_name], /*GL_TEXTURE*/0);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLsizei window_height = self.viewport.size.height;
@@ -71,7 +74,7 @@ NSString *mvp_name = @"mvp";
     //glDrawArrays(GL_POINTS, 0, size/sizeof(CC3Vector));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glDrawElements(GL_LINE_LOOP, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
+    glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
 }
 
 @end

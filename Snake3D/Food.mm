@@ -15,11 +15,11 @@
 extern NSString *mvp_name;
 NSString *foodAttrib_name = @"gridFloor";
 NSString *foodColor_name = @"color";
-float food_bsf = 1.0/2.0;
+float food_bsf = 1.0/2.0;   //base scale factor
 -(void)initResources {
     [self.program addAttribute:foodAttrib_name];
     [self.program addUniform:mvp_name];
-    [self.program addAttribute:foodColor_name];
+    //[self.program addAttribute:foodColor_name];
 }
 
 -(void)Render {
@@ -58,14 +58,14 @@ float food_bsf = 1.0/2.0;
                           stride,                  // no extra data between each position
                           (GLvoid*)0                  // offset of first element
                           );
-    glVertexAttribPointer(
-                          [self.program attributeLocation:foodColor_name], // attribute
-                          3,                  // number of elements per vertex, here (x,y)
-                          GL_FLOAT,           // the type of each element
-                          GL_FALSE,           // take our values as-is
-                          stride,                  // no extra data between each position
-                          (GLvoid*)sizeof(CC3Vector)                  // offset of first element
-                          );
+//    glVertexAttribPointer(
+//                          [self.program attributeLocation:foodColor_name], // attribute
+//                          3,                  // number of elements per vertex, here (x,y)
+//                          GL_FLOAT,           // the type of each element
+//                          GL_FALSE,           // take our values as-is
+//                          stride,                  // no extra data between each position
+//                          (GLvoid*)sizeof(CC3Vector)                  // offset of first element
+//                          );
     
     //glDrawArrays(GL_TRIANGLES, 0, size/sizeof(_vertexPC));
     //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

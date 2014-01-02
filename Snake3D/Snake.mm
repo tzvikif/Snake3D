@@ -159,6 +159,7 @@ float bsf = 1.0/2.0;
     [meshCube loadObjFromFile:@"snakeBP"];
     Drawable *drwblTemp = [Drawable createDrawable:meshCube];
     Material *materialTemp = [[Material alloc] init];
+    [materialTemp setupTexture:@"Reptiles0090_S.png"];
     BodyPart *bp;
     CC3Vector pos;
     _initScales = (CC3Vector*)malloc(sizeof(CC3Vector) * _bpCount);

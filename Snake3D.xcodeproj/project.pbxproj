@@ -52,6 +52,8 @@
 		91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91978F4C1870BFFE00204461 /* snakeBP.obj */; };
 		E549AC131833E0CB0023394A /* LoadObj.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC121833E0CB0023394A /* LoadObj.m */; };
 		E549AC161833E0DF0023394A /* face.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC151833E0DF0023394A /* face.m */; };
+		E582756018746EE50028093E /* floorGrass.png in Resources */ = {isa = PBXBuildFile; fileRef = E582755F18746EE50028093E /* floorGrass.png */; };
+		E5827568187477500028093E /* Reptiles0090_S.png in Resources */ = {isa = PBXBuildFile; fileRef = E5827567187477500028093E /* Reptiles0090_S.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +129,8 @@
 		E549AC121833E0CB0023394A /* LoadObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadObj.m; sourceTree = "<group>"; };
 		E549AC141833E0DF0023394A /* face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = face.h; sourceTree = "<group>"; };
 		E549AC151833E0DF0023394A /* face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = face.m; sourceTree = "<group>"; };
+		E582755F18746EE50028093E /* floorGrass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floorGrass.png; sourceTree = "<group>"; };
+		E5827567187477500028093E /* Reptiles0090_S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reptiles0090_S.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,8 @@
 			children = (
 				20E9E55A17CB82E300C7D3C7 /* tile_floor.png */,
 				20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */,
+				E582755F18746EE50028093E /* floorGrass.png */,
+				E5827567187477500028093E /* Reptiles0090_S.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -350,8 +356,10 @@
 				91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */,
 				91289D6D1800A5D10096F1E8 /* SbpVertex.vsh in Resources */,
 				20F74B6617C2604800407740 /* InfoPlist.strings in Resources */,
+				E582756018746EE50028093E /* floorGrass.png in Resources */,
 				20F74B6E17C2604800407740 /* Default.png in Resources */,
 				20F74B7017C2604800407740 /* Default@2x.png in Resources */,
+				E5827568187477500028093E /* Reptiles0090_S.png in Resources */,
 				20F74B7217C2604800407740 /* Default-568h@2x.png in Resources */,
 				91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */,
 				20F74B7817C2604800407740 /* ViewController.xib in Resources */,

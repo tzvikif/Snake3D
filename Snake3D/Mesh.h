@@ -77,12 +77,13 @@ verticesNumberOfElemets:(GLuint)vnoe;
             indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
--(void)loadVertices:(GLfloat*)v
-            texture:(GLfloat*)c
-            indices:(GLushort*)elements
+-(void)loadVertices:(const GLfloat*)v
+            texture:(const GLfloat*)c
+            indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
 -(size_t)sizeofVertices;
 -(size_t)sizeofIndices;
 -(void)loadObjFromFile:(NSString*)name;
+-(void)loadObjFromFileWithUV:(NSString *)name;
 @end

@@ -142,6 +142,11 @@ verticesNumberOfElemets:(GLuint)vnoe {
                 indicesNumberOfElemets:bp->_numberOfFaces*3
                 verticesNumberOfElemets:bp->_numberOfVertices];
 }
+-(void)loadObjFromFileWithUV:(NSString *)name{
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"obj"];
+    LoadObj *bp = [[LoadObj alloc] initWithPath:path];
+    [self loadVertices:(const GLfloat*)bp->_arrVertices texture:bp->_arrTexture indices:bp->_arrElements indicesNumberOfElemets:bp->_numberOfFaces*3 verticesNumberOfElemets:bp->_numberOfVertices];
+}
 
 -(void)loadVertices:(const GLfloat*)v
               color:(const GLfloat*)c
@@ -179,9 +184,9 @@ verticesNumberOfElemets:(GLuint)vnoe {
     _inoe = inoe;
     _vertexStruct = PC;
 }
--(void)loadVertices:(GLfloat*)v
-              texture:(GLfloat*)t
-            indices:(GLushort*)elements
+-(void)loadVertices:(const GLfloat*)v
+              texture:(const GLfloat*)t
+            indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
     VertexPT *verticesTemp = malloc( sizeof(VertexPT) * ( vnoe ));

@@ -11,15 +11,19 @@
 #import "Consts.h"
 #import "TurnPosition.h"
 
+
 @implementation BodyPart
 extern NSString *mvp_name;
 NSString *bp_name = @"gridFloor";
 NSString *SnakeColor_name = @"color";
+NSString *snakeTextureCoordName = @"textureCoord";
+NSString *snakeSampleName = @"sampler";
 
 -(void)initResources {
     [self.program addAttribute:bp_name];
     [self.program addUniform:mvp_name];
-    [self.program addAttribute:SnakeColor_name];
+    [self.program addUniform:snakeSampleName];
+    [self.program addAttribute:snakeTextureCoordName];
     _velocity = CC3VectorMake(0, 0, -_speed);
     _dir = DIR_UP;
     _currentRotatoinAngle = 0;
@@ -37,6 +41,9 @@ NSString *SnakeColor_name = @"color";
 //        return;
 //    }
     glEnable(GL_DEPTH_TEST);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    glUniform1i([self.program uniformLocation:snakeSampleName], /*GL_TEXTURE*/0);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLsizei window_height = self.viewport.size.height;
@@ -69,8 +76,8 @@ NSString *SnakeColor_name = @"color";
                           (GLvoid*)0                  // offset of first element
                           );
     glVertexAttribPointer(
-                          [self.program attributeLocation:SnakeColor_name], // attribute
-                          3,                  // number of elements per vertex, here (x,y)
+                          [self.program attributeLocation:snakeTextureCoordName], // attribute
+                          2,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
                           stride,                  // no extra data between each position
