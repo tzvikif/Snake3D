@@ -52,6 +52,7 @@
 		91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91978F4C1870BFFE00204461 /* snakeBP.obj */; };
 		E549AC131833E0CB0023394A /* LoadObj.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC121833E0CB0023394A /* LoadObj.m */; };
 		E549AC161833E0DF0023394A /* face.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC151833E0DF0023394A /* face.m */; };
+		E54CC33B187C43950002AADD /* SkyBox.m in Sources */ = {isa = PBXBuildFile; fileRef = E54CC33A187C43950002AADD /* SkyBox.m */; };
 		E582756018746EE50028093E /* floorGrass.png in Resources */ = {isa = PBXBuildFile; fileRef = E582755F18746EE50028093E /* floorGrass.png */; };
 		E5827568187477500028093E /* Reptiles0090_S.png in Resources */ = {isa = PBXBuildFile; fileRef = E5827567187477500028093E /* Reptiles0090_S.png */; };
 /* End PBXBuildFile section */
@@ -129,6 +130,8 @@
 		E549AC121833E0CB0023394A /* LoadObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadObj.m; sourceTree = "<group>"; };
 		E549AC141833E0DF0023394A /* face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = face.h; sourceTree = "<group>"; };
 		E549AC151833E0DF0023394A /* face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = face.m; sourceTree = "<group>"; };
+		E54CC339187C43950002AADD /* SkyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkyBox.h; path = Snake3D/SkyBox.h; sourceTree = "<group>"; };
+		E54CC33A187C43950002AADD /* SkyBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkyBox.m; path = Snake3D/SkyBox.m; sourceTree = "<group>"; };
 		E582755F18746EE50028093E /* floorGrass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floorGrass.png; sourceTree = "<group>"; };
 		E5827567187477500028093E /* Reptiles0090_S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reptiles0090_S.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,6 +255,7 @@
 		20FF7DB117C4975300A58B95 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				E54CC338187C43350002AADD /* SkyBox */,
 				91609096186F844B00DB7624 /* monkey.obj */,
 				91609094186F826F00DB7624 /* cube.obj */,
 				91978F4C1870BFFE00204461 /* snakeBP.obj */,
@@ -299,6 +303,15 @@
 				20FF7DC417C49BF200A58B95 /* Vectors.h */,
 			);
 			path = Cocos3DMathLib;
+			sourceTree = "<group>";
+		};
+		E54CC338187C43350002AADD /* SkyBox */ = {
+			isa = PBXGroup;
+			children = (
+				E54CC339187C43950002AADD /* SkyBox.h */,
+				E54CC33A187C43950002AADD /* SkyBox.m */,
+			);
+			name = SkyBox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,6 +404,7 @@
 				20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */,
 				20FF7DC217C49A1F00A58B95 /* CC3Kazmath.mm in Sources */,
 				20FF7DC317C49A1F00A58B95 /* CC3Math.mm in Sources */,
+				E54CC33B187C43950002AADD /* SkyBox.m in Sources */,
 				20FF7DC717C49F9100A58B95 /* Drawable.m in Sources */,
 				20FF7DCD17C4E57100A58B95 /* Material.m in Sources */,
 				91289D6B1800A5920096F1E8 /* SbpVertex.vsh in Sources */,
