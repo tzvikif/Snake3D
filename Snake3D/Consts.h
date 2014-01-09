@@ -42,6 +42,13 @@ typedef enum _VIEW {
     UP,    //upper left
     EYE_AT    //upper right
 }VIEW;
+static const GLenum types[6] = {
+    GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };
 
 
 float lerp(float a,float b,float blend);

@@ -9,5 +9,5 @@
 #import "Node.h"
 
 @interface SkyBox : Node
-
+@property(nonatomic,assign) CC3Vector scaleFactor;
 @end

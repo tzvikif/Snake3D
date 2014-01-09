@@ -50,6 +50,8 @@
 		9172EE2D17C5505C008F48AB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2C17C5505C008F48AB /* OpenGLES.framework */; };
 		9172EE2F17C550BB008F48AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2E17C550BB008F48AB /* QuartzCore.framework */; };
 		91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91978F4C1870BFFE00204461 /* snakeBP.obj */; };
+		E544593A187D5CF500192FB4 /* skybox.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E5445939187D5CF500192FB4 /* skybox.vsh */; };
+		E544593C187D5D2700192FB4 /* skybox.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E544593B187D5D2700192FB4 /* skybox.fsh */; };
 		E549AC131833E0CB0023394A /* LoadObj.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC121833E0CB0023394A /* LoadObj.m */; };
 		E549AC161833E0DF0023394A /* face.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC151833E0DF0023394A /* face.m */; };
 		E54CC33B187C43950002AADD /* SkyBox.m in Sources */ = {isa = PBXBuildFile; fileRef = E54CC33A187C43950002AADD /* SkyBox.m */; };
@@ -126,6 +128,8 @@
 		9172EE2C17C5505C008F48AB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		9172EE2E17C550BB008F48AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		91978F4C1870BFFE00204461 /* snakeBP.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = snakeBP.obj; sourceTree = "<group>"; };
+		E5445939187D5CF500192FB4 /* skybox.vsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = skybox.vsh; sourceTree = "<group>"; };
+		E544593B187D5D2700192FB4 /* skybox.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = skybox.fsh; sourceTree = "<group>"; };
 		E549AC111833E0CB0023394A /* LoadObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadObj.h; sourceTree = "<group>"; };
 		E549AC121833E0CB0023394A /* LoadObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadObj.m; sourceTree = "<group>"; };
 		E549AC141833E0DF0023394A /* face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = face.h; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				91289D691800A5920096F1E8 /* SbpVertex.vsh */,
 				20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */,
 				20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */,
+				E5445939187D5CF500192FB4 /* skybox.vsh */,
+				E544593B187D5D2700192FB4 /* skybox.fsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E544593A187D5CF500192FB4 /* skybox.vsh in Resources */,
 				91609097186F844B00DB7624 /* monkey.obj in Resources */,
 				91609095186F826F00DB7624 /* cube.obj in Resources */,
 				91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */,
@@ -371,6 +378,7 @@
 				20F74B6617C2604800407740 /* InfoPlist.strings in Resources */,
 				E582756018746EE50028093E /* floorGrass.png in Resources */,
 				20F74B6E17C2604800407740 /* Default.png in Resources */,
+				E544593C187D5D2700192FB4 /* skybox.fsh in Resources */,
 				20F74B7017C2604800407740 /* Default@2x.png in Resources */,
 				E5827568187477500028093E /* Reptiles0090_S.png in Resources */,
 				20F74B7217C2604800407740 /* Default-568h@2x.png in Resources */,

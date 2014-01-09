@@ -18,4 +18,6 @@
 @property(assign,nonatomic) GLfloat shininess;
 
 - (void)setupTexture:(NSString *)fileName;
+- (void)setup3DTexture:(NSArray *)fileNames;
+
 @end
