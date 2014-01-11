@@ -19,5 +19,5 @@
 
 - (void)setupTexture:(NSString *)fileName;
 - (void)setup3DTexture:(NSArray *)fileNames;
-
+- (void)bindTexture:(GLenum)TextureUnit;
 @end

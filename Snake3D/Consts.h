@@ -13,7 +13,8 @@ extern float const totalOrientationTime;
 extern float const SNKspeed;
 typedef enum _PROGRAMS {
     PROG_FLOOR,
-    PROG_SNAKE
+    PROG_SNAKE,
+    PROG_SKYBOX
 }PROG_ID;
 
 typedef enum _DIRECTION {

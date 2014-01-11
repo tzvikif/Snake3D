@@ -51,8 +51,10 @@
     _textureId = texName;
 }
 - (void)setup3DTexture:(NSArray *)fileNames {
-    // 1
-    
+
+    GLuint texName;
+    glGenTextures(1, &texName);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, texName);
     for (GLuint i=0; i<sizeof(types)/sizeof(types[0]);i++) {
         CGImageRef spriteImage = [UIImage imageNamed:[fileNames objectAtIndex:i]].CGImage;
         if (!spriteImage) {
@@ -70,29 +72,29 @@
         
         // 3
         CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
-        
         CGContextRelease(spriteContext);
+        
+        glTexImage2D(types[i], 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        //glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+        
+        free(spriteData);
+        
         
 
     }
     
- 
-    
-    // 4
-    GLuint texName;
-    glGenTextures(1, &texName);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, texName);
-    
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
-    
-    free(spriteData);
     //return texName;
     _textureId = texName;
+}
+- (void)bindTexture:(GLenum)TextureUnit {
+    glActiveTexture(TextureUnit);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, _textureId);
 }
 
 

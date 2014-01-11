@@ -69,7 +69,15 @@ NSString *mvp_name = @"mvp";
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
                           stride,                  // data between each position
-                          (GLvoid*)(3*sizeof(CC3Vector))                  // offset of first element
+                          (GLvoid*)(1*sizeof(CC3Vector))                  // offset of first element
+                          );
+    glVertexAttribPointer(
+                          [self.program attributeLocation:texCoord_name], // attribute
+                          2,                  // number of elements per vertex, here (U,V)
+                          GL_FLOAT,           // the type of each element
+                          GL_FALSE,           // take our values as-is
+                          stride,                  // data between each position
+                          (GLvoid*)(2*sizeof(CC3Vector))                  // offset of first element
                           );
     //glDrawArrays(GL_POINTS, 0, size/sizeof(CC3Vector));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);

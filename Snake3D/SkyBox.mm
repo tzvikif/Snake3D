@@ -21,7 +21,7 @@ static NSString *skyboxColor_name = @"color";
     [self.program addUniform:skybox_mvp_name];
     [self.program addUniform:skybox_sample_name];
     [self.program addAttribute:skyboxPos_name];
-    [self.program addAttribute:skyboxColor_name];
+//    [self.program addAttribute:skyboxColor_name];
 }
 -(void)Render {
     [self.program use];
@@ -61,24 +61,7 @@ static NSString *skyboxColor_name = @"color";
                           GL_FALSE,           // take our values as-is
                           stride,                  // no extra data between each position
                           (GLvoid*)0                  // offset of first element
-                          );
-    glVertexAttribPointer(
-                          [self.program attributeLocation:skyBoxTextureCoord_name], // attribute
-                          3,                  // number of elements per vertex, here (x,y)
-                          GL_FLOAT,           // the type of each element
-                          GL_FALSE,           // take our values as-is
-                          stride,                  // no extra data between each position
-                          (GLvoid*)sizeof(CC3Vector)                  // offset of first element
-                          );
-    glVertexAttribPointer(
-                          [self.program attributeLocation:skyBoxTextureCoord_name], // attribute
-                          3,                  // number of elements per vertex, here (x,y)
-                          GL_FLOAT,           // the type of each element
-                          GL_FALSE,           // take our values as-is
-                          stride,                  // no extra data between each position
-                          (GLvoid*)(2*sizeof(CC3Vector))                  // offset of first element
-                          );
-    
+                          );    
     //glDrawArrays(GL_TRIANGLES, 0, size/sizeof(_vertexPC));
     //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);

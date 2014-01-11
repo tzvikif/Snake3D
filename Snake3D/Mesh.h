@@ -62,8 +62,8 @@ typedef struct _vertexPT
             indices:(GLushort*)elements
         indicesNumberOfElemets:(GLuint)inoe
        verticesNumberOfElemets:(GLuint)vnoe;
--(void)loadVertices:(GLfloat*)v
-            indices:(GLushort*)elements
+-(void)loadVertices:(const GLfloat*)v
+            indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
 -(void)loadVertices:(GLfloat*)v

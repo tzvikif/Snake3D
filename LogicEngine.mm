@@ -14,6 +14,7 @@
 #import "GLProgram.h"
 #import "Vectors.h"
 #import "Food.h"
+#import "SkyBox.h"
 #include <stdlib.h>
 #import <math.h>
 
@@ -46,6 +47,12 @@
     [self createProgramWithVertexShaderName:@"SbpVertex"
                       andFragmentShaderName:@"SbpFragment"
                                      withId:PROG_SNAKE];
+    [self createProgramWithVertexShaderName:@"SbpVertex"
+                      andFragmentShaderName:@"SbpFragment"
+                                     withId:PROG_SNAKE];
+    [self createProgramWithVertexShaderName:@"skybox"
+                      andFragmentShaderName:@"skybox"
+                                     withId:PROG_SKYBOX];
     [renderingEngineTemp initialize:viewport andProgram:_programs];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
@@ -65,15 +72,16 @@
     [snakeObjTemp setSpeed:SNKspeed];
     [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
     _currentVelocity = [snakeObjTemp getVelocity];
-
+    SkyBox *skyBoxTemp = [self createSkyBox];
+    [_renderables addObject:skyBoxTemp];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
     
     [floorObjTemp release];
     [snakeObjTemp release];
-    
+    [skyBoxTemp release];
     [_renderingEngine initResources:_renderables];
-    }
+}
 -(void)Render:(NSArray*)renderables; {
     [_renderingEngine Render:renderables];
 }
@@ -479,6 +487,26 @@
     BOOL isEaten = [snk isCollideWithPosition:pos];
     return isEaten;
 }
+-(SkyBox*)createSkyBox {
+    Mesh *msh = [[Mesh alloc] init];
+    [msh loadVertices:cube_vertices indices:cube_elements indicesNumberOfElemets:cube_elementsSize/cube_elements[0] verticesNumberOfElemets:cube_verticesSize/cube_vertices[0]];
+    Drawable *dr =  [Drawable createDrawable:msh];
+    Material *mt = [[Material alloc] init];
+    [mt setup3DTexture:[NSArray arrayWithObjects:
+                        @"xpox.png",
+                        @"xneg.png",
+                        @"ypos.png",
+                        @"yneg.png",
+                        @"zpos.png",
+                        @"zneg.png",
+                        nil]];
+    SkyBox *sb = [[SkyBox alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SKYBOX]]
+                                           andDrawable:dr andMesh:msh andMaterial:mt andViewport:_viewport];
+    [msh release];
+    [dr release];
+    [mt release];
+    return sb;
+}
 -(void)dealloc {
     [_programs release];
     [_renderingEngine release];
@@ -486,3 +514,4 @@
     [super dealloc];
 }
 @end
+

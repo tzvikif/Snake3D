@@ -57,8 +57,8 @@
 -(size_t)sizeofIndices {
     return _inoe * sizeof(GLushort);
 }
--(void)loadVertices:(GLfloat*)v
-            indices:(GLushort*)elements
+-(void)loadVertices:(const GLfloat*)v
+            indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
     CC3Vector *verticesTemp = malloc( sizeof(CC3Vector) * ( vnoe ));
