@@ -105,29 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LogicEngine.mm"
-            timestampString = "411232576.252164"
+            filePath = "Snake3D/Mesh.m"
+            timestampString = "411233995.617979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
-            landmarkName = "-createSkyBox"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Snake3D/BodyPart.mm"
-            timestampString = "411232664.587215"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-Render"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "-loadVertices:texture:indices:indicesNumberOfElemets:verticesNumberOfElemets:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

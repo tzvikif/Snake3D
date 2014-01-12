@@ -480,8 +480,8 @@
 -(SkyBox*)createSkyBox {
     
     Mesh *msh = [[Mesh alloc] init];
-    [msh loadVertices:cube_vertices texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:/*cube_elementsSize/sizeof(cube_elements[0])*/6
-verticesNumberOfElemets:cube_verticesSize/sizeof(cube_vertices[0])];
+//    [msh loadVertices:cube_vertices texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:cube_elementsSize/sizeof(cube_elements[0])
+//verticesNumberOfElemets:cube_verticesSize/sizeof(cube_vertices[0])];
     Drawable *dr =  [Drawable createDrawable:msh];
     Material *mtxpos = [[Material alloc] init];
     Material *mtxneg = [[Material alloc] init];
@@ -501,7 +501,7 @@ verticesNumberOfElemets:cube_verticesSize/sizeof(cube_vertices[0])];
                                            andDrawable:dr andMesh:msh andMaterial:mtxpos andViewport:_viewport];
     [msh release];
     [dr release];
-    [sb release];
+    //[sb release];
     NSMutableDictionary *mtrDic = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:mtxpos,mtxneg,mtypos,mtyneg,mtzpos,mtzneg,nil]
                                                                        forKeys:[NSArray arrayWithObjects:
                                                                                 [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_X],
