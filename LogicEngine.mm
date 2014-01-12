@@ -14,6 +14,7 @@
 #import "GLProgram.h"
 #import "Vectors.h"
 #import "Food.h"
+#import "SkyBox.h"
 #include <stdlib.h>
 #import <math.h>
 
@@ -46,6 +47,9 @@
     [self createProgramWithVertexShaderName:@"SbpVertex"
                       andFragmentShaderName:@"SbpFragment"
                                      withId:PROG_SNAKE];
+    [self createProgramWithVertexShaderName:@"skybox"
+                      andFragmentShaderName:@"skybox"
+                                     withId:PROG_SKYBOX];
     [renderingEngineTemp initialize:viewport andProgram:_programs];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
@@ -65,12 +69,14 @@
     [snakeObjTemp setSpeed:SNKspeed];
     [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
     _currentVelocity = [snakeObjTemp getVelocity];
-
+    SkyBox *sboxTemp = [self createSkyBox];
+    
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
     
     [floorObjTemp release];
     [snakeObjTemp release];
+    //[sboxTemp release];
     
     [_renderingEngine initResources:_renderables];
     }
@@ -470,6 +476,52 @@
     }
     [foodTemp setPosition:pos];
     return [foodTemp autorelease];
+}
+-(SkyBox*)createSkyBox {
+    
+    Mesh *msh = [[Mesh alloc] init];
+    [msh loadVertices:cube_vertices texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:/*cube_elementsSize/sizeof(cube_elements[0])*/6
+verticesNumberOfElemets:cube_verticesSize/sizeof(cube_vertices[0])];
+    Drawable *dr =  [Drawable createDrawable:msh];
+    Material *mtxpos = [[Material alloc] init];
+    Material *mtxneg = [[Material alloc] init];
+    Material *mtypos = [[Material alloc] init];
+    Material *mtyneg = [[Material alloc] init];
+    Material *mtzpos = [[Material alloc] init];
+    Material *mtzneg = [[Material alloc] init];
+
+    [mtxpos setupTexture:@"xpos.png"];
+    [mtxneg setupTexture:@"xneg.png"];
+    [mtypos setupTexture:@"ypos.png"];
+    [mtyneg setupTexture:@"yneg.png"];
+    [mtzpos setupTexture:@"zpos.png"];
+    [mtzneg setupTexture:@"zneg.png"];
+
+    SkyBox *sb = [[SkyBox alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SKYBOX]]
+                                           andDrawable:dr andMesh:msh andMaterial:mtxpos andViewport:_viewport];
+    [msh release];
+    [dr release];
+    [sb release];
+    NSMutableDictionary *mtrDic = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:mtxpos,mtxneg,mtypos,mtyneg,mtzpos,mtzneg,nil]
+                                                                       forKeys:[NSArray arrayWithObjects:
+                                                                                [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_X],
+                                                                                [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_NEGATIVE_X],
+                                                                                [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_Y],
+                                                                                [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_NEGATIVE_Y],
+                                                                                [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_Z],
+                                                                                [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_NEGATIVE_Z],
+                                                                                nil]];
+//    //[sb setMoreMaterials:mtrDic];
+//    
+    [mtrDic release];
+    [mtxpos release];
+    [mtxneg release];
+    [mtypos release];
+    [mtyneg release];
+    [mtzpos release];
+    [mtzneg release];
+    
+    return nil;
 }
 -(DIRECTION)getDirectionFromVelocity:(CC3Vector)v {
     return DIR_DOWN;

@@ -22,6 +22,7 @@
 
 @class GLProgram;
 @class Food;
+@class SkyBox;
 
 @interface LogicEngine : NSObject
 @property(nonatomic,retain) NSMutableArray *renderables;
@@ -47,5 +48,6 @@
 -(DIRECTION)getDirectionFromVelocity:(CC3Vector)v;
 -(void)updateSceneOrientation;
 -(void)setDir:(DIRECTION)dir;
+-(SkyBox*)createSkyBox;
 @end
     

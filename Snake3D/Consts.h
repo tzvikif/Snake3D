@@ -13,7 +13,8 @@ extern float const totalOrientationTime;
 extern float const SNKspeed;
 typedef enum _PROGRAMS {
     PROG_FLOOR,
-    PROG_SNAKE
+    PROG_SNAKE,
+    PROG_SKYBOX
 }PROG_ID;
 
 typedef enum _DIRECTION {
@@ -77,6 +78,7 @@ extern GLfloat const cube_normals[];
 extern size_t const SimpleCube_elementsSize;
 extern GLfloat const SnakeCube_verticesY[];
 extern size_t const SnakeCube_verticesYSize;
+extern GLfloat const cube_texcoords[];
 
 #define TWODIGITS_FP(x) x*=100;x=roundf(x);x/=100; //round a number by 2 digits. 5.499993 => 5.500000
 
