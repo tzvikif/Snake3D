@@ -10,6 +10,10 @@
 #import "GLProgram.h"
 #import "Consts.h"
 
+@interface SkyBox()
+-(void)drawFace:(int)face;
+@end
+
 @implementation SkyBox
 static NSString *skyBoxTextureCoord_name = @"textureCoord";
 static NSString *skybox_mvp_name = @"mvp";
@@ -39,9 +43,9 @@ static NSString *skyboxPos_name = @"pos";
     glGetIntegerv(GL_DEPTH_FUNC, &OldDepthFuncMode);
     glCullFace(GL_FRONT);
     
-    //Material *mtrl;
-    //mtrl = [self.moreMaterials objectForKey:[NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_X]];
-    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    Material *mtrl;
+    mtrl = [self.materials objectForKey:[NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_X]];
+    glBindTexture(GL_TEXTURE_2D,mtrl.textureId);
     glUniform1i([self.program uniformLocation:skybox_sample_name], /*GL_TEXTURE*/1);
     GLsizei window_height = self.viewport.size.height;
     GLsizei window_width = self.viewport.size.width;
@@ -89,5 +93,58 @@ static NSString *skyboxPos_name = @"pos";
     
     glCullFace(OldCullFaceMode);
     glDepthFunc(OldDepthFuncMode);
+}
+-(void)drawFace:(int)face {
+    Material *mtrl;
+    mtrl = [self.materials objectForKey:[NSNumber numberWithInt:face]];
+    glBindTexture(GL_TEXTURE_2D,mtrl.textureId);
+    glUniform1i([self.program uniformLocation:skybox_sample_name], /*GL_TEXTURE*/1);
+    GLsizei size;
+    GLsizei stride = [self getStride];
+    glVertexAttribPointer(
+                          [self.program attributeLocation:skyboxPos_name], // attribute
+                          3,                  // number of elements per vertex, here (x,y)
+                          GL_FLOAT,           // the type of each element
+                          GL_FALSE,           // take our values as-is
+                          stride,                  // no extra data between each position
+                          (GLvoid*)0                  // offset of first element
+                          );
+    glVertexAttribPointer(
+                          [self.program attributeLocation:skyBoxTextureCoord_name], // attribute
+                          2,                  // number of elements per vertex, here (x,y)
+                          GL_FLOAT,           // the type of each element
+                          GL_FALSE,           // take our values as-is
+                          stride,                  // no extra data between each position
+                          (GLvoid*)sizeof(CC3Vector)                  // offset of first element
+                          );
+    
+    switch (face) {
+        case GL_TEXTURE_CUBE_MAP_POSITIVE_Z  :
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(12*sizeof(GLushort)));
+            break;
+        case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
+            break;
+        case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(18*sizeof(GLushort)));
+            break;
+        case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(6*sizeof(GLushort)));
+            break;
+        case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(24*sizeof(GLushort)));
+            break;
+        case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(30*sizeof(GLushort)));
+            break;
+        default:
+            break;
+    }
+    
+    //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
+    //glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+    //glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
+
 }
 @end

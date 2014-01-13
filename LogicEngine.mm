@@ -502,7 +502,7 @@
     [mtzneg setupTexture:@"zneg.png"];
 
     SkyBox *sb = [[SkyBox alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SKYBOX]]
-                                           andDrawable:dr andMesh:msh andMaterial:mtxpos andViewport:_viewport];
+                                           andDrawable:dr andMesh:msh andMaterial:nil andViewport:_viewport];
     [msh release];
     NSMutableDictionary *mtrDic = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:mtxpos,mtxneg,mtypos,mtyneg,mtzpos,mtzneg,nil]
                                                                        forKeys:[NSArray arrayWithObjects:
@@ -514,7 +514,7 @@
                                                                                 [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_NEGATIVE_Z],
                                                                                 nil]];
     //[sb setMoreMaterials:mtrDic];
-//
+    [sb setMaterials:mtrDic];
     [mtrDic release];
     [mtxpos release];
     [mtxneg release];

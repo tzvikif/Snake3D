@@ -10,4 +10,5 @@
 
 @interface SkyBox : Node
 @property(nonatomic,assign) CC3Vector scaleFactor;
+@property(retain,nonatomic) NSDictionary *materials;
 @end
