@@ -39,7 +39,7 @@
 }
 -(void)startRenderLoop {
     CADisplayLink* displayLink;
-    [self Render:nil];
+    //[self Render:nil];
     m_timestamp = CACurrentMediaTime();
     displayLink = [CADisplayLink displayLinkWithTarget:self
                                               selector:@selector(Render:)];

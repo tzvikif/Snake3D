@@ -42,7 +42,7 @@
     CC3Vector br_up = CC3VectorMake(0.0, 1.0, 0.0);
     [_matView populateToLookAt:br_lookAt withEyeAt:br_eyeAt withUp:br_up];
     float ratio = self.viewport.size.width / self.viewport.size.height;
-    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:50 andAspectRatio:ratio];
+    [_matProjection populateFromFrustumFov:45.0 andNear:0.1 andFar:100 andAspectRatio:ratio];
     for (Node *obj in renderables) {
             [obj setProjectionMatrix:_matProjection];
             [obj setViewMatrix:_matView];

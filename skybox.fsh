@@ -4,9 +4,7 @@ varying mediump vec2 textureCoordOut;
 //varying vec3 colorOut;
 
 void main(void) {
-    //gl_FragColor = vec4(f_color,1);
-    mediump vec3 temp;
-    mediump vec4 tex = texture3D(sampler, temp);
+    mediump vec4 tex = texture2D(sampler, textureCoordOut);
     gl_FragColor = tex;
     
     

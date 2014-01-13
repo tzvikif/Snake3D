@@ -59,6 +59,8 @@
 		E507DFAA1882D9FA00C5DA91 /* SkyBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = E507DFA91882D9FA00C5DA91 /* SkyBox.mm */; };
 		E507DFAD1882DA0700C5DA91 /* skybox.fsh in Sources */ = {isa = PBXBuildFile; fileRef = E507DFAB1882DA0700C5DA91 /* skybox.fsh */; };
 		E507DFAE1882DA0700C5DA91 /* skybox.vsh in Sources */ = {isa = PBXBuildFile; fileRef = E507DFAC1882DA0700C5DA91 /* skybox.vsh */; };
+		E507DFAF1883FD2500C5DA91 /* skybox.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E507DFAB1882DA0700C5DA91 /* skybox.fsh */; };
+		E507DFB01883FD2500C5DA91 /* skybox.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E507DFAC1882DA0700C5DA91 /* skybox.vsh */; };
 		E549AC131833E0CB0023394A /* LoadObj.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC121833E0CB0023394A /* LoadObj.m */; };
 		E549AC161833E0DF0023394A /* face.m in Sources */ = {isa = PBXBuildFile; fileRef = E549AC151833E0DF0023394A /* face.m */; };
 		E582756018746EE50028093E /* floorGrass.png in Resources */ = {isa = PBXBuildFile; fileRef = E582755F18746EE50028093E /* floorGrass.png */; };
@@ -380,6 +382,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E507DFAF1883FD2500C5DA91 /* skybox.fsh in Resources */,
+				E507DFB01883FD2500C5DA91 /* skybox.vsh in Resources */,
 				91609097186F844B00DB7624 /* monkey.obj in Resources */,
 				91609095186F826F00DB7624 /* cube.obj in Resources */,
 				91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */,

@@ -26,6 +26,7 @@
 -(Food*)createFood;
 -(void)Render:(NSArray*)renderables;
 -(BOOL)isFoodEaten:(CC3Vector)pos;
+-(Snake*)getSnakeObj;
 @end
 
 @implementation LogicEngine
@@ -70,13 +71,13 @@
     [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
     _currentVelocity = [snakeObjTemp getVelocity];
     SkyBox *sboxTemp = [self createSkyBox];
-    
+    [_renderables addObject:sboxTemp];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
     
     [floorObjTemp release];
     [snakeObjTemp release];
-    //[sboxTemp release];
+    [sboxTemp release];
     
     [_renderingEngine initResources:_renderables];
     }
@@ -93,7 +94,7 @@
 //updateAnimation: is called after Render()
 //paramters: timeElapsed - time elapsed after last frame.
 -(void)updateAnimation:(NSTimeInterval)timeElapsed {
-    Snake *snk = [_renderables objectAtIndex:0];
+    Snake *snk = [self getSnakeObj];
     BOOL isCollide = [snk isCollideWithPosition:snk.position] || [snk isCollideWithWall];
     if (!isCollide) {
         [snk advance];
@@ -261,7 +262,7 @@
     
 }
 -(void)setDir:(DIRECTION)dir {
-    Snake *snk = [_renderables objectAtIndex:0];
+    Snake *snk = [self getSnakeObj];
     CC3Vector pos = snk.position;
     //CC3Vector velocity = [snk getVelocity];
     //CC3Vector vn = CC3VectorNegate(CC3VectorNormalize(velocity));
@@ -305,7 +306,7 @@
 }
 
 -(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity {
-    Snake *snk = [_renderables objectAtIndex:0];
+    Snake *snk = [self getSnakeObj];
    
     //CC3Vector vn = CC3VectorNormalize(velocity);
     CC3Vector eyeAt = CC3VectorMake(pos.x, 10,pos.z+10.0);
@@ -467,7 +468,7 @@
         x -= truncf( (N+1)/2.0 );
         z = arc4random() % N;
         z -= truncf( (N+1)/2.0 );
-        Snake *snk = [_renderables objectAtIndex:0];
+        Snake *snk = [self getSnakeObj];
         pos = CC3VectorMake(x<0?x+0.5:x-0.5, 0.5,z<0?z+0.5:z-0.5);
         BOOL isCollide = [snk isCollideWithPosition:pos];
         if (isCollide == NO) {
@@ -480,8 +481,11 @@
 -(SkyBox*)createSkyBox {
     
     Mesh *msh = [[Mesh alloc] init];
-//    [msh loadVertices:cube_vertices texture:cube_texcoords indices:cube_elements indicesNumberOfElemets:cube_elementsSize/sizeof(cube_elements[0])
-//verticesNumberOfElemets:cube_verticesSize/sizeof(cube_vertices[0])];
+    [msh loadVertices:cube_vertices
+        texture:cube_texcoords
+        indices:cube_elements
+        indicesNumberOfElemets:cube_elementsSize/sizeof(cube_elements[0])
+        verticesNumberOfElemets:cube_verticesSize/sizeof(cube_vertices[0])];
     Drawable *dr =  [Drawable createDrawable:msh];
     Material *mtxpos = [[Material alloc] init];
     Material *mtxneg = [[Material alloc] init];
@@ -500,8 +504,6 @@
     SkyBox *sb = [[SkyBox alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SKYBOX]]
                                            andDrawable:dr andMesh:msh andMaterial:mtxpos andViewport:_viewport];
     [msh release];
-    [dr release];
-    //[sb release];
     NSMutableDictionary *mtrDic = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:mtxpos,mtxneg,mtypos,mtyneg,mtzpos,mtzneg,nil]
                                                                        forKeys:[NSArray arrayWithObjects:
                                                                                 [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_X],
@@ -511,8 +513,8 @@
                                                                                 [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_Z],
                                                                                 [NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_NEGATIVE_Z],
                                                                                 nil]];
-//    //[sb setMoreMaterials:mtrDic];
-//    
+    //[sb setMoreMaterials:mtrDic];
+//
     [mtrDic release];
     [mtxpos release];
     [mtxneg release];
@@ -521,15 +523,25 @@
     [mtzpos release];
     [mtzneg release];
     
-    return nil;
+    return sb;
 }
 -(DIRECTION)getDirectionFromVelocity:(CC3Vector)v {
     return DIR_DOWN;
 }
 -(BOOL)isFoodEaten:(CC3Vector)pos {
-    Snake *snk = [_renderables objectAtIndex:0];
+    Snake *snk =  [self getSnakeObj];
     BOOL isEaten = [snk isCollideWithPosition:pos];
     return isEaten;
+}
+-(Node*)getSnakeObj {
+    Snake *snake;
+    for (Node *obj in _renderables) {
+        if ([obj isKindOfClass:[Snake class]]) {
+            snake = (Snake*)obj;
+            break;
+        }
+    }
+    return snake;
 }
 -(void)dealloc {
     [_programs release];
