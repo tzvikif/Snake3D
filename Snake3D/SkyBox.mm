@@ -43,9 +43,6 @@ static NSString *skyboxPos_name = @"pos";
     glGetIntegerv(GL_DEPTH_FUNC, &OldDepthFuncMode);
     glCullFace(GL_FRONT);
     
-    Material *mtrl;
-    mtrl = [self.materials objectForKey:[NSNumber numberWithInt:GL_TEXTURE_CUBE_MAP_POSITIVE_X]];
-    glBindTexture(GL_TEXTURE_2D,mtrl.textureId);
     glUniform1i([self.program uniformLocation:skybox_sample_name], /*GL_TEXTURE*/1);
     GLsizei window_height = self.viewport.size.height;
     GLsizei window_width = self.viewport.size.width;
@@ -55,7 +52,7 @@ static NSString *skyboxPos_name = @"pos";
     CC3Vector translateVector = CC3VectorMake(self.viewMatrix.glMatrix[12], self.viewMatrix.glMatrix[13], self.viewMatrix.glMatrix[14]);
     [self.modelMatrix translateBy:translateVector];
     //[self.modelMatrix multiplyByMatrix:self.rotatetionMat];
-    [self.modelMatrix scaleBy:CC3VectorScale(self.scaleFactor, CC3VectorMake(2, 2, 2))];
+    [self.modelMatrix scaleBy:CC3VectorScale(self.scaleFactor, CC3VectorMake(4, 4, 4))];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
     //    NSLog(@"projection %@",[projectionMat description]);
@@ -64,33 +61,14 @@ static NSString *skyboxPos_name = @"pos";
     [projectionMat multiplyByMatrix:self.modelMatrix];
     //[self setProjectionMatrix:[CC3GLMatrix identity]];
     glUniformMatrix4fv([self.program uniformLocation:skybox_mvp_name], 1,   0, projectionMat.glMatrix);
-    GLsizei size;
-    GLsizei stride = [self getStride];
-    glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
-    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glVertexAttribPointer(
-                          [self.program attributeLocation:skyboxPos_name], // attribute
-                          3,                  // number of elements per vertex, here (x,y)
-                          GL_FLOAT,           // the type of each element
-                          GL_FALSE,           // take our values as-is
-                          stride,                  // no extra data between each position
-                          (GLvoid*)0                  // offset of first element
-                          );
-    glVertexAttribPointer(
-                          [self.program attributeLocation:skyBoxTextureCoord_name], // attribute
-                          2,                  // number of elements per vertex, here (x,y)
-                          GL_FLOAT,           // the type of each element
-                          GL_FALSE,           // take our values as-is
-                          stride,                  // no extra data between each position
-                          (GLvoid*)sizeof(CC3Vector)                  // offset of first element
-                          );
+    //    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     
-    //glDrawArrays(GL_TRIANGLES, 0, size/sizeof(_vertexPC));
-    //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
-    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
-    
+    [self drawFace:GL_TEXTURE_CUBE_MAP_NEGATIVE_Z];
+    [self drawFace:GL_TEXTURE_CUBE_MAP_NEGATIVE_X];
+    [self drawFace:GL_TEXTURE_CUBE_MAP_POSITIVE_Y];
+    [self drawFace:GL_TEXTURE_CUBE_MAP_NEGATIVE_Y];
+    [self drawFace:GL_TEXTURE_CUBE_MAP_POSITIVE_Z];
+    [self drawFace:GL_TEXTURE_CUBE_MAP_NEGATIVE_Z];
     glCullFace(OldCullFaceMode);
     glDepthFunc(OldDepthFuncMode);
 }
@@ -101,6 +79,8 @@ static NSString *skyboxPos_name = @"pos";
     glUniform1i([self.program uniformLocation:skybox_sample_name], /*GL_TEXTURE*/1);
     GLsizei size;
     GLsizei stride = [self getStride];
+    glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glVertexAttribPointer(
                           [self.program attributeLocation:skyboxPos_name], // attribute
                           3,                  // number of elements per vertex, here (x,y)
@@ -142,9 +122,9 @@ static NSString *skyboxPos_name = @"pos";
     }
     
     //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
-    //glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    //glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
+//    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+//    glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
 
 }
 @end
