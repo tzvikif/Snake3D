@@ -49,10 +49,10 @@ static NSString *skyboxPos_name = @"pos";
     glViewport(0, 0, window_width, window_height);
     
     self.modelMatrix = [CC3GLMatrix identity];
-    CC3Vector translateVector = CC3VectorMake(self.viewMatrix.glMatrix[12], self.viewMatrix.glMatrix[13], self.viewMatrix.glMatrix[14]);
+    CC3Vector translateVector = CC3VectorMake(self.viewMatrix.glMatrix[12], self.viewMatrix.glMatrix[13]+3, self.viewMatrix.glMatrix[14]);
     [self.modelMatrix translateBy:translateVector];
     //[self.modelMatrix multiplyByMatrix:self.rotatetionMat];
-    [self.modelMatrix scaleBy:CC3VectorScale(self.scaleFactor, CC3VectorMake(4, 4, 4))];
+    [self.modelMatrix scaleBy:CC3VectorScale(self.scaleFactor, CC3VectorMake(4, 3, 4))];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
     //    NSLog(@"projection %@",[projectionMat description]);
@@ -63,7 +63,7 @@ static NSString *skyboxPos_name = @"pos";
     glUniformMatrix4fv([self.program uniformLocation:skybox_mvp_name], 1,   0, projectionMat.glMatrix);
     //    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     
-    [self drawFace:GL_TEXTURE_CUBE_MAP_NEGATIVE_Z];
+    [self drawFace:GL_TEXTURE_CUBE_MAP_POSITIVE_X];
     [self drawFace:GL_TEXTURE_CUBE_MAP_NEGATIVE_X];
     [self drawFace:GL_TEXTURE_CUBE_MAP_POSITIVE_Y];
     [self drawFace:GL_TEXTURE_CUBE_MAP_NEGATIVE_Y];
@@ -76,6 +76,10 @@ static NSString *skyboxPos_name = @"pos";
     Material *mtrl;
     mtrl = [self.materials objectForKey:[NSNumber numberWithInt:face]];
     glBindTexture(GL_TEXTURE_2D,mtrl.textureId);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glUniform1i([self.program uniformLocation:skybox_sample_name], /*GL_TEXTURE*/1);
     GLsizei size;
     GLsizei stride = [self getStride];
@@ -100,10 +104,10 @@ static NSString *skyboxPos_name = @"pos";
     
     switch (face) {
         case GL_TEXTURE_CUBE_MAP_POSITIVE_Z  :
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(12*sizeof(GLushort)));
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
             break;
         case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(12*sizeof(GLushort)));
             break;
         case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (GLvoid*)(18*sizeof(GLushort)));

@@ -54,6 +54,11 @@ NSString *snakeSampleName = @"sampler";
     CC3Vector translateVector = self.position;
     [self.modelMatrix translateBy:translateVector];
     [self.modelMatrix multiplyByMatrix:self.rotatetionMat];
+    if (_myId == 0) {
+        CC3GLMatrix *mat = [CC3GLMatrix identity];
+        [mat rotateByY:180];
+        [self.modelMatrix multiplyByMatrix:mat];
+    }
     [self.modelMatrix scaleBy:self.scaleFactor];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];

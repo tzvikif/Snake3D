@@ -150,24 +150,39 @@ float bsf = 1.0/2.0;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
     [self setBodyParts:ma];
     [ma release];
-    Mesh *meshCube = [[Mesh alloc] init];
+    Mesh *bodyMesh = [[Mesh alloc] init];
+    Mesh *headMesh = [[Mesh alloc] init];
 //    [meshCube loadVertices:SnakeCube_vertices
 //                     color:SnakeCube_colors
 //                   indices:SnakeCube_elements
 //                indicesNumberOfElemets:sizeof(SnakeCube_elements)/sizeof(SnakeCube_elements[0])
 //                verticesNumberOfElemets:SnakeCube_verticesYSize/sizeof(GLfloat)/3];
-    [meshCube loadObjFromFile:@"snakeBP"];
-    Drawable *drwblTemp = [Drawable createDrawable:meshCube];
-    Material *materialTemp = [[Material alloc] init];
-    [materialTemp setupTexture:@"Reptiles0090_S.png"];
+    [bodyMesh loadObjFromFile:@"snakeBP"];
+    [headMesh loadObjFromFile:@"monkey"];
+    Drawable *bodyDrwblTemp = [Drawable createDrawable:bodyMesh];
+    Drawable *headDrwblTemp = [Drawable createDrawable:headMesh];
+    Material *bodyMaterialTemp = [[Material alloc] init];
+    Material *headMaterialTemp = [[Material alloc] init];
+    [bodyMaterialTemp setupTexture:@"Reptiles0090_S.png"];
+    [headMaterialTemp setupTexture:@"Reptiles0090_S.png"];
     BodyPart *bp;
     CC3Vector pos;
     _initScales = (CC3Vector*)malloc(sizeof(CC3Vector) * _bpCount);
     [self setPosition:CC3VectorMake(2.5, 0.5, 1.5)];
-    //[bp setScaleFactor:(N/2.0)/2.0];
-    //float bsf = 1.0/2.0; //base scale factor
-    for (int i=0; i<_bpCount; i++) {
-        bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:drwblTemp andMesh:meshCube andMaterial:materialTemp andViewport:self.viewport];
+    //create head
+    bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:headDrwblTemp andMesh:headMesh andMaterial:headMaterialTemp andViewport:self.viewport];
+    [bp setMyId:0];
+    [bp setSpeed:_speed];
+    [bp initResources];
+    CC3Vector currentScale = CC3VectorMake(bsf, bsf, bsf);
+    [bp setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
+    pos = _position;
+    [bp setPosition:pos];
+    [bp setViewMatrix:self.viewMatrix];
+    [bp setProjectionMatrix:self.projectionMatrix];
+    [_bodyParts addObject:bp];
+    for (int i=1; i<_bpCount; i++) {
+        bp = [[BodyPart alloc] initializeWithProgram:self.program andDrawable:bodyDrwblTemp andMesh:bodyMesh andMaterial:bodyMaterialTemp andViewport:self.viewport];
         [bp setMyId:i];
         [bp setSpeed:_speed];
         [bp initResources];
@@ -182,8 +197,10 @@ float bsf = 1.0/2.0;
         
         [_bodyParts addObject:bp];
     }
-    [meshCube release];
-    [materialTemp release];
+    [bodyMesh release];
+    [headMesh release];
+    [bodyMaterialTemp release];
+    [headMaterialTemp release];
 }
 -(void)dealloc {
     [_bodyParts release];
