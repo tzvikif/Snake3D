@@ -16,5 +16,6 @@
 @property(nonatomic,assign) GLuint vboVertexBuffer;
 @property(nonatomic,assign) GLuint iboIndexBuffer;
 @property(nonatomic,assign) int IndexCount;
+@property(nonatomic,assign) BOOL hasIndexBuffer;
 +(Drawable*)createDrawable:(Mesh*)mesh;
 @end

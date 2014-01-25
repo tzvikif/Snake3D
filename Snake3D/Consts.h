@@ -14,7 +14,8 @@ extern float const SNKspeed;
 typedef enum _PROGRAMS {
     PROG_FLOOR,
     PROG_SNAKE,
-    PROG_SKYBOX
+    PROG_SKYBOX,
+    PROG_FOOD
 }PROG_ID;
 
 typedef enum _DIRECTION {

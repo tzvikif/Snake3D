@@ -50,6 +50,13 @@
 		9172EE2D17C5505C008F48AB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2C17C5505C008F48AB /* OpenGLES.framework */; };
 		9172EE2F17C550BB008F48AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2E17C550BB008F48AB /* QuartzCore.framework */; };
 		91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91978F4C1870BFFE00204461 /* snakeBP.obj */; };
+		91D5834C188FEF5500241332 /* SimpleVertex.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */; };
+		91D5834D188FEF5D00241332 /* SimpleFragment.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */; };
+		91D5835A188FFA4000241332 /* food.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 91D58356188FF87500241332 /* food.fsh */; };
+		91D5835B188FFA4000241332 /* food.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 91D58357188FF87500241332 /* food.vsh */; };
+		91E82087188F0E2F00A9EBD0 /* mushroom.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E82086188F0E2F00A9EBD0 /* mushroom.png */; };
+		91E8208A188F0E4700A9EBD0 /* mushroom.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 91E82088188F0E4700A9EBD0 /* mushroom.mtl */; };
+		91E8208B188F0E4700A9EBD0 /* mushroom.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91E82089188F0E4700A9EBD0 /* mushroom.obj */; };
 		E507DFA21882D89400C5DA91 /* xneg.png in Resources */ = {isa = PBXBuildFile; fileRef = E507DF9C1882D89400C5DA91 /* xneg.png */; };
 		E507DFA31882D89400C5DA91 /* xpos.png in Resources */ = {isa = PBXBuildFile; fileRef = E507DF9D1882D89400C5DA91 /* xpos.png */; };
 		E507DFA41882D89400C5DA91 /* yneg.png in Resources */ = {isa = PBXBuildFile; fileRef = E507DF9E1882D89400C5DA91 /* yneg.png */; };
@@ -136,6 +143,11 @@
 		9172EE2C17C5505C008F48AB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		9172EE2E17C550BB008F48AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		91978F4C1870BFFE00204461 /* snakeBP.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = snakeBP.obj; sourceTree = "<group>"; };
+		91D58356188FF87500241332 /* food.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = food.fsh; sourceTree = "<group>"; };
+		91D58357188FF87500241332 /* food.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = food.vsh; sourceTree = "<group>"; };
+		91E82086188F0E2F00A9EBD0 /* mushroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mushroom.png; sourceTree = "<group>"; };
+		91E82088188F0E4700A9EBD0 /* mushroom.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mushroom.mtl; sourceTree = "<group>"; };
+		91E82089188F0E4700A9EBD0 /* mushroom.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mushroom.obj; sourceTree = "<group>"; };
 		E507DF9C1882D89400C5DA91 /* xneg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xneg.png; sourceTree = "<group>"; };
 		E507DF9D1882D89400C5DA91 /* xpos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xpos.png; sourceTree = "<group>"; };
 		E507DF9E1882D89400C5DA91 /* yneg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yneg.png; sourceTree = "<group>"; };
@@ -173,12 +185,14 @@
 		20B3A0F317C5EBDF001957B5 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				E507DFAB1882DA0700C5DA91 /* skybox.fsh */,
+				91D58356188FF87500241332 /* food.fsh */,
+				91D58357188FF87500241332 /* food.vsh */,
 				E507DFAC1882DA0700C5DA91 /* skybox.vsh */,
-				91289D681800A5920096F1E8 /* SbpFragment.fsh */,
+				E507DFAB1882DA0700C5DA91 /* skybox.fsh */,
 				91289D691800A5920096F1E8 /* SbpVertex.vsh */,
-				20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */,
+				91289D681800A5920096F1E8 /* SbpFragment.fsh */,
 				20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */,
+				20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -186,6 +200,7 @@
 		20E9E55917CB82CE00C7D3C7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				91E82086188F0E2F00A9EBD0 /* mushroom.png */,
 				E507DF9C1882D89400C5DA91 /* xneg.png */,
 				E507DF9D1882D89400C5DA91 /* xpos.png */,
 				E507DF9E1882D89400C5DA91 /* yneg.png */,
@@ -281,6 +296,8 @@
 		20FF7DB117C4975300A58B95 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				91E82088188F0E4700A9EBD0 /* mushroom.mtl */,
+				91E82089188F0E4700A9EBD0 /* mushroom.obj */,
 				E507DFA81882D9FA00C5DA91 /* SkyBox.h */,
 				E507DFA91882D9FA00C5DA91 /* SkyBox.mm */,
 				91609096186F844B00DB7624 /* monkey.obj */,
@@ -382,12 +399,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91D5835A188FFA4000241332 /* food.fsh in Resources */,
+				91D5835B188FFA4000241332 /* food.vsh in Resources */,
 				E507DFAF1883FD2500C5DA91 /* skybox.fsh in Resources */,
 				E507DFB01883FD2500C5DA91 /* skybox.vsh in Resources */,
 				91609097186F844B00DB7624 /* monkey.obj in Resources */,
 				91609095186F826F00DB7624 /* cube.obj in Resources */,
 				91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */,
 				91289D6D1800A5D10096F1E8 /* SbpVertex.vsh in Resources */,
+				91E82087188F0E2F00A9EBD0 /* mushroom.png in Resources */,
 				20F74B6617C2604800407740 /* InfoPlist.strings in Resources */,
 				E507DFA71882D89400C5DA91 /* zpos.png in Resources */,
 				E582756018746EE50028093E /* floorGrass.png in Resources */,
@@ -404,8 +424,10 @@
 				20F74B7817C2604800407740 /* ViewController.xib in Resources */,
 				20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */,
 				20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */,
+				91E8208A188F0E4700A9EBD0 /* mushroom.mtl in Resources */,
 				20E9E55B17CB82E300C7D3C7 /* tile_floor.png in Resources */,
 				20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */,
+				91E8208B188F0E4700A9EBD0 /* mushroom.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +438,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91D5834D188FEF5D00241332 /* SimpleFragment.fsh in Sources */,
+				91D5834C188FEF5500241332 /* SimpleVertex.vsh in Sources */,
 				20F74B6817C2604800407740 /* main.m in Sources */,
 				E507DFAD1882DA0700C5DA91 /* skybox.fsh in Sources */,
 				20F74B6C17C2604800407740 /* AppDelegate.m in Sources */,

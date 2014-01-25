@@ -14,7 +14,7 @@
 
 @implementation BodyPart
 extern NSString *mvp_name;
-NSString *bp_name = @"gridFloor";
+NSString *bp_name = @"pos";
 NSString *SnakeColor_name = @"color";
 NSString *snakeTextureCoordName = @"textureCoord";
 NSString *snakeSampleName = @"sampler";
@@ -165,7 +165,8 @@ NSString *snakeSampleName = @"sampler";
         _position.x = px;
         _position.z = pz;
         //NSLog(@"current position x=%f z=%f. next turn position x=%f z=%f",_position.x,_position.z,_nextTurnPos.x,_nextTurnPos.z);
-        if (_position.x == _nextTurnPos.x && _position.z == _nextTurnPos.z) {
+        if ( ((_nextTurnDir == DIR_DOWN || _nextTurnDir == DIR_UP) && _position.x == _nextTurnPos.x) ||
+            ((_nextTurnDir == DIR_RIGHT || _nextTurnDir == DIR_LEFT) && _position.z == _nextTurnPos.z) ) {
             _currentRotatoinAngle = _destAngle;
             _isRotating = NO;
             [_turnsAndPositions removeObjectAtIndex:0];
@@ -200,6 +201,24 @@ NSString *snakeSampleName = @"sampler";
         //NSLog(@"current rotation angle:%f",_currentRotatoinAngle);
     }
     _position = CC3VectorAdd(_position,_velocity);
+    GLfloat crawlPos;
+    switch (_dir) {
+        case DIR_LEFT:
+        case DIR_RIGHT:
+            crawlPos = sinf(_position.x*2*3.1415/4.0)/4.0;
+            _position.z = crawlPos;
+            break;
+        case DIR_DOWN:
+        case DIR_UP:
+            crawlPos = sinf(_position.z*2*3.1415/4.0)/4.0;
+            _position.x = crawlPos;
+            break;
+        default:
+            break;
+    }
+    if (_myId == 0) {
+        NSLog(@"my position:(%f,%f,%f)",_position.x,_position.y,_position.z);
+    }
 }
 -(void)addTurnDirection:(DIRECTION)dir inPosition:(CC3Vector)pos {
     TurnPosition *tp = [[TurnPosition alloc] init];

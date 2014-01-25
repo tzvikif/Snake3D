@@ -27,6 +27,8 @@ NSString *mvp_name = @"mvp";
     [self.program use];
     glEnable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
     glUniform1i([self.program uniformLocation:sampler_name], /*GL_TEXTURE*/0);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
@@ -75,6 +77,7 @@ NSString *mvp_name = @"mvp";
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
+    glDisable(GL_BLEND);
 }
 
 @end

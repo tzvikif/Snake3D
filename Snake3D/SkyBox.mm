@@ -49,7 +49,7 @@ static NSString *skyboxPos_name = @"pos";
     glViewport(0, 0, window_width, window_height);
     
     self.modelMatrix = [CC3GLMatrix identity];
-    CC3Vector translateVector = CC3VectorMake(self.viewMatrix.glMatrix[12], self.viewMatrix.glMatrix[13]+3, self.viewMatrix.glMatrix[14]);
+    CC3Vector translateVector = CC3VectorMake(self.viewMatrix.glMatrix[12], self.viewMatrix.glMatrix[13], self.viewMatrix.glMatrix[14]);
     [self.modelMatrix translateBy:translateVector];
     //[self.modelMatrix multiplyByMatrix:self.rotatetionMat];
     [self.modelMatrix scaleBy:CC3VectorScale(self.scaleFactor, CC3VectorMake(4, 3, 4))];

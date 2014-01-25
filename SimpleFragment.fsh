@@ -10,5 +10,5 @@ void main(void) {
 //    }
     mediump vec4 c = texture2D(sampler, textureCoordOut);
     /*gl_FragColor = texture2D(Sampler, TextureCoordOut) * DestinationColor;*/
-    gl_FragColor = c;
+    gl_FragColor = vec4(c.xyz,1.0);
 }

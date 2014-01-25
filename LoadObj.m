@@ -38,6 +38,7 @@
             if (firstTextureCoords)
             {
                 _valuesPerCoord = [line count];
+                firstTextureCoords = NO;
             }
         }
         else if ([line hasPrefix:@"vn "]) {
@@ -137,9 +138,9 @@
                     normal.z = [[normalTemp objectAtIndex:2] floatValue];
                     
                     _arrVertices[vertexIndex] = vertex;
-                    if (!_valuesPerCoord > 1) {
-                        _arrTexture[vertexIndex] = u;
-                        _arrTexture[vertexIndex+1] = v;
+                    if (_valuesPerCoord > 1) {
+                        _arrTexture[vertexIndex*2] = u;
+                        _arrTexture[vertexIndex*2+1] = v;
                     }
                     _arrNormals[vertexIndex] = normal;
                     _arrElements[elementIndex] = vertexIndex;
@@ -186,6 +187,12 @@
     NSLog(@"normals. count:%d",_numberOfVertices);
     for (i=0; i<_numberOfVertices; i++) {
         [str appendFormat:@"\n%f,%f,%f\n",_arrNormals[i].x,_arrNormals[i].y,_arrNormals[i].z];
+    }
+    NSLog(@"%@",str);
+    str = [[NSMutableString alloc] init];
+    NSLog(@"textures");
+    for (i=0; i<_numberOfVertices; i+=2) {
+        [str appendFormat:@"\n%f,%f\n",_arrTexture[i],_arrTexture[i+1]];
     }
     NSLog(@"%@",str);
     [str release];

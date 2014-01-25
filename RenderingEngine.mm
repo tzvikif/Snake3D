@@ -38,7 +38,7 @@
     [self setMatProjection:[CC3GLMatrix identity]];
     [self setMatView:[CC3GLMatrix identity]];
     CC3Vector br_lookAt = CC3VectorMake(8.0, 1.0, 0.0);
-    CC3Vector br_eyeAt = CC3VectorMake(12.0, 8.0, 22.0);
+    CC3Vector br_eyeAt = CC3VectorMake(12.0, 6.0, 22.0);
     CC3Vector br_up = CC3VectorMake(0.0, 1.0, 0.0);
     [_matView populateToLookAt:br_lookAt withEyeAt:br_eyeAt withUp:br_up];
     float ratio = self.viewport.size.width / self.viewport.size.height;

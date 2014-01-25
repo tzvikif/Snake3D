@@ -163,8 +163,8 @@ float bsf = 1.0/2.0;
     Drawable *headDrwblTemp = [Drawable createDrawable:headMesh];
     Material *bodyMaterialTemp = [[Material alloc] init];
     Material *headMaterialTemp = [[Material alloc] init];
-    [bodyMaterialTemp setupTexture:@"Reptiles0090_S.png"];
-    [headMaterialTemp setupTexture:@"Reptiles0090_S.png"];
+    //[bodyMaterialTemp setupTexture:@"tile_floor.png"];
+    //[headMaterialTemp setupTexture:@"Reptiles0090_S.png"];
     BodyPart *bp;
     CC3Vector pos;
     _initScales = (CC3Vector*)malloc(sizeof(CC3Vector) * _bpCount);
@@ -186,7 +186,7 @@ float bsf = 1.0/2.0;
         [bp setMyId:i];
         [bp setSpeed:_speed];
         [bp initResources];
-        CC3Vector currentScale = CC3VectorMake(bsf-i*0.02, bsf, bsf);
+        CC3Vector currentScale = CC3VectorMake(bsf, bsf, bsf);
         _initScales[i] = currentScale;
         [bp setScaleFactor:CC3VectorMake(currentScale.x, currentScale.y, currentScale.z)];
         pos = _position;
@@ -241,7 +241,8 @@ float bsf = 1.0/2.0;
         TWODIGITS_FP(objPos.z);
         TWODIGITS_FP(pos.x);
         TWODIGITS_FP(pos.z);
-        if ((objPos.x - pos.x < 1.0 && objPos.x - pos.x > -1.0) && (objPos.z - pos.z < 1.0 && objPos.z - pos.z > -1.0)) {
+//        if ((objPos.x - pos.x < 1.0 && objPos.x - pos.x > -1.0) && (objPos.z - pos.z < 1.0 && objPos.z - pos.z > -1.0)) {
+           if ((objPos.x - pos.x < 0.1 && objPos.x - pos.x > -0.1) && (objPos.z - pos.z < 0.1 && objPos.z - pos.z > -0.1)) {
             collisitionStatus = YES;
            
             NSLog(@"collision. objPos.x=%f objPos.z=%f pos.x=%f pos.z=%f",objPos.x,objPos.z,pos.x,pos.z);

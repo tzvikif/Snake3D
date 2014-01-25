@@ -145,6 +145,7 @@ verticesNumberOfElemets:(GLuint)vnoe {
 -(void)loadObjFromFileWithUV:(NSString *)name{
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"obj"];
     LoadObj *bp = [[LoadObj alloc] initWithPath:path];
+    [bp displayArrays];
     [self loadVertices:(const GLfloat*)bp->_arrVertices texture:bp->_arrTexture indices:bp->_arrElements indicesNumberOfElemets:bp->_numberOfFaces*3 verticesNumberOfElemets:bp->_numberOfVertices];
 }
 

@@ -51,6 +51,9 @@
     [self createProgramWithVertexShaderName:@"skybox"
                       andFragmentShaderName:@"skybox"
                                      withId:PROG_SKYBOX];
+    [self createProgramWithVertexShaderName:@"food"
+                      andFragmentShaderName:@"food"
+                                     withId:PROG_FOOD];
     [renderingEngineTemp initialize:viewport andProgram:_programs];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
@@ -307,33 +310,33 @@
 
 -(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity {
     Snake *snk = [self getSnakeObj];
-   
+   //NSLog(@"pos at:(%f,%f,%f)",pos.x,pos.y,pos.z);
     //CC3Vector vn = CC3VectorNormalize(velocity);
-    CC3Vector eyeAt = CC3VectorMake(pos.x, 10,pos.z+10.0);
-    CC3Vector lookAt =  CC3VectorMake(pos.x, 0,pos.z-5.0);
+    CC3Vector eyeAt = CC3VectorMake(pos.x, 4,pos.z+10.0);
+    CC3Vector lookAt =  CC3VectorMake(pos.x, 2,pos.z-5.0);
     static CC3Vector cameraSpace[3];
     float angle = [snk getRotationAngle];
 //    if ([snk isRotating]) {
         angle = [snk getRotationAngle];
 
-//        NSLog(@"angle:%f",angle);
+        NSLog(@"angle:%f",angle);
 //        NSLog(@"postion(%f,%f,%f",pos.x,pos.y,pos.z);
 //        NSLog(@"before translation eyeAt(%f,%f,%f",eyeAt.x,eyeAt.y,eyeAt.z);
-        CC3Vector eyeAtTemp = eyeAt;
-        CC3GLMatrix *rotationMat = [CC3GLMatrix identity];
-        [rotationMat translateBy:pos];
-        [rotationMat rotateByY:angle];
-        [rotationMat translateBy:CC3VectorNegate(pos)];
-        //[rotationMat print:@"rotation"];
-        [rotationMat transpose];
-        CC3Vector4 eyeAt4 = [rotationMat multiplyByVector:CC3Vector4Make(eyeAt.x, eyeAt.y, eyeAt.z, 1.0)];
-        eyeAt.x = eyeAt4.x;
-        eyeAt.y = eyeAt4.y;
-        eyeAt.z = eyeAt4.z;
-        CC3Vector4 lookAt4 = [rotationMat multiplyByVector:CC3Vector4Make(lookAt.x, 0, lookAt.z, 1.0)];
-        lookAt.x = lookAt4.x;
-        lookAt.y = lookAt4.y;
-        lookAt.z = lookAt4.z;
+    CC3GLMatrix *rotationMat = [CC3GLMatrix identity];
+    [rotationMat translateBy:pos];
+    [rotationMat rotateByY:angle];
+
+    [rotationMat translateBy:CC3VectorNegate(pos)];
+    //[rotationMat print:@"rotation"];
+    [rotationMat transpose];
+    CC3Vector4 eyeAt4 = [rotationMat multiplyByVector:CC3Vector4Make(eyeAt.x, eyeAt.y, eyeAt.z, 1.0)];
+    eyeAt.x = eyeAt4.x;
+    eyeAt.y = eyeAt4.y;
+    eyeAt.z = eyeAt4.z;
+    CC3Vector4 lookAt4 = [rotationMat multiplyByVector:CC3Vector4Make(lookAt.x, 0, lookAt.z, 1.0)];
+    lookAt.x = lookAt4.x;
+    lookAt.y = lookAt4.y;
+    lookAt.z = lookAt4.z;
 //        NSLog(@"after translation eyeAt(%f,%f,%f",eyeAt.x,eyeAt.y,eyeAt.z);
 //        {
 //            CC3GLMatrix *rotationMat = [CC3GLMatrix identity];
@@ -353,6 +356,7 @@
     cameraSpace[LOOK_AT] = lookAt;
     cameraSpace[UP] = CC3VectorMake(0.0, 1.0, 0.0);
     cameraSpace[EYE_AT] = eyeAt;
+    //NSLog(@"eye at:(%f,%f,%f)",eyeAt.x,eyeAt.y,eyeAt.z);
     return cameraSpace;
 }
 
@@ -445,17 +449,19 @@
     
 }
 -(Food*)createFood {
-    Food *foodTemp = [[Food alloc] init];
+    Food *foodObj = [[Food alloc] init];
     Mesh *foodMeshTemp = [[Mesh alloc] init];
-    [foodMeshTemp loadVertices:cube_vertices
-                         color:cube_colorsFood
-                       indices:cube_elements
-        indicesNumberOfElemets:cube_elementsSize/sizeof(GLushort)
-       verticesNumberOfElemets:cube_verticesSize/sizeof(GLfloat)];
+    [foodMeshTemp loadObjFromFileWithUV:@"mushroom"];
+//    [foodMeshTemp loadVertices:cube_vertices
+//                         color:cube_colorsFood
+//                       indices:cube_elements
+//        indicesNumberOfElemets:cube_elementsSize/sizeof(GLushort)
+//       verticesNumberOfElemets:cube_verticesSize/sizeof(GLfloat)];
     Drawable *DrwFood =  [Drawable createDrawable:foodMeshTemp];
     Material *foodMaterialTemp = [[Material alloc] init];
-    [foodMaterialTemp setupTexture:@"tile_floor.png"];
-    [foodTemp initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]
+    [foodMaterialTemp setupTexture:@"mushroom.png"];
+    //[foodMaterialTemp setupTexture:@"tile_floor.png"];
+    [foodObj initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_FOOD]]
                         andDrawable:DrwFood
                             andMesh:foodMeshTemp andMaterial:foodMaterialTemp
                         andViewport:_viewport];
@@ -475,8 +481,8 @@
             emptySpot = YES;
         }
     }
-    [foodTemp setPosition:pos];
-    return [foodTemp autorelease];
+    [foodObj setPosition:pos];
+    return [foodObj autorelease];
 }
 -(SkyBox*)createSkyBox {
     

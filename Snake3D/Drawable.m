@@ -21,7 +21,7 @@
     size_t  size = [mesh sizeofVertices];
     glBufferData(GL_ARRAY_BUFFER, size, mesh.vertices, GL_STATIC_DRAW);
     [d setVboVertexBuffer:vboVertexBuffer];
-    
+    [d setHasIndexBuffer:NO];
     if ([mesh sizeofIndices] != 0) {
         GLuint ibo;
         glGenBuffers(1, &ibo);
@@ -29,6 +29,7 @@
         size = [mesh sizeofIndices];
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, mesh.indices, GL_STATIC_DRAW);
         [d setIboIndexBuffer:ibo];
+        [d setHasIndexBuffer:YES];
     }
     return d;
 }
