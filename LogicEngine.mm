@@ -319,7 +319,7 @@
 //    if ([snk isRotating]) {
         angle = [snk getRotationAngle];
 
-        NSLog(@"angle:%f",angle);
+        //NSLog(@"angle:%f",angle);
 //        NSLog(@"postion(%f,%f,%f",pos.x,pos.y,pos.z);
 //        NSLog(@"before translation eyeAt(%f,%f,%f",eyeAt.x,eyeAt.y,eyeAt.z);
     CC3GLMatrix *rotationMat = [CC3GLMatrix identity];

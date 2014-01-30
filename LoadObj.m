@@ -167,7 +167,7 @@
     return self;
 }
 -(void)displayArrays {
-    NSLog(@"elemets. count:%d",_numberOfFaces);
+    NSLog(@"elements. count:%d",_numberOfFaces);
     int i;
     NSMutableString *str = [[NSMutableString alloc] init];
     for (i=0; i<_numberOfFaces * 3; i+=3) {

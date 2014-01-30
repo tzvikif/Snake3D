@@ -12,6 +12,7 @@
 @interface BodyPart : Node <NSCopying>
 
 @property(nonatomic,assign) CC3Vector position;
+@property(nonatomic,assign) CC3Vector crawlPosition;
 @property(nonatomic,assign) CC3Vector velocity;
 @property(nonatomic,assign) DIRECTION dir;
 //@property(nonatomic,assign) NSTimeInterval rotationTime;

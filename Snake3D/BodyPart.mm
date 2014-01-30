@@ -51,7 +51,8 @@ NSString *snakeSampleName = @"sampler";
     glViewport(0, 0, window_width, window_height);
     
     self.modelMatrix = [CC3GLMatrix identity];
-    CC3Vector translateVector = self.position;
+    //CC3Vector translateVector = self.position;
+    CC3Vector translateVector = self.crawlPosition;
     [self.modelMatrix translateBy:translateVector];
     [self.modelMatrix multiplyByMatrix:self.rotatetionMat];
     if (_myId == 0) {
@@ -200,25 +201,27 @@ NSString *snakeSampleName = @"sampler";
         [_rotatetionMat rotateByY:_currentRotatoinAngle];
         //NSLog(@"current rotation angle:%f",_currentRotatoinAngle);
     }
+ 
     _position = CC3VectorAdd(_position,_velocity);
+    _crawlPosition = _position;
+    
     GLfloat crawlPos;
     switch (_dir) {
         case DIR_LEFT:
         case DIR_RIGHT:
-            crawlPos = sinf(_position.x*2*3.1415/4.0)/4.0;
-            _position.z = crawlPos;
+            crawlPos = sinf(_position.x*2*3.1415/4.0)/8.0;
+            _crawlPosition.z += crawlPos;
             break;
         case DIR_DOWN:
         case DIR_UP:
-            crawlPos = sinf(_position.z*2*3.1415/4.0)/4.0;
-            _position.x = crawlPos;
+            crawlPos = sinf(_position.z*2*3.1415/4.0)/8.0;
+            _crawlPosition.x += crawlPos;
             break;
         default:
             break;
     }
-    if (_myId == 0) {
-        NSLog(@"my position:(%f,%f,%f)",_position.x,_position.y,_position.z);
-    }
+//    NSLog(@"postion(%f,%f,%f",_position.x,_position.y,_position.z);
+//    NSLog(@"crawlPostion(%f,%f,%f",_crawlPosition.x,_crawlPosition.y,_crawlPosition.z);
 }
 -(void)addTurnDirection:(DIRECTION)dir inPosition:(CC3Vector)pos {
     TurnPosition *tp = [[TurnPosition alloc] init];
@@ -227,6 +230,10 @@ NSString *snakeSampleName = @"sampler";
     [_turnsAndPositions addObject:tp];
     [tp release];
     
+}
+-(void)setPosition:(CC3Vector)position {
+    _position = position;
+    _crawlPosition = _position;
 }
 -(void)dealloc {
     [_turnsAndPositions release];
