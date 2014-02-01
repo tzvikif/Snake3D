@@ -52,6 +52,7 @@ typedef struct _vertexPT
 @interface Mesh : NSObject
 @property(assign,nonatomic) GLuint inoe,vnoe;
 @property(assign,nonatomic) GLfloat *vertices;
+@property(assign,nonatomic) GLfloat *normals;
 @property(assign,nonatomic) GLushort *indices;
 @property(assign,nonatomic) vertexStructure vertexStruct;
 
@@ -66,10 +67,10 @@ typedef struct _vertexPT
             indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
--(void)loadVertices:(GLfloat*)v
-            normals:(GLfloat*)n
-              color:(GLfloat*)c
-            indices:(GLushort*)elements
+-(void)loadVertices:(const GLfloat*)v
+            normals:(const GLfloat*)n
+              color:(const GLfloat*)c
+            indices:(const GLushort*)elements
             indicesNumberOfElemets:(GLuint)inoe
             verticesNumberOfElemets:(GLuint)vnoe;
 -(void)loadVertices:(const GLfloat*)v
@@ -86,4 +87,11 @@ verticesNumberOfElemets:(GLuint)vnoe;
 -(size_t)sizeofIndices;
 -(void)loadObjFromFile:(NSString*)name;
 -(void)loadObjFromFileWithUV:(NSString *)name;
+-(CC3Vector)CalculateSurfaceNormal:(CC3Vector*)triangle;
+- (GLfloat*)computeNormalsWithElements:(GLushort*)elements
+                                   noe:(GLushort)noe
+                           andVertices:(GLfloat*)vertices
+                                   nov:(GLushort)nov
+                            andAverage:(BOOL)average;
+- (void)displayNormals:(GLfloat*)arr noe:(GLushort)numberOfElements;
 @end

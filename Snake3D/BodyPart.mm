@@ -18,6 +18,11 @@ NSString *bp_name = @"pos";
 NSString *SnakeColor_name = @"color";
 NSString *snakeTextureCoordName = @"textureCoord";
 NSString *snakeSampleName = @"sampler";
+NSString *snakeLightPos = @"lightPosition";
+NSString *snakeShininess = @"shininess";
+NSString *snakeSpecular = @"specular";
+NSString *snakeAmbient = @"ambient";
+NSString *snakeDiffuse = @"diffuse";
 
 -(void)initResources {
     [self.program addAttribute:bp_name];
