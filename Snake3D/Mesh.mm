@@ -93,6 +93,7 @@ verticesNumberOfElemets:(GLuint)vnoe {
     VertexPNC *verticesTemp = (VertexPNC*)malloc( sizeof(VertexPNC) * ( vnoe ));
     
     _indices = (GLushort*)malloc(inoe*sizeof(GLushort));
+    _vertices = (GLfloat*)verticesTemp;
     for (int i=0; i<vnoe*3; i+=3) {
         CC3Vector vertex;
         CC3Vector normal;
