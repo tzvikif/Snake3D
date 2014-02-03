@@ -13,22 +13,38 @@
 
 
 @implementation BodyPart
-extern NSString *mvp_name;
-NSString *bp_name = @"pos";
-NSString *SnakeColor_name = @"color";
-NSString *snakeTextureCoordName = @"textureCoord";
-NSString *snakeSampleName = @"sampler";
-NSString *snakeLightPos = @"lightPosition";
-NSString *snakeShininess = @"shininess";
-NSString *snakeSpecular = @"specular";
-NSString *snakeAmbient = @"ambient";
-NSString *snakeDiffuse = @"diffuse";
+static NSString *mvp_name = @"MVP";
+static NSString *position_name = @"Position";
+static NSString *color_name = @"Color";
+static NSString *textureCoord_name = @"TextureCoord";
+static NSString *sample_name = @"Sampler";
+static NSString *ambient_name = @"AmbientMaterial";
+static NSString *diffuse_name = @"DiffuseMaterial";
+static NSString *specular_name = @"SpecularMaterial";
+static NSString *shininess_name = @"Shininess";
+static NSString *lightPosition_name = @"LightPosition";
+static NSString *normalMatrix_name = @"NormalMatrix";
+static NSString *normal_name = @"Normal";
+
+
+
 
 -(void)initResources {
-    [self.program addAttribute:bp_name];
+    //attributes
+    [self.program addAttribute:position_name];
+    [self.program addAttribute:color_name];
+    [self.program addAttribute:normal_name];
+//    [self.program addAttribute:textureCoord_name];
+    //uniforms
     [self.program addUniform:mvp_name];
-    [self.program addUniform:snakeSampleName];
-    [self.program addAttribute:snakeTextureCoordName];
+//    [self.program addUniform:sample_name];
+//    [self.program addUniform:ambient_name];
+//    [self.program addUniform:diffuse_name];
+//    [self.program addUniform:specular_name];
+//    [self.program addUniform:shininess_name];
+//    [self.program addUniform:lightPosition_name];
+//    [self.program addUniform:normalMatrix_name];
+    
     _velocity = CC3VectorMake(0, 0, -_speed);
     _dir = DIR_UP;
     _currentRotatoinAngle = 0;
@@ -48,7 +64,7 @@ NSString *snakeDiffuse = @"diffuse";
     glEnable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
-    glUniform1i([self.program uniformLocation:snakeSampleName], /*GL_TEXTURE*/0);
+    //glUniform1i([self.program uniformLocation:snakeSample_name], /*GL_TEXTURE*/0);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLsizei window_height = self.viewport.size.height;
@@ -79,7 +95,7 @@ NSString *snakeDiffuse = @"diffuse";
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     glVertexAttribPointer(
-                          [self.program attributeLocation:bp_name], // attribute
+                          [self.program attributeLocation:position_name], // attribute
                           3,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
@@ -87,14 +103,21 @@ NSString *snakeDiffuse = @"diffuse";
                           (GLvoid*)0                  // offset of first element
                           );
     glVertexAttribPointer(
-                          [self.program attributeLocation:snakeTextureCoordName], // attribute
-                          2,                  // number of elements per vertex, here (x,y)
+                          [self.program attributeLocation:normal_name], // attribute
+                          3,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
                           GL_FALSE,           // take our values as-is
                           stride,                  // no extra data between each position
                           (GLvoid*)sizeof(CC3Vector)                  // offset of first element
                           );
-
+    glVertexAttribPointer(
+                          [self.program attributeLocation:color_name], // attribute
+                          2,                  // number of elements per vertex, here (x,y)
+                          GL_FLOAT,           // the type of each element
+                          GL_FALSE,           // take our values as-is
+                          stride,                  // no extra data between each position
+                          (GLvoid*)(2*sizeof(CC3Vector))                  // offset of first element
+                          );
     //glDrawArrays(GL_TRIANGLES, 0, size/sizeof(_vertexPC));
     //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);

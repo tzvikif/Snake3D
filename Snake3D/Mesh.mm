@@ -84,10 +84,10 @@ verticesNumberOfElemets:(GLuint)vnoe {
     _vertexStruct = P;
 
 }
--(void)loadVertices:(const GLfloat*)v
-            normals:(const GLfloat*)n
-              color:(const GLfloat*)c
-            indices:(const GLushort*)elements
+-(void)loadVertices:(GLfloat*)v
+            normals:(GLfloat*)n
+              color:(GLfloat*)c
+            indices:(GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe {
     VertexPNC *verticesTemp = (VertexPNC*)malloc( sizeof(VertexPNC) * ( vnoe ));
@@ -116,7 +116,7 @@ verticesNumberOfElemets:(GLuint)vnoe {
         vstruct.color = color;
         verticesTemp[i/3] = vstruct;
     }
-    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    memcpy(_indices, elements, inoe*sizeof(GLushort));
     _vnoe = vnoe;
     _inoe = inoe;
     _vertexStruct = PNC;
@@ -136,14 +136,18 @@ verticesNumberOfElemets:(GLuint)vnoe {
 -(void)loadObjFromFile:(NSString *)name {
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"obj"];
     LoadObj *bp = [[LoadObj alloc] initWithPath:path];
-    _normals = [self computeNormalsWithElements:bp->_arrElements noe:bp->_numberOfFaces*3 andVertices:(GLfloat*)bp->_arrVertices nov:bp->_numberOfVertices andAverage:YES];
-    [self loadVertices:(const GLfloat*)bp->_arrVertices
-                 color:(const GLfloat*)bp->_arrVertices
+    GLfloat *normals = [self computeNormalsWithElements:bp->_arrElements noe:bp->_numberOfFaces*3 andVertices:(GLfloat*)bp->_arrVertices nov:bp->_numberOfVertices andAverage:YES];
+//     [self loadVertices:(const GLfloat*)bp->_arrVertices
+//                 color:(const GLfloat*)bp->_arrVertices
+//               indices:bp->_arrElements
+//                indicesNumberOfElemets:bp->_numberOfFaces*3
+//                verticesNumberOfElemets:bp->_numberOfVertices];
+    [self loadVertices:(GLfloat*)bp->_arrVertices
+               normals:(GLfloat*)normals
+                 color:(GLfloat*)bp->_arrVertices
                indices:bp->_arrElements
                 indicesNumberOfElemets:bp->_numberOfFaces*3
                 verticesNumberOfElemets:bp->_numberOfVertices];
-    [self loadVertices:(const GLfloat*)bp->_arrVertices normals:(const GLfloat*)_normals color:(const GLfloat*)bp->_arrVertices indices:(const GLushort*)bp->_arrElements indicesNumberOfElemets:bp->_numberOfFaces*3 verticesNumberOfElemets:bp->_numberOfVertices];
-    
 }
 -(void)loadObjFromFileWithUV:(NSString *)name{
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"obj"];
@@ -155,8 +159,8 @@ verticesNumberOfElemets:(GLuint)vnoe {
 -(void)loadVertices:(const GLfloat*)v
               color:(const GLfloat*)c
             indices:(const GLushort*)elements
-indicesNumberOfElemets:(GLuint)inoe
-verticesNumberOfElemets:(GLuint)vnoe {
+indicesNumberOfElemets:(GLushort)inoe
+verticesNumberOfElemets:(GLushort)vnoe {
     VertexPC *verticesTemp = (VertexPC*)malloc( sizeof(VertexPC) * ( vnoe ));
     if (inoe != 0 && elements != NULL) {
         _indices = (GLushort*)malloc(inoe*sizeof(GLushort));
@@ -182,7 +186,7 @@ verticesNumberOfElemets:(GLuint)vnoe {
         verticesTemp[i/3] = vstruct;
     }
     if (inoe != 0 && elements != NULL) {
-        memcpy(_indices, elements, inoe*sizeof(GLuint));    
+        memcpy(_indices, elements, inoe*sizeof(GLushort));
     }
     _vnoe = vnoe;
     _inoe = inoe;
@@ -216,7 +220,7 @@ verticesNumberOfElemets:(GLuint)vnoe {
         verticesTemp[i/3] = vstruct;
         textureIndex += 2;
     }
-    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    memcpy(_indices, elements, inoe*sizeof(GLushort));
     _vnoe = vnoe;
     _inoe = inoe;
     _vertexStruct = PT;
@@ -263,21 +267,10 @@ verticesNumberOfElemets:(GLuint)vnoe {
         verticesTemp[i/3] = vstruct;
         textureIndex += 2;
     }
-    memcpy(_indices, elements, inoe*sizeof(GLuint));
+    memcpy(_indices, elements, inoe*sizeof(GLushort));
     _vnoe = vnoe;
     _inoe = inoe;
     _vertexStruct = PNCT;
-}
--(CC3Vector)CalculateSurfaceNormal:(CC3Vector*)triangle {
-    CC3Vector p1 = triangle[0];
-    CC3Vector p2 = triangle[1];
-    CC3Vector p3 = triangle[2];
-    
-    CC3Vector u = CC3VectorMake(p2.x-p1.x, p2.y-p1.y, p2.z-p1.z);
-    CC3Vector v = CC3VectorMake(p3.x-p1.x, p3.y-p1.y, p3.z-p1.z);
-    
-    CC3Vector normal = CC3VectorCross(u, v);
-    return normal;
 }
 - (GLfloat*)computeNormalsWithElements:(GLushort*)elements noe:(GLushort)noe andVertices:(GLfloat*)vertices nov:(GLushort)nov andAverage:(BOOL)average {
     CC3Vector normal;
@@ -352,6 +345,16 @@ verticesNumberOfElemets:(GLuint)vnoe {
     free(normalsCount);
     return (GLfloat*)normalsSum;
 }
-
+-(CC3Vector)CalculateSurfaceNormal:(CC3Vector*)triangle {
+    CC3Vector p1 = triangle[0];
+    CC3Vector p2 = triangle[1];
+    CC3Vector p3 = triangle[2];
+    
+    CC3Vector u = CC3VectorMake(p2.x-p1.x, p2.y-p1.y, p2.z-p1.z);
+    CC3Vector v = CC3VectorMake(p3.x-p1.x, p3.y-p1.y, p3.z-p1.z);
+    
+    CC3Vector normal = CC3VectorCross(u, v);
+    return normal;
+}
 
 @end

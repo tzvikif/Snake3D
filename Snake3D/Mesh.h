@@ -52,7 +52,6 @@ typedef struct _vertexPT
 @interface Mesh : NSObject
 @property(assign,nonatomic) GLuint inoe,vnoe;
 @property(assign,nonatomic) GLfloat *vertices;
-@property(assign,nonatomic) GLfloat *normals;
 @property(assign,nonatomic) GLushort *indices;
 @property(assign,nonatomic) vertexStructure vertexStruct;
 
@@ -67,17 +66,17 @@ typedef struct _vertexPT
             indices:(const GLushort*)elements
 indicesNumberOfElemets:(GLuint)inoe
 verticesNumberOfElemets:(GLuint)vnoe;
--(void)loadVertices:(const GLfloat*)v
-            normals:(const GLfloat*)n
-              color:(const GLfloat*)c
-            indices:(const GLushort*)elements
+-(void)loadVertices:(GLfloat*)v
+            normals:(GLfloat*)n
+              color:(GLfloat*)c
+            indices:(GLushort*)elements
             indicesNumberOfElemets:(GLuint)inoe
             verticesNumberOfElemets:(GLuint)vnoe;
 -(void)loadVertices:(const GLfloat*)v
               color:(const GLfloat*)c
             indices:(const GLushort*)elements
-indicesNumberOfElemets:(GLuint)inoe
-verticesNumberOfElemets:(GLuint)vnoe;
+indicesNumberOfElemets:(GLushort)inoe
+verticesNumberOfElemets:(GLushort)vnoe;
 -(void)loadVertices:(const GLfloat*)v
             texture:(const GLfloat*)c
             indices:(const GLushort*)elements
@@ -88,10 +87,7 @@ verticesNumberOfElemets:(GLuint)vnoe;
 -(void)loadObjFromFile:(NSString*)name;
 -(void)loadObjFromFileWithUV:(NSString *)name;
 -(CC3Vector)CalculateSurfaceNormal:(CC3Vector*)triangle;
-- (GLfloat*)computeNormalsWithElements:(GLushort*)elements
-                                   noe:(GLushort)noe
-                           andVertices:(GLfloat*)vertices
-                                   nov:(GLushort)nov
-                            andAverage:(BOOL)average;
+- (GLfloat*)avarageNormalsWithElements:(GLushort*)arrElements numberOfElements:(GLushort)noe andNormals:(GLfloat*)arrNormals numberOfNormals:(GLushort)non;
 - (void)displayNormals:(GLfloat*)arr noe:(GLushort)numberOfElements;
+- (GLfloat*)computeNormalsWithElements:(GLushort*)elements noe:(GLushort)noe andVertices:(GLfloat*)vertices nov:(GLushort)nov andAverage:(BOOL)average;
 @end
