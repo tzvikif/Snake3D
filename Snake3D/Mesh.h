@@ -75,8 +75,8 @@ verticesNumberOfElemets:(GLuint)vnoe;
 -(void)loadVertices:(const GLfloat*)v
               color:(const GLfloat*)c
             indices:(const GLushort*)elements
-indicesNumberOfElemets:(GLuint)inoe
-verticesNumberOfElemets:(GLuint)vnoe;
+indicesNumberOfElemets:(GLushort)inoe
+verticesNumberOfElemets:(GLushort)vnoe;
 -(void)loadVertices:(const GLfloat*)v
             texture:(const GLfloat*)c
             indices:(const GLushort*)elements
@@ -86,4 +86,8 @@ verticesNumberOfElemets:(GLuint)vnoe;
 -(size_t)sizeofIndices;
 -(void)loadObjFromFile:(NSString*)name;
 -(void)loadObjFromFileWithUV:(NSString *)name;
+-(CC3Vector)CalculateSurfaceNormal:(CC3Vector*)triangle;
+- (GLfloat*)avarageNormalsWithElements:(GLushort*)arrElements numberOfElements:(GLushort)noe andNormals:(GLfloat*)arrNormals numberOfNormals:(GLushort)non;
+- (void)displayNormals:(GLfloat*)arr noe:(GLushort)numberOfElements;
+- (GLfloat*)computeNormalsWithElements:(GLushort*)elements noe:(GLushort)noe andVertices:(GLfloat*)vertices nov:(GLushort)nov andAverage:(BOOL)average;
 @end

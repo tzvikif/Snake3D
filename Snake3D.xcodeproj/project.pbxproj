@@ -31,7 +31,7 @@
 		20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 20F8D94617CCA2AC00CFF9A6 /* uvtemplate.bmp */; };
 		20F8D94A17CE2CF100CFF9A6 /* Plotter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20F8D94917CE2CF100CFF9A6 /* Plotter.mm */; };
 		20F8D95117CE4E4F00CFF9A6 /* Consts.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F8D95017CE4E4F00CFF9A6 /* Consts.m */; };
-		20FF7DB417C4977800A58B95 /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB317C4977800A58B95 /* Mesh.m */; };
+		20FF7DB417C4977800A58B95 /* Mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB317C4977800A58B95 /* Mesh.mm */; };
 		20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */; };
 		20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DB917C49A1F00A58B95 /* CC3GLMatrix.mm */; };
 		20FF7DC217C49A1F00A58B95 /* CC3Kazmath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20FF7DBB17C49A1F00A58B95 /* CC3Kazmath.mm */; };
@@ -114,7 +114,7 @@
 		20F8D94F17CE4E4F00CFF9A6 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		20F8D95017CE4E4F00CFF9A6 /* Consts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Consts.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20FF7DB217C4977800A58B95 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = Snake3D/Mesh.h; sourceTree = "<group>"; };
-		20FF7DB317C4977800A58B95 /* Mesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mesh.m; path = Snake3D/Mesh.m; sourceTree = "<group>"; };
+		20FF7DB317C4977800A58B95 /* Mesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Mesh.mm; path = Snake3D/Mesh.mm; sourceTree = "<group>"; };
 		20FF7DB617C49A1F00A58B95 /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CC3Foundation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		20FF7DB717C49A1F00A58B95 /* CC3Foundation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CC3Foundation.mm; sourceTree = "<group>"; };
 		20FF7DB817C49A1F00A58B95 /* CC3GLMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3GLMatrix.h; sourceTree = "<group>"; };
@@ -310,7 +310,7 @@
 				201FF78E17FB0053004F188C /* BodyPart.mm */,
 				201FF78F17FB0053004F188C /* BodyPart.h */,
 				20FF7DB217C4977800A58B95 /* Mesh.h */,
-				20FF7DB317C4977800A58B95 /* Mesh.m */,
+				20FF7DB317C4977800A58B95 /* Mesh.mm */,
 				20FF7DC517C49F9100A58B95 /* Drawable.h */,
 				20FF7DC617C49F9100A58B95 /* Drawable.m */,
 				20FF7DCB17C4E57100A58B95 /* Material.h */,
@@ -451,7 +451,7 @@
 				20F74B8717C26ADE00407740 /* LogicEngine.mm in Sources */,
 				E507DFAA1882D9FA00C5DA91 /* SkyBox.mm in Sources */,
 				20F74B8A17C26B0D00407740 /* RenderingEngine.mm in Sources */,
-				20FF7DB417C4977800A58B95 /* Mesh.m in Sources */,
+				20FF7DB417C4977800A58B95 /* Mesh.mm in Sources */,
 				20FF7DC017C49A1F00A58B95 /* CC3Foundation.mm in Sources */,
 				20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */,
 				20FF7DC217C49A1F00A58B95 /* CC3Kazmath.mm in Sources */,
