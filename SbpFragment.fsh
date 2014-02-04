@@ -1,11 +1,10 @@
-varying mediump vec4   f_color;
-//uniform sampler2D sampler;
-varying mediump vec2 textureCoordOut;
+varying lowp vec4 DestinationColor;
+varying mediump vec2 f_texcoord;
+uniform sampler2D mytexture;
 
 void main(void) {
-    //gl_FragColor = vec4(f_color,1);
-    //mediump vec4 c = texture2D(sampler, textureCoordOut);
-    //gl_FragColor = vec4(0.7,0.5,0.1,1.0);
-    gl_FragColor = f_color;
-
+    mediump vec2 flipped_texcoord = vec2(f_texcoord.x, 1.0 - f_texcoord.y);
+    gl_FragColor = texture2D(mytexture, flipped_texcoord) * DestinationColor;
+    //gl_FragColor = DestinationColor;
+    //gl_FragColor = vec4(1.0,0.0,0.8,1.0);
 }
