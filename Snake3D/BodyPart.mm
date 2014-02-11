@@ -39,10 +39,10 @@ static NSString *normal_name = @"Normal";
     [self.program addAttribute:normal_name];
 //    [self.program addAttribute:textureCoord_name];
     //uniforms
-    //[self.program addUniform:mvp_name];
+    [self.program addUniform:mvp_name];
     [self.program addUniform:model_name];
     [self.program addUniform:view_name];
-    [self.program addUniform:projection_name];
+    //[self.program addUniform:projection_name];
 //    [self.program addUniform:sample_name];
     [self.program addUniform:ambient_name];
     [self.program addUniform:diffuse_name];
@@ -78,13 +78,13 @@ static NSString *normal_name = @"Normal";
     glViewport(0, 0, window_width, window_height);
     
     glUniform3f([self.program uniformLocation:ambient_name], 0.1f, 0.1f, 0.1f);
-    glUniform3f([self.program uniformLocation:specular_name],9.0, 9.0, 0.0);
-    glUniform1f([self.program uniformLocation:shininess_name],60);
+    glUniform3f([self.program uniformLocation:specular_name],9.0, 9.0, 9.0);
+    glUniform1f([self.program uniformLocation:shininess_name],100);
     // Set the light position.
-    CC3Vector4 lightPosition  = CC3Vector4Make(0.0,10.0,0.0,0.0);
+    CC3Vector4 lightPosition  = CC3Vector4Make(0.0,3.0,0.0,0.0);
     glUniform4f([self.program uniformLocation:lightPosition_name], lightPosition.x, lightPosition.y, lightPosition.z,lightPosition.w);
-    CC3Vector color = CC3VectorMake(200.0/255.0, 150.0/255.0, 250.0/255.0);
-    glUniform3f([self.program uniformLocation:diffuse_name], color.x, color.y, color.z);
+    CC3Vector diffuseColor = CC3VectorMake(200.0/255.0, 160.0/255.0, 100.0/255.0);
+    glUniform3f([self.program uniformLocation:diffuse_name], diffuseColor.x, diffuseColor.y, diffuseColor.z);
     
     self.modelMatrix = [CC3GLMatrix identity];
     //CC3Vector translateVector = self.position;
@@ -101,13 +101,13 @@ static NSString *normal_name = @"Normal";
     glUniformMatrix4fv([self.program uniformLocation:view_name], 1,   0, self.viewMatrix.glMatrix);
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
-    glUniformMatrix4fv([self.program uniformLocation:projection_name], 1,   0, projectionMat.glMatrix);
+    //glUniformMatrix4fv([self.program uniformLocation:projection_name], 1,   0, projectionMat.glMatrix);
 //    NSLog(@"projection %@",[projectionMat description]);
 //    NSLog(@"view %@",[self.viewMatrix description]);
     [projectionMat multiplyByMatrix:self.viewMatrix];
     [projectionMat multiplyByMatrix:self.modelMatrix];
     //[self setProjectionMatrix:[CC3GLMatrix identity]];
-    //glUniformMatrix4fv([self.program uniformLocation:mvp_name], 1,   0, projectionMat.glMatrix);
+    glUniformMatrix4fv([self.program uniformLocation:mvp_name], 1,   0, projectionMat.glMatrix);
     GLsizei size;
     GLsizei stride = [self getStride];
     glBindBuffer(GL_ARRAY_BUFFER, self.drawable.vboVertexBuffer);
