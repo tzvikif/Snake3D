@@ -42,7 +42,7 @@ static NSString *normal_name = @"Normal";
     [self.program addUniform:mvp_name];
     [self.program addUniform:model_name];
     [self.program addUniform:view_name];
-    //[self.program addUniform:projection_name];
+    [self.program addUniform:projection_name];
 //    [self.program addUniform:sample_name];
     [self.program addUniform:ambient_name];
     [self.program addUniform:diffuse_name];
@@ -101,7 +101,7 @@ static NSString *normal_name = @"Normal";
     glUniformMatrix4fv([self.program uniformLocation:view_name], 1,   0, self.viewMatrix.glMatrix);
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
-    //glUniformMatrix4fv([self.program uniformLocation:projection_name], 1,   0, projectionMat.glMatrix);
+    glUniformMatrix4fv([self.program uniformLocation:projection_name], 1,   0, projectionMat.glMatrix);
 //    NSLog(@"projection %@",[projectionMat description]);
 //    NSLog(@"view %@",[self.viewMatrix description]);
     [projectionMat multiplyByMatrix:self.viewMatrix];
@@ -141,7 +141,7 @@ static NSString *normal_name = @"Normal";
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     if (_isDrawEnabled) {
-        glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
+        glDrawElements(GL_POINTS, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
     }
 }
 -(void)advance {
