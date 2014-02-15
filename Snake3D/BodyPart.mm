@@ -81,7 +81,7 @@ static NSString *normal_name = @"Normal";
     glUniform3f([self.program uniformLocation:specular_name],9.0, 9.0, 9.0);
     glUniform1f([self.program uniformLocation:shininess_name],100);
     // Set the light position.
-    CC3Vector4 lightPosition  = CC3Vector4Make(0.0,3.0,0.0,0.0);
+    CC3Vector4 lightPosition  = CC3Vector4Make(0.0,4.0,0.0,1.0);
     glUniform4f([self.program uniformLocation:lightPosition_name], lightPosition.x, lightPosition.y, lightPosition.z,lightPosition.w);
     CC3Vector diffuseColor = CC3VectorMake(200.0/255.0, 160.0/255.0, 100.0/255.0);
     glUniform3f([self.program uniformLocation:diffuse_name], diffuseColor.x, diffuseColor.y, diffuseColor.z);
@@ -141,7 +141,7 @@ static NSString *normal_name = @"Normal";
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
     if (_isDrawEnabled) {
-        glDrawElements(GL_POINTS, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
+        glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, (GLvoid*)0);
     }
 }
 -(void)advance {

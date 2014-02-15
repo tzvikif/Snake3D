@@ -312,7 +312,7 @@
     Snake *snk = [self getSnakeObj];
    //NSLog(@"pos at:(%f,%f,%f)",pos.x,pos.y,pos.z);
     //CC3Vector vn = CC3VectorNormalize(velocity);
-    CC3Vector eyeAt = CC3VectorMake(pos.x, 4,pos.z+10.0);
+    CC3Vector eyeAt = CC3VectorMake(pos.x, 10,pos.z+10.0);
     CC3Vector lookAt =  CC3VectorMake(pos.x, 2,pos.z-5.0);
     static CC3Vector cameraSpace[3];
     float angle = [snk getRotationAngle];

@@ -33,13 +33,13 @@ void main(void)
     vec3 d = DiffuseMaterial;
     vec3 s = SpecularMaterial;
     vec3 a = AmbientMaterial;
-    float distanceToLight = distance(vcLightPosition,vcVertexPosition);
-    float attenuation = 1.0 - distanceToLight / 60.0;
+    float distanceToLight = length(vcLightPosition-vcVertexPosition);
+    float attenuation = 1.0 - distanceToLight / 32.0;
     //float attenuation = 1.0 / (1.0 + 1.0 * pow(distanceToLight, 1.0));
     //attenuation = 0.2;
-    vec3 color = AmbientMaterial + attenuation * (df * DiffuseMaterial + sf * SpecularMaterial);
+    vec3 color = AmbientMaterial + attenuation * (df * DiffuseMaterial /*+ sf * SpecularMaterial*/);
     
-    //vec3 color = SpecularMaterial;
+    //color = vec3(1.0,0.0,0.0);
 //    if (0.0 <= df && df < 0.25 ) {
 //        color = vec3(1.0,0.0,0.0);
 //    }
@@ -56,21 +56,21 @@ void main(void)
     //    {
     //        color = DiffuseMaterial;
     //    }
-    if (distanceToLight < 10.0) {
-        color = vec3(1.0,0.0,0.0);
-    }
-    if (distanceToLight > 10.0 && distanceToLight < 20.0) {
-        color = vec3(0.0,1.0,0.0);
-    }
-    if (distanceToLight > 20.0 && distanceToLight < 30.0) {
-        color = vec3(0.0,0.0,1.0);
-    }
-    if (distanceToLight > 30.0) {
-        color = vec3(1.0,0.0,1.0);
-    }
+//    if (distanceToLight < 5.0) {
+//        color = vec3(1.0,0.0,0.0);
+//    }
+//    if (distanceToLight > 5.0 && distanceToLight < 15.0) {
+//        color = vec3(0.0,1.0,0.0);
+//    }
+//    if (distanceToLight > 15.0 && distanceToLight < 20.0) {
+//        color = vec3(0.0,0.0,1.0);
+//    }
+//    if (distanceToLight > 20.0) {
+//        color = vec3(1.0,0.0,1.0);
+//    }
     DestinationColor = vec4(color,1.0);
     f_texcoord = texcoord;
-    gl_PointSize = 10.0;
-    vec4 lp = vec4(0.0,3.0,0.5,1.0);
-    gl_Position = Projection * View * vcLightPosition;
+    //gl_PointSize = 10.0;
+    //vec4 lp = vec4(0.0,3.0,0.5,1.0);
+    gl_Position = Projection * View * Model * Position;
 }
