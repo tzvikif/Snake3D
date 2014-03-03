@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Vectors.h"
 extern int const N;
+extern int const initNumberOfSnakeParts;
 extern float const totalOrientationTime;
 extern float const SNKspeed;
 typedef enum _PROGRAMS {

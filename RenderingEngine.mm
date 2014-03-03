@@ -54,7 +54,7 @@
     glClearColor(0.4, 0.9, 0.9, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
--(void)Render:(NSArray*)renderables {
+-(void)Render:(NSArray*)renderables  {
   
     for (Node *obj in renderables) {
     [obj Render];

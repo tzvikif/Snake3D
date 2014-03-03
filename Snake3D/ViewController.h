@@ -18,4 +18,9 @@
 @property (retain,nonatomic) GLProgram *program1;
 - (void)Render: (CADisplayLink*) displayLink;
 -(void)startRenderLoop;
+- (IBAction)btnContinueClicked:(id)sender;
+- (IBAction)btnStartOverClicked:(id)sender;
+@property (retain, nonatomic) IBOutlet UIButton *btnContinue;
+@property (retain, nonatomic) IBOutlet UIButton *btnStartOver;
+
 @end

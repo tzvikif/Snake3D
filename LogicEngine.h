@@ -37,6 +37,7 @@
 @property(nonatomic,assign) CGRect viewport;
 @property(nonatomic,assign) BOOL isFoodOnBoard;
 @property(nonatomic,assign) CC3Vector currentVelocity;
+@property(nonatomic,assign,getter = isGameStopped) BOOL gameStopped;
 
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;
@@ -49,5 +50,7 @@
 -(void)updateSceneOrientation;
 -(void)setDir:(DIRECTION)dir;
 -(SkyBox*)createSkyBox;
+-(void)btnContinueClicked;
+-(void)btnStartOverClicked;
 @end
     

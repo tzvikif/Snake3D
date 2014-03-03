@@ -27,12 +27,14 @@
 -(void)Render:(NSArray*)renderables;
 -(BOOL)isFoodEaten:(CC3Vector)pos;
 -(Snake*)getSnakeObj;
+-(Snake*)initSnakeWithBPcount:(int)count;
 @end
 
 @implementation LogicEngine
 
 -(void)initialize:(CGRect)viewport {
     _viewport = viewport;
+    _gameStopped = NO;
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
     _orient = ORTN_BR;
     _newOrient = ORTN_NONE;
@@ -68,12 +70,9 @@
     Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_FLOOR]] andDrawable:DrwFloor andMesh:floorMeshTemp andMaterial:floorMaterialTemp andViewport:viewport];
     [floorMeshTemp release];
     [floorMaterialTemp release];
-    Snake *snakeObjTemp = [[Snake alloc] init];
-    [snakeObjTemp setPosition:CC3VectorMake(2.5, 0.5, 5.5)];
-    [snakeObjTemp setSpeed:SNKspeed];
-    [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
-    _currentVelocity = [snakeObjTemp getVelocity];
+  
     SkyBox *sboxTemp = [self createSkyBox];
+    Snake* snakeObjTemp = [self initSnakeWithBPcount:initNumberOfSnakeParts];
     [_renderables addObject:sboxTemp];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
@@ -87,7 +86,19 @@
 -(void)Render:(NSArray*)renderables; {
     [_renderingEngine Render:renderables];
 }
+-(Snake*)initSnakeWithBPcount:(int)count {
+    Snake *snakeObjTemp = [[Snake alloc] init];
+    [snakeObjTemp setBpCount:count];
+    [snakeObjTemp setPosition:CC3VectorMake(2.5, 0.5, 5.5)];
+    [snakeObjTemp setSpeed:SNKspeed];
+    [snakeObjTemp setProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SNAKE]]];
+    _currentVelocity = [snakeObjTemp getVelocity];
+    return snakeObjTemp;
+}
 -(void)Render {
+     if (self.isGameStopped) {
+         return;
+     }
     [_renderingEngine preRender];
     [self Render:_renderables];
     if (_currentFood) {
@@ -98,31 +109,35 @@
 //paramters: timeElapsed - time elapsed after last frame.
 -(void)updateAnimation:(NSTimeInterval)timeElapsed {
     Snake *snk = [self getSnakeObj];
-    BOOL isCollide = [snk isCollideWithPosition:snk.position] || [snk isCollideWithWall];
-    if (!isCollide) {
-        [snk advance];
-    }
-    else {
-        [snk oops:timeElapsed];
-    }
-    CC3Vector *pnewOrientation = [self getOrientation:snk.position andVelocity:[snk getVelocity]];
-    [_renderingEngine applyView:pnewOrientation to:_renderables];
-    //[self updateSceneOrientation:timeElapsed];
-    if (!_isFoodOnBoard) {
-        Food *f = [self createFood];
-        [f setProjectionMatrix:_renderingEngine.matProjection];
-        [f setViewMatrix:_renderingEngine.matView];
-        [f setViewport:_renderingEngine.viewport];
-        [f initResources];
-        [self setCurrentFood:f];
-        _isFoodOnBoard = YES;
-    }
-    
-    if ([self isFoodEaten:_currentFood.position]) {
-        _isFoodOnBoard = NO;
-        [_currentFood release];
-        _currentFood = nil;
-        [snk addBodyPart];
+    if (!self.isGameStopped) {
+        BOOL isCollide = [snk isCollideWithPosition:snk.position] || [snk isCollideWithWall];
+        if (!isCollide) {
+            [snk advance];
+        }
+        else {
+            if ([snk oops:timeElapsed]) {
+                _gameStopped = YES;
+            };
+        }
+        CC3Vector *pnewOrientation = [self getOrientation:snk.position andVelocity:[snk getVelocity]];
+        [_renderingEngine applyView:pnewOrientation to:_renderables];
+        //[self updateSceneOrientation:timeElapsed];
+        if (!_isFoodOnBoard) {
+            Food *f = [self createFood];
+            [f setProjectionMatrix:_renderingEngine.matProjection];
+            [f setViewMatrix:_renderingEngine.matView];
+            [f setViewport:_renderingEngine.viewport];
+            [f initResources];
+            [self setCurrentFood:f];
+            _isFoodOnBoard = YES;
+        }
+        
+        if ([self isFoodEaten:_currentFood.position]) {
+            _isFoodOnBoard = NO;
+            [_currentFood release];
+            _currentFood = nil;
+            [snk addBodyPart];
+        }
     }
 }
 -(void)updateOffset_x:(GLfloat)delta {
@@ -539,6 +554,23 @@
     BOOL isEaten = [snk isCollideWithPosition:pos];
     return isEaten;
 }
+-(void)btnContinueClicked {
+    Snake *snake = [self getSnakeObj];
+    Snake *newSnake = [self initSnakeWithBPcount:snake.bpCount];
+    [_renderables removeObject:snake];
+    [_renderables addObject:newSnake];
+    
+    _gameStopped = NO;
+}
+-(void)btnStartOverClicked {
+    Snake *snake = [self getSnakeObj];
+    Snake *newSnake = [self initSnakeWithBPcount:initNumberOfSnakeParts];
+    [_renderables removeObject:snake];
+    [_renderables addObject:newSnake];
+    
+    _gameStopped = NO;
+}
+
 -(Node*)getSnakeObj {
     Snake *snake;
     for (Node *obj in _renderables) {

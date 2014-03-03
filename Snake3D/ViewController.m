@@ -48,6 +48,14 @@
                       forMode:NSDefaultRunLoopMode];
     
 }
+
+- (IBAction)btnContinueClicked:(id)sender {
+    [_logicEngine btnContinueClicked];
+}
+
+- (IBAction)btnStartOverClicked:(id)sender {
+    [_logicEngine btnStartOverClicked];
+}
 - (void) Render: (CADisplayLink*) displayLink {
     if (displayLink != nil) {
         NSTimeInterval elapsedSeconds = displayLink.timestamp - m_timestamp;
@@ -134,6 +142,13 @@
 -(void)dealloc {
     [_logicEngine release];
     [_program1 release];
+    [_btnContinue release];
+    [_btnStartOver release];
     [super dealloc];
+}
+- (void)viewDidUnload {
+    [self setBtnContinue:nil];
+    [self setBtnStartOver:nil];
+    [super viewDidUnload];
 }
 @end

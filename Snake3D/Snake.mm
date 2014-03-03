@@ -144,7 +144,6 @@ float bsf = 1.0/2.0;
 @implementation Snake
 
 -(void)initResources {
-    _bpCount = 3;
     _totalTimeElapsed = 0;
     _velocityChanged = YES;
     NSMutableArray *ma = [[NSMutableArray alloc] init];
@@ -262,34 +261,37 @@ float bsf = 1.0/2.0;
     }
     return collisitionStatus;
 }
--(void)oops:(NSTimeInterval)timeElappsed{
+-(BOOL)oops:(NSTimeInterval)timeElappsed{
+    BOOL animationCompleted = NO;
     static float total = 0.3;
     if (_totalTimeElapsed >= total) {
         //_totalTimeElapsed = 0;
         for (BodyPart *bp in _bodyParts) {
             [bp setIsDrawEnabled:NO];
         }
-        return;
+        animationCompleted = YES;
     }
-    
-    _totalTimeElapsed += timeElappsed;
-    if (_totalTimeElapsed > total) {
-        _totalTimeElapsed = total;
+    else {
+        _totalTimeElapsed += timeElappsed;
+        if (_totalTimeElapsed > total) {
+            _totalTimeElapsed = total;
+        }
+     
+        float scaleX,scaleY,scaleZ;
+        BodyPart *bp;
+        for (int i=0; i<_bpCount; i++) {
+            bp = [_bodyParts objectAtIndex:i];
+            CC3Vector scaleFactor = _initScales[i];
+            scaleX = lerp(0.0, scaleFactor.x, _totalTimeElapsed/total);
+            scaleY = lerp(0, scaleFactor.y, _totalTimeElapsed/total);
+            //scaleZ = lerp(0, scaleFactor.z, timeElappsed/total);
+        
+            scaleFactor = CC3VectorMake(scaleFactor.x, scaleY, scaleFactor.z);
+            //NSLog(@"scaleX=%f scaleY=%f scaleZ=%f totalTime=%f",scaleX,scaleY,scaleFactor.z,_totalTimeElapsed);
+            [bp setScaleFactor:scaleFactor];
+        }
     }
- 
-    float scaleX,scaleY,scaleZ;
-    BodyPart *bp;
-    for (int i=0; i<_bpCount; i++) {
-        bp = [_bodyParts objectAtIndex:i];
-        CC3Vector scaleFactor = _initScales[i];
-        scaleX = lerp(0.0, scaleFactor.x, _totalTimeElapsed/total);
-        scaleY = lerp(0, scaleFactor.y, _totalTimeElapsed/total);
-        //scaleZ = lerp(0, scaleFactor.z, timeElappsed/total);
-    
-        scaleFactor = CC3VectorMake(scaleFactor.x, scaleY, scaleFactor.z);
-        //NSLog(@"scaleX=%f scaleY=%f scaleZ=%f totalTime=%f",scaleX,scaleY,scaleFactor.z,_totalTimeElapsed);
-        [bp setScaleFactor:scaleFactor];
-    }
+    return  animationCompleted;
 }
 -(void)addBodyPart {
      BodyPart *tail = [_bodyParts objectAtIndex:[_bodyParts count]-1];
