@@ -82,6 +82,10 @@ extern GLfloat const SnakeCube_verticesY[];
 extern size_t const SnakeCube_verticesYSize;
 extern GLfloat const cube_texcoords[];
 
+extern GLfloat const maxEyeViewY;
+extern GLfloat const minEyeViewY;
+extern GLfloat const defaultEyeViewY;
+
 #define TWODIGITS_FP(x) x*=100;x=roundf(x);x/=100; //round a number by 2 digits. 5.499993 => 5.500000
 
 

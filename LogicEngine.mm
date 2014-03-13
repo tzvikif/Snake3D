@@ -35,6 +35,8 @@
 -(void)initialize:(CGRect)viewport {
     _viewport = viewport;
     _gameStopped = NO;
+    _eyePosY = defaultEyeViewY;
+    _deltaEyePosZ = 0;
     RenderingEngine *renderingEngineTemp = [[RenderingEngine alloc] init];
     _orient = ORTN_BR;
     _newOrient = ORTN_NONE;
@@ -322,13 +324,14 @@
             break;
     }
 }
-
+#pragma mark -
+#pragma mark Orientation
 -(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity {
     Snake *snk = [self getSnakeObj];
    //NSLog(@"pos at:(%f,%f,%f)",pos.x,pos.y,pos.z);
     //CC3Vector vn = CC3VectorNormalize(velocity);
-    CC3Vector eyeAt = CC3VectorMake(pos.x, 10,pos.z+10.0);
-    CC3Vector lookAt =  CC3VectorMake(pos.x, 2,pos.z-5.0);
+    CC3Vector eyeAt = CC3VectorMake(pos.x, _eyePosY,pos.z+12.0+_deltaEyePosZ);
+    CC3Vector lookAt =  CC3VectorMake(pos.x, 4,pos.z-5.0);
     static CC3Vector cameraSpace[3];
     float angle = [snk getRotationAngle];
 //    if ([snk isRotating]) {
@@ -374,7 +377,18 @@
     //NSLog(@"eye at:(%f,%f,%f)",eyeAt.x,eyeAt.y,eyeAt.z);
     return cameraSpace;
 }
-
+-(void)eyeViewGoingDown {
+    if (_eyePosY - 0.5 > minEyeViewY) {
+        _eyePosY -= 0.5;
+        _deltaEyePosZ -= 0.2;
+    }
+}
+-(void)eyeViewGoingUp {
+    if (_eyePosY + 0.5 < maxEyeViewY) {
+        _eyePosY += 0.5;
+        _deltaEyePosZ += 0.2;
+    }
+}
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed {
     _orientationTimeElapsed += timeElapsed;
     if (_orientationTimeElapsed > totalOrientationTime) {
@@ -463,6 +477,8 @@
 -(void)updateSceneOrientation {
     
 }
+#pragma mark -
+#pragma mark rendered objects
 -(Food*)createFood {
     Food *foodObj = [[Food alloc] init];
     Mesh *foodMeshTemp = [[Mesh alloc] init];
@@ -558,8 +574,10 @@
     Snake *snake = [self getSnakeObj];
     Snake *newSnake = [self initSnakeWithBPcount:snake.bpCount];
     [_renderables removeObject:snake];
-    [_renderables addObject:newSnake];
-    
+    [_renderables addObject:newSnake] ;
+    [_renderingEngine initResources:_renderables];
+    [_currentFood release];
+    _currentFood = nil;
     _gameStopped = NO;
 }
 -(void)btnStartOverClicked {
@@ -567,7 +585,9 @@
     Snake *newSnake = [self initSnakeWithBPcount:initNumberOfSnakeParts];
     [_renderables removeObject:snake];
     [_renderables addObject:newSnake];
-    
+    [_renderingEngine initResources:_renderables];
+    [_currentFood release];
+    _currentFood = nil;
     _gameStopped = NO;
 }
 

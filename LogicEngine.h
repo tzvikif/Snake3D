@@ -38,7 +38,8 @@
 @property(nonatomic,assign) BOOL isFoodOnBoard;
 @property(nonatomic,assign) CC3Vector currentVelocity;
 @property(nonatomic,assign,getter = isGameStopped) BOOL gameStopped;
-
+@property(nonatomic,assign) GLfloat eyePosY;
+@property(nonatomic,assign) GLfloat deltaEyePosZ;
 -(void)initialize:(CGRect)viewport;
 //-(void)loadProgram:(GLProgram*)program;
 -(void)updateAnimation:(NSTimeInterval)timeElapsed;
@@ -52,5 +53,7 @@
 -(SkyBox*)createSkyBox;
 -(void)btnContinueClicked;
 -(void)btnStartOverClicked;
+-(void)eyeViewGoingUp;
+-(void)eyeViewGoingDown;
 @end
     

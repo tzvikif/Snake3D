@@ -26,9 +26,15 @@
     [self setLogicEngine:leTemp];
     [leTemp release];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    int tempHeight = screenBounds.size.height;
+    screenBounds.size.height = screenBounds.size.width;
+    screenBounds.size.width = tempHeight;
     [_logicEngine initialize:screenBounds];
-    [self addSwipeRecognizer];
+      [self addSwipeRecognizer];
     //[self addPinchRecognizer];
+    CGRect frame = _btnCw.frame;
+    frame.origin.x = screenBounds.size.width - frame.size.width;
+    [_btnCw setFrame:frame];
     [self startRenderLoop];
 }
 
@@ -144,11 +150,26 @@
     [_program1 release];
     [_btnContinue release];
     [_btnStartOver release];
+    [_btnCw release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setBtnContinue:nil];
     [self setBtnStartOver:nil];
     [super viewDidUnload];
+}
+- (IBAction)btnCwClicked:(id)sender {
+    [_logicEngine setDir:DIR_RIGHT];
+}
+
+- (IBAction)btnCcwClicked:(id)sender {
+    [_logicEngine setDir:DIR_LEFT];
+}
+- (IBAction)btnDown:(id)sender {
+    [_logicEngine eyeViewGoingDown];
+}
+
+- (IBAction)btnUp:(id)sender {
+    [_logicEngine eyeViewGoingUp];
 }
 @end

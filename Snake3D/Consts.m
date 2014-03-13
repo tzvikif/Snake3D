@@ -19,6 +19,10 @@ float RIGHT_DIR_ANGLE = 270;
 float const totalOrientationTime = 1.0;
 float const SNKspeed = 0.1;
 
+GLfloat const maxEyeViewY = 15.0;
+GLfloat const minEyeViewY= 1.0;
+GLfloat const defaultEyeViewY = 4.0;
+
 //UL
 CC3Vector const ul_lookAt = {-8.0, 1.0, -8.0};
 CC3Vector const ul_eyeAt = {-12.0, 10.0, 10.0};

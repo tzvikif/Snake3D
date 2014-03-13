@@ -233,7 +233,7 @@ float bsf = 1.0/2.0;
 -(BOOL)isCollideWithPosition:(CC3Vector)pos {
     //snake
     BOOL collisitionStatus = NO;
-    for (int i=2; i<[_bodyParts count]; i++) {
+    for (int i=1; i<[_bodyParts count]; i++) {
         BodyPart *bp = [_bodyParts objectAtIndex:i];
         CC3Vector objPos = bp.position;
         TWODIGITS_FP(objPos.x);
