@@ -379,14 +379,14 @@
 }
 -(void)eyeViewGoingDown {
     if (_eyePosY - 0.5 > minEyeViewY) {
-        _eyePosY -= 0.5;
-        _deltaEyePosZ -= 0.2;
+        _eyePosY -= 0.2;
+        _deltaEyePosZ -= 0.1;
     }
 }
 -(void)eyeViewGoingUp {
     if (_eyePosY + 0.5 < maxEyeViewY) {
-        _eyePosY += 0.5;
-        _deltaEyePosZ += 0.2;
+        _eyePosY += 0.2;
+        _deltaEyePosZ += 0.1;
     }
 }
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed {

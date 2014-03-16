@@ -14,6 +14,8 @@
 -(void)addPinchRecognizer;
 -(void)handleSwipeGesture:(UISwipeGestureRecognizer*)sender;
 -(void)pinched:(UIPinchGestureRecognizer*)gestureRecognizer;
+-(void)goingUp;
+-(void)goingDown;
 @end
 
 @implementation ViewController
@@ -35,6 +37,12 @@
     CGRect frame = _btnCw.frame;
     frame.origin.x = screenBounds.size.width - frame.size.width;
     [_btnCw setFrame:frame];
+    UIImage *plusImage = [UIImage imageNamed:@"plus.jpeg"];
+    [_plus setImage:plusImage];
+    [_plus setDelegate:self];
+    UIImage *minusImage = [UIImage imageNamed:@"minus.jpeg"];
+    [_minus setImage:minusImage];
+    [_minus setDelegate:self];
     [self startRenderLoop];
 }
 
@@ -145,12 +153,43 @@
         [_logicEngine updateScale:scale];
     //}
 }
+#pragma mark -
+#pragma mark stickyProtocol methods
+-(void)touchBegan:(UIView *)caller  {
+    if (caller == _plus) {
+        self.plusTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                     target:self
+                   selector:@selector(goingUp)
+                   userInfo:nil repeats:YES];
+    }
+    if (caller == _minus) {
+        self.minusTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                     target:self
+                   selector:@selector(goingDown)
+                   userInfo:nil
+                    repeats:YES];
+    }
+}
+-(void)touchEnded:(UIView *)caller {
+    if (caller == _plus) {
+        [_plusTimer invalidate];
+    }
+    if (caller == _minus) {
+        [_minusTimer invalidate];
+    }
+}
+
+
 -(void)dealloc {
     [_logicEngine release];
     [_program1 release];
     [_btnContinue release];
     [_btnStartOver release];
     [_btnCw release];
+    [_plus release];
+    [_minus release];
+    [_minusTimer release];
+    [_plusTimer release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -165,11 +204,11 @@
 - (IBAction)btnCcwClicked:(id)sender {
     [_logicEngine setDir:DIR_LEFT];
 }
-- (IBAction)btnDown:(id)sender {
+- (void)goingDown {
     [_logicEngine eyeViewGoingDown];
 }
 
-- (IBAction)btnUp:(id)sender {
+- (void)goingUp {
     [_logicEngine eyeViewGoingUp];
 }
 @end

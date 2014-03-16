@@ -49,7 +49,10 @@
 		91680FB51804ADF300B68789 /* TurnPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 91680FB41804ADF300B68789 /* TurnPosition.m */; };
 		9172EE2D17C5505C008F48AB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2C17C5505C008F48AB /* OpenGLES.framework */; };
 		9172EE2F17C550BB008F48AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9172EE2E17C550BB008F48AB /* QuartzCore.framework */; };
+		9191EFDD18D24ADE004934F1 /* minus.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9191EFDB18D24ADE004934F1 /* minus.jpeg */; };
+		9191EFDE18D24ADE004934F1 /* plus.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9191EFDC18D24ADE004934F1 /* plus.jpeg */; };
 		91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91978F4C1870BFFE00204461 /* snakeBP.obj */; };
+		91A66AD218D4F68D00333C98 /* StickyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A66AD118D4F68D00333C98 /* StickyButton.m */; };
 		91D5834C188FEF5500241332 /* SimpleVertex.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */; };
 		91D5834D188FEF5D00241332 /* SimpleFragment.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */; };
 		91D5835A188FFA4000241332 /* food.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 91D58356188FF87500241332 /* food.fsh */; };
@@ -142,7 +145,11 @@
 		91680FB41804ADF300B68789 /* TurnPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TurnPosition.m; path = Snake3D/TurnPosition.m; sourceTree = "<group>"; };
 		9172EE2C17C5505C008F48AB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		9172EE2E17C550BB008F48AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9191EFDB18D24ADE004934F1 /* minus.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = minus.jpeg; sourceTree = "<group>"; };
+		9191EFDC18D24ADE004934F1 /* plus.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = plus.jpeg; sourceTree = "<group>"; };
 		91978F4C1870BFFE00204461 /* snakeBP.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = snakeBP.obj; sourceTree = "<group>"; };
+		91A66AD018D4F68D00333C98 /* StickyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyButton.h; sourceTree = "<group>"; };
+		91A66AD118D4F68D00333C98 /* StickyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyButton.m; sourceTree = "<group>"; };
 		91D58356188FF87500241332 /* food.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = food.fsh; sourceTree = "<group>"; };
 		91D58357188FF87500241332 /* food.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = food.vsh; sourceTree = "<group>"; };
 		91E82086188F0E2F00A9EBD0 /* mushroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mushroom.png; sourceTree = "<group>"; };
@@ -200,6 +207,8 @@
 		20E9E55917CB82CE00C7D3C7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9191EFDB18D24ADE004934F1 /* minus.jpeg */,
+				9191EFDC18D24ADE004934F1 /* plus.jpeg */,
 				91E82086188F0E2F00A9EBD0 /* mushroom.png */,
 				E507DF9C1882D89400C5DA91 /* xneg.png */,
 				E507DF9D1882D89400C5DA91 /* xpos.png */,
@@ -264,6 +273,8 @@
 				20F74B6217C2604800407740 /* Supporting Files */,
 				20F8D94F17CE4E4F00CFF9A6 /* Consts.h */,
 				20F8D95017CE4E4F00CFF9A6 /* Consts.m */,
+				91A66AD018D4F68D00333C98 /* StickyButton.h */,
+				91A66AD118D4F68D00333C98 /* StickyButton.m */,
 			);
 			path = Snake3D;
 			sourceTree = "<group>";
@@ -403,12 +414,14 @@
 				91D5835B188FFA4000241332 /* food.vsh in Resources */,
 				E507DFAF1883FD2500C5DA91 /* skybox.fsh in Resources */,
 				E507DFB01883FD2500C5DA91 /* skybox.vsh in Resources */,
+				9191EFDE18D24ADE004934F1 /* plus.jpeg in Resources */,
 				91609097186F844B00DB7624 /* monkey.obj in Resources */,
 				91609095186F826F00DB7624 /* cube.obj in Resources */,
 				91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */,
 				91289D6D1800A5D10096F1E8 /* SbpVertex.vsh in Resources */,
 				91E82087188F0E2F00A9EBD0 /* mushroom.png in Resources */,
 				20F74B6617C2604800407740 /* InfoPlist.strings in Resources */,
+				9191EFDD18D24ADE004934F1 /* minus.jpeg in Resources */,
 				E507DFA71882D89400C5DA91 /* zpos.png in Resources */,
 				E582756018746EE50028093E /* floorGrass.png in Resources */,
 				E507DFA51882D89400C5DA91 /* ypos.png in Resources */,
@@ -466,6 +479,7 @@
 				20427BC917F98F8800D02B84 /* Snake.mm in Sources */,
 				201FF79017FB0053004F188C /* BodyPart.mm in Sources */,
 				E507DFAE1882DA0700C5DA91 /* skybox.vsh in Sources */,
+				91A66AD218D4F68D00333C98 /* StickyButton.m in Sources */,
 				206157B2180E75A500AACAC4 /* Food.mm in Sources */,
 				E549AC131833E0CB0023394A /* LoadObj.m in Sources */,
 				E549AC161833E0DF0023394A /* face.m in Sources */,
