@@ -15,11 +15,13 @@
 #import "Vectors.h"
 #import "Food.h"
 #import "SkyBox.h"
+#import "Fence.h"
 #include <stdlib.h>
 #import <math.h>
 
 @interface LogicEngine ()
 -(void)createFloor:(Mesh*)floorMesh;
+-(Mesh*)createFenceMesh;
 //-(ORIENTATION)getOrientation:(CC3Vector)pos;
 -(CC3Vector*)getOrientation:(CC3Vector)pos andVelocity:(CC3Vector)velocity;
 -(void)updateSceneOrientation:(NSTimeInterval)timeElapsed;
@@ -61,6 +63,19 @@
     [renderingEngineTemp initialize:viewport andProgram:_programs];
     [self setRenderingEngine:renderingEngineTemp];
     [renderingEngineTemp release];
+    
+    Mesh *fenceMesh = [self createFenceMesh];
+    Drawable *drwFence = [Drawable createDrawable:fenceMesh];
+    Material *fenceMaterial = [[Material alloc] init];
+    [fenceMaterial setupTexture:@"WoodFence.png"];
+    Fence *fenceNode = [[Fence alloc] initializeWithProgram:
+                        [_programs objectForKey:[NSNumber numberWithInt:PROG_FLOOR]]
+                                                andDrawable:drwFence andMesh:fenceMesh
+                                                andMaterial:fenceMaterial
+                                                andViewport:viewport];
+    [fenceMesh release];
+    [fenceMaterial release];
+    
     Mesh *floorMeshTemp = [[Mesh alloc] init];
     //sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
     //[self createFloor:floorMeshTemp];
@@ -78,10 +93,12 @@
     [_renderables addObject:sboxTemp];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
+    //[_renderables addObject:fenceNode];
     
     [floorObjTemp release];
     [snakeObjTemp release];
     [sboxTemp release];
+    [fenceNode release];
     
     [_renderingEngine initResources:_renderables];
     }
@@ -147,110 +164,6 @@
 }
 -(void)updateScale:(GLfloat)delta {
     //    [_plotterObj setScale_xy:delta];
-}
--(void)createFloor:(Mesh*)floorMesh {
-    CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * N * N);
-    float x,y,z;
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < N; j++) {
-            x = (i - N / 2) / (N / 2.0);
-            z = (j - N / 2) / (N / 2.0);
-            y = 0;
-            (floorGrid + i * N + j)->x = x;
-            (floorGrid + i * N + j)->y = y;
-            (floorGrid + i * N + j)->z = z;
-            //NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
-        }
-    }
-    //    GLushort *elements = malloc(sizeof(GLushort)* (N-1)*(N-1)*6);
-    //    GLushort index = 0;
-    //    for (int i=0; i< N-1; i++) {
-    //        for (int j=0; j<N-1; j++) {
-    //            elements[index+0] = (i+1)*N+j+0;
-    //            elements[index+1] = i*N+j+1;
-    //            elements[index+2] = i*N+j+0;
-    //            elements[index+3] = (i+1)*N+j+0;
-    //            elements[index+4] = (i+1)*N+j+1;
-    //            elements[index+5] = i*N+j+1;
-    //            index+=6;
-    //        }
-    //    }
-    //draw grid
-    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*(N)*(N-1)*2*2);
-    GLushort index = 0;
-    for (int c=0; c<N; c++) {
-        for (int r=0; r<N-1; r++) {
-            elements[index+0] = c*N + r;
-            elements[index+1] = c*N + r + 1;
-            index+=2;
-        }
-    }
-    for (int r=0; r<N;r++) {
-        for (int c=0; c<N-1; c++) {
-            elements[index+0] = c*N + r;
-            elements[index+1] = (c+1)*N + r;
-            index+=2;
-        }
-    }
-    
-    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:N*N];
-    
-    free(floorGrid);
-    free(elements);
-}
--(void)createSimpleFloor:(Mesh*)floorMesh {
-    CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * 4);
-  
-    GLfloat left = (0 - N / 2) / (N / 2.0);
-    GLfloat right = ((N-1) - N / 2) / (N / 2.0);
-    GLfloat far = (0 - N / 2) / (N / 2.0);
-    GLfloat near = ((N-1) - N / 2) / (N / 2.0);
-//    int left = -1;
-//    int right = 1;
-//    int far = -1;
-//    int near = 1;
-   
-    GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 4*2);   //(x,y) * 4 vertices
-    texCoord[0] =   0.0;
-    texCoord[1] =   0.0;
-    texCoord[2] =   1.0;
-    texCoord[3] =   0.0;
-    texCoord[4] =   1.0;
-    texCoord[5] =   1.0;
-    texCoord[6] =   0.0;
-    texCoord[7] =   1.0;
-    
-    floorGrid[0].x = left;
-    floorGrid[0].z = near;
-    floorGrid[0].y = 0;
-    
-    floorGrid[1].x = right;
-    floorGrid[1].z = near;
-    floorGrid[1].y = 0;
-    
-    floorGrid[2].x = right;
-    floorGrid[2].z = far;
-    floorGrid[2].y = 0;
-    
-    floorGrid[3].x = left;
-    floorGrid[3].z = far;
-    floorGrid[3].y = 0;
-    
-    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6);
-    elements[0] = 0;
-    elements[1] = 1;
-    elements[2] = 2;
-    elements[3] = 0;
-    elements[4] = 2;
-    elements[5] = 3;
-    
-//    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:6
-//    verticesNumberOfElemets:4];
-    
-    [floorMesh loadVertices:(GLfloat*)floorGrid normals:(GLfloat*)floorGrid color:(GLfloat*)floorGrid texture:texCoord indices:elements indicesNumberOfElemets:6 verticesNumberOfElemets:4];
-    
-    free(floorGrid);
-    free(elements);
 }
 //-(void)loadProgram:(GLProgram*)program {
 //    [self setProgram1:program];
@@ -479,6 +392,190 @@
 }
 #pragma mark -
 #pragma mark rendered objects
+-(Mesh*)createFenceMesh {
+    CC3Vector *fenceCoord = (CC3Vector*)malloc(sizeof(CC3Vector) * 4 * 4);   //(x,y,z) * 4 vertices * 4 fences
+    CC3Vector *fenceNormalCoord = (CC3Vector*)malloc(sizeof(CC3Vector) * 4 * 4);   //(x,y,z) * 4 vertices * 4 fences
+    
+    GLfloat left = (0 - N / 2) / (N / 2.0);
+    GLfloat right = ((N-1) - N / 2) / (N / 2.0);
+    GLfloat far = (0 - N / 2) / (N / 2.0);
+    GLfloat near = ((N-1) - N / 2) / (N / 2.0);
+    GLfloat height = 0.1;
+    //far fence
+    fenceCoord[0].x = left;
+    fenceCoord[0].z = far;
+    fenceCoord[0].y = 0;
+    fenceNormalCoord[0].x = 0;
+    fenceNormalCoord[0].y = 0;
+    fenceNormalCoord[0].z = -1;
+    
+    fenceCoord[1].x = right;
+    fenceCoord[1].z = far;
+    fenceCoord[1].y = 0;
+    fenceNormalCoord[1].x = 0;
+    fenceNormalCoord[1].y = 0;
+    fenceNormalCoord[1].z = -1;
+    
+    fenceCoord[2].x = left;
+    fenceCoord[2].z = far;
+    fenceCoord[2].y = height;
+    fenceNormalCoord[2].x = 0;
+    fenceNormalCoord[2].y = 0;
+    fenceNormalCoord[2].z = -1;
+
+    fenceCoord[3].x = left;
+    fenceCoord[3].z = far;
+    fenceCoord[3].y = height;
+    fenceNormalCoord[3].x = 0;
+    fenceNormalCoord[3].y = 0;
+    fenceNormalCoord[3].z = -1;
+    
+    fenceCoord[4].x = right;
+    fenceCoord[4].z = far;
+    fenceCoord[4].y = 0;
+    fenceNormalCoord[4].x = 0;
+    fenceNormalCoord[4].y = 0;
+    fenceNormalCoord[4].z = -1;
+    
+    fenceCoord[5].x = right;
+    fenceCoord[5].z = far;
+    fenceCoord[5].y = height;
+    fenceNormalCoord[5].x = 0;
+    fenceNormalCoord[5].y = 0;
+    fenceNormalCoord[5].z = -1;
+    
+    GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 2 * 4 * 4);   //(x,y) * 4 vertices * 4 fences
+    texCoord[0] = 0.0;
+    texCoord[1] = 0.0;
+    texCoord[2] = 1.0;
+    texCoord[3] = 0.0;
+    texCoord[4] = 0.0;
+    texCoord[5] = 1.0;
+    texCoord[6] = 1.0;
+    texCoord[7] = 1.0;
+    
+    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6*4);   //(elememt * 6 vertices * 4 fences
+    
+    elements[0] = 0;
+    elements[1] = 1;
+    elements[2] = 2;
+    elements[3] = 2;
+    elements[4] = 1;
+    elements[5] = 3;
+    
+    Mesh *fenceMesh = [[Mesh alloc] init];
+    [fenceMesh loadVertices:(GLfloat*)fenceCoord normals:(GLfloat*)fenceNormalCoord color:(GLfloat*)texCoord texture:texCoord indices:elements indicesNumberOfElemets:6*4 verticesNumberOfElemets:4*4];
+    
+    free(fenceCoord);
+    free(elements);
+    free(fenceNormalCoord);
+    
+    return fenceMesh;
+}
+-(void)createFloor:(Mesh*)floorMesh {
+    CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * N * N);
+    float x,y,z;
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < N; j++) {
+            x = (i - N / 2) / (N / 2.0);
+            z = (j - N / 2) / (N / 2.0);
+            y = 0;
+            (floorGrid + i * N + j)->x = x;
+            (floorGrid + i * N + j)->y = y;
+            (floorGrid + i * N + j)->z = z;
+            //NSLog(@"vertices: x=%f,y=%f,z=%f",x,y,z);
+        }
+    }
+    //    GLushort *elements = malloc(sizeof(GLushort)* (N-1)*(N-1)*6);
+    //    GLushort index = 0;
+    //    for (int i=0; i< N-1; i++) {
+    //        for (int j=0; j<N-1; j++) {
+    //            elements[index+0] = (i+1)*N+j+0;
+    //            elements[index+1] = i*N+j+1;
+    //            elements[index+2] = i*N+j+0;
+    //            elements[index+3] = (i+1)*N+j+0;
+    //            elements[index+4] = (i+1)*N+j+1;
+    //            elements[index+5] = i*N+j+1;
+    //            index+=6;
+    //        }
+    //    }
+    //draw grid
+    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*(N)*(N-1)*2*2);
+    GLushort index = 0;
+    for (int c=0; c<N; c++) {
+        for (int r=0; r<N-1; r++) {
+            elements[index+0] = c*N + r;
+            elements[index+1] = c*N + r + 1;
+            index+=2;
+        }
+    }
+    for (int r=0; r<N;r++) {
+        for (int c=0; c<N-1; c++) {
+            elements[index+0] = c*N + r;
+            elements[index+1] = (c+1)*N + r;
+            index+=2;
+        }
+    }
+    
+    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:N*(N-1)*4 verticesNumberOfElemets:N*N];
+    
+    free(floorGrid);
+    free(elements);
+}
+-(void)createSimpleFloor:(Mesh*)floorMesh {
+    CC3Vector *floorGrid = (CC3Vector*)malloc(sizeof(CC3Vector) * 4);
+    
+    GLfloat left = (0 - N / 2) / (N / 2.0);
+    GLfloat right = ((N-1) - N / 2) / (N / 2.0);
+    GLfloat far = (0 - N / 2) / (N / 2.0);
+    GLfloat near = ((N-1) - N / 2) / (N / 2.0);
+    //    int left = -1;
+    //    int right = 1;
+    //    int far = -1;
+    //    int near = 1;
+    
+    GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 4*2);   //(x,y) * 4 vertices
+    texCoord[0] =   0.0;
+    texCoord[1] =   0.0;
+    texCoord[2] =   1.0;
+    texCoord[3] =   0.0;
+    texCoord[4] =   1.0;
+    texCoord[5] =   1.0;
+    texCoord[6] =   0.0;
+    texCoord[7] =   1.0;
+    
+    floorGrid[0].x = left;
+    floorGrid[0].z = near;
+    floorGrid[0].y = 0;
+    
+    floorGrid[1].x = right;
+    floorGrid[1].z = near;
+    floorGrid[1].y = 0;
+    
+    floorGrid[2].x = right;
+    floorGrid[2].z = far;
+    floorGrid[2].y = 0;
+    
+    floorGrid[3].x = left;
+    floorGrid[3].z = far;
+    floorGrid[3].y = 0;
+    
+    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6);
+    elements[0] = 0;
+    elements[1] = 1;
+    elements[2] = 2;
+    elements[3] = 0;
+    elements[4] = 2;
+    elements[5] = 3;
+    
+    //    [floorMesh loadVertices:(GLfloat*)floorGrid indices:elements indicesNumberOfElemets:6
+    //    verticesNumberOfElemets:4];
+    
+    [floorMesh loadVertices:(GLfloat*)floorGrid normals:(GLfloat*)floorGrid color:(GLfloat*)floorGrid texture:texCoord indices:elements indicesNumberOfElemets:6 verticesNumberOfElemets:4];
+    
+    free(floorGrid);
+    free(elements);
+}
 -(Food*)createFood {
     Food *foodObj = [[Food alloc] init];
     Mesh *foodMeshTemp = [[Mesh alloc] init];

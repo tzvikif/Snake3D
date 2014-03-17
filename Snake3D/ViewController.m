@@ -157,13 +157,13 @@
 #pragma mark stickyProtocol methods
 -(void)touchBegan:(UIView *)caller  {
     if (caller == _plus) {
-        self.plusTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+        self.plusTimer = [NSTimer scheduledTimerWithTimeInterval:0.05
                      target:self
                    selector:@selector(goingUp)
                    userInfo:nil repeats:YES];
     }
     if (caller == _minus) {
-        self.minusTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+        self.minusTimer = [NSTimer scheduledTimerWithTimeInterval:0.05
                      target:self
                    selector:@selector(goingDown)
                    userInfo:nil
