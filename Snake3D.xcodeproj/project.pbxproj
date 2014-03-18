@@ -44,7 +44,7 @@
 		91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 91289D681800A5920096F1E8 /* SbpFragment.fsh */; };
 		91289D6D1800A5D10096F1E8 /* SbpVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 91289D691800A5920096F1E8 /* SbpVertex.vsh */; };
 		913D96C317EC6B87005AAF09 /* Floor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 913D96C217EC6B87005AAF09 /* Floor.mm */; };
-		9156140C18D6EEB300A46685 /* Fence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9156140B18D6EEB300A46685 /* Fence.m */; };
+		9156140C18D6EEB300A46685 /* Fence.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9156140B18D6EEB300A46685 /* Fence.mm */; };
 		9156140E18D7237900A46685 /* WoodFence.png in Resources */ = {isa = PBXBuildFile; fileRef = 9156140D18D7237900A46685 /* WoodFence.png */; };
 		91609095186F826F00DB7624 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91609094186F826F00DB7624 /* cube.obj */; };
 		91609097186F844B00DB7624 /* monkey.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91609096186F844B00DB7624 /* monkey.obj */; };
@@ -142,7 +142,7 @@
 		913D96C117EC6B87005AAF09 /* Floor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Floor.h; path = Snake3D/Floor.h; sourceTree = "<group>"; };
 		913D96C217EC6B87005AAF09 /* Floor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Floor.mm; path = Snake3D/Floor.mm; sourceTree = "<group>"; };
 		9156140A18D6EEB300A46685 /* Fence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fence.h; path = Snake3D/Fence.h; sourceTree = "<group>"; };
-		9156140B18D6EEB300A46685 /* Fence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fence.m; path = Snake3D/Fence.m; sourceTree = "<group>"; };
+		9156140B18D6EEB300A46685 /* Fence.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Fence.mm; path = Snake3D/Fence.mm; sourceTree = "<group>"; };
 		9156140D18D7237900A46685 /* WoodFence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WoodFence.png; sourceTree = "<group>"; };
 		91609094186F826F00DB7624 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
 		91609096186F844B00DB7624 /* monkey.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey.obj; sourceTree = "<group>"; };
@@ -345,7 +345,7 @@
 				206157B0180E75A500AACAC4 /* Food.h */,
 				206157B1180E75A500AACAC4 /* Food.mm */,
 				9156140A18D6EEB300A46685 /* Fence.h */,
-				9156140B18D6EEB300A46685 /* Fence.m */,
+				9156140B18D6EEB300A46685 /* Fence.mm */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -478,7 +478,7 @@
 				20FF7DC117C49A1F00A58B95 /* CC3GLMatrix.mm in Sources */,
 				20FF7DC217C49A1F00A58B95 /* CC3Kazmath.mm in Sources */,
 				20FF7DC317C49A1F00A58B95 /* CC3Math.mm in Sources */,
-				9156140C18D6EEB300A46685 /* Fence.m in Sources */,
+				9156140C18D6EEB300A46685 /* Fence.mm in Sources */,
 				20FF7DC717C49F9100A58B95 /* Drawable.m in Sources */,
 				20FF7DCD17C4E57100A58B95 /* Material.m in Sources */,
 				91289D6B1800A5920096F1E8 /* SbpVertex.vsh in Sources */,

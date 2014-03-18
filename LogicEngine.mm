@@ -69,7 +69,7 @@
     Material *fenceMaterial = [[Material alloc] init];
     [fenceMaterial setupTexture:@"WoodFence.png"];
     Fence *fenceNode = [[Fence alloc] initializeWithProgram:
-                        [_programs objectForKey:[NSNumber numberWithInt:PROG_FLOOR]]
+                        [_programs objectForKey:[NSNumber numberWithInt:PROG_FOOD]]
                                                 andDrawable:drwFence andMesh:fenceMesh
                                                 andMaterial:fenceMaterial
                                                 andViewport:viewport];
@@ -78,7 +78,7 @@
     
     Mesh *floorMeshTemp = [[Mesh alloc] init];
     //sizeof(GLushort) verticesNumberOfElemets:sizeof(cube_vertices)/sizeof(GLfloat)];
-    //[self createFloor:floorMeshTemp];
+    //[self createFloor:floorMeshTemp]; n
     [self createSimpleFloor:floorMeshTemp];
     
     Drawable *DrwFloor =  [Drawable createDrawable:floorMeshTemp];
@@ -93,7 +93,7 @@
     [_renderables addObject:sboxTemp];
     [_renderables addObject:snakeObjTemp];
     [_renderables addObject:floorObjTemp];
-    //[_renderables addObject:fenceNode];
+    [_renderables addObject:fenceNode];
     
     [floorObjTemp release];
     [snakeObjTemp release];
@@ -423,45 +423,77 @@
     fenceNormalCoord[2].y = 0;
     fenceNormalCoord[2].z = -1;
 
-    fenceCoord[3].x = left;
+    fenceCoord[3].x = right;
     fenceCoord[3].z = far;
     fenceCoord[3].y = height;
     fenceNormalCoord[3].x = 0;
     fenceNormalCoord[3].y = 0;
     fenceNormalCoord[3].z = -1;
-    
-    fenceCoord[4].x = right;
-    fenceCoord[4].z = far;
+    //near fence
+    fenceCoord[4].x = left;
+    fenceCoord[4].z = near;
     fenceCoord[4].y = 0;
     fenceNormalCoord[4].x = 0;
     fenceNormalCoord[4].y = 0;
-    fenceNormalCoord[4].z = -1;
+    fenceNormalCoord[4].z = 1;
     
     fenceCoord[5].x = right;
-    fenceCoord[5].z = far;
-    fenceCoord[5].y = height;
+    fenceCoord[5].z = near;
+    fenceCoord[5].y = 0;
     fenceNormalCoord[5].x = 0;
     fenceNormalCoord[5].y = 0;
-    fenceNormalCoord[5].z = -1;
+    fenceNormalCoord[5].z = 1;
+    
+    fenceCoord[6].x = left;
+    fenceCoord[6].z = near;
+    fenceCoord[6].y = height;
+    fenceNormalCoord[6].x = 0;
+    fenceNormalCoord[6].y = 0;
+    fenceNormalCoord[6].z = 1;
+    
+    fenceCoord[7].x = right;
+    fenceCoord[7].z = near;
+    fenceCoord[7].y = height;
+    fenceNormalCoord[7].x = 0;
+    fenceNormalCoord[7].y = 0;
+    fenceNormalCoord[7].z = 1;
+
+    
     
     GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 2 * 4 * 4);   //(x,y) * 4 vertices * 4 fences
     texCoord[0] = 0.0;
     texCoord[1] = 0.0;
-    texCoord[2] = 1.0;
+    texCoord[2] = 4.0;
     texCoord[3] = 0.0;
     texCoord[4] = 0.0;
     texCoord[5] = 1.0;
-    texCoord[6] = 1.0;
+    texCoord[6] = 4.0;
     texCoord[7] = 1.0;
     
-    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6*4);   //(elememt * 6 vertices * 4 fences
+    texCoord[8] = 0.0;
+    texCoord[9] = 0.0;
+    texCoord[10] = 4.0;
+    texCoord[11] = 0.0;
+    texCoord[12] = 0.0;
+    texCoord[13] = 1.0;
+    texCoord[14] = 4.0;
+    texCoord[15] = 1.0;
     
+    GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6*4);   //(elememt * 6 vertices * 4 fences
+    //far
     elements[0] = 0;
     elements[1] = 1;
     elements[2] = 2;
     elements[3] = 2;
     elements[4] = 1;
     elements[5] = 3;
+    //near
+    elements[6] = 4;
+    elements[6] = 5;
+    elements[8] = 6;
+    elements[9] = 6;
+    elements[10] = 5;
+    elements[11] = 7;
     
     Mesh *fenceMesh = [[Mesh alloc] init];
     [fenceMesh loadVertices:(GLfloat*)fenceCoord normals:(GLfloat*)fenceNormalCoord color:(GLfloat*)texCoord texture:texCoord indices:elements indicesNumberOfElemets:6*4 verticesNumberOfElemets:4*4];
