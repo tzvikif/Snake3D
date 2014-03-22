@@ -393,8 +393,9 @@
 #pragma mark -
 #pragma mark rendered objects
 -(Mesh*)createFenceMesh {
-    CC3Vector *fenceCoord = (CC3Vector*)malloc(sizeof(CC3Vector) * 4 * 4);   //(x,y,z) * 4 vertices * 4 fences
+    CC3Vector *fencePos = (CC3Vector*)malloc(sizeof(CC3Vector) * 4 * 4);   //(x,y,z) * 4 vertices * 4 fences
     CC3Vector *fenceNormalCoord = (CC3Vector*)malloc(sizeof(CC3Vector) * 4 * 4);   //(x,y,z) * 4 vertices * 4 fences
+    CC3Vector *fenceColor = (CC3Vector*)malloc(sizeof(CC3Vector) * 4 * 4);   //(r,g,b) * 4 vertices * 4 fences
     
     GLfloat left = (0 - N / 2) / (N / 2.0);
     GLfloat right = ((N-1) - N / 2) / (N / 2.0);
@@ -402,61 +403,136 @@
     GLfloat near = ((N-1) - N / 2) / (N / 2.0);
     GLfloat height = 0.1;
     //far fence
-    fenceCoord[0].x = left;
-    fenceCoord[0].z = far;
-    fenceCoord[0].y = 0;
+    fencePos[0].x = left;
+    fencePos[0].z = far;
+    fencePos[0].y = 0;
     fenceNormalCoord[0].x = 0;
     fenceNormalCoord[0].y = 0;
     fenceNormalCoord[0].z = -1;
+    fenceColor[0].x = 1.0;
+    fenceColor[0].y = 0.0;
+    fenceColor[0].z = 0.0;
     
-    fenceCoord[1].x = right;
-    fenceCoord[1].z = far;
-    fenceCoord[1].y = 0;
+    fencePos[1].x = right;
+    fencePos[1].z = far;
+    fencePos[1].y = 0;
     fenceNormalCoord[1].x = 0;
     fenceNormalCoord[1].y = 0;
     fenceNormalCoord[1].z = -1;
+    fenceColor[1].x = 0.0;
+    fenceColor[1].y = 1.0;
+    fenceColor[1].z = 0.0;
     
-    fenceCoord[2].x = left;
-    fenceCoord[2].z = far;
-    fenceCoord[2].y = height;
+    fencePos[2].x = left;
+    fencePos[2].z = far;
+    fencePos[2].y = height;
     fenceNormalCoord[2].x = 0;
     fenceNormalCoord[2].y = 0;
     fenceNormalCoord[2].z = -1;
+    fenceColor[2].x = 0.0;
+    fenceColor[2].y = 0.0;
+    fenceColor[2].z = 1.0;
 
-    fenceCoord[3].x = right;
-    fenceCoord[3].z = far;
-    fenceCoord[3].y = height;
+    fencePos[3].x = right;
+    fencePos[3].z = far;
+    fencePos[3].y = height;
     fenceNormalCoord[3].x = 0;
     fenceNormalCoord[3].y = 0;
     fenceNormalCoord[3].z = -1;
     //near fence
-    fenceCoord[4].x = left;
-    fenceCoord[4].z = near;
-    fenceCoord[4].y = 0;
+    fencePos[4].x = left;
+    fencePos[4].z = near;
+    fencePos[4].y = 0;
     fenceNormalCoord[4].x = 0;
     fenceNormalCoord[4].y = 0;
     fenceNormalCoord[4].z = 1;
+    fenceColor[4].x = 1.0;
+    fenceColor[4].y = 0.0;
+    fenceColor[4].z = 0.0;
     
-    fenceCoord[5].x = right;
-    fenceCoord[5].z = near;
-    fenceCoord[5].y = 0;
+    fencePos[5].x = right;
+    fencePos[5].z = near;
+    fencePos[5].y = 0;
     fenceNormalCoord[5].x = 0;
     fenceNormalCoord[5].y = 0;
     fenceNormalCoord[5].z = 1;
+    fenceColor[5].x = 0.0;
+    fenceColor[5].y = 1.0;
+    fenceColor[5].z = 0.0;
     
-    fenceCoord[6].x = left;
-    fenceCoord[6].z = near;
-    fenceCoord[6].y = height;
+    fencePos[6].x = left;
+    fencePos[6].z = near;
+    fencePos[6].y = height;
     fenceNormalCoord[6].x = 0;
     fenceNormalCoord[6].y = 0;
     fenceNormalCoord[6].z = 1;
+    fenceColor[6].x = 0.0;
+    fenceColor[6].y = 0.0;
+    fenceColor[6].z = 1.0;
     
-    fenceCoord[7].x = right;
-    fenceCoord[7].z = near;
-    fenceCoord[7].y = height;
+    fencePos[7].x = right;
+    fencePos[7].z = near;
+    fencePos[7].y = height;
     fenceNormalCoord[7].x = 0;
     fenceNormalCoord[7].y = 0;
     fenceNormalCoord[7].z = 1;
+
+    //left fence
+    fencePos[8].x = left;
+    fencePos[8].z = near;
+    fencePos[8].y = 0;
+    fenceNormalCoord[8].x = 1;
+    fenceNormalCoord[8].y = 0;
+    fenceNormalCoord[8].z = 0;
+    
+    fencePos[9].x = left;
+    fencePos[9].z = far;
+    fencePos[9].y = 0;
+    fenceNormalCoord[9].x = 1;
+    fenceNormalCoord[9].y = 0;
+    fenceNormalCoord[9].z = 0;
+    
+    fencePos[10].x = left;
+    fencePos[10].z = near;
+    fencePos[10].y = height;
+    fenceNormalCoord[10].x = 1;
+    fenceNormalCoord[10].y = 0;
+    fenceNormalCoord[10].z = 0;
+    
+    fencePos[11].x = left;
+    fencePos[11].z = far;
+    fencePos[11].y = height;
+    fenceNormalCoord[11].x = 1;
+    fenceNormalCoord[11].y = 0;
+    fenceNormalCoord[11].z = 0;
+    //right fence
+    fencePos[12].x = right;
+    fencePos[12].z = near;
+    fencePos[12].y = 0;
+    fenceNormalCoord[12].x = 1;
+    fenceNormalCoord[12].y = 0;
+    fenceNormalCoord[12].z = 0;
+    
+    fencePos[13].x = right;
+    fencePos[13].z = far;
+    fencePos[13].y = 0;
+    fenceNormalCoord[13].x = 1;
+    fenceNormalCoord[13].y = 0;
+    fenceNormalCoord[13].z = 0;
+    
+    fencePos[14].x = right;
+    fencePos[14].z = near;
+    fencePos[14].y = height;
+    fenceNormalCoord[14].x = 1;
+    fenceNormalCoord[14].y = 0;
+    fenceNormalCoord[14].z = 0;
+    
+    fencePos[15].x = right;
+    fencePos[15].z = far;
+    fencePos[15].y = height;
+    fenceNormalCoord[15].x = 1;
+    fenceNormalCoord[15].y = 0;
+    fenceNormalCoord[15].z = 0;
 
     
     
@@ -479,6 +555,24 @@
     texCoord[14] = 4.0;
     texCoord[15] = 1.0;
     
+    texCoord[16] = 0.0;
+    texCoord[17] = 0.0;
+    texCoord[18] = 4.0;
+    texCoord[19] = 0.0;
+    texCoord[20] = 0.0;
+    texCoord[21] = 1.0;
+    texCoord[22] = 4.0;
+    texCoord[23] = 1.0;
+    
+    texCoord[24] = 0.0;
+    texCoord[25] = 0.0;
+    texCoord[26] = 4.0;
+    texCoord[27] = 0.0;
+    texCoord[28] = 0.0;
+    texCoord[29] = 1.0;
+    texCoord[30] = 4.0;
+    texCoord[31] = 1.0;
+    
     GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6*4);   //(elememt * 6 vertices * 4 fences
     //far
     elements[0] = 0;
@@ -489,18 +583,35 @@
     elements[5] = 3;
     //near
     elements[6] = 4;
-    elements[6] = 5;
+    elements[7] = 5;
     elements[8] = 6;
     elements[9] = 6;
     elements[10] = 5;
     elements[11] = 7;
+    //left
+    elements[12] = 8;
+    elements[13] = 9;
+    elements[14] = 10;
+    elements[15] = 10;
+    elements[16] = 9;
+    elements[17] = 11;
+    //right
+    elements[18] = 12;
+    elements[19] = 13;
+    elements[20] = 14;
+    elements[21] = 14;
+    elements[22] = 13;
+    elements[23] = 15;
+
+    
     
     Mesh *fenceMesh = [[Mesh alloc] init];
-    [fenceMesh loadVertices:(GLfloat*)fenceCoord normals:(GLfloat*)fenceNormalCoord color:(GLfloat*)texCoord texture:texCoord indices:elements indicesNumberOfElemets:6*4 verticesNumberOfElemets:4*4];
+    [fenceMesh loadVertices:(GLfloat*)fencePos normals:(GLfloat*)fenceNormalCoord color:(GLfloat*)fenceColor texture:texCoord indices:elements indicesNumberOfElemets:6*4 verticesNumberOfElemets:4*4];
     
-    free(fenceCoord);
+    free(fencePos);
     free(elements);
     free(fenceNormalCoord);
+    free(fenceColor);
     
     return fenceMesh;
 }

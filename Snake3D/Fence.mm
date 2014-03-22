@@ -12,7 +12,7 @@
 
 static NSString *mvp_name = @"mvp";
 static NSString *pos_name = @"pos";
-//static NSString *foodColor_name = @"color";
+static NSString *color_name = @"color";
 static NSString *textureCoord_name = @"textureCoord";
 static NSString *sample_name = @"sampler";
 
@@ -22,7 +22,7 @@ static NSString *sample_name = @"sampler";
     //attributes
     [self.program addAttribute:pos_name];
     [self.program addAttribute:textureCoord_name];
-    
+    [self.program addAttribute:color_name];
     //uniforms
     [self.program addUniform:mvp_name];
     [self.program addUniform:sample_name];
@@ -40,7 +40,7 @@ static NSString *sample_name = @"sampler";
     
     self.modelMatrix = [CC3GLMatrix identity];
     //CC3Vector translateVector = self.position;
-    [self.modelMatrix scaleBy:CC3VectorMake(N/2.0, 32, N/2.0)];
+    [self.modelMatrix scaleBy:CC3VectorMake(N/2.0, 16, N/2.0)];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
     //    NSLog(@"projection %@",[projectionMat description]);
@@ -62,6 +62,15 @@ static NSString *sample_name = @"sampler";
                           (GLvoid*)0                  // offset of first element
                           );
     glVertexAttribPointer(
+                          [self.program attributeLocation:color_name], // attribute
+                          3,                  // number of elements per vertex, here (x,y)
+                          GL_FLOAT,           // the type of each element
+                          GL_FALSE,           // take our values as-is
+                          stride,                  // no extra data between each position
+                          (GLvoid*)(2*sizeof(CC3Vector))                  // offset of first element
+                          );
+    
+    glVertexAttribPointer(
                           [self.program attributeLocation:textureCoord_name], // attribute
                           2,                  // number of elements per vertex, here (x,y)
                           GL_FLOAT,           // the type of each element
@@ -74,7 +83,7 @@ static NSString *sample_name = @"sampler";
     //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.drawable.iboIndexBuffer);
     glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
-    glDrawElements(GL_TRIANGLES, /*size/sizeof(GLushort)*/6, GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
+    glDrawElements(GL_TRIANGLES, /*size/sizeof(GLushort)*/24, GL_UNSIGNED_SHORT, (GLvoid*)(0*sizeof(GLushort)));
 }
 
 
