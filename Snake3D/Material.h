@@ -16,6 +16,8 @@
 @property(assign,nonatomic) CC3Vector *specular;
 @property(assign,nonatomic) CC3Vector *ambient;
 @property(assign,nonatomic) GLfloat shininess;
+@property(assign,nonatomic) GLint textureWidth;
+@property(assign,nonatomic) GLint textureHeight;
 
 - (void)setupTexture:(NSString *)fileName;
 - (void)setupTexture:(NSString *)fileName withParams:(NSDictionary*)params;

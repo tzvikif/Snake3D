@@ -22,7 +22,8 @@
     // 2
     size_t width = CGImageGetWidth(spriteImage);
     size_t height = CGImageGetHeight(spriteImage);
-    
+    self.textureHeight = height;
+    self.textureWidth = width;
     GLubyte * spriteData = (GLubyte *) calloc(width*height*4, sizeof(GLubyte));
     
     CGContextRef spriteContext = CGBitmapContextCreate(spriteData, width, height, 8, width*4,

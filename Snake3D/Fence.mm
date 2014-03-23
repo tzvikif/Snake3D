@@ -26,6 +26,15 @@ static NSString *sample_name = @"sampler";
     //uniforms
     [self.program addUniform:mvp_name];
     [self.program addUniform:sample_name];
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    glTexStorage2DEXT(GL_TEXTURE_2D,8,GL_RGBA8_OES,self.material.textureWidth,self.material.textureHeight);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, self.material.textureWidth, self.material.textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, <#const GLvoid *pixels#>)
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
 }
 
 -(void)Render {
@@ -33,6 +42,8 @@ static NSString *sample_name = @"sampler";
     glEnable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    glTexStorage2DEXT(GL_TEXTURE_2D,8,GL_RGBA8_OES,self.material.textureWidth,self.material.textureHeight);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, self.material.textureWidth, self.material.textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, <#const GLvoid *pixels#>)
     if (!_mipmap) {
         glGenerateMipmap(GL_TEXTURE_2D);
         _mipmap = YES;
