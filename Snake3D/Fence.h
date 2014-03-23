@@ -9,5 +9,5 @@
 #import "Node.h"
 
 @interface Fence : Node
-
+@property(nonatomic,assign) BOOL mipmap;
 @end
