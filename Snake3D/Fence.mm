@@ -26,6 +26,9 @@ static NSString *sample_name = @"sampler";
     //uniforms
     [self.program addUniform:mvp_name];
     [self.program addUniform:sample_name];
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 -(void)Render {
@@ -33,12 +36,10 @@ static NSString *sample_name = @"sampler";
     glEnable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
-    if (!_mipmap) {
-        glGenerateMipmap(GL_TEXTURE_2D);
-        _mipmap = YES;
-    }
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glUniform1i([self.program uniformLocation:sample_name], /*GL_TEXTURE*/0);
     GLsizei window_height = self.viewport.size.height;
     GLsizei window_width = self.viewport.size.width;

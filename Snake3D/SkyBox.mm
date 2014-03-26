@@ -26,7 +26,7 @@ static NSString *skyboxPos_name = @"pos";
     [self.program addUniform:skybox_sample_name];
     [self.program addAttribute:skyboxPos_name];
     [self.program addAttribute:skyBoxTextureCoord_name];
-    [self setScaleFactor:CC3VectorMake(N/2.0, N/2.0, N/2.0)];
+    [self setScaleFactor:CC3VectorMake(N, N, N)];
     //[self.program addAttribute:skyboxColor_name];
 }
 -(void)Render {
@@ -52,7 +52,7 @@ static NSString *skyboxPos_name = @"pos";
     CC3Vector translateVector = CC3VectorMake(self.viewMatrix.glMatrix[12], self.viewMatrix.glMatrix[13], self.viewMatrix.glMatrix[14]);
     [self.modelMatrix translateBy:translateVector];
     //[self.modelMatrix multiplyByMatrix:self.rotatetionMat];
-    [self.modelMatrix scaleBy:CC3VectorScale(self.scaleFactor, CC3VectorMake(4, 3, 4))];
+    [self.modelMatrix scaleBy:CC3VectorScale(self.scaleFactor, CC3VectorMake(2, 2, 2))];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
     //    NSLog(@"projection %@",[projectionMat description]);

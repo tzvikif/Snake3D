@@ -55,6 +55,7 @@
 		9191EFDE18D24ADE004934F1 /* plus.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9191EFDC18D24ADE004934F1 /* plus.jpeg */; };
 		91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91978F4C1870BFFE00204461 /* snakeBP.obj */; };
 		91A66AD218D4F68D00333C98 /* StickyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A66AD118D4F68D00333C98 /* StickyButton.m */; };
+		91BA9B0A18E3174300CE28A9 /* Grass2.png in Resources */ = {isa = PBXBuildFile; fileRef = 91BA9B0918E3174300CE28A9 /* Grass2.png */; };
 		91D5834C188FEF5500241332 /* SimpleVertex.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 20B3A0F517C5EBFC001957B5 /* SimpleVertex.vsh */; };
 		91D5834D188FEF5D00241332 /* SimpleFragment.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 20B3A0F417C5EBFC001957B5 /* SimpleFragment.fsh */; };
 		91D5835A188FFA4000241332 /* food.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 91D58356188FF87500241332 /* food.fsh */; };
@@ -155,6 +156,7 @@
 		91978F4C1870BFFE00204461 /* snakeBP.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = snakeBP.obj; sourceTree = "<group>"; };
 		91A66AD018D4F68D00333C98 /* StickyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyButton.h; sourceTree = "<group>"; };
 		91A66AD118D4F68D00333C98 /* StickyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyButton.m; sourceTree = "<group>"; };
+		91BA9B0918E3174300CE28A9 /* Grass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grass2.png; sourceTree = "<group>"; };
 		91D58356188FF87500241332 /* food.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = food.fsh; sourceTree = "<group>"; };
 		91D58357188FF87500241332 /* food.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = food.vsh; sourceTree = "<group>"; };
 		91E82086188F0E2F00A9EBD0 /* mushroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mushroom.png; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		20E9E55917CB82CE00C7D3C7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				91BA9B0918E3174300CE28A9 /* Grass2.png */,
 				917AA04218DB8F440090B23F /* WoodFence.png */,
 				9191EFDB18D24ADE004934F1 /* minus.jpeg */,
 				9191EFDC18D24ADE004934F1 /* plus.jpeg */,
@@ -448,6 +451,7 @@
 				20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */,
 				91E8208A188F0E4700A9EBD0 /* mushroom.mtl in Resources */,
 				20E9E55B17CB82E300C7D3C7 /* tile_floor.png in Resources */,
+				91BA9B0A18E3174300CE28A9 /* Grass2.png in Resources */,
 				20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */,
 				91E8208B188F0E4700A9EBD0 /* mushroom.obj in Resources */,
 			);

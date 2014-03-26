@@ -83,7 +83,7 @@
     
     Drawable *DrwFloor =  [Drawable createDrawable:floorMeshTemp];
     Material *floorMaterialTemp = [[Material alloc] init];
-    [floorMaterialTemp setupTexture:@"floorGrass.png"];
+    [floorMaterialTemp setupTexture:@"Grass2.png"];
     Floor *floorObjTemp = [[Floor alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_FLOOR]] andDrawable:DrwFloor andMesh:floorMeshTemp andMaterial:floorMaterialTemp andViewport:viewport];
     [floorMeshTemp release];
     [floorMaterialTemp release];
@@ -244,7 +244,7 @@
    //NSLog(@"pos at:(%f,%f,%f)",pos.x,pos.y,pos.z);
     //CC3Vector vn = CC3VectorNormalize(velocity);
     CC3Vector eyeAt = CC3VectorMake(pos.x, _eyePosY,pos.z+12.0+_deltaEyePosZ);
-    CC3Vector lookAt =  CC3VectorMake(pos.x, 4,pos.z-5.0);
+    CC3Vector lookAt =  CC3VectorMake(pos.x, 5,pos.z-8.0-_deltaEyePosZ);
     static CC3Vector cameraSpace[3];
     float angle = [snk getRotationAngle];
 //    if ([snk isRotating]) {
@@ -537,40 +537,41 @@
     
     
     GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 2 * 4 * 4);   //(x,y) * 4 vertices * 4 fences
+    GLfloat wrap = 16.0;
     texCoord[0] = 0.0;
     texCoord[1] = 0.0;
-    texCoord[2] = 4.0;
+    texCoord[2] = wrap;
     texCoord[3] = 0.0;
     texCoord[4] = 0.0;
     texCoord[5] = 1.0;
-    texCoord[6] = 4.0;
+    texCoord[6] = wrap;
     texCoord[7] = 1.0;
     
     texCoord[8] = 0.0;
     texCoord[9] = 0.0;
-    texCoord[10] = 4.0;
+    texCoord[10] = wrap;
     texCoord[11] = 0.0;
     texCoord[12] = 0.0;
     texCoord[13] = 1.0;
-    texCoord[14] = 4.0;
+    texCoord[14] = wrap;
     texCoord[15] = 1.0;
     
     texCoord[16] = 0.0;
     texCoord[17] = 0.0;
-    texCoord[18] = 4.0;
+    texCoord[18] = wrap;
     texCoord[19] = 0.0;
     texCoord[20] = 0.0;
     texCoord[21] = 1.0;
-    texCoord[22] = 4.0;
+    texCoord[22] = wrap;
     texCoord[23] = 1.0;
     
     texCoord[24] = 0.0;
     texCoord[25] = 0.0;
-    texCoord[26] = 4.0;
+    texCoord[26] = wrap;
     texCoord[27] = 0.0;
     texCoord[28] = 0.0;
     texCoord[29] = 1.0;
-    texCoord[30] = 4.0;
+    texCoord[30] = wrap;
     texCoord[31] = 1.0;
     
     GLushort *elements = (GLushort*)malloc(sizeof(GLushort)*6*4);   //(elememt * 6 vertices * 4 fences

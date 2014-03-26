@@ -21,6 +21,10 @@ NSString *mvp_name = @"mvp";
     [self.program addAttribute:texCoord_name];
     [self.program addUniform:mvp_name];
     [self.program addUniform:sampler_name];
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 -(void)Render {
@@ -29,7 +33,13 @@ NSString *mvp_name = @"mvp";
     glActiveTexture(GL_TEXTURE0);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
     glUniform1i([self.program uniformLocation:sampler_name], /*GL_TEXTURE*/0);
     //glClearColor(0.4, 0.9, 0.9, 1.0);
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
