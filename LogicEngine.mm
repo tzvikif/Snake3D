@@ -537,7 +537,7 @@
     
     
     GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 2 * 4 * 4);   //(x,y) * 4 vertices * 4 fences
-    GLfloat wrap = 16.0;
+    GLfloat wrap = 8.0;
     texCoord[0] = 0.0;
     texCoord[1] = 0.0;
     texCoord[2] = wrap;

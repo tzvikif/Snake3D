@@ -34,7 +34,7 @@ void main(void)
     vec3 s = SpecularMaterial;
     vec3 a = AmbientMaterial;
     float distanceToLight = length(vcLightPosition-vcVertexPosition);
-    float attenuation = 1.0 - distanceToLight / 32.0;
+    float attenuation = 1.0 - distanceToLight / 64.0;
     //float attenuation = 1.0 / (1.0 + 1.0 * pow(distanceToLight, 1.0));
     //attenuation = 0.2;
     vec3 color = AmbientMaterial + attenuation * (df * DiffuseMaterial /*+ sf * SpecularMaterial*/);
