@@ -772,12 +772,19 @@
     Material *mtzpos = [[Material alloc] init];
     Material *mtzneg = [[Material alloc] init];
 
-    [mtxpos setupTexture:@"xpos.png"];
-    [mtxneg setupTexture:@"xneg.png"];
-    [mtypos setupTexture:@"ypos.png"];
-    [mtyneg setupTexture:@"yneg.png"];
-    [mtzpos setupTexture:@"zpos.png"];
-    [mtzneg setupTexture:@"zneg.png"];
+//    [mtxpos setupTexture:@"xpos.png"];
+//    [mtxneg setupTexture:@"xneg.png"];
+//    [mtypos setupTexture:@"ypos.png"];
+//    [mtyneg setupTexture:@"yneg.png"];
+//    [mtzpos setupTexture:@"zpos.png"];
+//    [mtzneg setupTexture:@"zneg.png"];
+    
+    [mtxpos setupTexture:@"posx.jpg"];
+    [mtxneg setupTexture:@"negx.jpg"];
+    [mtypos setupTexture:@"posy.jpg"];
+    [mtyneg setupTexture:@"negy.jpg"];
+    [mtzpos setupTexture:@"posz.jpg"];
+    [mtzneg setupTexture:@"negz.jpg"];
 
     SkyBox *sb = [[SkyBox alloc] initializeWithProgram:[_programs objectForKey:[NSNumber numberWithInt:PROG_SKYBOX]]
                                            andDrawable:dr andMesh:msh andMaterial:nil andViewport:_viewport];

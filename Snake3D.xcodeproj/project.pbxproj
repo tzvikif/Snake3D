@@ -44,6 +44,12 @@
 		91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 91289D681800A5920096F1E8 /* SbpFragment.fsh */; };
 		91289D6D1800A5D10096F1E8 /* SbpVertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 91289D691800A5920096F1E8 /* SbpVertex.vsh */; };
 		913D96C317EC6B87005AAF09 /* Floor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 913D96C217EC6B87005AAF09 /* Floor.mm */; };
+		9148160318E76D1B00BA45E1 /* negx.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 914815FD18E76D1B00BA45E1 /* negx.jpg */; };
+		9148160418E76D1B00BA45E1 /* negy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 914815FE18E76D1B00BA45E1 /* negy.jpg */; };
+		9148160518E76D1B00BA45E1 /* negz.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 914815FF18E76D1B00BA45E1 /* negz.jpg */; };
+		9148160618E76D1B00BA45E1 /* posx.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9148160018E76D1B00BA45E1 /* posx.jpg */; };
+		9148160718E76D1B00BA45E1 /* posy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9148160118E76D1B00BA45E1 /* posy.jpg */; };
+		9148160818E76D1B00BA45E1 /* posz.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9148160218E76D1B00BA45E1 /* posz.jpg */; };
 		91609095186F826F00DB7624 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91609094186F826F00DB7624 /* cube.obj */; };
 		91609097186F844B00DB7624 /* monkey.obj in Resources */ = {isa = PBXBuildFile; fileRef = 91609096186F844B00DB7624 /* monkey.obj */; };
 		91680FB51804ADF300B68789 /* TurnPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 91680FB41804ADF300B68789 /* TurnPosition.m */; };
@@ -142,6 +148,12 @@
 		91289D691800A5920096F1E8 /* SbpVertex.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SbpVertex.vsh; sourceTree = "<group>"; };
 		913D96C117EC6B87005AAF09 /* Floor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Floor.h; path = Snake3D/Floor.h; sourceTree = "<group>"; };
 		913D96C217EC6B87005AAF09 /* Floor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Floor.mm; path = Snake3D/Floor.mm; sourceTree = "<group>"; };
+		914815FD18E76D1B00BA45E1 /* negx.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = negx.jpg; sourceTree = "<group>"; };
+		914815FE18E76D1B00BA45E1 /* negy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = negy.jpg; sourceTree = "<group>"; };
+		914815FF18E76D1B00BA45E1 /* negz.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = negz.jpg; sourceTree = "<group>"; };
+		9148160018E76D1B00BA45E1 /* posx.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = posx.jpg; sourceTree = "<group>"; };
+		9148160118E76D1B00BA45E1 /* posy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = posy.jpg; sourceTree = "<group>"; };
+		9148160218E76D1B00BA45E1 /* posz.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = posz.jpg; sourceTree = "<group>"; };
 		91609094186F826F00DB7624 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
 		91609096186F844B00DB7624 /* monkey.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey.obj; sourceTree = "<group>"; };
 		91680FB31804ADF300B68789 /* TurnPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TurnPosition.h; path = Snake3D/TurnPosition.h; sourceTree = "<group>"; };
@@ -214,6 +226,12 @@
 		20E9E55917CB82CE00C7D3C7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				914815FD18E76D1B00BA45E1 /* negx.jpg */,
+				914815FE18E76D1B00BA45E1 /* negy.jpg */,
+				914815FF18E76D1B00BA45E1 /* negz.jpg */,
+				9148160018E76D1B00BA45E1 /* posx.jpg */,
+				9148160118E76D1B00BA45E1 /* posy.jpg */,
+				9148160218E76D1B00BA45E1 /* posz.jpg */,
 				91BA9B0918E3174300CE28A9 /* Grass2.png */,
 				917AA04218DB8F440090B23F /* WoodFence.png */,
 				9191EFDB18D24ADE004934F1 /* minus.jpeg */,
@@ -430,6 +448,7 @@
 				91609095186F826F00DB7624 /* cube.obj in Resources */,
 				91289D6C1800A5D10096F1E8 /* SbpFragment.fsh in Resources */,
 				91289D6D1800A5D10096F1E8 /* SbpVertex.vsh in Resources */,
+				9148160618E76D1B00BA45E1 /* posx.jpg in Resources */,
 				91E82087188F0E2F00A9EBD0 /* mushroom.png in Resources */,
 				20F74B6617C2604800407740 /* InfoPlist.strings in Resources */,
 				9191EFDD18D24ADE004934F1 /* minus.jpeg in Resources */,
@@ -437,19 +456,24 @@
 				E582756018746EE50028093E /* floorGrass.png in Resources */,
 				E507DFA51882D89400C5DA91 /* ypos.png in Resources */,
 				20F74B6E17C2604800407740 /* Default.png in Resources */,
+				9148160418E76D1B00BA45E1 /* negy.jpg in Resources */,
 				20F74B7017C2604800407740 /* Default@2x.png in Resources */,
 				E507DFA21882D89400C5DA91 /* xneg.png in Resources */,
 				E5827568187477500028093E /* Reptiles0090_S.png in Resources */,
 				20F74B7217C2604800407740 /* Default-568h@2x.png in Resources */,
+				9148160818E76D1B00BA45E1 /* posz.jpg in Resources */,
 				E507DFA31882D89400C5DA91 /* xpos.png in Resources */,
 				E507DFA41882D89400C5DA91 /* yneg.png in Resources */,
 				E507DFA61882D89400C5DA91 /* zneg.png in Resources */,
 				91978F4D1870BFFE00204461 /* snakeBP.obj in Resources */,
+				9148160718E76D1B00BA45E1 /* posy.jpg in Resources */,
 				20F74B7817C2604800407740 /* ViewController.xib in Resources */,
+				9148160318E76D1B00BA45E1 /* negx.jpg in Resources */,
 				20B3A0F617C5EBFC001957B5 /* SimpleFragment.fsh in Resources */,
 				917AA04318DB8F440090B23F /* WoodFence.png in Resources */,
 				20B3A0F717C5EBFC001957B5 /* SimpleVertex.vsh in Resources */,
 				91E8208A188F0E4700A9EBD0 /* mushroom.mtl in Resources */,
+				9148160518E76D1B00BA45E1 /* negz.jpg in Resources */,
 				20E9E55B17CB82E300C7D3C7 /* tile_floor.png in Resources */,
 				91BA9B0A18E3174300CE28A9 /* Grass2.png in Resources */,
 				20F8D94717CCA2AC00CFF9A6 /* uvtemplate.bmp in Resources */,
