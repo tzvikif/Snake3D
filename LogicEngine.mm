@@ -537,7 +537,7 @@
     
     
     GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 2 * 4 * 4);   //(x,y) * 4 vertices * 4 fences
-    GLfloat wrap = 8.0;
+    GLfloat wrap = 3.0;
     texCoord[0] = 0.0;
     texCoord[1] = 0.0;
     texCoord[2] = wrap;
@@ -677,16 +677,16 @@
     //    int right = 1;
     //    int far = -1;
     //    int near = 1;
-    
+    GLfloat wrap = 1.0;
     GLfloat *texCoord =  (GLfloat*)malloc(sizeof(GLfloat) * 4*2);   //(x,y) * 4 vertices
     texCoord[0] =   0.0;
     texCoord[1] =   0.0;
-    texCoord[2] =   1.0;
+    texCoord[2] =   wrap;
     texCoord[3] =   0.0;
-    texCoord[4] =   1.0;
-    texCoord[5] =   1.0;
+    texCoord[4] =   wrap;
+    texCoord[5] =   wrap;
     texCoord[6] =   0.0;
-    texCoord[7] =   1.0;
+    texCoord[7] =   wrap;
     
     floorGrid[0].x = left;
     floorGrid[0].z = near;

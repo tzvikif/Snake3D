@@ -10,7 +10,7 @@
 #import "Vectors.h"
 #import "CC3Foundation.h"
 int const N = 64;
-int const initNumberOfSnakeParts = 30;
+int const initNumberOfSnakeParts = 10;
 float UP_DIR_ANGLE = 0;
 float DOWN_DIR_ANGLE = 180;
 float LEFT_DIR_ANGLE = 90;

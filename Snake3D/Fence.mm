@@ -36,7 +36,7 @@ static NSString *sample_name = @"sampler";
     glEnable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, self.material.textureId);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -47,7 +47,7 @@ static NSString *sample_name = @"sampler";
     
     self.modelMatrix = [CC3GLMatrix identity];
     //CC3Vector translateVector = self.position;
-    [self.modelMatrix scaleBy:CC3VectorMake(N/2.0, 16, N/2.0)];
+    [self.modelMatrix scaleBy:CC3VectorMake(N/2.0, 32, N/2.0)];
     CC3GLMatrix *projectionMat = [CC3GLMatrix identity];
     [projectionMat populateFrom:self.projectionMatrix];
     //    NSLog(@"projection %@",[projectionMat description]);
