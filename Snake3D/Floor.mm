@@ -54,7 +54,7 @@ NSString *mvp_name = @"mvp";
     translateVector.z = -0.0;
     
     [self.modelMatrix translateBy:translateVector];
-    [self.modelMatrix scaleBy:CC3VectorMake(N/2 ,1.0,N/2)];
+    [self.modelMatrix scaleBy:CC3VectorMake(N ,1.0,N)];
     //[self.projectionMatrix print:@"Projection"];
     //[self.viewMatrix print:@"View"];
     CC3GLMatrix *projectionMat = [[CC3GLMatrix alloc] initFromGLMatrix:self.projectionMatrix.glMatrix];
